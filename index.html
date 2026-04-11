@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AcademiSearch — 42 Surse Academice Multilingve</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inconsolata:wght@400;500;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0c0e14; --surf:#13161f; --surf2:#1a1e2c; --border:#252a3a;
+  --text:#e4dff5; --muted:#7a7f9a;
+  --gold:#c8a84b; --gold2:#8a6f2e;
+  --green:#3ecf8e; --red:#e05c6a; --blue:#5b8dee;
+  --purple:#9b72ef; --teal:#2ec9c9; --orange:#e8893a;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Libre Baskerville',Georgia,serif;font-size:15px;line-height:1.65;min-height:100vh;overflow-x:hidden}
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.4}
+
+/* ── Header ── */
+header{text-align:center;padding:48px 20px 28px}
+.logo{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,6vw,4rem);font-weight:700;letter-spacing:.06em;line-height:1;color:var(--gold)}
+.logo em{color:var(--text);font-style:normal}
+.tagline{margin-top:10px;font-family:'Inconsolata',monospace;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.rule{width:140px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:16px auto}
+
+/* Profile tabs */
+.profile-row{display:flex;justify-content:center;gap:7px;flex-wrap:wrap;margin-bottom:18px}
+.profile-tab{font-family:'Inconsolata',monospace;font-size:.7rem;letter-spacing:.07em;padding:6px 14px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all .18s}
+.profile-tab.active{border-color:var(--gold);color:var(--gold);background:rgba(200,168,75,.08)}
+.profile-tab:hover:not(.active){border-color:var(--muted);color:var(--text)}
+
+/* ── Search ── */
+.search-wrap{max-width:820px;margin:0 auto;padding:0 20px}
+.search-box{display:flex;background:var(--surf);border:1px solid var(--border);border-radius:3px;box-shadow:0 6px 40px rgba(0,0,0,.45),0 0 0 1px rgba(200,168,75,.08);overflow:hidden}
+.search-input{flex:1;background:transparent;border:none;outline:none;color:var(--text);font-family:'Libre Baskerville',serif;font-size:1.1rem;padding:14px 20px}
+.search-input::placeholder{color:var(--muted)}
+.search-btn{background:var(--gold);color:#0c0e14;border:none;cursor:pointer;font-family:'Inconsolata',monospace;font-size:.82rem;font-weight:600;letter-spacing:.07em;padding:0 28px;transition:background .18s,transform .1s;white-space:nowrap}
+.search-btn:hover{background:#dbb94f}
+.search-btn:active{transform:scale(.98)}
+.doi-row{display:flex;align-items:center;gap:8px;margin-top:11px;flex-wrap:wrap}
+.doi-label{font-family:'Inconsolata',monospace;font-size:.65rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+.doi-input{flex:1;min-width:180px;background:var(--surf);border:1px solid var(--border);border-radius:3px;color:var(--text);font-family:'Inconsolata',monospace;font-size:.76rem;padding:7px 13px;outline:none;transition:border-color .2s}
+.doi-input:focus{border-color:var(--gold2)}
+.doi-btn{background:transparent;border:1px solid var(--border);border-radius:3px;color:var(--gold);font-family:'Inconsolata',monospace;font-size:.72rem;padding:7px 13px;cursor:pointer;white-space:nowrap;transition:all .18s}
+.doi-btn:hover{background:rgba(200,168,75,.1);border-color:var(--gold2)}
+.doi-btn.teal{color:var(--teal)}
+.doi-btn.teal:hover{background:rgba(46,201,201,.08);border-color:var(--teal)}
+
+/* API Keys */
+.api-bar{max-width:820px;margin:9px auto 0;padding:0 20px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.api-input{background:var(--surf);border:1px solid var(--border);border-radius:3px;color:var(--text);font-family:'Inconsolata',monospace;font-size:.7rem;padding:6px 11px;outline:none;width:240px}
+.api-input:focus{border-color:var(--gold2)}
+.api-label{font-family:'Inconsolata',monospace;font-size:.62rem;color:var(--muted);white-space:nowrap;letter-spacing:.07em}
+.api-save{background:transparent;border:1px solid var(--border);border-radius:3px;color:var(--green);font-family:'Inconsolata',monospace;font-size:.68rem;padding:5px 11px;cursor:pointer;transition:all .15s}
+.api-save:hover{border-color:var(--green);background:rgba(62,207,142,.07)}
+
+/* ── Toggle bar ── */
+.toggle-bar{max-width:820px;margin:16px auto 0;padding:0 20px}
+.toggle-header{display:flex;align-items:center;gap:11px;cursor:pointer;user-select:none}
+.toggle-label{font-family:'Inconsolata',monospace;font-size:.68rem;letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
+.toggle-arrow{font-size:.58rem;color:var(--muted);transition:transform .2s}
+.toggle-arrow.open{transform:rotate(180deg)}
+.toggle-select-all{margin-left:auto;font-family:'Inconsolata',monospace;font-size:.68rem;color:var(--gold2);cursor:pointer;background:none;border:none;transition:color .15s}
+.toggle-select-all:hover{color:var(--gold)}
+
+/* Filter pills — categories */
+.filter-row{display:none;flex-wrap:wrap;gap:5px;margin-top:9px}
+.filter-row.open{display:flex}
+.filter-row-label{font-family:'Inconsolata',monospace;font-size:.6rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;align-self:center;margin-right:4px;white-space:nowrap}
+.fpill{font-family:'Inconsolata',monospace;font-size:.63rem;letter-spacing:.05em;padding:3px 11px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all .15s}
+.fpill.active{border-color:var(--gold);color:var(--gold);background:rgba(200,168,75,.08)}
+.fpill:hover:not(.active){border-color:var(--muted);color:var(--text)}
+.fpill.lang-active{border-color:var(--teal);color:var(--teal);background:rgba(46,201,201,.07)}
+.fpill.lang-active:hover{border-color:var(--teal);background:rgba(46,201,201,.12)}
+
+/* Source chips grid */
+.sources-grid{display:none;grid-template-columns:repeat(auto-fill,minmax(162px,1fr));gap:5px;margin-top:7px}
+.sources-grid.open{display:grid}
+.src-chip{display:flex;align-items:center;gap:6px;padding:6px 9px;background:var(--surf);border:1px solid var(--border);border-radius:3px;cursor:pointer;transition:border-color .18s,background .18s;user-select:none}
+.src-chip input{display:none}
+.src-chip.on{border-color:var(--gold2);background:rgba(200,168,75,.06)}
+.src-chip:hover{border-color:var(--muted)}
+.src-chip.hidden{display:none}
+.src-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.src-lbl{font-family:'Inconsolata',monospace;font-size:.64rem;letter-spacing:.02em;color:var(--muted);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.src-chip.on .src-lbl{color:var(--text)}
+.src-flags{font-size:.7rem;flex-shrink:0;letter-spacing:-.1em}
+
+/* ── Results ── */
+.results-wrap{max-width:920px;margin:40px auto 60px;padding:0 20px}
+.results-status{display:flex;align-items:center;gap:14px;margin-bottom:18px;padding-bottom:13px;border-bottom:1px solid var(--border);flex-wrap:wrap}
+.results-title{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:400;font-style:italic;color:var(--muted)}
+.rpill{font-family:'Inconsolata',monospace;font-size:.65rem;padding:2px 9px;border-radius:20px;border:1px solid}
+.rpill-gold{border-color:rgba(200,168,75,.4);color:var(--gold);background:rgba(200,168,75,.07)}
+.rpill-teal{border-color:rgba(46,201,201,.3);color:var(--teal);background:rgba(46,201,201,.06)}
+
+.stats-bar{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:13px}
+.sc{font-family:'Inconsolata',monospace;font-size:.61rem;padding:2px 7px;border-radius:20px;border:1px solid var(--border);color:var(--muted);display:flex;align-items:center;gap:3px}
+.sc.ok{border-color:rgba(62,207,142,.3);color:var(--green)}
+.sc.err{border-color:rgba(224,92,106,.3);color:var(--red)}
+.sc.loading{border-color:rgba(200,168,75,.3);color:var(--gold)}
+
+.cat-div{display:flex;align-items:center;gap:11px;margin:30px 0 14px}
+.cat-div-lbl{font-family:'Inconsolata',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap}
+.cat-div-line{flex:1;height:1px;background:var(--border)}
+.cat-div-ct{font-family:'Inconsolata',monospace;font-size:.62rem;color:var(--muted);white-space:nowrap}
+
+.src-sec{margin-bottom:28px}
+.src-hdr{display:flex;align-items:center;gap:9px;margin-bottom:9px;padding-bottom:7px;border-bottom:1px solid var(--border);flex-wrap:wrap}
+.src-hdr-badge{font-family:'Inconsolata',monospace;font-size:.63rem;font-weight:600;letter-spacing:.05em;padding:3px 9px;border-radius:2px;white-space:nowrap}
+.src-hdr-desc{font-family:'Inconsolata',monospace;font-size:.6rem;color:var(--muted);flex:1}
+.src-hdr-langs{font-size:.75rem;letter-spacing:-.05em}
+.src-hdr-ct{font-family:'Inconsolata',monospace;font-size:.63rem;color:var(--muted);margin-left:auto;white-space:nowrap}
+
+.r-card{background:var(--surf);border:1px solid var(--border);border-radius:3px;padding:14px 17px;margin-bottom:7px;transition:border-color .2s}
+.r-card:hover{border-color:var(--gold2)}
+.r-title{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;line-height:1.3;margin-bottom:5px}
+.r-title a{color:var(--text);text-decoration:none}
+.r-title a:hover{color:var(--gold)}
+.r-meta{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:6px;font-family:'Inconsolata',monospace;font-size:.68rem}
+.r-authors{color:var(--gold);font-style:italic}
+.r-year{color:var(--muted)}
+.r-journal{color:var(--teal)}
+.r-doi{color:var(--muted);font-size:.6rem}
+.r-abstract{color:var(--muted);font-size:.84rem;line-height:1.5;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.r-actions{display:flex;gap:5px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:4px;padding:4px 11px;border-radius:2px;font-family:'Inconsolata',monospace;font-size:.63rem;font-weight:500;letter-spacing:.04em;cursor:pointer;text-decoration:none;transition:all .14s;border:1px solid}
+.btn-gold{background:var(--gold);color:#0c0e14;border-color:var(--gold)}
+.btn-gold:hover{background:#dbb94f;border-color:#dbb94f}
+.btn-out{background:transparent;color:var(--muted);border-color:var(--border)}
+.btn-out:hover{color:var(--text);border-color:var(--muted)}
+.btn-teal{background:transparent;color:var(--teal);border-color:rgba(46,201,201,.28)}
+.btn-teal:hover{background:rgba(46,201,201,.08)}
+
+/* Portals */
+.portals-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px}
+.portal-card{background:var(--surf);border:1px solid var(--border);border-radius:3px;padding:13px 15px;transition:border-color .2s}
+.portal-card:hover{border-color:var(--gold2)}
+.p-name{font-family:'Inconsolata',monospace;font-size:.74rem;font-weight:600;display:flex;align-items:center;gap:6px;margin-bottom:5px}
+.p-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.p-flags{font-size:.75rem;letter-spacing:-.05em;margin-left:auto;flex-shrink:0}
+.p-desc{color:var(--muted);font-size:.77rem;margin-bottom:9px;line-height:1.38}
+.mirrors-row{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:5px}
+.mirror-link{font-family:'Inconsolata',monospace;font-size:.61rem;padding:2px 8px;border:1px solid var(--border);border-radius:20px;color:var(--muted);text-decoration:none;transition:all .14s}
+.mirror-link:hover{border-color:var(--red);color:var(--red)}
+
+.loader{display:inline-block;width:13px;height:13px;border:2px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-row{display:flex;align-items:center;gap:9px;padding:14px 18px;font-family:'Inconsolata',monospace;font-size:.7rem;color:var(--muted)}
+.src-error{padding:10px 14px;font-family:'Inconsolata',monospace;font-size:.7rem;border-radius:3px;border:1px solid}
+.src-error.err{color:var(--red);background:rgba(224,92,106,.06);border-color:rgba(224,92,106,.2)}
+.src-error.empty{color:var(--muted);background:transparent;border-color:var(--border)}
+
+.welcome{text-align:center;padding:52px 20px}
+.welcome-icon{font-size:2.6rem;margin-bottom:13px}
+.welcome-text{font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:400;font-style:italic;color:var(--muted);margin-bottom:7px}
+.welcome-sub{color:var(--muted);font-size:.8rem;line-height:1.7}
+.welcome-langs{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;margin-top:16px}
+.wlang{font-family:'Inconsolata',monospace;font-size:.65rem;padding:3px 11px;border:1px solid var(--border);border-radius:20px;color:var(--muted)}
+
+/* ── Legal / GDPR Modal ── */
+.modal-overlay{position:fixed;inset:0;background:rgba(8,9,15,.88);z-index:10000;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity .25s}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal-box{background:var(--surf);border:1px solid var(--border);border-radius:4px;max-width:720px;width:100%;max-height:88vh;display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(0,0,0,.7)}
+.modal-hdr{display:flex;align-items:center;gap:12px;padding:18px 24px;border-bottom:1px solid var(--border);flex-shrink:0}
+.modal-title{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:var(--gold);flex:1}
+.modal-sub{font-family:'Inconsolata',monospace;font-size:.65rem;color:var(--muted);letter-spacing:.1em}
+.modal-close{background:transparent;border:1px solid var(--border);border-radius:2px;color:var(--muted);font-family:'Inconsolata',monospace;font-size:.75rem;padding:5px 12px;cursor:pointer;transition:all .15s;flex-shrink:0}
+.modal-close:hover{border-color:var(--red);color:var(--red)}
+.modal-body{overflow-y:auto;padding:24px;flex:1;scrollbar-width:thin;scrollbar-color:var(--border) transparent}
+.modal-body::-webkit-scrollbar{width:5px}
+.modal-body::-webkit-scrollbar-track{background:transparent}
+.modal-body::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+.legal-section{margin-bottom:24px}
+.legal-h{font-family:'Inconsolata',monospace;font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid var(--border)}
+.legal-p{font-size:.88rem;line-height:1.68;color:var(--muted);margin-bottom:8px}
+.legal-p strong{color:var(--text);font-weight:700}
+.legal-p a{color:var(--gold2);text-decoration:none}
+.legal-p a:hover{color:var(--gold)}
+.legal-ul{list-style:none;padding:0;margin-bottom:8px}
+.legal-ul li{font-size:.86rem;color:var(--muted);padding:3px 0 3px 16px;position:relative;line-height:1.55}
+.legal-ul li::before{content:'—';position:absolute;left:0;color:var(--gold2)}
+.legal-warn{background:rgba(224,92,106,.07);border:1px solid rgba(224,92,106,.25);border-radius:3px;padding:10px 14px;margin-bottom:8px}
+.legal-warn p{font-size:.84rem;color:#e05c6a;line-height:1.55}
+.legal-note{background:rgba(200,168,75,.06);border:1px solid rgba(200,168,75,.2);border-radius:3px;padding:10px 14px;margin-bottom:8px}
+.legal-note p{font-size:.84rem;color:var(--gold);line-height:1.55}
+.modal-footer-row{padding:14px 24px;border-top:1px solid var(--border);font-family:'Inconsolata',monospace;font-size:.62rem;color:var(--muted);display:flex;align-items:center;gap:12px;flex-shrink:0}
+.modal-footer-row span{margin-left:auto}
+/* Legal link in footer */
+.legal-link{color:var(--gold2);text-decoration:none;cursor:pointer;background:none;border:none;font-family:inherit;font-size:inherit;letter-spacing:inherit}
+.legal-link:hover{color:var(--gold)}
+
+footer{text-align:center;border-top:1px solid var(--border);padding:22px 20px;font-family:'Inconsolata',monospace;font-size:.62rem;color:var(--muted);letter-spacing:.09em}
+footer a{color:var(--gold2);text-decoration:none}
+footer a:hover{color:var(--gold)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Academi<em>Search</em></div>
+  <div class="tagline">Motor Academic Unificat · v3 · 42 Surse · 8 Limbi</div>
+  <div class="rule"></div>
+  <div class="profile-row">
+    <button class="profile-tab active" data-p="all"       onclick="setProfile('all')">🔍 Toate sursele</button>
+    <button class="profile-tab"        data-p="student"   onclick="setProfile('student')">🎓 Student / Doctorand</button>
+    <button class="profile-tab"        data-p="researcher"onclick="setProfile('researcher')">🔬 Cercetător / Cadru didactic</button>
+    <button class="profile-tab"        data-p="books"     onclick="setProfile('books')">📚 Cărți & Manuale</button>
+    <button class="profile-tab"        data-p="ro"        onclick="setProfile('ro')">🇷🇴 Surse Românești</button>
+    <button class="profile-tab"        data-p="romance"   onclick="setProfile('romance')">🌍 Limbi Romanice</button>
+  </div>
+</header>
+
+<div class="search-wrap">
+  <div class="search-box">
+    <input type="text" class="search-input" id="queryInput"
+      placeholder="Titlu, autor, subiect, cuvinte cheie, DOI, ISSN…" autocomplete="off" spellcheck="false">
+    <button class="search-btn" id="searchBtn">CAUTĂ</button>
+  </div>
+  <div class="doi-row">
+    <span class="doi-label">DOI / URL →</span>
+    <input type="text" class="doi-input" id="doiInput" placeholder="10.1000/xyz123 sau URL complet articol">
+    <button class="doi-btn" id="doiSciHub">🔑 Sci-Hub</button>
+    <button class="doi-btn teal" id="doiUnpay">🔓 Unpaywall</button>
+  </div>
+</div>
+
+<div class="api-bar">
+  <span class="api-label">CORE KEY:</span>
+  <input class="api-input" id="coreKey" placeholder="core.ac.uk/services/api">
+  <button class="api-save" id="coreSave">Salvează</button>
+  <span class="api-label" style="margin-left:6px">S2 KEY:</span>
+  <input class="api-input" id="s2Key" placeholder="semanticscholar.org/product/api">
+  <button class="api-save" id="s2Save">Salvează</button>
+</div>
+
+<div class="toggle-bar">
+  <div class="toggle-header" id="toggleHdr">
+    <span class="toggle-label">Surse activate</span>
+    <span class="toggle-arrow open" id="toggleArrow">▲</span>
+    <button class="toggle-select-all" id="selAllBtn">Toate</button>
+  </div>
+
+  <!-- Category filter -->
+  <div class="filter-row open" id="catRow">
+    <span class="filter-row-label">CATEGORIE:</span>
+    <button class="fpill active" data-cat="all"       onclick="filterCat('all')">🔍 Toate</button>
+    <button class="fpill"        data-cat="articles"  onclick="filterCat('articles')">📄 Articole</button>
+    <button class="fpill"        data-cat="preprints" onclick="filterCat('preprints')">🧪 Preprint</button>
+    <button class="fpill"        data-cat="books"     onclick="filterCat('books')">📚 Cărți</button>
+    <button class="fpill"        data-cat="theses"    onclick="filterCat('theses')">🎓 Teze</button>
+    <button class="fpill"        data-cat="data"      onclick="filterCat('data')">🗄 Date</button>
+  </div>
+
+  <!-- Language filter -->
+  <div class="filter-row open" id="langRow">
+    <span class="filter-row-label">LIMBĂ:</span>
+    <button class="fpill active" data-lang="all" onclick="filterLang('all')">🌍 Toate</button>
+    <button class="fpill" data-lang="en" onclick="filterLang('en')">🇬🇧 EN</button>
+    <button class="fpill" data-lang="ro" onclick="filterLang('ro')">🇷🇴 RO</button>
+    <button class="fpill" data-lang="fr" onclick="filterLang('fr')">🇫🇷 FR</button>
+    <button class="fpill" data-lang="de" onclick="filterLang('de')">🇩🇪 DE</button>
+    <button class="fpill" data-lang="es" onclick="filterLang('es')">🇪🇸 ES</button>
+    <button class="fpill" data-lang="pt" onclick="filterLang('pt')">🇵🇹 PT</button>
+    <button class="fpill" data-lang="it" onclick="filterLang('it')">🇮🇹 IT</button>
+  </div>
+
+  <div class="sources-grid open" id="srcGrid"></div>
+</div>
+
+<div class="results-wrap">
+  <div id="statsBar" class="stats-bar" style="display:none"></div>
+  <div id="resSt" style="display:none" class="results-status">
+    <span class="results-title" id="resTitle"></span>
+    <span class="rpill rpill-gold" id="resTotPill"></span>
+    <span class="rpill rpill-teal" id="resPortPill"></span>
+  </div>
+  <div id="resArea">
+    <div class="welcome">
+      <div class="welcome-icon">🌐</div>
+      <div class="welcome-text">42 surse academice · 8 limbi</div>
+      <div class="welcome-sub">11 surse cu rezultate live prin API · 31 portaluri cu link direct<br>Română · English · Français · Deutsch · Español · Português · Italiano · Multilingv</div>
+      <div class="welcome-langs">
+        <span class="wlang">🇷🇴 CEEOL · BCU</span>
+        <span class="wlang">🇫🇷 Gallica · Persée · OpenEdition · HAL</span>
+        <span class="wlang">🇩🇪 SSOAR · BASE</span>
+        <span class="wlang">🇪🇸 Dialnet · SciELO · Redalyc</span>
+        <span class="wlang">🇵🇹 SciELO · Redalyc · RCAAP</span>
+        <span class="wlang">🇮🇹 IRIS CNR</span>
+        <span class="wlang">🇬🇧 arXiv · PubMed · JSTOR · EThOS</span>
+        <span class="wlang">🌍 OpenAlex · CrossRef · Zenodo · DOAJ</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  AcademiSearch v3 · 42 surse open-access multilingve · instrument gratuit pentru cercetare academică<br>
+  Respectă termenii de utilizare ai fiecărei platforme &nbsp;·&nbsp;
+  <a href="https://www.sci-hub.pub" target="_blank">sci-hub.pub</a> mirror-uri active &nbsp;·&nbsp;
+  <a href="https://unpaywall.org" target="_blank">Unpaywall</a> OA legitim &nbsp;·&nbsp;
+  <button class="legal-link" onclick="openLegal()">⚖ Termeni legali & GDPR</button>
+</footer>
+
+<!-- ══ MODAL LEGAL & GDPR ══════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="legalModal" onclick="closeLegalOutside(event)">
+  <div class="modal-box">
+    <div class="modal-hdr">
+      <div>
+        <div class="modal-title">⚖ Termeni Legali &amp; Politică GDPR</div>
+        <div class="modal-sub">ACADEMISEARCH · versiunea 3.0 · actualizat 2025</div>
+      </div>
+      <button class="modal-close" onclick="closeLegal()">✕ Închide</button>
+    </div>
+
+    <div class="modal-body">
+
+      <div class="legal-section">
+        <div class="legal-h">1. Descrierea serviciului</div>
+        <p class="legal-p">
+          <strong>AcademiSearch</strong> este un motor de căutare academic unificat, gratuit și open-source, destinat
+          studenților, doctoranzilor, cadrelor didactice și cercetătorilor științifici. Aplicația agregează
+          interogări simultan în <strong>42 de surse externe independente</strong> și afișează rezultatele
+          pentru a facilita accesul la literatură academică în opt limbi.
+        </p>
+        <p class="legal-p">
+          AcademiSearch este o aplicație <strong>client-side</strong> (o singură pagină HTML). Nu există server
+          propriu, baze de date proprii sau procesare backend. Toate cererile API sunt efectuate direct
+          din browserul utilizatorului către serviciile terțe listate.
+        </p>
+      </div>
+
+      <div class="legal-section">
+        <div class="legal-h">2. Date personale &amp; conformitate GDPR</div>
+        <div class="legal-note"><p>AcademiSearch <strong>nu colectează, nu stochează și nu transmite</strong> nicio dată cu caracter personal. Aplicația este conformă cu Regulamentul (UE) 2016/679 (GDPR) prin proiectare (<em>privacy by design</em>).</p></div>
+        <p class="legal-p">Specific:</p>
+        <ul class="legal-ul">
+          <li>Nu există conturi de utilizator, înregistrare sau autentificare</li>
+          <li>Nu se utilizează cookie-uri de tracking, analitics sau publicitate</li>
+          <li>Nu se înregistrează istoricul căutărilor pe niciun server</li>
+          <li>Nu se transmite adresa IP sau User-Agent-ul utilizatorului către operatorul aplicației</li>
+          <li>Cheile API (CORE, Semantic Scholar) introduse de utilizator sunt stocate exclusiv în <code>localStorage</code> al browserului local și nu părăsesc dispozitivul utilizatorului decât în headerele cererilor direct către API-urile respective</li>
+        </ul>
+        <p class="legal-p">
+          Interogările de căutare sunt transmise direct de browser către API-urile serviciilor terțe (arXiv, OpenAlex, CrossRef, Zenodo etc.). Utilizatorul trebuie să consulte <strong>politicile de confidențialitate ale fiecărui serviciu terț</strong> accesat.
+        </p>
+      </div>
+
+      <div class="legal-section">
+        <div class="legal-h">3. Cookie-uri și stocare locală</div>
+        <p class="legal-p">
+          AcademiSearch utilizează exclusiv <strong><code>localStorage</code></strong> al browserului, strict necesar pentru:
+        </p>
+        <ul class="legal-ul">
+          <li>Salvarea cheii API CORE (opțional, la solicitarea explicită a utilizatorului)</li>
+          <li>Salvarea cheii API Semantic Scholar (opțional, la solicitarea explicită a utilizatorului)</li>
+        </ul>
+        <p class="legal-p">
+          Nu se utilizează cookie-uri de niciun fel. Datele din <code>localStorage</code> pot fi șterse
+          oricând din setările browserului. Conform art. 5 alin. (1) lit. (c) GDPR, stocarea este minimă
+          și strict necesară funcționării opționale solicitate.
+        </p>
+      </div>
+
+      <div class="legal-section">
+        <div class="legal-h">4. Proprietate intelectuală și drepturi de autor</div>
+        <p class="legal-p">
+          AcademiSearch este un instrument de <strong>referință și indexare</strong>. Aplicația nu stochează,
+          nu reproduc și nu redistribuie conținut protejat de drepturi de autor.
+        </p>
+        <p class="legal-p">
+          Rezultatele afișate provin din API-uri publice ale surselor terțe. Titlurile, rezumatele și
+          metadatele afișate sunt furnizate de sursele respective sub propriile lor licențe (de ex.
+          Creative Commons, licențe open-access). <strong>Utilizatorul este responsabil</strong> de
+          respectarea condițiilor de utilizare ale fiecărei surse accesate.
+        </p>
+        <ul class="legal-ul">
+          <li>Conținutul academic poate fi protejat prin drepturi de autor conform legislației naționale și internaționale</li>
+          <li>Accesul la PDF-uri se face prin link direct către serverele surselor terțe</li>
+          <li>Descărcarea și utilizarea documentelor trebuie efectuată cu respectarea licenței fiecărui document</li>
+        </ul>
+      </div>
+
+      <div class="legal-section">
+        <div class="legal-h">5. Utilizarea Sci-Hub — avertisment legal</div>
+        <div class="legal-warn">
+          <p>
+            <strong>⚠ Atenție:</strong> Sci-Hub operează într-o zonă juridică disputată în multiple jurisdicții.
+            Accesul la articole prin Sci-Hub poate constitui o încălcare a drepturilor de autor în România,
+            Uniunea Europeană și alte state, în funcție de legislația aplicabilă.
+          </p>
+        </div>
+        <p class="legal-p">
+          AcademiSearch oferă <strong>exclusiv link-uri de navigare</strong> către mirror-urile Sci-Hub publice,
+          fără a stoca sau a intermedia conținut. Utilizatorul accesează Sci-Hub pe propria răspundere
+          și cu deplina înțelegere a implicațiilor legale din jurisdicția sa.
+        </p>
+        <p class="legal-p">
+          Alternativa legală recomandată: folosiți butonul <strong>🔓 Unpaywall</strong> pentru a verifica
+          dacă articolul este disponibil în mod legitim în acces deschis.
+        </p>
+      </div>
+
+      <div class="legal-section">
+        <div class="legal-h">6. Limitarea răspunderii</div>
+        <p class="legal-p">
+          AcademiSearch este furnizat <strong>„ca atare"</strong> (<em>as-is</em>), fără garanții de orice natură.
+          Operatorul nu garantează:
+        </p>
+        <ul class="legal-ul">
+          <li>Disponibilitatea continuă sau acuratețea rezultatelor returnate de sursele terțe</li>
+          <li>Funcționarea neîntreruptă a API-urilor externe utilizate</li>
+          <li>Legalitatea accesului la conținut în toate jurisdicțiile</li>
+          <li>Completitudinea sau relevanța rezultatelor pentru orice scop specific</li>
+        </ul>
+        <p class="legal-p">
+          Operatorul nu este responsabil pentru conținutul, disponibilitatea sau politicile platformelor
+          terțe accesate prin intermediul AcademiSearch.
+        </p>
+      </div>
+
+      <div class="legal-section">
+        <div class="legal-h">7. Drepturile utilizatorului conform GDPR (art. 15–22)</div>
+        <p class="legal-p">
+          Deoarece AcademiSearch <strong>nu prelucrează date cu caracter personal</strong>, drepturile
+          GDPR privind accesul, rectificarea, ștergerea sau portabilitatea datelor nu sunt aplicabile
+          în relația cu operatorul acestei aplicații.
+        </p>
+        <p class="legal-p">
+          Dacă ați furnizat chei API terțe, drepturile dvs. sunt exercitabile direct față de furnizorii
+          acelor servicii (CORE.ac.uk, Semantic Scholar etc.), conform politicilor lor de confidențialitate.
+        </p>
+        <p class="legal-p">
+          Pentru exercitarea drepturilor GDPR față de <strong>serviciile terțe</strong> accesate,
+          consultați politicile lor individuale:
+        </p>
+        <ul class="legal-ul">
+          <li><a href="https://core.ac.uk/about/privacy-policy" target="_blank">CORE Privacy Policy</a></li>
+          <li><a href="https://www.semanticscholar.org/privacy" target="_blank">Semantic Scholar Privacy Policy</a></li>
+          <li><a href="https://arxiv.org/help/policies/privacy_policy" target="_blank">arXiv Privacy Policy</a></li>
+          <li><a href="https://openalex.org/about" target="_blank">OpenAlex — About &amp; Privacy</a></li>
+          <li><a href="https://zenodo.org/privacy-policy" target="_blank">Zenodo Privacy Policy</a></li>
+        </ul>
+      </div>
+
+      <div class="legal-section">
+        <div class="legal-h">8. Utilizare academică responsabilă</div>
+        <p class="legal-p">
+          AcademiSearch este destinat exclusiv scopurilor <strong>educaționale, de cercetare și documentare academică</strong>,
+          în conformitate cu excepția pentru scopuri de cercetare și educație prevăzută de Directiva UE
+          2019/790 privind dreptul de autor pe piața unică digitală, transpusă în legislația română.
+        </p>
+        <ul class="legal-ul">
+          <li>Utilizarea comercială a conținutului descoperit prin AcademiSearch este interzisă fără acordul deținătorilor de drepturi</li>
+          <li>Citarea corectă a surselor este obligatorie în orice lucrare academică</li>
+          <li>Utilizarea masivă sau automatizată a API-urilor terțe poate încălca termenii de serviciu ai acestora</li>
+        </ul>
+      </div>
+
+      <div class="legal-section">
+        <div class="legal-h">9. Modificări ale termenilor</div>
+        <p class="legal-p">
+          Acești termeni pot fi actualizați odată cu noile versiuni ale aplicației. Versiunea curentă este
+          afișată în antetul acestui document. Continuarea utilizării aplicației după publicarea
+          modificărilor constituie acceptarea noilor termeni.
+        </p>
+      </div>
+
+      <div class="legal-section">
+        <div class="legal-h">10. Legislație aplicabilă</div>
+        <p class="legal-p">
+          Prezenții termeni sunt guvernați de legislația română și de dreptul Uniunii Europene, inclusiv:
+        </p>
+        <ul class="legal-ul">
+          <li>Regulamentul (UE) 2016/679 — GDPR</li>
+          <li>Directiva (UE) 2019/790 privind dreptul de autor pe piața unică digitală</li>
+          <li>Legea nr. 8/1996 privind dreptul de autor și drepturile conexe (România)</li>
+          <li>Legea nr. 190/2018 privind măsuri de punere în aplicare a GDPR (România)</li>
+        </ul>
+      </div>
+
+    </div><!-- /modal-body -->
+
+    <div class="modal-footer-row">
+      <button class="modal-close" onclick="closeLegal()">✕ Închide</button>
+      <span>AcademiSearch v3 · © 2025 · Instrument gratuit, fără garanții</span>
+    </div>
+  </div>
+</div>
+
+<script>
+'use strict';
+const enc = s => encodeURIComponent(s);
+const esc = s => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+
+// ════════════════════════════════════════════════════════
+//  CONSTANTE LIMBĂ
+// ════════════════════════════════════════════════════════
+const LANG_LABELS = { en:'🇬🇧', ro:'🇷🇴', fr:'🇫🇷', de:'🇩🇪', es:'🇪🇸', pt:'🇵🇹', it:'🇮🇹', multi:'🌍' };
+
+// ════════════════════════════════════════════════════════
+//  SURSE API — rezultate live (11)
+// ════════════════════════════════════════════════════════
+const API_SOURCES = [
+  { id:'arxiv',     name:'arXiv',            color:'#c8a84b', cat:'preprints', langs:['en','multi'],
+    desc:'Preprint fizică, matematică, informatică, biologie, economie' },
+  { id:'oplib',     name:'Open Library',     color:'#3ecf8e', cat:'books',     langs:['multi'],
+    desc:'Catalogul Open Library — milioane de cărți digitalizate' },
+  { id:'archive',   name:'Archive.org',      color:'#5b8dee', cat:'books',     langs:['multi'],
+    desc:'Texte digitalizate, cărți, periodice, documente istorice' },
+  { id:'gutenberg', name:'Gutenberg',         color:'#9b72ef', cat:'books',     langs:['multi'],
+    desc:'70.000+ cărți clasice în domeniu public — RO, FR, DE, ES inclus' },
+  { id:'core',      name:'CORE',             color:'#e05c6a', cat:'articles',  langs:['multi'],
+    desc:'200M+ articole open-access agregate din repozitoarii globale' },
+  { id:'semantic',  name:'Semantic Scholar', color:'#2ec9c9', cat:'articles',  langs:['en','multi'],
+    desc:'215M+ lucrări cu citări, grafuri de cunoaștere și PDF-uri OA' },
+  { id:'openalex',  name:'OpenAlex',         color:'#e8893a', cat:'articles',  langs:['multi'],
+    desc:'250M+ lucrări, autori, reviste, finanțatori — date structurate' },
+  { id:'crossref',  name:'CrossRef',         color:'#4ade80', cat:'articles',  langs:['multi'],
+    desc:'155M+ metadate DOI — reviste, conferințe, cărți cu link PDF' },
+  { id:'zenodo',    name:'Zenodo',           color:'#60a5fa', cat:'data',      langs:['multi'],
+    desc:'Repozitoriu CERN — articole, date, software, teze, prezentări' },
+  { id:'doaj',      name:'DOAJ',             color:'#f472b6', cat:'articles',  langs:['multi'],
+    desc:'21.000+ reviste open-access peer-reviewed din toate disciplinele' },
+  { id:'europepmc', name:'Europe PMC',       color:'#a78bfa', cat:'articles',  langs:['en','multi'],
+    desc:'40M+ articole biomedicale cu acces la full-text PubMed Central' },
+];
+
+// ════════════════════════════════════════════════════════
+//  SURSE PORTAL — link direct (31)
+// ════════════════════════════════════════════════════════
+const PORTAL_SOURCES = [
+  // ── Motoare generale
+  { id:'scholar',     name:'Google Scholar',      color:'#4285f4', cat:'articles',  langs:['multi'],
+    desc:'Cel mai extins motor academic — indexează toate domeniile și limbile',
+    url:q=>`https://scholar.google.com/scholar?q=${enc(q)}` },
+  { id:'dimensions',  name:'Dimensions.ai',       color:'#e8893a', cat:'articles',  langs:['multi'],
+    desc:'Motor academic cu metrici de citare, finanțare și context politic',
+    url:q=>`https://app.dimensions.ai/discover/publication?search_text=${enc(q)}&search_type=kws` },
+  { id:'base',        name:'BASE',                color:'#92400e', cat:'articles',  langs:['multi'],
+    desc:'Bielefeld Academic Search — 350M+ documente OA din 10.000+ surse',
+    url:q=>`https://www.base-search.net/Search/Results?lookfor=${enc(q)}&name=basesearch&oaboost=1` },
+
+  // ── Articole EN/multi
+  { id:'pubmed',      name:'PubMed',              color:'#1a7f5a', cat:'articles',  langs:['en','multi'],
+    desc:'35M+ articole biomedicale NCBI — medicină, farmacologie, biologie',
+    url:q=>`https://pubmed.ncbi.nlm.nih.gov/?term=${enc(q)}` },
+  { id:'jstor',       name:'JSTOR',               color:'#8b5e3c', cat:'articles',  langs:['en'],
+    desc:'Reviste academice arhivate — științe sociale, umane, economie',
+    url:q=>`https://www.jstor.org/action/doBasicSearch?Query=${enc(q)}&so=rel` },
+  { id:'ssrn',        name:'SSRN',                color:'#1e3a8a', cat:'preprints', langs:['en','multi'],
+    desc:'Social Sciences Research Network — economie, drept, finanțe, management',
+    url:q=>`https://papers.ssrn.com/sol3/results.cfm?txtkey=${enc(q)}&form_name=journalBrowse` },
+  { id:'biorxiv',     name:'bioRxiv / medRxiv',   color:'#6d28d9', cat:'preprints', langs:['en'],
+    desc:'Preprint biologie, medicină, neuroștiințe, psihologie (Cold Spring Harbor)',
+    url:q=>`https://www.biorxiv.org/search/${enc(q)}` },
+  { id:'eric',        name:'ERIC',                color:'#0891b2', cat:'articles',  langs:['en'],
+    desc:'Education Resources Information Center (USDOE) — pedagogie și educație',
+    url:q=>`https://eric.ed.gov/?q=${enc(q)}&ft=on` },
+  { id:'philpapers',  name:'PhilPapers',          color:'#7c3aed', cat:'articles',  langs:['en','multi'],
+    desc:'Filozofie academică — articole, cărți, recenzii din toate curentele',
+    url:q=>`https://philpapers.org/s/${enc(q)}` },
+  { id:'repec',       name:'REPEC / IDEAS',       color:'#065f46', cat:'preprints', langs:['en','multi'],
+    desc:'Research Papers in Economics — 4M+ lucrări economie și finanțe',
+    url:q=>`https://ideas.repec.org/cgi-bin/htsearch?q=${enc(q)}` },
+  { id:'researchgate',name:'ResearchGate',        color:'#00ccbb', cat:'articles',  langs:['multi'],
+    desc:'Rețea academică globală — profiluri cercetători și full-text articole',
+    url:q=>`https://www.researchgate.net/search?q=${enc(q)}` },
+  { id:'academia',    name:'Academia.edu',        color:'#36a9e1', cat:'articles',  langs:['multi'],
+    desc:'Platformă diseminare lucrări — multidisciplinar, profil personal cercetător',
+    url:q=>`https://www.academia.edu/search?q=${enc(q)}` },
+  // ── Cărți
+  { id:'doab',        name:'DOAB',                color:'#059669', cat:'books',     langs:['multi'],
+    desc:'Directory of Open Access Books — 80.000+ cărți academice peer-reviewed',
+    url:q=>`https://www.doabooks.org/doab?func=search&query=${enc(q)}&uiLanguage=en` },
+  { id:'oapen',       name:'OAPEN Library',       color:'#7c3aed', cat:'books',     langs:['multi'],
+    desc:'Monografii academice europene open-access — EN, FR, DE, NL, ES',
+    url:q=>`https://library.oapen.org/discover?query=${enc(q)}` },
+  { id:'books101',    name:'101books.club',       color:'#0f766e', cat:'books',     langs:['multi'],
+    desc:'Bibliotecă online cu cărți descărcabile din mai multe limbi',
+    url:q=>`https://101books.club/search?q=${enc(q)}` },
+  { id:'scribd',      name:'Scribd Downloader',   color:'#1e40af', cat:'books',     langs:['multi'],
+    desc:'Descarcă documente Scribd — inserează URL-ul documentului în câmpul de pe site',
+    url:q=>`https://scribd.vdownloaders.com/` },
+  // ── Teze
+  { id:'dart',        name:'DART-Europe',         color:'#c2410c', cat:'theses',    langs:['multi'],
+    desc:'Teze europene de doctorat în acces deschis — 1M+ din 28 țări',
+    url:q=>`https://www.dart-europe.org/basic-search.php?value%5B%5D=${enc(q)}` },
+  { id:'ethos',       name:'EThOS',               color:'#9d174d', cat:'theses',    langs:['en'],
+    desc:'British Library — 600.000+ teze de doctorat din Marea Britanie',
+    url:q=>`https://ethos.bl.uk/Home.do#search/${enc(q)}` },
+  { id:'ndltd',       name:'NDLTD',               color:'#6b21a8', cat:'theses',    langs:['multi'],
+    desc:'Networked Digital Library of Theses — global, multilingv, 6M+ teze',
+    url:q=>`https://ndltd.org/cgi-bin/simple-search.pl?query=${enc(q)}` },
+  // ── Sci-Hub
+  { id:'scihub',      name:'Sci-Hub',             color:'#e05c6a', cat:'articles',  langs:['multi'],
+    desc:'Acces la articole prin DOI sau titlu — verifică mirror activ pe sci-hub.pub',
+    mirrors:['sci-hub.se','sci-hub.st','sci-hub.ru','sci-hub.mksa.top','sci-hub.ren','www.sci-hub.pub'],
+    url:q=>`https://sci-hub.se/${enc(q)}` },
+  { id:'core_p',      name:'CORE (portal)',       color:'#be185d', cat:'articles',  langs:['multi'],
+    desc:'Interfața web CORE cu filtre avansate: disciplină, an, țară sursă',
+    url:q=>`https://core.ac.uk/search?q=${enc(q)}` },
+
+  // ════════ SURSE NOI MULTILINGVE ════════
+
+  // ── Franceză 🇫🇷
+  { id:'gallica',     name:'Gallica (BnF)',       color:'#dc2626', cat:'books',     langs:['fr','multi'],
+    desc:'🇫🇷 Biblioteca Națională a Franței — 8M+ documente: cărți, periodice, manuscrise, fotografii',
+    url:q=>`https://gallica.bnf.fr/services/engine/search/sru?operation=searchRetrieve&version=1.2&query=${enc(q)}&suggest=10&rk=1` },
+  { id:'persee',      name:'Persée',              color:'#b45309', cat:'articles',  langs:['fr','multi'],
+    desc:'🇫🇷 Arhivă digitală reviste academice franceze — drept, istorie, filozofie, sociologie',
+    url:q=>`https://www.persee.fr/search#q=${enc(q)}` },
+
+  { id:'hal',         name:'HAL Science',         color:'#b91c1c', cat:'articles',  langs:['fr','multi'],
+    desc:'🇫🇷 Arhivă deschisă franceză — 1M+ lucrări multidisciplinare, teze, rapoarte',
+    url:q=>`https://hal.science/search/index/?q=${enc(q)}&rows=30` },
+
+  // ── Spaniolă / Portugheză 🇪🇸🇵🇹
+  { id:'dialnet',     name:'Dialnet',             color:'#c2410c', cat:'articles',  langs:['es','pt'],
+    desc:'🇪🇸🇵🇹 Cel mai mare portal academic ibero-american — 10M+ documente, reviste, teze',
+    url:q=>`https://dialnet.unirioja.es/buscar/documentos/?querysDismax.TITULAR=${enc(q)}` },
+  { id:'scielo',      name:'SciELO',              color:'#0d9488', cat:'articles',  langs:['es','pt','multi'],
+    desc:'🌎 Scientific Electronic Library Online — reviste latinoamericane, spaniole, portugheze, OA',
+    url:q=>`https://search.scielo.org/?q=${enc(q)}&lang=en` },
+  { id:'redalyc',     name:'Redalyc',             color:'#0891b2', cat:'articles',  langs:['es','pt'],
+    desc:'🇲🇽🇪🇸 Red de Revistas Científicas — 800.000+ articole latinoamericane și ibero-americane OA',
+    url:q=>`https://www.redalyc.org/busquedaArticuloFiltros.oa?busqueda=${enc(q)}` },
+  { id:'rcaap',       name:'RCAAP',               color:'#1a56db', cat:'articles',  langs:['pt'],
+    desc:'🇵🇹 Repositórios Científicos de Acesso Aberto de Portugal — teze și articole portugheze',
+    url:q=>`https://www.rcaap.pt/search.jsp?query=${enc(q)}` },
+
+  // ── Germană 🇩🇪
+  { id:'ssoar',       name:'SSOAR',               color:'#374151', cat:'articles',  langs:['de','en','multi'],
+    desc:'🇩🇪 Social Science Open Access Repository — 80.000+ lucrări EN/DE în științe sociale',
+    url:q=>`https://www.ssoar.info/ssoar/discover?query=${enc(q)}` },
+
+  // ── Italiană 🇮🇹
+  { id:'iris_cnr',    name:'IRIS CNR',            color:'#be123c', cat:'articles',  langs:['it','multi'],
+    desc:'🇮🇹 Archivio istituzionale CNR — cercetare științifică italiană, acces la full-text',
+    url:q=>`https://iris.cnr.it/search?query=${enc(q)}&rpp=20&sort_by=score&order=desc` },
+
+  // ── Română / Europa Centrală și de Est 🇷🇴
+  { id:'ceeol',       name:'CEEOL',               color:'#d97706', cat:'articles',  langs:['ro','multi'],
+    desc:'🇷🇴🌍 Central & Eastern European Online Library — reviste RO, CZ, PL, HU, SK — cel mai mare index CEE',
+    url:q=>`https://www.ceeol.com/search/search?query=${enc(q)}` },
+];
+
+const ALL_SOURCES = [...API_SOURCES, ...PORTAL_SOURCES];
+const SRC_META = {};
+ALL_SOURCES.forEach(s=>{ SRC_META[s.id]=s; });
+
+// ════════════════════════════════════════════════════════
+//  PROFILURI RAPIDE
+// ════════════════════════════════════════════════════════
+const PROFILES = {
+  all:        ALL_SOURCES.map(s=>s.id),
+  student:    ['arxiv','oplib','archive','gutenberg','core','semantic','scholar','scihub','ssrn','doab','oapen','base','dart','ethos','ndltd','books101','scribd','ceeol','dialnet','scielo','gallica'],
+  researcher: ['arxiv','core','semantic','openalex','crossref','zenodo','doaj','europepmc','scholar','dimensions','base','pubmed','jstor','ssrn','biorxiv','eric','hal','philpapers','repec','researchgate','academia','scihub','core_p','ssoar','iris_cnr','ceeol','dialnet','scielo'],
+  books:      ['oplib','archive','gutenberg','doab','oapen','books101','scribd','scholar','gallica','openedition'],
+  ro:         ['ceeol','dart','ndltd','core','openalex','scholar','scihub','base','doaj','zenodo','hal'],
+  romance:    ['hal','gallica','persee','openedition','dialnet','scielo','redalyc','rcaap','iris_cnr','openedition','doaj','oapen','doab','scholar','core'],
+};
+
+// ════════════════════════════════════════════════════════
+//  STATE
+// ════════════════════════════════════════════════════════
+const active = new Set(ALL_SOURCES.map(s=>s.id));
+let activeCat  = 'all';
+let activeLang = 'all';
+
+// ════════════════════════════════════════════════════════
+//  FILTRARE CHIPS
+// ════════════════════════════════════════════════════════
+function chipVisible(s) {
+  const catOk  = activeCat  === 'all' || s.cat === activeCat;
+  const langOk = activeLang === 'all' || (s.langs||[]).includes(activeLang);
+  return catOk && langOk;
+}
+
+function applyChipFilter() {
+  ALL_SOURCES.forEach(s=>{
+    const chip = document.getElementById(`chip-${s.id}`);
+    if (chip) chip.classList.toggle('hidden', !chipVisible(s));
+  });
+}
+
+function filterCat(cat) {
+  activeCat = cat;
+  document.querySelectorAll('#catRow .fpill').forEach(b=>b.classList.toggle('active',b.dataset.cat===cat));
+  applyChipFilter();
+}
+
+function filterLang(lang) {
+  activeLang = lang;
+  document.querySelectorAll('#langRow .fpill').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+  applyChipFilter();
+}
+
+// ════════════════════════════════════════════════════════
+//  BUILD CHIPS
+// ════════════════════════════════════════════════════════
+function langFlags(langs) {
+  return (langs||[]).filter(l=>l!=='multi').map(l=>LANG_LABELS[l]||'').join('')
+    + ((langs||[]).includes('multi')?LANG_LABELS.multi:'');
+}
+
+function buildChips() {
+  const grid = document.getElementById('srcGrid');
+  grid.innerHTML = ALL_SOURCES.map(s=>`
+    <label class="src-chip on" id="chip-${s.id}" for="chk-${s.id}" data-cat="${s.cat}" title="${esc(s.desc||'')}">
+      <input type="checkbox" id="chk-${s.id}" checked>
+      <span class="src-dot" style="background:${s.color}"></span>
+      <span class="src-lbl">${esc(s.name)}</span>
+      <span class="src-flags">${langFlags(s.langs)}</span>
+    </label>`).join('');
+
+  ALL_SOURCES.forEach(s=>{
+    const chk  = document.getElementById(`chk-${s.id}`);
+    const chip = document.getElementById(`chip-${s.id}`);
+    chk.addEventListener('change',()=>{
+      if(chk.checked){active.add(s.id);chip.classList.add('on');}
+      else{active.delete(s.id);chip.classList.remove('on');}
+    });
+  });
+}
+
+// Select all / none
+document.getElementById('selAllBtn').addEventListener('click',e=>{
+  e.stopPropagation();
+  const visible = ALL_SOURCES.filter(s=>chipVisible(s));
+  const allOn   = visible.every(s=>active.has(s.id));
+  visible.forEach(s=>{
+    const chk=document.getElementById(`chk-${s.id}`);
+    const chip=document.getElementById(`chip-${s.id}`);
+    if(allOn){chk.checked=false;active.delete(s.id);chip.classList.remove('on');}
+    else{chk.checked=true;active.add(s.id);chip.classList.add('on');}
+  });
+  document.getElementById('selAllBtn').textContent = allOn?'Toate':'Niciuna';
+});
+
+// Toggle panel
+document.getElementById('toggleHdr').addEventListener('click',function(e){
+  if(e.target.id==='selAllBtn') return;
+  const grid=document.getElementById('srcGrid');
+  const cat=document.getElementById('catRow');
+  const lang=document.getElementById('langRow');
+  const arrow=document.getElementById('toggleArrow');
+  const open=grid.classList.toggle('open');
+  cat.classList.toggle('open',open);
+  lang.classList.toggle('open',open);
+  arrow.classList.toggle('open',open);
+});
+
+// Profile switcher
+function setProfile(name) {
+  document.querySelectorAll('.profile-tab').forEach(b=>b.classList.toggle('active',b.dataset.p===name));
+  const allowed = new Set(PROFILES[name]||ALL_SOURCES.map(s=>s.id));
+  ALL_SOURCES.forEach(s=>{
+    const on=allowed.has(s.id);
+    const chk=document.getElementById(`chk-${s.id}`);
+    const chip=document.getElementById(`chip-${s.id}`);
+    if(!chk||!chip) return;
+    chk.checked=on;
+    if(on){active.add(s.id);chip.classList.add('on');}
+    else{active.delete(s.id);chip.classList.remove('on');}
+  });
+}
+
+// API Keys
+['core','s2'].forEach(k=>{
+  document.getElementById(`${k}Save`).addEventListener('click',()=>{
+    localStorage.setItem(`${k}_api_key`,document.getElementById(`${k}Key`).value.trim());
+    const btn=document.getElementById(`${k}Save`);
+    btn.textContent='✓ Salvat';
+    setTimeout(()=>btn.textContent='Salvează',1500);
+  });
+});
+window.addEventListener('load',()=>{
+  ['core','s2'].forEach(k=>{
+    const v=localStorage.getItem(`${k}_api_key`);
+    if(v) document.getElementById(`${k}Key`).value=v;
+  });
+});
+
+// ════════════════════════════════════════════════════════
+//  API FETCH FUNCTIONS
+// ════════════════════════════════════════════════════════
+async function fetchArxiv(q) {
+  const r = await fetch(`https://export.arxiv.org/api/query?search_query=all:${enc(q)}&start=0&max_results=6`);
+  const xml = new DOMParser().parseFromString(await r.text(),'text/xml');
+  return [...xml.querySelectorAll('entry')].map(e=>({
+    title:    e.querySelector('title')?.textContent?.trim(),
+    authors:  [...e.querySelectorAll('author name')].map(a=>a.textContent).join(', '),
+    abstract: e.querySelector('summary')?.textContent?.trim().slice(0,280),
+    url:      e.querySelector('id')?.textContent?.trim(),
+    pdf:      e.querySelector('link[title="pdf"]')?.getAttribute('href'),
+    year:     e.querySelector('published')?.textContent?.slice(0,4),
+    journal:  e.querySelector('arxiv\\:journal_ref,journal_ref')?.textContent||'',
+    source:'arxiv'
+  }));
+}
+
+async function fetchOpenLibrary(q) {
+  const r = await fetch(`https://openlibrary.org/search.json?q=${enc(q)}&limit=6&fields=title,author_name,first_publish_year,key,ia`);
+  const d = await r.json();
+  return (d.docs||[]).map(item=>({
+    title:   item.title,
+    authors: (item.author_name||[]).join(', '),
+    year:    item.first_publish_year,
+    url:     `https://openlibrary.org${item.key}`,
+    pdf:     item.ia?.[0]?`https://archive.org/download/${item.ia[0]}/${item.ia[0]}.pdf`:null,
+    source:  'oplib'
+  }));
+}
+
+async function fetchArchive(q) {
+  const r = await fetch(`https://archive.org/advancedsearch.php?q=${enc(q)}+AND+mediatype:texts&fl[]=identifier,title,creator,date,description&rows=6&output=json&page=1`);
+  const d = await r.json();
+  return (d.response?.docs||[]).map(item=>({
+    title:    item.title,
+    authors:  typeof item.creator==='string'?item.creator:(item.creator||[]).join(', '),
+    year:     item.date?.slice(0,4),
+    abstract: typeof item.description==='string'?item.description?.slice(0,280):(item.description||[])[0]?.slice(0,280),
+    url:      `https://archive.org/details/${item.identifier}`,
+    pdf:      `https://archive.org/download/${item.identifier}/${item.identifier}.pdf`,
+    source:   'archive'
+  }));
+}
+
+async function fetchGutenberg(q) {
+  const r = await fetch(`https://gutendex.com/books/?search=${enc(q)}`);
+  const d = await r.json();
+  return (d.results||[]).slice(0,6).map(item=>({
+    title:   item.title,
+    authors: item.authors.map(a=>a.name).join(', '),
+    url:     `https://www.gutenberg.org/ebooks/${item.id}`,
+    pdf:     item.formats?.['application/pdf']||item.formats?.['application/epub+zip']||null,
+    source:  'gutenberg'
+  }));
+}
+
+async function fetchCore(q) {
+  const key = localStorage.getItem('core_api_key')||'';
+  const headers = key?{Authorization:`Bearer ${key}`}:{};
+  const r = await fetch(`https://api.core.ac.uk/v3/search/works?q=${enc(q)}&limit=6`, {headers});
+  if (!r.ok) throw new Error(`CORE ${r.status} — adaugă API key gratuit`);
+  const d = await r.json();
+  return (d.results||[]).map(item=>({
+    title:    item.title,
+    authors:  (item.authors||[]).map(a=>a.name||String(a)).join(', '),
+    year:     item.yearPublished,
+    abstract: item.abstract?.slice(0,280),
+    url:      item.links?.[0]?.url||`https://core.ac.uk/works/${item.id}`,
+    pdf:      item.downloadUrl,
+    source:   'core'
+  }));
+}
+
+async function fetchSemantic(q) {
+  const key = localStorage.getItem('s2_api_key')||'';
+  const headers = key?{'x-api-key':key}:{};
+  const r = await fetch(`https://api.semanticscholar.org/graph/v1/paper/search?query=${enc(q)}&limit=6&fields=title,authors,year,abstract,openAccessPdf,venue`, {headers});
+  if (!r.ok) throw new Error(`Semantic Scholar ${r.status}`);
+  const d = await r.json();
+  return (d.data||[]).map(item=>({
+    title:    item.title,
+    authors:  (item.authors||[]).map(a=>a.name).join(', '),
+    year:     item.year,
+    abstract: item.abstract?.slice(0,280),
+    journal:  item.venue,
+    url:      `https://www.semanticscholar.org/paper/${item.paperId}`,
+    pdf:      item.openAccessPdf?.url,
+    source:   'semantic'
+  }));
+}
+
+async function fetchOpenAlex(q) {
+  const r = await fetch(`https://api.openalex.org/works?search=${enc(q)}&per-page=6&select=title,authorships,publication_year,abstract_inverted_index,open_access,doi,primary_location`);
+  if (!r.ok) throw new Error(`OpenAlex ${r.status}`);
+  const d = await r.json();
+  return (d.results||[]).map(item=>{
+    let abstract='';
+    if (item.abstract_inverted_index){
+      const words={};
+      for(const [word,pos] of Object.entries(item.abstract_inverted_index)) pos.forEach(p=>{words[p]=word;});
+      abstract=Object.keys(words).sort((a,b)=>a-b).map(k=>words[k]).join(' ').slice(0,280);
+    }
+    return { title:item.title, authors:(item.authorships||[]).slice(0,4).map(a=>a.author?.display_name).filter(Boolean).join(', '),
+      year:item.publication_year, abstract, journal:item.primary_location?.source?.display_name,
+      url:item.doi?`https://doi.org/${item.doi}`:item.id, pdf:item.open_access?.oa_url, source:'openalex' };
+  });
+}
+
+async function fetchCrossRef(q) {
+  const r = await fetch(`https://api.crossref.org/works?query=${enc(q)}&rows=6&select=title,author,published,DOI,abstract,link,container-title`);
+  if (!r.ok) throw new Error(`CrossRef ${r.status}`);
+  const d = await r.json();
+  return (d.message?.items||[]).map(item=>({
+    title:    (item.title||[])[0],
+    authors:  (item.author||[]).slice(0,4).map(a=>[a.given,a.family].filter(Boolean).join(' ')).join(', '),
+    year:     item.published?.['date-parts']?.[0]?.[0],
+    abstract: item.abstract?.replace(/<[^>]+>/g,'').slice(0,280),
+    journal:  (item['container-title']||[])[0],
+    doi:      item.DOI,
+    url:      `https://doi.org/${item.DOI}`,
+    pdf:      (item.link||[]).find(l=>l['content-type']==='application/pdf')?.URL,
+    source:   'crossref'
+  }));
+}
+
+async function fetchZenodo(q) {
+  const r = await fetch(`https://zenodo.org/api/records?q=${enc(q)}&size=6&sort=bestmatch`);
+  if (!r.ok) throw new Error(`Zenodo ${r.status}`);
+  const d = await r.json();
+  return (d.hits?.hits||[]).map(item=>({
+    title:    item.metadata?.title,
+    authors:  (item.metadata?.creators||[]).slice(0,4).map(c=>c.name).join(', '),
+    year:     item.metadata?.publication_date?.slice(0,4),
+    abstract: item.metadata?.description?.replace(/<[^>]+>/g,'').slice(0,280),
+    journal:  item.metadata?.journal?.title,
+    doi:      item.doi,
+    url:      item.links?.html||`https://zenodo.org/records/${item.id}`,
+    pdf:      (item.files||[]).find(f=>f.key?.toLowerCase().endsWith('.pdf'))?.links?.self,
+    source:   'zenodo'
+  }));
+}
+
+async function fetchDOAJ(q) {
+  const r = await fetch(`https://doaj.org/api/search/articles/${enc(q)}?page=1&pageSize=6`);
+  if (!r.ok) throw new Error(`DOAJ ${r.status}`);
+  const d = await r.json();
+  return (d.results||[]).map(item=>({
+    title:    item.bibjson?.title,
+    authors:  (item.bibjson?.author||[]).map(a=>a.name).join(', '),
+    year:     item.bibjson?.year,
+    abstract: item.bibjson?.abstract?.slice(0,280),
+    journal:  item.bibjson?.journal?.title,
+    url:      item.bibjson?.link?.find(l=>l.type==='fulltext')?.url||`https://doaj.org/article/${item.id}`,
+    pdf:      item.bibjson?.link?.find(l=>l.type==='fulltext')?.url,
+    source:   'doaj'
+  }));
+}
+
+async function fetchEuropePMC(q) {
+  const r = await fetch(`https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=${enc(q)}&format=json&pageSize=6&resultType=core`);
+  if (!r.ok) throw new Error(`Europe PMC ${r.status}`);
+  const d = await r.json();
+  return (d.resultList?.result||[]).map(item=>({
+    title:    item.title,
+    authors:  item.authorString,
+    year:     item.pubYear,
+    abstract: item.abstractText?.slice(0,280),
+    journal:  item.journalTitle,
+    doi:      item.doi,
+    url:      item.doi?`https://doi.org/${item.doi}`:`https://europepmc.org/article/${item.source}/${item.id}`,
+    pdf:      item.fullTextUrlList?.fullTextUrl?.find(u=>u.documentStyle==='pdf')?.url,
+    source:   'europepmc'
+  }));
+}
+
+const API_FNS = { arxiv:fetchArxiv, oplib:fetchOpenLibrary, archive:fetchArchive, gutenberg:fetchGutenberg,
+  core:fetchCore, semantic:fetchSemantic, openalex:fetchOpenAlex, crossref:fetchCrossRef,
+  zenodo:fetchZenodo, doaj:fetchDOAJ, europepmc:fetchEuropePMC };
+
+// ════════════════════════════════════════════════════════
+//  RENDER
+// ════════════════════════════════════════════════════════
+const CAT_COLORS = { articles:'#5b8dee', preprints:'#9b72ef', books:'#3ecf8e', theses:'#e8893a', data:'#2ec9c9' };
+const CAT_LABELS = { articles:'Articole & Reviste', preprints:'Preprint & Working Papers', books:'Cărți & Manuale', theses:'Teze & Disertații', data:'Repozitoarii Date' };
+
+function resultCard(item) {
+  const hasPdf = item.pdf && String(item.pdf).startsWith('http');
+  const safeT  = (item.title||'').replace(/'/g,'&apos;').replace(/\\/g,'\\\\');
+  return `<div class="r-card">
+    <div class="r-title"><a href="${esc(item.url||'#')}" target="_blank" rel="noopener">${esc(item.title||'Titlu necunoscut')}</a></div>
+    <div class="r-meta">
+      ${item.authors?`<span class="r-authors">${esc(String(item.authors).slice(0,90))}${String(item.authors).length>90?'…':''}</span>`:''}
+      ${item.year   ?`<span class="r-year">${esc(item.year)}</span>`:''}
+      ${item.journal?`<span class="r-journal">${esc(String(item.journal).slice(0,55))}</span>`:''}
+      ${item.doi    ?`<span class="r-doi">DOI:${esc(item.doi)}</span>`:''}
+    </div>
+    ${item.abstract?`<div class="r-abstract">${esc(item.abstract)}</div>`:''}
+    <div class="r-actions">
+      <a class="btn btn-out" href="${esc(item.url||'#')}" target="_blank" rel="noopener">↗ Deschide</a>
+      ${hasPdf?`<a class="btn btn-gold" href="${esc(item.pdf)}" target="_blank" rel="noopener">⬇ PDF</a>`:''}
+      ${item.doi?`<button class="btn btn-teal" onclick="openUnpaywall('${esc(item.doi)}')">🔓 OA Check</button>`:''}
+      <button class="btn btn-out" onclick="sciHubLookup('${safeT}')">🔑 Sci-Hub</button>
+    </div>
+  </div>`;
+}
+
+function srcSection(srcId, items, error) {
+  const meta = SRC_META[srcId]; if (!meta) return '';
+  const content = error
+    ? `<div class="src-error err">⚠ ${esc(error)}</div>`
+    : items.length===0
+      ? `<div class="src-error empty">Niciun rezultat pentru această sursă.</div>`
+      : items.map(resultCard).join('');
+  const flags = langFlags(meta.langs);
+  return `<div class="src-sec" id="sec-${srcId}">
+    <div class="src-hdr">
+      <span class="src-hdr-badge" style="background:${meta.color}22;color:${meta.color};border:1px solid ${meta.color}44">${esc(meta.name)}</span>
+      ${flags?`<span class="src-hdr-langs">${flags}</span>`:''}
+      ${meta.desc?`<span class="src-hdr-desc">${esc(meta.desc)}</span>`:''}
+      ${!error?`<span class="src-hdr-ct">${items.length} rezultat${items.length!==1?'e':''}</span>`:''}
+    </div>
+    ${content}
+  </div>`;
+}
+
+function portalSection(activePids, query) {
+  const groups = {};
+  PORTAL_SOURCES.filter(p=>activePids.has(p.id)).forEach(p=>{
+    if(!groups[p.cat]) groups[p.cat]=[];
+    groups[p.cat].push(p);
+  });
+  const order = ['articles','preprints','books','theses','data'];
+  return order.filter(c=>groups[c]?.length).map(cat=>{
+    const cc = CAT_COLORS[cat]||'#7a7f9a';
+    const cards = groups[cat].map(p=>{
+      const flags = langFlags(p.langs);
+      let actions = '';
+      if (p.id==='scihub') {
+        actions=`<div class="mirrors-row">${(p.mirrors||[]).map(m=>`<a class="mirror-link" href="https://${m}/${enc(query)}" target="_blank" rel="noopener">${m}</a>`).join('')}</div>
+          <a class="btn btn-out" href="https://www.sci-hub.pub" target="_blank" rel="noopener" style="font-size:.61rem;margin-top:4px">🔍 Mirror-uri active</a>`;
+      } else {
+        actions=`<a class="btn btn-out" href="${esc(p.url(query))}" target="_blank" rel="noopener" style="font-size:.65rem">↗ Caută pe ${esc(p.name)}</a>`;
+      }
+      return `<div class="portal-card">
+        <div class="p-name"><span class="p-dot" style="background:${p.color}"></span>${esc(p.name)}${flags?`<span class="p-flags">${flags}</span>`:''}</div>
+        <div class="p-desc">${esc(p.desc)}</div>
+        ${actions}
+      </div>`;
+    }).join('');
+    return `<div class="src-sec">
+      <div class="cat-div">
+        <span class="cat-div-lbl" style="color:${cc}">${CAT_LABELS[cat]||cat}</span>
+        <div class="cat-div-line"></div>
+        <span class="cat-div-ct">${groups[cat].length} surse</span>
+      </div>
+      <div class="portals-grid">${cards}</div>
+    </div>`;
+  }).join('');
+}
+
+// Helpers
+function sciHubLookup(title){ window.open('https://sci-hub.se/'+enc(title),'_blank'); }
+function openUnpaywall(doi){ window.open(`https://unpaywall.org/${doi}`,'_blank'); }
+
+// DOI handlers
+document.getElementById('doiSciHub').addEventListener('click',()=>{
+  const v=document.getElementById('doiInput').value.trim(); if(!v) return;
+  window.open(`https://sci-hub.se/${v.replace(/^https?:\/\/(dx\.)?doi\.org\//,'')}`, '_blank');
+});
+document.getElementById('doiUnpay').addEventListener('click',()=>{
+  const v=document.getElementById('doiInput').value.trim(); if(!v) return;
+  window.open(`https://unpaywall.org/${v.replace(/^https?:\/\/(dx\.)?doi\.org\//,'')}`, '_blank');
+});
+document.getElementById('doiInput').addEventListener('keydown',e=>{ if(e.key==='Enter') document.getElementById('doiSciHub').click(); });
+
+// ════════════════════════════════════════════════════════
+//  MAIN SEARCH
+// ════════════════════════════════════════════════════════
+let searchCounter = 0;
+
+async function doSearch() {
+  const query = document.getElementById('queryInput').value.trim();
+  if (!query) return;
+  const myId = ++searchCounter;
+  const activeApiSrcs    = API_SOURCES.filter(s=>active.has(s.id));
+  const activePortalSrcs = new Set(PORTAL_SOURCES.filter(s=>active.has(s.id)).map(s=>s.id));
+
+  const area  = document.getElementById('resArea');
+  const resSt = document.getElementById('resSt');
+  const sBar  = document.getElementById('statsBar');
+  resSt.style.display='flex'; sBar.style.display='flex';
+  document.getElementById('resTitle').textContent=`Rezultate pentru „${query}"`;
+  document.getElementById('resTotPill').textContent='Se caută…';
+  document.getElementById('resPortPill').textContent=`${activePortalSrcs.size} portaluri`;
+
+  sBar.innerHTML = activeApiSrcs.map(s=>
+    `<span class="sc loading" id="stat-${s.id}">
+      <span class="loader" style="width:8px;height:8px;border-width:1.5px"></span>
+      ${esc(s.name)}
+    </span>`).join('');
+
+  // Group API sources by category
+  const apiGrouped={};
+  activeApiSrcs.forEach(s=>{ if(!apiGrouped[s.cat]) apiGrouped[s.cat]=[]; apiGrouped[s.cat].push(s); });
+  const order=['articles','preprints','books','data','theses'];
+
+  let apiHTML='';
+  order.filter(c=>apiGrouped[c]?.length).forEach(cat=>{
+    const cc=CAT_COLORS[cat]||'#7a7f9a';
+    apiHTML+=`<div class="cat-div"><span class="cat-div-lbl" style="color:${cc}">${CAT_LABELS[cat]} — Live API</span><div class="cat-div-line"></div></div>`;
+    apiHTML+=apiGrouped[cat].map(s=>`
+      <div class="src-sec" id="sec-${s.id}">
+        <div class="src-hdr">
+          <span class="src-hdr-badge" style="background:${s.color}22;color:${s.color};border:1px solid ${s.color}44">${esc(s.name)}</span>
+          <span class="src-hdr-langs">${langFlags(s.langs)}</span>
+        </div>
+        <div class="loading-row"><span class="loader"></span>Se caută în ${esc(s.name)}…</div>
+      </div>`).join('');
+  });
+
+  const portalCount = activePortalSrcs.size;
+  area.innerHTML = apiHTML + `<div id="portal-wrap">
+    <div class="cat-div" style="margin-top:36px">
+      <span class="cat-div-lbl" style="color:var(--muted)">Portaluri — Deschide în Browser</span>
+      <div class="cat-div-line"></div>
+      <span class="cat-div-ct">${portalCount} surse active</span>
+    </div>
+    ${portalSection(activePortalSrcs, query)}
+  </div>`;
+
+  let total=0;
+  const promises = activeApiSrcs.map(async s=>{
+    try {
+      const fn=API_FNS[s.id]; if(!fn) return;
+      const items=await fn(query);
+      if(myId!==searchCounter) return;
+      total+=items.length;
+      const el=document.getElementById(`sec-${s.id}`);
+      if(el) el.outerHTML=srcSection(s.id,items,null);
+      const chip=document.getElementById(`stat-${s.id}`);
+      if(chip){chip.className='sc ok';chip.innerHTML=`✓ ${esc(s.name)} (${items.length})`;}
+    } catch(err) {
+      if(myId!==searchCounter) return;
+      const el=document.getElementById(`sec-${s.id}`);
+      if(el) el.outerHTML=srcSection(s.id,[],err.message||String(err));
+      const chip=document.getElementById(`stat-${s.id}`);
+      if(chip){chip.className='sc err';chip.innerHTML=`✗ ${esc(s.name)}`;}
+    }
+  });
+
+  await Promise.allSettled(promises);
+  if(myId!==searchCounter) return;
+  document.getElementById('resTotPill').textContent=`${total} rezultat${total!==1?'e':''} live`;
+}
+
+document.getElementById('searchBtn').addEventListener('click', doSearch);
+document.getElementById('queryInput').addEventListener('keydown', e=>{ if(e.key==='Enter') doSearch(); });
+
+// ── Legal modal ──────────────────────────────────────────────────────────────
+function openLegal(){ document.getElementById('legalModal').classList.add('open'); document.body.style.overflow='hidden'; }
+function closeLegal(){ document.getElementById('legalModal').classList.remove('open'); document.body.style.overflow=''; }
+function closeLegalOutside(e){ if(e.target===document.getElementById('legalModal')) closeLegal(); }
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeLegal(); });
+
+// ── Init ────────────────────────────────────────────────────────────────────
+buildChips();
+</script>
+</body>
+</html>
