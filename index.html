@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AcademiSearch — 42 Surse Academice Multilingve</title>
+<meta name="description" content="Motor de căutare academic unificat gratuit — 42 surse open-access în 8 limbi: arXiv, PubMed, CORE, Zenodo, CEEOL, Gallica, Dialnet și altele. Ideal pentru studenți, doctoranzi și cercetători.">
+<meta property="og:title" content="AcademiSearch — 42 Surse Academice Multilingve">
+<meta property="og:description" content="Motor de căutare academic unificat — 42 surse open-access în 8 limbi. Gratuit, fără cont, fără reclame.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://chiuta.github.io/AcademiSearch/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AcademiSearch — 42 Surse Academice">
+<meta name="twitter:description" content="Motor academic unificat — 42 surse OA în 8 limbi.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230c0e14'/%3E%3Ctext x='16' y='23' font-size='20' text-anchor='middle' fill='%23c8a84b'%3E📚%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inconsolata:wght@400;500;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -215,31 +224,33 @@ footer a:hover{color:var(--gold)}
 <div class="search-wrap">
   <div class="search-box">
     <input type="text" class="search-input" id="queryInput"
-      placeholder="Titlu, autor, subiect, cuvinte cheie, DOI, ISSN…" autocomplete="off" spellcheck="false">
-    <button class="search-btn" id="searchBtn">CAUTĂ</button>
+      placeholder="Titlu, autor, subiect, cuvinte cheie, ISSN…" autocomplete="off" spellcheck="false"
+      aria-label="Câmp de căutare principală">
+    <button class="search-btn" id="searchBtn" aria-label="Caută în toate sursele selectate">CAUTĂ</button>
   </div>
   <div class="doi-row">
     <span class="doi-label">DOI / URL →</span>
-    <input type="text" class="doi-input" id="doiInput" placeholder="10.1000/xyz123 sau URL complet articol">
-    <button class="doi-btn" id="doiSciHub">🔑 Sci-Hub</button>
-    <button class="doi-btn teal" id="doiUnpay">🔓 Unpaywall</button>
+    <input type="text" class="doi-input" id="doiInput" placeholder="10.1000/xyz123 sau URL complet articol" aria-label="Câmp DOI sau URL articol">
+    <button class="doi-btn" id="doiSciHub" aria-label="Deschide DOI în Sci-Hub">🔑 Sci-Hub</button>
+    <button class="doi-btn teal" id="doiUnpay" aria-label="Verifică disponibilitate open-access pe Unpaywall">🔓 Unpaywall</button>
   </div>
 </div>
 
 <div class="api-bar">
   <span class="api-label">CORE KEY:</span>
-  <input class="api-input" id="coreKey" placeholder="core.ac.uk/services/api">
-  <button class="api-save" id="coreSave">Salvează</button>
+  <input class="api-input" type="password" id="coreKey" placeholder="Obții gratuit la core.ac.uk/services/api" aria-label="Cheie API CORE (opțională)">
+  <button class="api-save" id="coreSave" aria-label="Salvează cheia CORE în localStorage">Salvează</button>
   <span class="api-label" style="margin-left:6px">S2 KEY:</span>
-  <input class="api-input" id="s2Key" placeholder="semanticscholar.org/product/api">
-  <button class="api-save" id="s2Save">Salvează</button>
+  <input class="api-input" type="password" id="s2Key" placeholder="semanticscholar.org/product/api" aria-label="Cheie API Semantic Scholar (opțională)">
+  <button class="api-save" id="s2Save" aria-label="Salvează cheia Semantic Scholar în localStorage">Salvează</button>
+  <span class="api-label" style="color:var(--muted);font-size:.58rem;margin-left:4px" title="Fără cheie CORE, căutările pot fi limitate de rate-limit. Cheia este gratuită și se obține la core.ac.uk">ⓘ Cheile sunt opționale dar recomandate</span>
 </div>
 
 <div class="toggle-bar">
-  <div class="toggle-header" id="toggleHdr">
+  <div class="toggle-header" id="toggleHdr" role="button" aria-expanded="true" aria-controls="srcGrid" tabindex="0">
     <span class="toggle-label">Surse activate</span>
-    <span class="toggle-arrow open" id="toggleArrow">▲</span>
-    <button class="toggle-select-all" id="selAllBtn">Toate</button>
+    <span class="toggle-arrow open" id="toggleArrow" aria-hidden="true">▲</span>
+    <button class="toggle-select-all" id="selAllBtn" aria-label="Selectează sau deselectează toate sursele vizibile">Toate</button>
   </div>
 
   <!-- Category filter -->
@@ -266,7 +277,7 @@ footer a:hover{color:var(--gold)}
     <button class="fpill" data-lang="it" onclick="filterLang('it')">🇮🇹 IT</button>
   </div>
 
-  <div class="sources-grid open" id="srcGrid"></div>
+  <div class="sources-grid open" id="srcGrid" role="group" aria-label="Surse de căutare disponibile"></div>
 </div>
 
 <div class="results-wrap">
@@ -282,8 +293,8 @@ footer a:hover{color:var(--gold)}
       <div class="welcome-text">42 surse academice · 8 limbi</div>
       <div class="welcome-sub">11 surse cu rezultate live prin API · 31 portaluri cu link direct<br>Română · English · Français · Deutsch · Español · Português · Italiano · Multilingv</div>
       <div class="welcome-langs">
-        <span class="wlang">🇷🇴 CEEOL · BCU</span>
-        <span class="wlang">🇫🇷 Gallica · Persée · OpenEdition · HAL</span>
+        <span class="wlang">🇷🇴 CEEOL</span>
+        <span class="wlang">🇫🇷 Gallica · Persée · HAL</span>
         <span class="wlang">🇩🇪 SSOAR · BASE</span>
         <span class="wlang">🇪🇸 Dialnet · SciELO · Redalyc</span>
         <span class="wlang">🇵🇹 SciELO · Redalyc · RCAAP</span>
@@ -304,14 +315,14 @@ footer a:hover{color:var(--gold)}
 </footer>
 
 <!-- ══ MODAL LEGAL & GDPR ══════════════════════════════════════════════════ -->
-<div class="modal-overlay" id="legalModal" onclick="closeLegalOutside(event)">
+<div class="modal-overlay" id="legalModal" onclick="closeLegalOutside(event)" role="dialog" aria-modal="true" aria-labelledby="legalModalTitle" aria-describedby="legalModalDesc">
   <div class="modal-box">
     <div class="modal-hdr">
       <div>
-        <div class="modal-title">⚖ Termeni Legali &amp; Politică GDPR</div>
-        <div class="modal-sub">ACADEMISEARCH · versiunea 3.0 · actualizat 2025</div>
+        <div class="modal-title" id="legalModalTitle">⚖ Termeni Legali &amp; Politică GDPR</div>
+        <div class="modal-sub" id="legalModalDesc">ACADEMISEARCH · versiunea 3.0 · actualizat 2025</div>
       </div>
-      <button class="modal-close" onclick="closeLegal()">✕ Închide</button>
+      <button class="modal-close" onclick="closeLegal()" aria-label="Închide fereastra cu termeni legali">✕ Închide</button>
     </div>
 
     <div class="modal-body">
@@ -367,7 +378,7 @@ footer a:hover{color:var(--gold)}
         <div class="legal-h">4. Proprietate intelectuală și drepturi de autor</div>
         <p class="legal-p">
           AcademiSearch este un instrument de <strong>referință și indexare</strong>. Aplicația nu stochează,
-          nu reproduc și nu redistribuie conținut protejat de drepturi de autor.
+          nu reproduce și nu redistribuie conținut protejat de drepturi de autor.
         </p>
         <p class="legal-p">
           Rezultatele afișate provin din API-uri publice ale surselor terțe. Titlurile, rezumatele și
@@ -386,9 +397,11 @@ footer a:hover{color:var(--gold)}
         <div class="legal-h">5. Utilizarea Sci-Hub — avertisment legal</div>
         <div class="legal-warn">
           <p>
-            <strong>⚠ Atenție:</strong> Sci-Hub operează într-o zonă juridică disputată în multiple jurisdicții.
-            Accesul la articole prin Sci-Hub poate constitui o încălcare a drepturilor de autor în România,
-            Uniunea Europeană și alte state, în funcție de legislația aplicabilă.
+            <strong>⚠ Atenție:</strong> Sci-Hub face obiectul unor <strong>hotărâri judecătorești de blocare</strong>
+            în mai multe state membre UE, printre care Germania (Landgericht München, 2021), Franța (TGI Paris),
+            Italia, Suedia și altele. Accesul la articole prin Sci-Hub poate constitui o <strong>încălcare a drepturilor
+            de autor</strong> în România și în Uniunea Europeană în conformitate cu Directiva 2001/29/CE și
+            Legea nr. 8/1996 privind dreptul de autor.
           </p>
         </div>
         <p class="legal-p">
@@ -459,16 +472,43 @@ footer a:hover{color:var(--gold)}
       </div>
 
       <div class="legal-section">
-        <div class="legal-h">9. Modificări ale termenilor</div>
+        <div class="legal-h">9. Identificarea operatorului</div>
         <p class="legal-p">
-          Acești termeni pot fi actualizați odată cu noile versiuni ale aplicației. Versiunea curentă este
-          afișată în antetul acestui document. Continuarea utilizării aplicației după publicarea
-          modificărilor constituie acceptarea noilor termeni.
+          AcademiSearch este un proiect open-source găzduit pe <strong>GitHub Pages</strong> sub contul
+          <a href="https://github.com/chiuta" target="_blank" rel="noopener">github.com/chiuta</a>.
+          Codul sursă integral este disponibil public și poate fi inspectat, copiat și redistribuit
+          conform licenței proiectului.
+        </p>
+        <p class="legal-p">
+          Pentru întrebări privind funcționarea aplicației, raportarea erorilor sau solicitări legate
+          de conținut, contactați operatorul prin intermediul repozitoriului GitHub al proiectului:
+          <a href="https://github.com/chiuta/AcademiSearch/issues" target="_blank" rel="noopener">
+            github.com/chiuta/AcademiSearch/issues
+          </a>.
+        </p>
+        <p class="legal-p">
+          Deoarece aplicația nu prelucrează date cu caracter personal și nu deține un server propriu,
+          nu există obligația legală de a desemna un Responsabil cu Protecția Datelor (DPO) conform
+          art. 37 GDPR.
         </p>
       </div>
 
       <div class="legal-section">
-        <div class="legal-h">10. Legislație aplicabilă</div>
+        <div class="legal-h">10. Modificări ale termenilor</div>
+        <p class="legal-p">
+          Acești termeni pot fi actualizați odată cu noile versiuni ale aplicației. Orice modificare
+          semnificativă va fi indicată prin incrementarea numărului de versiune vizibil în antetul
+          acestui document și în pagina de <em>Releases</em> a repozitoriului GitHub.
+        </p>
+        <p class="legal-p">
+          Utilizatorii sunt încurajați să consulte periodic această pagină. Continuarea utilizării
+          aplicației după publicarea modificărilor reprezintă acceptarea versiunii actualizate a termenilor,
+          în limita permisă de legislația aplicabilă. Modificările nu au efect retroactiv.
+        </p>
+      </div>
+
+      <div class="legal-section">
+        <div class="legal-h">11. Legislație aplicabilă</div>
         <p class="legal-p">
           Prezenții termeni sunt guvernați de legislația română și de dreptul Uniunii Europene, inclusiv:
         </p>
@@ -483,7 +523,7 @@ footer a:hover{color:var(--gold)}
     </div><!-- /modal-body -->
 
     <div class="modal-footer-row">
-      <button class="modal-close" onclick="closeLegal()">✕ Închide</button>
+      <button class="modal-close" onclick="closeLegal()" aria-label="Închide fereastra cu termeni legali">✕ Închide</button>
       <span>AcademiSearch v3 · © 2025 · Instrument gratuit, fără garanții</span>
     </div>
   </div>
@@ -657,9 +697,9 @@ const PROFILES = {
   all:        ALL_SOURCES.map(s=>s.id),
   student:    ['arxiv','oplib','archive','gutenberg','core','semantic','scholar','scihub','ssrn','doab','oapen','base','dart','ethos','ndltd','books101','scribd','ceeol','dialnet','scielo','gallica'],
   researcher: ['arxiv','core','semantic','openalex','crossref','zenodo','doaj','europepmc','scholar','dimensions','base','pubmed','jstor','ssrn','biorxiv','eric','hal','philpapers','repec','researchgate','academia','scihub','core_p','ssoar','iris_cnr','ceeol','dialnet','scielo'],
-  books:      ['oplib','archive','gutenberg','doab','oapen','books101','scribd','scholar','gallica','openedition'],
+  books:      ['oplib','archive','gutenberg','doab','oapen','books101','scribd','scholar','gallica'],
   ro:         ['ceeol','dart','ndltd','core','openalex','scholar','scihub','base','doaj','zenodo','hal'],
-  romance:    ['hal','gallica','persee','openedition','dialnet','scielo','redalyc','rcaap','iris_cnr','openedition','doaj','oapen','doab','scholar','core'],
+  romance:    ['hal','gallica','persee','dialnet','scielo','redalyc','rcaap','iris_cnr','doaj','oapen','doab','scholar','core'],
 };
 
 // ════════════════════════════════════════════════════════
@@ -1143,10 +1183,45 @@ document.getElementById('searchBtn').addEventListener('click', doSearch);
 document.getElementById('queryInput').addEventListener('keydown', e=>{ if(e.key==='Enter') doSearch(); });
 
 // ── Legal modal ──────────────────────────────────────────────────────────────
-function openLegal(){ document.getElementById('legalModal').classList.add('open'); document.body.style.overflow='hidden'; }
-function closeLegal(){ document.getElementById('legalModal').classList.remove('open'); document.body.style.overflow=''; }
-function closeLegalOutside(e){ if(e.target===document.getElementById('legalModal')) closeLegal(); }
-document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeLegal(); });
+let _prevFocus = null;
+
+function openLegal() {
+  _prevFocus = document.activeElement;
+  const modal = document.getElementById('legalModal');
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  // Move focus to first focusable element inside modal
+  const focusable = modal.querySelectorAll('button, [href], input, [tabindex]:not([tabindex="-1"])');
+  if (focusable.length) focusable[0].focus();
+}
+
+function closeLegal() {
+  document.getElementById('legalModal').classList.remove('open');
+  document.body.style.overflow = '';
+  if (_prevFocus) { _prevFocus.focus(); _prevFocus = null; }
+}
+
+function closeLegalOutside(e) {
+  if (e.target === document.getElementById('legalModal')) closeLegal();
+}
+
+// Focus trap inside modal
+document.getElementById('legalModal').addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') { closeLegal(); return; }
+  if (e.key !== 'Tab') return;
+  const focusable = [...this.querySelectorAll('button, [href], input, [tabindex]:not([tabindex="-1"])')].filter(el => !el.disabled);
+  if (!focusable.length) return;
+  const first = focusable[0], last = focusable[focusable.length - 1];
+  if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+  else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+});
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && document.getElementById('legalModal').classList.contains('open')) closeLegal(); });
+
+// Also allow Enter/Space on the toggle header div
+document.getElementById('toggleHdr').addEventListener('keydown', e => {
+  if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.target.click(); }
+});
 
 // ── Init ────────────────────────────────────────────────────────────────────
 buildChips();
