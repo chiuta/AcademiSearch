@@ -4,14 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AcademiSearch — 42 Surse Academice Multilingve</title>
-<meta name="description" content="Motor de căutare academic unificat gratuit — 42 surse open-access în 8 limbi: arXiv, PubMed, CORE, Zenodo, CEEOL, Gallica, Dialnet și altele. Ideal pentru studenți, doctoranzi și cercetători.">
+<meta name="description" content="Motor de căutare academic unificat gratuit — 42 surse open-access în 7 limbi + surse multilingve: arXiv, PubMed, CORE, Zenodo, CEEOL, Gallica, Dialnet și altele. Ideal pentru studenți, doctoranzi și cercetători.">
 <meta property="og:title" content="AcademiSearch — 42 Surse Academice Multilingve">
-<meta property="og:description" content="Motor de căutare academic unificat — 42 surse open-access în 8 limbi. Gratuit, fără cont, fără reclame.">
+<meta property="og:description" content="Motor de căutare academic unificat — 42 surse open-access în 7 limbi + multilingv. Gratuit, fără cont, fără reclame.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://chiuta.github.io/AcademiSearch/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AcademiSearch — 42 Surse Academice">
-<meta name="twitter:description" content="Motor academic unificat — 42 surse OA în 8 limbi.">
+<meta name="twitter:description" content="Motor academic unificat — 42 surse OA în 7 limbi + multilingv.">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230c0e14'/%3E%3Ctext x='16' y='23' font-size='20' text-anchor='middle' fill='%23c8a84b'%3E📚%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inconsolata:wght@400;500;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
@@ -211,7 +211,7 @@ footer a:hover{color:var(--gold)}
 
 <header>
   <div class="logo">Academi<em>Search</em></div>
-  <div class="tagline">Motor Academic Unificat · v3 · 42 Surse · 8 Limbi</div>
+  <div class="tagline">Motor Academic Unificat · v3 · 42 Surse · 7 Limbi + Multilingv</div>
   <div class="rule"></div>
   <div class="profile-row">
     <button class="profile-tab active" data-p="all"       onclick="setProfile('all')">🔍 Toate sursele</button>
@@ -292,7 +292,7 @@ footer a:hover{color:var(--gold)}
   <div id="resArea">
     <div class="welcome">
       <div class="welcome-icon">🌐</div>
-      <div class="welcome-text">42 surse academice · 8 limbi</div>
+      <div class="welcome-text">42 surse academice · 7 limbi + multilingv</div>
       <div class="welcome-sub">11 surse cu rezultate live prin API · 31 portaluri cu link direct<br>Română · English · Français · Deutsch · Español · Português · Italiano · Multilingv</div>
       <div class="welcome-langs">
         <span class="wlang">🇷🇴 CEEOL</span>
@@ -335,7 +335,7 @@ footer a:hover{color:var(--gold)}
           <strong>AcademiSearch</strong> este un motor de căutare academic unificat, gratuit și open-source, destinat
           studenților, doctoranzilor, cadrelor didactice și cercetătorilor științifici. Aplicația agregează
           interogări simultan în <strong>42 de surse externe independente</strong> și afișează rezultatele
-          pentru a facilita accesul la literatură academică în opt limbi.
+          pentru a facilita accesul la literatură academică în șapte limbi și surse multilingve.
         </p>
         <p class="legal-p">
           AcademiSearch este o aplicație <strong>client-side</strong> (o singură pagină HTML). Nu există server
@@ -898,8 +898,13 @@ window.addEventListener('load',()=>{
 //  API FETCH FUNCTIONS
 // ════════════════════════════════════════════════════════
 async function fetchArxiv(q) {
-  const r = await fetch(`https://export.arxiv.org/api/query?search_query=all:${enc(q)}&start=0&max_results=6`);
-  const xml = new DOMParser().parseFromString(await r.text(),'text/xml');
+  let r;
+  try { r = await fetch(`https://export.arxiv.org/api/query?search_query=all:${enc(q)}&start=0&max_results=6`); }
+  catch { throw new Error('arXiv — conexiune eșuată'); }
+  let text;
+  try { text = await r.text(); } catch { throw new Error('arXiv — răspuns invalid'); }
+  const xml = new DOMParser().parseFromString(text,'text/xml');
+  if (xml.querySelector('parsererror')) throw new Error('arXiv — răspuns XML invalid');
   return [...xml.querySelectorAll('entry')].map(e=>({
     title:    e.querySelector('title')?.textContent?.trim(),
     authors:  [...e.querySelectorAll('author name')].map(a=>a.textContent).join(', '),
@@ -908,13 +913,16 @@ async function fetchArxiv(q) {
     pdf:      e.querySelector('link[title="pdf"]')?.getAttribute('href'),
     year:     e.querySelector('published')?.textContent?.slice(0,4),
     journal:  e.querySelector('arxiv\\:journal_ref,journal_ref')?.textContent||'',
-    source:'arxiv'
+    source:   'arxiv'
   }));
 }
 
 async function fetchOpenLibrary(q) {
-  const r = await fetch(`https://openlibrary.org/search.json?q=${enc(q)}&limit=6&fields=title,author_name,first_publish_year,key,ia`);
-  const d = await r.json();
+  let r;
+  try { r = await fetch(`https://openlibrary.org/search.json?q=${enc(q)}&limit=6&fields=title,author_name,first_publish_year,key,ia`); }
+  catch { throw new Error('Open Library — conexiune eșuată'); }
+  if (!r.ok) throw new Error(`Open Library — eroare ${r.status}`);
+  const d = await safeJson(r, 'Open Library');
   return (d.docs||[]).map(item=>({
     title:   item.title,
     authors: (item.author_name||[]).join(', '),
@@ -926,8 +934,11 @@ async function fetchOpenLibrary(q) {
 }
 
 async function fetchArchive(q) {
-  const r = await fetch(`https://archive.org/advancedsearch.php?q=${enc(q)}+AND+mediatype:texts&fl[]=identifier,title,creator,date,description&rows=6&output=json&page=1`);
-  const d = await r.json();
+  let r;
+  try { r = await fetch(`https://archive.org/advancedsearch.php?q=${enc(q)}+AND+mediatype:texts&fl[]=identifier,title,creator,date,description&rows=6&output=json&page=1`); }
+  catch { throw new Error('Archive.org — conexiune eșuată'); }
+  if (!r.ok) throw new Error(`Archive.org — eroare ${r.status}`);
+  const d = await safeJson(r, 'Archive.org');
   return (d.response?.docs||[]).map(item=>({
     title:    item.title,
     authors:  typeof item.creator==='string'?item.creator:(item.creator||[]).join(', '),
@@ -940,8 +951,11 @@ async function fetchArchive(q) {
 }
 
 async function fetchGutenberg(q) {
-  const r = await fetch(`https://gutendex.com/books/?search=${enc(q)}`);
-  const d = await r.json();
+  let r;
+  try { r = await fetch(`https://gutendex.com/books/?search=${enc(q)}`); }
+  catch { throw new Error('Gutenberg — conexiune eșuată'); }
+  if (!r.ok) throw new Error(`Gutenberg — eroare ${r.status}`);
+  const d = await safeJson(r, 'Gutenberg');
   return (d.results||[]).slice(0,6).map(item=>({
     title:   item.title,
     authors: item.authors.map(a=>a.name).join(', '),
@@ -951,12 +965,30 @@ async function fetchGutenberg(q) {
   }));
 }
 
+
+// ── safeJson: parsează JSON sau aruncă eroare clară ──────────────────────────
+async function safeJson(r, sourceName) {
+  const ct = r.headers.get('content-type') || '';
+  // Unele API-uri returnează 200 cu HTML (Cloudflare challenge, maintenance) — detectăm
+  if (!ct.includes('json')) {
+    const text = await r.text().catch(()=>'');
+    if (text.trim().startsWith('<')) throw new Error(`${sourceName} — serviciu temporar indisponibil (răspuns non-JSON)`);
+    throw new Error(`${sourceName} — răspuns neașteptat`);
+  }
+  try { return await r.json(); }
+  catch { throw new Error(`${sourceName} — răspuns invalid (eroare server)`); }
+}
+
 async function fetchCore(q) {
   const key = localStorage.getItem('core_api_key')||'';
-  const headers = key?{Authorization:`Bearer ${key}`}:{};
-  const r = await fetch(`https://api.core.ac.uk/v3/search/works?q=${enc(q)}&limit=6`, {headers});
-  if (!r.ok) throw new Error(`CORE ${r.status} — adaugă API key gratuit`);
-  const d = await r.json();
+  const headers = key ? {Authorization:`Bearer ${key}`} : {};
+  let r;
+  try { r = await fetch(`https://api.core.ac.uk/v3/search/works?q=${enc(q)}&limit=6`, {headers}); }
+  catch { throw new Error('CORE — conexiune eșuată (DNS/rețea)'); }
+  if (r.status===401) throw new Error('CORE — API key lipsă sau invalidă. Obții gratuit la core.ac.uk/services/api');
+  if (r.status===429) throw new Error('CORE — limită de cereri depășită. Adaugă un API key gratuit pentru acces extins');
+  if (!r.ok)          throw new Error(`CORE — eroare ${r.status}`);
+  const d = await safeJson(r, 'CORE');
   return (d.results||[]).map(item=>({
     title:    item.title,
     authors:  (item.authors||[]).map(a=>a.name||String(a)).join(', '),
@@ -970,10 +1002,13 @@ async function fetchCore(q) {
 
 async function fetchSemantic(q) {
   const key = localStorage.getItem('s2_api_key')||'';
-  const headers = key?{'x-api-key':key}:{};
-  const r = await fetch(`https://api.semanticscholar.org/graph/v1/paper/search?query=${enc(q)}&limit=6&fields=title,authors,year,abstract,openAccessPdf,venue`, {headers});
-  if (!r.ok) throw new Error(`Semantic Scholar ${r.status}`);
-  const d = await r.json();
+  const headers = key ? {'x-api-key':key} : {};
+  let r;
+  try { r = await fetch(`https://api.semanticscholar.org/graph/v1/paper/search?query=${enc(q)}&limit=6&fields=title,authors,year,abstract,openAccessPdf,venue`, {headers}); }
+  catch { throw new Error('Semantic Scholar — conexiune eșuată (DNS/rețea)'); }
+  if (r.status===429) throw new Error('Semantic Scholar — limită de cereri depășită. Încearcă din nou în câteva minute sau adaugă un API key');
+  if (!r.ok)          throw new Error(`Semantic Scholar — eroare ${r.status}`);
+  const d = await safeJson(r, 'Semantic Scholar');
   return (d.data||[]).map(item=>({
     title:    item.title,
     authors:  (item.authors||[]).map(a=>a.name).join(', '),
@@ -987,9 +1022,12 @@ async function fetchSemantic(q) {
 }
 
 async function fetchOpenAlex(q) {
-  const r = await fetch(`https://api.openalex.org/works?search=${enc(q)}&per-page=6&select=title,authorships,publication_year,abstract_inverted_index,open_access,doi,primary_location`);
-  if (!r.ok) throw new Error(`OpenAlex ${r.status}`);
-  const d = await r.json();
+  let r;
+  try { r = await fetch(`https://api.openalex.org/works?search=${enc(q)}&per-page=6&select=title,authorships,publication_year,abstract_inverted_index,open_access,doi,primary_location`); }
+  catch { throw new Error('OpenAlex — conexiune eșuată'); }
+  if (r.status===429) throw new Error('OpenAlex — limită de cereri depășită. Încearcă din nou în câteva secunde');
+  if (!r.ok) throw new Error(`OpenAlex — eroare ${r.status}`);
+  const d = await safeJson(r, 'OpenAlex');
   return (d.results||[]).map(item=>{
     let abstract='';
     if (item.abstract_inverted_index){
@@ -1004,9 +1042,11 @@ async function fetchOpenAlex(q) {
 }
 
 async function fetchCrossRef(q) {
-  const r = await fetch(`https://api.crossref.org/works?query=${enc(q)}&rows=6&select=title,author,published,DOI,abstract,link,container-title`);
-  if (!r.ok) throw new Error(`CrossRef ${r.status}`);
-  const d = await r.json();
+  let r;
+  try { r = await fetch(`https://api.crossref.org/works?query=${enc(q)}&rows=6&select=title,author,published,DOI,abstract,link,container-title`); }
+  catch { throw new Error('CrossRef — conexiune eșuată'); }
+  if (!r.ok) throw new Error(`CrossRef — eroare ${r.status}`);
+  const d = await safeJson(r, 'CrossRef');
   return (d.message?.items||[]).map(item=>({
     title:    (item.title||[])[0],
     authors:  (item.author||[]).slice(0,4).map(a=>[a.given,a.family].filter(Boolean).join(' ')).join(', '),
@@ -1021,9 +1061,11 @@ async function fetchCrossRef(q) {
 }
 
 async function fetchZenodo(q) {
-  const r = await fetch(`https://zenodo.org/api/records?q=${enc(q)}&size=6&sort=bestmatch`);
-  if (!r.ok) throw new Error(`Zenodo ${r.status}`);
-  const d = await r.json();
+  let r;
+  try { r = await fetch(`https://zenodo.org/api/records?q=${enc(q)}&size=6&sort=bestmatch`); }
+  catch { throw new Error('Zenodo — conexiune eșuată'); }
+  if (!r.ok) throw new Error(`Zenodo — eroare ${r.status}`);
+  const d = await safeJson(r, 'Zenodo');
   return (d.hits?.hits||[]).map(item=>({
     title:    item.metadata?.title,
     authors:  (item.metadata?.creators||[]).slice(0,4).map(c=>c.name).join(', '),
@@ -1038,9 +1080,11 @@ async function fetchZenodo(q) {
 }
 
 async function fetchDOAJ(q) {
-  const r = await fetch(`https://doaj.org/api/search/articles/${enc(q)}?page=1&pageSize=6`);
-  if (!r.ok) throw new Error(`DOAJ ${r.status}`);
-  const d = await r.json();
+  let r;
+  try { r = await fetch(`https://doaj.org/api/search/articles/${enc(q)}?page=1&pageSize=6`); }
+  catch { throw new Error('DOAJ — conexiune eșuată'); }
+  if (!r.ok) throw new Error(`DOAJ — eroare ${r.status}`);
+  const d = await safeJson(r, 'DOAJ');
   return (d.results||[]).map(item=>({
     title:    item.bibjson?.title,
     authors:  (item.bibjson?.author||[]).map(a=>a.name).join(', '),
@@ -1054,9 +1098,11 @@ async function fetchDOAJ(q) {
 }
 
 async function fetchEuropePMC(q) {
-  const r = await fetch(`https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=${enc(q)}&format=json&pageSize=6&resultType=core`);
-  if (!r.ok) throw new Error(`Europe PMC ${r.status}`);
-  const d = await r.json();
+  let r;
+  try { r = await fetch(`https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=${enc(q)}&format=json&pageSize=6&resultType=core`); }
+  catch { throw new Error('Europe PMC — conexiune eșuată'); }
+  if (!r.ok) throw new Error(`Europe PMC — eroare ${r.status}`);
+  const d = await safeJson(r, 'Europe PMC');
   return (d.resultList?.result||[]).map(item=>({
     title:    item.title,
     authors:  item.authorString,
@@ -1069,6 +1115,7 @@ async function fetchEuropePMC(q) {
     source:   'europepmc'
   }));
 }
+
 
 const API_FNS = { arxiv:fetchArxiv, oplib:fetchOpenLibrary, archive:fetchArchive, gutenberg:fetchGutenberg,
   core:fetchCore, semantic:fetchSemantic, openalex:fetchOpenAlex, crossref:fetchCrossRef,
@@ -1103,18 +1150,25 @@ function resultCard(item) {
 
 function srcSection(srcId, items, error) {
   const meta = SRC_META[srcId]; if (!meta) return '';
-  const content = error
-    ? `<div class="src-error err">⚠ ${esc(error)}</div>`
-    : items.length===0
-      ? `<div class="src-error empty">Niciun rezultat pentru această sursă.</div>`
-      : items.map(resultCard).join('');
+  // Erori critice de infrastructură — colaps complet, doar badge mic în status bar
+  if (error) {
+    return `<div class="src-sec" id="sec-${srcId}" style="margin-bottom:8px">
+      <div class="src-hdr" style="opacity:.5;padding-bottom:5px;margin-bottom:0">
+        <span class="src-hdr-badge" style="background:${meta.color}11;color:${meta.color}88;border:1px solid ${meta.color}22">${esc(meta.name)}</span>
+        <span style="font-family:Inconsolata,monospace;font-size:.6rem;color:var(--red)">⚠ ${esc(error)}</span>
+      </div>
+    </div>`;
+  }
+  const content = items.length===0
+    ? `<div class="src-error empty">Niciun rezultat pentru această sursă.</div>`
+    : items.map(resultCard).join('');
   const flags = langFlags(meta.langs);
   return `<div class="src-sec" id="sec-${srcId}">
     <div class="src-hdr">
       <span class="src-hdr-badge" style="background:${meta.color}22;color:${meta.color};border:1px solid ${meta.color}44">${esc(meta.name)}</span>
       ${flags?`<span class="src-hdr-langs">${flags}</span>`:''}
       ${meta.desc?`<span class="src-hdr-desc">${esc(meta.desc)}</span>`:''}
-      ${!error?`<span class="src-hdr-ct">${items.length} rezultat${items.length!==1?'e':''}</span>`:''}
+      <span class="src-hdr-ct">${items.length} rezultat${items.length!==1?'e':''}</span>
     </div>
     ${content}
   </div>`;
@@ -1177,14 +1231,14 @@ function portalSection(activePids, query) {
 //  SCI-HUB MIRROR PROBE ENGINE
 // ══════════════════════════════════════════════════════
 const SCIHUB_MIRRORS = [
-  {host:'sci-hub.ru',  label:'Official'},
+  {host:'sci-hub.red', label:'Official'},
+  {host:'sci-hub.box', label:'Official'},
   {host:'sci-hub.st',  label:'Official'},
   {host:'sci-hub.su',  label:'Official'},
-  {host:'sci-hub.box', label:'Official'},
-  {host:'sci-hub.red', label:'Official'},
   {host:'sci-hub.al',  label:''},
   {host:'sci-hub.mk',  label:''},
   {host:'sci-hub.ee',  label:''},
+  {host:'sci-hub.ru',  label:'Official'},
 ];
 
 let _cachedMirror     = null;
