@@ -190,6 +190,8 @@ header{text-align:center;padding:48px 20px 28px}
 .legal-ul{list-style:none;padding:0;margin-bottom:8px}
 .legal-ul li{font-size:.86rem;color:var(--muted);padding:3px 0 3px 16px;position:relative;line-height:1.55}
 .legal-ul li::before{content:'—';position:absolute;left:0;color:var(--gold2)}
+.legal-ul li a{color:var(--gold);text-decoration:none}
+.legal-ul li a:hover{color:var(--gold2);text-decoration:underline}
 .legal-warn{background:rgba(224,92,106,.07);border:1px solid rgba(224,92,106,.25);border-radius:3px;padding:10px 14px;margin-bottom:8px}
 .legal-warn p{font-size:.84rem;color:#e05c6a;line-height:1.55}
 .legal-note{background:rgba(200,168,75,.06);border:1px solid rgba(200,168,75,.2);border-radius:3px;padding:10px 14px;margin-bottom:8px}
@@ -395,24 +397,65 @@ footer a:hover{color:var(--gold)}
 
       <div class="legal-section">
         <div class="legal-h">5. Utilizarea Sci-Hub — avertisment legal</div>
+
         <div class="legal-warn">
           <p>
             <strong>⚠ Atenție:</strong> Sci-Hub face obiectul unor <strong>hotărâri judecătorești de blocare</strong>
             în mai multe state membre UE, printre care Germania (Landgericht München, 2021), Franța (TGI Paris),
             Italia, Suedia și altele. Accesul la articole prin Sci-Hub poate constitui o <strong>încălcare a drepturilor
-            de autor</strong> în România și în Uniunea Europeană în conformitate cu Directiva 2001/29/CE și
-            Legea nr. 8/1996 privind dreptul de autor.
+            de autor</strong> în România și în Uniunea Europeană, în conformitate cu Directiva 2001/29/CE și
+            Legea nr. 8/1996 privind dreptul de autor și drepturile conexe.
           </p>
         </div>
+
+        <div class="legal-h" style="margin-top:14px">Mecanismul tehnic de accesare</div>
         <p class="legal-p">
-          AcademiSearch oferă <strong>exclusiv link-uri de navigare</strong> către mirror-urile Sci-Hub publice,
-          fără a stoca sau a intermedia conținut. Utilizatorul accesează Sci-Hub pe propria răspundere
-          și cu deplina înțelegere a implicațiilor legale din jurisdicția sa.
+          AcademiSearch implementează un <strong>sistem de detectare automată a mirror-ului activ</strong>.
+          La apăsarea oricărui buton „Sci-Hub", aplicația testează simultan următoarele adrese publice
+          și deschide prima care răspunde:
+        </p>
+        <ul class="legal-ul">
+          <li><strong>sci-hub.ru</strong> — domeniu oficial</li>
+          <li><strong>sci-hub.st</strong> — domeniu oficial</li>
+          <li><strong>sci-hub.su</strong> — domeniu oficial</li>
+          <li><strong>sci-hub.box</strong> — domeniu oficial</li>
+          <li><strong>sci-hub.red</strong> — domeniu oficial</li>
+          <li><strong>sci-hub.al</strong> — mirror alternativ</li>
+          <li><strong>sci-hub.mk</strong> — mirror alternativ</li>
+          <li><strong>sci-hub.ee</strong> — mirror alternativ</li>
+        </ul>
+        <p class="legal-p">
+          Testarea se realizează prin cereri de tip <code>fetch(mode: no-cors)</code> direct din browserul
+          utilizatorului, fără intermedierea unui server propriu. AcademiSearch <strong>nu cunoaște, nu
+          înregistrează și nu transmite</strong> rezultatul acestor teste. Niciun conținut Sci-Hub nu tranzitează
+          serverele sau infrastructura AcademiSearch.
         </p>
         <p class="legal-p">
-          Alternativa legală recomandată: folosiți butonul <strong>🔓 Unpaywall</strong> pentru a verifica
-          dacă articolul este disponibil în mod legitim în acces deschis.
+          Lista mirror-urilor este preluată din surse publice (<a href="https://www.sci-hub.pub" target="_blank" rel="noopener">sci-hub.pub</a>)
+          și poate fi modificată în versiunile viitoare ale aplicației pe măsură ce disponibilitatea
+          domeniilor se schimbă.
         </p>
+
+        <div class="legal-h" style="margin-top:14px">Responsabilitatea utilizatorului</div>
+        <p class="legal-p">
+          AcademiSearch oferă <strong>exclusiv funcționalitate de navigare</strong> către adrese publice ale
+          Sci-Hub. Operatorul aplicației nu stochează, nu intermediază și nu reproduce niciun conținut
+          al acestei platforme. <strong>Utilizatorul este singurul responsabil</strong> pentru decizia de
+          a accesa Sci-Hub și pentru consecințele juridice care decurg din această decizie în jurisdicția sa.
+        </p>
+        <p class="legal-p">
+          Utilizarea Sci-Hub este <strong>interzisă</strong> utilizatorilor din jurisdicții în care există
+          hotărâri judecătorești de blocare în vigoare, dacă accesul se realizează în mod deliberat pentru
+          a eluda aceste restricții.
+        </p>
+
+        <div class="legal-note">
+          <p>
+            <strong>Alternativa legală recomandată:</strong> folosiți butonul <strong>🔓 Unpaywall</strong>
+            disponibil pe fiecare rezultat cu DOI — verifică gratuit dacă articolul există în versiune
+            legitimă open-access (depozit instituțional, PubMed Central, versiune acceptată de autor etc.).
+          </p>
+        </div>
       </div>
 
       <div class="legal-section">
@@ -474,22 +517,41 @@ footer a:hover{color:var(--gold)}
       <div class="legal-section">
         <div class="legal-h">9. Identificarea operatorului</div>
         <p class="legal-p">
-          AcademiSearch este un proiect open-source găzduit pe <strong>GitHub Pages</strong> sub contul
-          <a href="https://github.com/chiuta" target="_blank" rel="noopener">github.com/chiuta</a>.
-          Codul sursă integral este disponibil public și poate fi inspectat, copiat și redistribuit
+          AcademiSearch este dezvoltat și întreținut de <strong>Alexio</strong>, autor și dezvoltator independent
+          cu sediul în <strong>București, România</strong>.
+        </p>
+        <p class="legal-p">
+          Aplicația este găzduită pe următoarele platforme publice:
+        </p>
+        <ul class="legal-ul">
+          <li>
+            <strong>GitHub Pages</strong> —
+            <a href="https://chiuta.github.io/AcademiSearch/" target="_blank" rel="noopener">chiuta.github.io/AcademiSearch</a>
+            (cod sursă public la
+            <a href="https://github.com/chiuta/AcademiSearch" target="_blank" rel="noopener">github.com/chiuta/AcademiSearch</a>)
+          </li>
+          <li>
+            <strong>Server propriu</strong> —
+            <a href="https://alexio.tf" target="_blank" rel="noopener">alexio.tf</a>
+            (găzduit și administrat direct de operator)
+          </li>
+        </ul>
+        <p class="legal-p">
+          Codul sursă integral este disponibil public pe GitHub și poate fi inspectat, copiat și redistribuit
           conform licenței proiectului.
         </p>
         <p class="legal-p">
-          Pentru întrebări privind funcționarea aplicației, raportarea erorilor sau solicitări legate
-          de conținut, contactați operatorul prin intermediul repozitoriului GitHub al proiectului:
-          <a href="https://github.com/chiuta/AcademiSearch/issues" target="_blank" rel="noopener">
-            github.com/chiuta/AcademiSearch/issues
-          </a>.
+          <strong>Contact:</strong> pentru întrebări privind funcționarea aplicației, raportarea erorilor,
+          solicitări legate de conținut sau orice aspecte legate de prezentele condiții, operatorul poate
+          fi contactat la adresa de e-mail:
+          <a href="mailto:alexio@trom.tf">alexio@trom.tf</a>
+          sau prin repozitoriul GitHub:
+          <a href="https://github.com/chiuta/AcademiSearch/issues" target="_blank" rel="noopener">github.com/chiuta/AcademiSearch/issues</a>.
         </p>
         <p class="legal-p">
-          Deoarece aplicația nu prelucrează date cu caracter personal și nu deține un server propriu,
-          nu există obligația legală de a desemna un Responsabil cu Protecția Datelor (DPO) conform
-          art. 37 GDPR.
+          Deoarece aplicația nu prelucrează date cu caracter personal și nu deține infrastructură de
+          procesare a datelor, nu există obligația legală de a desemna un Responsabil cu Protecția
+          Datelor (DPO) conform art. 37 GDPR.
         </p>
       </div>
 
@@ -635,9 +697,18 @@ const PORTAL_SOURCES = [
     url:q=>`https://ndltd.org/cgi-bin/simple-search.pl?query=${enc(q)}` },
   // ── Sci-Hub
   { id:'scihub',      name:'Sci-Hub',             color:'#e05c6a', cat:'articles',  langs:['multi'],
-    desc:'Acces la articole prin DOI sau titlu — verifică mirror activ pe sci-hub.pub',
-    mirrors:['sci-hub.se','sci-hub.st','sci-hub.ru','sci-hub.mksa.top','sci-hub.ren','www.sci-hub.pub'],
-    url:q=>`https://sci-hub.se/${enc(q)}` },
+    desc:'Acces la articole prin DOI sau titlu — se detectează automat mirror-ul activ',
+    mirrors:[
+      {host:'sci-hub.ru',  label:'Official'},
+      {host:'sci-hub.st',  label:'Official'},
+      {host:'sci-hub.su',  label:'Official'},
+      {host:'sci-hub.box', label:'Official'},
+      {host:'sci-hub.red', label:'Official'},
+      {host:'sci-hub.al',  label:''},
+      {host:'sci-hub.mk',  label:''},
+      {host:'sci-hub.ee',  label:''},
+    ],
+    url:q=>`https://sci-hub.ru/${enc(q)}` },
   { id:'core_p',      name:'CORE (portal)',       color:'#be185d', cat:'articles',  langs:['multi'],
     desc:'Interfața web CORE cu filtre avansate: disciplină, an, țară sursă',
     url:q=>`https://core.ac.uk/search?q=${enc(q)}` },
@@ -1025,7 +1096,7 @@ function resultCard(item) {
       <a class="btn btn-out" href="${esc(item.url||'#')}" target="_blank" rel="noopener">↗ Deschide</a>
       ${hasPdf?`<a class="btn btn-gold" href="${esc(item.pdf)}" target="_blank" rel="noopener">⬇ PDF</a>`:''}
       ${item.doi?`<button class="btn btn-teal" onclick="openUnpaywall('${esc(item.doi)}')">🔓 OA Check</button>`:''}
-      <button class="btn btn-out" onclick="sciHubLookup('${safeT}')">🔑 Sci-Hub</button>
+      <button class="btn btn-out" onclick="sciHubLookup('${safeT}',this)">🔑 Sci-Hub</button>
     </div>
   </div>`;
 }
@@ -1062,8 +1133,26 @@ function portalSection(activePids, query) {
       const flags = langFlags(p.langs);
       let actions = '';
       if (p.id==='scihub') {
-        actions=`<div class="mirrors-row">${(p.mirrors||[]).map(m=>`<a class="mirror-link" href="https://${m}/${enc(query)}" target="_blank" rel="noopener">${m}</a>`).join('')}</div>
-          <a class="btn btn-out" href="https://www.sci-hub.pub" target="_blank" rel="noopener" style="font-size:.61rem;margin-top:4px">🔍 Mirror-uri active</a>`;
+        const mirrorBadges = (p.mirrors||[]).map(m=>
+          `<span class="mirror-badge" title="${m.label||'Mirror'}" style="font-family:Inconsolata,monospace;font-size:.6rem;padding:2px 8px;border:1px solid var(--border);border-radius:20px;color:var(--muted);display:inline-flex;align-items:center;gap:4px">
+            <span style="width:6px;height:6px;border-radius:50%;background:${m.label==='Official'?'var(--green)':'var(--muted)'}"></span>
+            ${m.host}${m.label?`<span style="color:var(--green);font-size:.55rem">${m.label}</span>`:''}
+          </span>`).join('');
+        const safeQ = esc(enc(query));
+        actions=`
+          <div style="font-family:Inconsolata,monospace;font-size:.6rem;color:var(--muted);margin-bottom:6px;letter-spacing:.06em">MIRROR-URI DISPONIBILE</div>
+          <div class="mirrors-row" style="margin-bottom:10px">${mirrorBadges}</div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap">
+            <button class="btn btn-gold" onclick="sciHubOpen('${safeQ}',this)" style="font-size:.65rem">
+              🔑 Deschide — mirror activ
+            </button>
+            <a class="btn btn-out" href="https://www.sci-hub.pub" target="_blank" rel="noopener" style="font-size:.62rem">
+              🌐 sci-hub.pub
+            </a>
+          </div>
+          <div style="font-family:Inconsolata,monospace;font-size:.58rem;color:var(--muted);margin-top:8px">
+            ⚡ Se testează automat toate mirror-urile și se deschide primul activ
+          </div>`;
       } else {
         actions=`<a class="btn btn-out" href="${esc(p.url(query))}" target="_blank" rel="noopener" style="font-size:.65rem">↗ Caută pe ${esc(p.name)}</a>`;
       }
@@ -1084,18 +1173,73 @@ function portalSection(activePids, query) {
   }).join('');
 }
 
-// Helpers
-function sciHubLookup(title){ window.open('https://sci-hub.se/'+enc(title),'_blank'); }
-function openUnpaywall(doi){ window.open(`https://unpaywall.org/${doi}`,'_blank'); }
+// ══════════════════════════════════════════════════════
+//  SCI-HUB MIRROR PROBE ENGINE
+// ══════════════════════════════════════════════════════
+const SCIHUB_MIRRORS = [
+  {host:'sci-hub.ru',  label:'Official'},
+  {host:'sci-hub.st',  label:'Official'},
+  {host:'sci-hub.su',  label:'Official'},
+  {host:'sci-hub.box', label:'Official'},
+  {host:'sci-hub.red', label:'Official'},
+  {host:'sci-hub.al',  label:''},
+  {host:'sci-hub.mk',  label:''},
+  {host:'sci-hub.ee',  label:''},
+];
 
-// DOI handlers
-document.getElementById('doiSciHub').addEventListener('click',()=>{
-  const v=document.getElementById('doiInput').value.trim(); if(!v) return;
-  window.open(`https://sci-hub.se/${v.replace(/^https?:\/\/(dx\.)?doi\.org\//,'')}`, '_blank');
+let _cachedMirror     = null;
+let _probeInProgress  = null;
+
+async function probeMirror(host, timeout=5000) {
+  const ctrl = new AbortController();
+  const tid  = setTimeout(()=>ctrl.abort(), timeout);
+  try {
+    await fetch(`https://${host}/`, {mode:'no-cors', signal:ctrl.signal});
+    clearTimeout(tid);
+    return host;
+  } catch {
+    clearTimeout(tid);
+    return null;
+  }
+}
+
+async function findActiveMirror() {
+  if (_cachedMirror) return _cachedMirror;
+  if (_probeInProgress) return _probeInProgress;
+  _probeInProgress = (async () => {
+    const results = await Promise.all(SCIHUB_MIRRORS.map(m => probeMirror(m.host)));
+    const winner  = SCIHUB_MIRRORS.find((m,i) => results[i] !== null);
+    const host    = winner ? winner.host : SCIHUB_MIRRORS[0].host;
+    _cachedMirror = host;
+    _probeInProgress = null;
+    return host;
+  })();
+  return _probeInProgress;
+}
+
+async function sciHubOpen(path, btn) {
+  const orig = btn ? btn.innerHTML : null;
+  if (btn) { btn.innerHTML = '⏳…'; btn.disabled = true; }
+  let host;
+  try   { host = await findActiveMirror(); }
+  catch { host = SCIHUB_MIRRORS[0].host; }
+  if (btn) { btn.innerHTML = orig; btn.disabled = false; }
+  window.open(`https://${host}/${path}`, '_blank', 'noopener,noreferrer');
+}
+
+// Called inline from result cards — btn is the clicked element
+function sciHubLookup(title, btn) { sciHubOpen(enc(title), btn||null); }
+function openUnpaywall(doi){ window.open(`https://unpaywall.org/${doi}`,'_blank','noopener,noreferrer'); }
+
+// DOI row handlers
+document.getElementById('doiSciHub').addEventListener('click', async function() {
+  const v = document.getElementById('doiInput').value.trim(); if(!v) return;
+  const path = v.replace(/^https?:\/\/(dx\.)?doi\.org\//, '');
+  await sciHubOpen(path, this);
 });
 document.getElementById('doiUnpay').addEventListener('click',()=>{
   const v=document.getElementById('doiInput').value.trim(); if(!v) return;
-  window.open(`https://unpaywall.org/${v.replace(/^https?:\/\/(dx\.)?doi\.org\//,'')}`, '_blank');
+  window.open(`https://unpaywall.org/${v.replace(/^https?:\/\/(dx\.)?doi\.org\//,'')}`, '_blank','noopener,noreferrer');
 });
 document.getElementById('doiInput').addEventListener('keydown',e=>{ if(e.key==='Enter') document.getElementById('doiSciHub').click(); });
 
@@ -1225,6 +1369,8 @@ document.getElementById('toggleHdr').addEventListener('keydown', e => {
 
 // ── Init ────────────────────────────────────────────────────────────────────
 buildChips();
+// Warm up mirror probe in background so first Sci-Hub click is instant
+findActiveMirror().catch(()=>{});
 </script>
 </body>
 </html>
