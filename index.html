@@ -211,7 +211,7 @@ footer a:hover{color:var(--gold)}
 
 <header>
   <div class="logo">Academi<em>Search</em></div>
-  <div class="tagline">Motor Academic Unificat · v3 · 42 Surse · 7 Limbi + Multilingv</div>
+  <div class="tagline">Motor Academic Unificat · v4 · 42 Surse · 7 Limbi + Multilingv</div>
   <div class="rule"></div>
   <div class="profile-row">
     <button class="profile-tab active" data-p="all"       onclick="setProfile('all')">🔍 Toate sursele</button>
@@ -233,8 +233,8 @@ footer a:hover{color:var(--gold)}
   <div class="doi-row">
     <span class="doi-label">DOI / URL →</span>
     <input type="text" class="doi-input" id="doiInput" placeholder="10.1000/xyz123 sau URL complet articol" aria-label="Câmp DOI sau URL articol">
-    <button class="doi-btn" id="doiSciHub" aria-label="Deschide DOI în Sci-Hub">🔑 Sci-Hub</button>
-    <button class="doi-btn teal" id="doiUnpay" aria-label="Verifică disponibilitate open-access pe Unpaywall">🔓 Unpaywall</button>
+    <button class="doi-btn" id="doiOA" aria-label="Găsește versiunea open-access legitimă">🔓 Acces Liber</button>
+    <button class="doi-btn teal" id="doiUnpay" aria-label="Verifică disponibilitate open-access pe Unpaywall">🔍 Unpaywall</button>
   </div>
 </div>
 
@@ -309,10 +309,10 @@ footer a:hover{color:var(--gold)}
 </div>
 
 <footer>
-  AcademiSearch v3 · 42 surse open-access multilingve · instrument gratuit pentru cercetare academică<br>
+  AcademiSearch v4 · 42 surse open-access multilingve · instrument gratuit pentru cercetare academică<br>
   Respectă termenii de utilizare ai fiecărei platforme &nbsp;·&nbsp;
-  <a href="https://www.sci-hub.pub" target="_blank">sci-hub.pub</a> mirror-uri active &nbsp;·&nbsp;
-  <a href="https://unpaywall.org" target="_blank">Unpaywall</a> OA legitim &nbsp;·&nbsp;
+  <a href="https://openaccessbutton.org" target="_blank">Open Access Button</a> &nbsp;·&nbsp;
+  <a href="https://unpaywall.org" target="_blank">Unpaywall</a> &nbsp;·&nbsp;
   <button class="legal-link" onclick="openLegal()">⚖ Termeni legali & GDPR</button>
 </footer>
 
@@ -322,7 +322,7 @@ footer a:hover{color:var(--gold)}
     <div class="modal-hdr">
       <div>
         <div class="modal-title" id="legalModalTitle">⚖ Termeni Legali &amp; Politică GDPR</div>
-        <div class="modal-sub" id="legalModalDesc">ACADEMISEARCH · versiunea 3.0 · actualizat 2025</div>
+        <div class="modal-sub" id="legalModalDesc">ACADEMISEARCH · versiunea 4.0 · actualizat aprilie 2026</div>
       </div>
       <button class="modal-close" onclick="closeLegal()" aria-label="Închide fereastra cu termeni legali">✕ Închide</button>
     </div>
@@ -396,64 +396,45 @@ footer a:hover{color:var(--gold)}
       </div>
 
       <div class="legal-section">
-        <div class="legal-h">5. Utilizarea Sci-Hub — avertisment legal</div>
-
-        <div class="legal-warn">
-          <p>
-            <strong>⚠ Atenție:</strong> Sci-Hub face obiectul unor <strong>hotărâri judecătorești de blocare</strong>
-            în mai multe state membre UE, printre care Germania (Landgericht München, 2021), Franța (TGI Paris),
-            Italia, Suedia și altele. Accesul la articole prin Sci-Hub poate constitui o <strong>încălcare a drepturilor
-            de autor</strong> în România și în Uniunea Europeană, în conformitate cu Directiva 2001/29/CE și
-            Legea nr. 8/1996 privind dreptul de autor și drepturile conexe.
-          </p>
-        </div>
-
-        <div class="legal-h" style="margin-top:14px">Mecanismul tehnic de accesare</div>
+        <div class="legal-h">5. Accesul la literatura academică — instrumente legitime</div>
         <p class="legal-p">
-          AcademiSearch implementează un <strong>sistem de detectare automată a mirror-ului activ</strong>.
-          La apăsarea oricărui buton „Sci-Hub", aplicația testează simultan următoarele adrese publice
-          și deschide prima care răspunde:
-        </p>
-        <ul class="legal-ul">
-          <li><strong>sci-hub.ru</strong> — domeniu oficial</li>
-          <li><strong>sci-hub.st</strong> — domeniu oficial</li>
-          <li><strong>sci-hub.su</strong> — domeniu oficial</li>
-          <li><strong>sci-hub.box</strong> — domeniu oficial</li>
-          <li><strong>sci-hub.red</strong> — domeniu oficial</li>
-          <li><strong>sci-hub.al</strong> — mirror alternativ</li>
-          <li><strong>sci-hub.mk</strong> — mirror alternativ</li>
-          <li><strong>sci-hub.ee</strong> — mirror alternativ</li>
-        </ul>
-        <p class="legal-p">
-          Testarea se realizează prin cereri de tip <code>fetch(mode: no-cors)</code> direct din browserul
-          utilizatorului, fără intermedierea unui server propriu. AcademiSearch <strong>nu cunoaște, nu
-          înregistrează și nu transmite</strong> rezultatul acestor teste. Niciun conținut Sci-Hub nu tranzitează
-          serverele sau infrastructura AcademiSearch.
-        </p>
-        <p class="legal-p">
-          Lista mirror-urilor este preluată din surse publice (<a href="https://www.sci-hub.pub" target="_blank" rel="noopener">sci-hub.pub</a>)
-          și poate fi modificată în versiunile viitoare ale aplicației pe măsură ce disponibilitatea
-          domeniilor se schimbă.
+          AcademiSearch utilizează exclusiv instrumente și surse <strong>legal disponibile</strong> pentru a facilita
+          accesul la literatura academică. Aplicația nu conține, nu promovează și nu face trimitere la nicio platformă
+          care operează în afara cadrului legal al dreptului de autor.
         </p>
 
-        <div class="legal-h" style="margin-top:14px">Responsabilitatea utilizatorului</div>
+        <div class="legal-h" style="margin-top:14px">Open Access Button</div>
         <p class="legal-p">
-          AcademiSearch oferă <strong>exclusiv funcționalitate de navigare</strong> către adrese publice ale
-          Sci-Hub. Operatorul aplicației nu stochează, nu intermediază și nu reproduce niciun conținut
-          al acestei platforme. <strong>Utilizatorul este singurul responsabil</strong> pentru decizia de
-          a accesa Sci-Hub și pentru consecințele juridice care decurg din această decizie în jurisdicția sa.
+          <a href="https://openaccessbutton.org" target="_blank" rel="noopener">Open Access Button</a>
+          este un serviciu non-profit care identifică automat versiunile legal disponibile ale articolelor academice,
+          inclusiv copii depuse în repozitoarii instituționale, versiuni acceptate de autor (<em>accepted manuscripts</em>),
+          preprint-uri și versiuni din PubMed Central. Dacă nu găsește o versiune OA, facilitează solicitarea
+          documentului prin împrumut interbibliotecar sau direct de la autor.
         </p>
         <p class="legal-p">
-          Utilizarea Sci-Hub este <strong>interzisă</strong> utilizatorilor din jurisdicții în care există
-          hotărâri judecătorești de blocare în vigoare, dacă accesul se realizează în mod deliberat pentru
-          a eluda aceste restricții.
+          AcademiSearch integrează API-ul public Open Access Button (<code>api.openaccessbutton.org</code>)
+          pentru a oferi acces direct la versiunile legale ale articolelor găsite în căutare.
+        </p>
+
+        <div class="legal-h" style="margin-top:14px">Unpaywall</div>
+        <p class="legal-p">
+          <a href="https://unpaywall.org" target="_blank" rel="noopener">Unpaywall</a> este o bază de date
+          non-profit care indexează peste 50 de milioane de articole cu versiuni legale open-access, colectate
+          direct de la editori, repozitoarii instituționale și PubMed Central. Acoperă aproximativ 50% din
+          articolele publicate după anul 2000.
+        </p>
+        <p class="legal-p">
+          AcademiSearch utilizează API-ul public Unpaywall (<code>api.unpaywall.org/v2/</code>) pentru a
+          verifica și accesa versiunile OA ale articolelor identificate prin DOI. Nu se utilizează nicio
+          versiune cu plată sau cu autentificare a acestui API.
         </p>
 
         <div class="legal-note">
           <p>
-            <strong>Alternativa legală recomandată:</strong> folosiți butonul <strong>🔓 Unpaywall</strong>
-            disponibil pe fiecare rezultat cu DOI — verifică gratuit dacă articolul există în versiune
-            legitimă open-access (depozit instituțional, PubMed Central, versiune acceptată de autor etc.).
+            <strong>Strategia de acces în doi pași:</strong> la apăsarea butonului <strong>🔓 Acces Liber</strong>,
+            aplicația interoghează mai întâi Unpaywall (răspuns rapid), apoi Open Access Button (acoperire extinsă).
+            Dacă se găsește o versiune legală, se deschide direct. Dacă nu, utilizatorul este redirecționat
+            către pagina de solicitare OA Button unde poate cere documentul prin ILL sau email autor.
           </p>
         </div>
       </div>
@@ -586,7 +567,7 @@ footer a:hover{color:var(--gold)}
 
     <div class="modal-footer-row">
       <button class="modal-close" onclick="closeLegal()" aria-label="Închide fereastra cu termeni legali">✕ Închide</button>
-      <span>AcademiSearch v3 · © 2025 · Instrument gratuit, fără garanții</span>
+      <span>AcademiSearch v4 · © 2026 · Instrument gratuit, fără garanții</span>
     </div>
   </div>
 </div>
@@ -695,20 +676,10 @@ const PORTAL_SOURCES = [
   { id:'ndltd',       name:'NDLTD',               color:'#6b21a8', cat:'theses',    langs:['multi'],
     desc:'Networked Digital Library of Theses — global, multilingv, 6M+ teze',
     url:q=>`https://ndltd.org/cgi-bin/simple-search.pl?query=${enc(q)}` },
-  // ── Sci-Hub
-  { id:'scihub',      name:'Sci-Hub',             color:'#e05c6a', cat:'articles',  langs:['multi'],
-    desc:'Acces la articole prin DOI sau titlu — se detectează automat mirror-ul activ',
-    mirrors:[
-      {host:'sci-hub.ru',  label:'Official'},
-      {host:'sci-hub.st',  label:'Official'},
-      {host:'sci-hub.su',  label:'Official'},
-      {host:'sci-hub.box', label:'Official'},
-      {host:'sci-hub.red', label:'Official'},
-      {host:'sci-hub.al',  label:''},
-      {host:'sci-hub.mk',  label:''},
-      {host:'sci-hub.ee',  label:''},
-    ],
-    url:q=>`https://sci-hub.ru/${enc(q)}` },
+  // ── Acces Liber Legitim
+  { id:'oabutton',    name:'Open Access Button',  color:'#16a34a', cat:'articles',  langs:['multi'],
+    desc:'Găsește versiunea legală OA a oricărui articol — depozite instituționale, preprint-uri, email autor, ILL',
+    url:q=>`https://openaccessbutton.org/access?url=${enc(q)}` },
   { id:'core_p',      name:'CORE (portal)',       color:'#be185d', cat:'articles',  langs:['multi'],
     desc:'Interfața web CORE cu filtre avansate: disciplină, an, țară sursă',
     url:q=>`https://core.ac.uk/search?q=${enc(q)}` },
@@ -766,10 +737,10 @@ ALL_SOURCES.forEach(s=>{ SRC_META[s.id]=s; });
 // ════════════════════════════════════════════════════════
 const PROFILES = {
   all:        ALL_SOURCES.map(s=>s.id),
-  student:    ['arxiv','oplib','archive','gutenberg','core','semantic','scholar','scihub','ssrn','doab','oapen','base','dart','ethos','ndltd','books101','scribd','ceeol','dialnet','scielo','gallica'],
-  researcher: ['arxiv','core','semantic','openalex','crossref','zenodo','doaj','europepmc','scholar','dimensions','base','pubmed','jstor','ssrn','biorxiv','eric','hal','philpapers','repec','researchgate','academia','scihub','core_p','ssoar','iris_cnr','ceeol','dialnet','scielo'],
+  student:    ['arxiv','oplib','archive','gutenberg','core','semantic','scholar','oabutton','ssrn','doab','oapen','base','dart','ethos','ndltd','books101','scribd','ceeol','dialnet','scielo','gallica'],
+  researcher: ['arxiv','core','semantic','openalex','crossref','zenodo','doaj','europepmc','scholar','dimensions','base','pubmed','jstor','ssrn','biorxiv','eric','hal','philpapers','repec','researchgate','academia','oabutton','core_p','ssoar','iris_cnr','ceeol','dialnet','scielo'],
   books:      ['oplib','archive','gutenberg','doab','oapen','books101','scribd','scholar','gallica'],
-  ro:         ['ceeol','dart','ndltd','core','openalex','scholar','scihub','base','doaj','zenodo','hal'],
+  ro:         ['ceeol','dart','ndltd','core','openalex','scholar','oabutton','base','doaj','zenodo','hal'],
   romance:    ['hal','gallica','persee','dialnet','scielo','redalyc','rcaap','iris_cnr','doaj','oapen','doab','scholar','core'],
 };
 
@@ -1145,7 +1116,7 @@ function resultCard(item) {
   const hasPdf   = item.pdf && String(item.pdf).startsWith('http');
   const iid      = storeItem(item);
   const hasDoi   = !!item.doi;
-  const btnLabel = hasDoi ? '🎯 Sci-Hub (DOI)' : '🔑 Sci-Hub';
+  const btnLabel = hasDoi ? '🔓 Acces Liber (DOI)' : '🔓 Acces Liber';
   const btnClass = hasDoi ? 'btn-gold' : 'btn-out';
   return `<div class="r-card">
     <div class="r-title"><a href="${esc(item.url||'#')}" target="_blank" rel="noopener">${esc(item.title||'Titlu necunoscut')}</a></div>
@@ -1159,8 +1130,8 @@ function resultCard(item) {
     <div class="r-actions">
       <a class="btn btn-out" href="${esc(item.url||'#')}" target="_blank" rel="noopener">↗ Deschide</a>
       ${hasPdf?`<a class="btn btn-gold" href="${esc(item.pdf)}" target="_blank" rel="noopener">⬇ PDF</a>`:''}
-      ${hasDoi?`<button class="btn btn-teal" onclick="openUnpaywall('${esc(item.doi)}')">🔓 OA</button>`:''}
-      <button class="btn ${btnClass}" onclick="sciHubExact(${iid},this)" title="${hasDoi?'Match exact prin DOI':'Căutare titlu sau DOI via CrossRef'}">${btnLabel}</button>
+      ${hasDoi?`<button class="btn btn-teal" onclick="openUnpaywall('${esc(item.doi)}')">🔍 Unpaywall</button>`:''}
+      <button class="btn ${btnClass}" onclick="oaExact(${iid},this)" title="${hasDoi?'Caută PDF legal via Unpaywall + OA Button':'Caută DOI, apoi PDF legal via Unpaywall + OA Button'}">${btnLabel}</button>
     </div>
   </div>`;
 }
@@ -1202,31 +1173,7 @@ function portalSection(activePids, query) {
     const cc = CAT_COLORS[cat]||'#7a7f9a';
     const cards = groups[cat].map(p=>{
       const flags = langFlags(p.langs);
-      let actions = '';
-      if (p.id==='scihub') {
-        const mirrorBadges = (p.mirrors||[]).map(m=>
-          `<span class="mirror-badge" title="${m.label||'Mirror'}" style="font-family:Inconsolata,monospace;font-size:.6rem;padding:2px 8px;border:1px solid var(--border);border-radius:20px;color:var(--muted);display:inline-flex;align-items:center;gap:4px">
-            <span style="width:6px;height:6px;border-radius:50%;background:${m.label==='Official'?'var(--green)':'var(--muted)'}"></span>
-            ${m.host}${m.label?`<span style="color:var(--green);font-size:.55rem">${m.label}</span>`:''}
-          </span>`).join('');
-        const safeQ = esc(enc(query));
-        actions=`
-          <div style="font-family:Inconsolata,monospace;font-size:.6rem;color:var(--muted);margin-bottom:6px;letter-spacing:.06em">MIRROR-URI DISPONIBILE</div>
-          <div class="mirrors-row" style="margin-bottom:10px">${mirrorBadges}</div>
-          <div style="display:flex;gap:6px;flex-wrap:wrap">
-            <button class="btn btn-gold" onclick="sciHubOpen('${safeQ}',this)" style="font-size:.65rem">
-              🔑 Deschide — mirror activ
-            </button>
-            <a class="btn btn-out" href="https://www.sci-hub.pub" target="_blank" rel="noopener" style="font-size:.62rem">
-              🌐 sci-hub.pub
-            </a>
-          </div>
-          <div style="font-family:Inconsolata,monospace;font-size:.58rem;color:var(--muted);margin-top:8px">
-            ⚡ Se testează automat toate mirror-urile și se deschide primul activ
-          </div>`;
-      } else {
-        actions=`<a class="btn btn-out" href="${esc(p.url(query))}" target="_blank" rel="noopener" style="font-size:.65rem">↗ Caută pe ${esc(p.name)}</a>`;
-      }
+      const actions=`<a class="btn btn-out" href="${esc(p.url(query))}" target="_blank" rel="noopener" style="font-size:.65rem">↗ Caută pe ${esc(p.name)}</a>`;
       return `<div class="portal-card">
         <div class="p-name"><span class="p-dot" style="background:${p.color}"></span>${esc(p.name)}${flags?`<span class="p-flags">${flags}</span>`:''}</div>
         <div class="p-desc">${esc(p.desc)}</div>
@@ -1245,182 +1192,161 @@ function portalSection(activePids, query) {
 }
 
 // ══════════════════════════════════════════════════════
-//  SCI-HUB MIRROR PROBE ENGINE
+//  OPEN ACCESS ENGINE  (Unpaywall + OA Button)
+//  1. DOI via Unpaywall API  → PDF direct
+//  2. DOI via OA Button API  → PDF direct
+//  3. Fără DOI → CrossRef lookup → repeat 1+2
+//  4. Fallback → pagina OA Button request
 // ══════════════════════════════════════════════════════
-const SCIHUB_MIRRORS = [
-  {host:'sci-hub.red', label:'Official'},
-  {host:'sci-hub.box', label:'Official'},
-  {host:'sci-hub.st',  label:'Official'},
-  {host:'sci-hub.su',  label:'Official'},
-  {host:'sci-hub.al',  label:''},
-  {host:'sci-hub.mk',  label:''},
-  {host:'sci-hub.ee',  label:''},
-  {host:'sci-hub.ru',  label:'Official'},
-];
-
-let _cachedMirror     = null;
-let _probeInProgress  = null;
-
-async function probeMirror(host, timeout=5000) {
-  const ctrl = new AbortController();
-  const tid  = setTimeout(()=>ctrl.abort(), timeout);
-  try {
-    await fetch(`https://${host}/`, {mode:'no-cors', signal:ctrl.signal});
-    clearTimeout(tid);
-    return host;
-  } catch {
-    clearTimeout(tid);
-    return null;
-  }
-}
-
-async function findActiveMirror() {
-  if (_cachedMirror) return _cachedMirror;
-  if (_probeInProgress) return _probeInProgress;
-  _probeInProgress = (async () => {
-    const results = await Promise.all(SCIHUB_MIRRORS.map(m => probeMirror(m.host)));
-    const winner  = SCIHUB_MIRRORS.find((m,i) => results[i] !== null);
-    const host    = winner ? winner.host : SCIHUB_MIRRORS[0].host;
-    _cachedMirror = host;
-    _probeInProgress = null;
-    return host;
-  })();
-  return _probeInProgress;
-}
-
-async function sciHubOpen(path, btn) {
-  const orig = btn ? btn.innerHTML : null;
-  if (btn) { btn.innerHTML = '⏳…'; btn.disabled = true; }
-  let host;
-  try   { host = await findActiveMirror(); }
-  catch { host = SCIHUB_MIRRORS[0].host; }
-  if (btn) { btn.innerHTML = orig; btn.disabled = false; }
-  window.open(`https://${host}/${path}`, '_blank', 'noopener,noreferrer');
-}
-
-// ════════════════════════════════════════════════════════
-//  SCI-HUB EXACT MATCH ENGINE  (3 tiers)
-//  1. DOI direct (exact)
-//  2. CrossRef DOI lookup (titlu+autori+an → DOI)
-//  3. Fallback: căutare titlu
-// ════════════════════════════════════════════════════════
 
 // Normalizare titlu pentru comparație
 function normTitle(s) {
   return String(s||'').toLowerCase().replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ').trim();
 }
-
-// Similaritate titluri: returnează true dacă sunt suficient de apropiate
 function titleMatch(a, b) {
   const na = normTitle(a), nb = normTitle(b);
   if (!na || !nb) return false;
   if (na === nb) return true;
-  const [shorter, longer] = na.length <= nb.length ? [na, nb] : [nb, na];
-  // Containment cu minim 20 caractere
+  const [shorter, longer] = na.length <= nb.length ? [na,nb] : [nb,na];
   if (shorter.length >= 20 && longer.includes(shorter)) return true;
-  // Word overlap ≥ 75%
   const wa = new Set(na.split(' ').filter(w=>w.length>3));
   const wb = new Set(nb.split(' ').filter(w=>w.length>3));
   if (!wa.size) return false;
-  let overlap = 0;
-  wa.forEach(w=>{ if(wb.has(w)) overlap++; });
-  return overlap / wa.size >= 0.75;
+  let ov=0; wa.forEach(w=>{ if(wb.has(w)) ov++; });
+  return ov/wa.size >= 0.75;
 }
 
-// Tier 2: CrossRef DOI lookup
+// CrossRef DOI lookup by title+authors+year
 async function lookupDOI(title, authors, year) {
   if (!title || title.length < 10) return null;
   try {
     const q = [title, authors, year].filter(Boolean).join(' ');
     const r = await fetch(
-      `https://api.crossref.org/works?query.bibliographic=${enc(q)}&rows=3&select=DOI,title,score`,
+      `https://api.crossref.org/works?query.bibliographic=${enc(q)}&rows=3&select=DOI,title`,
       { signal: AbortSignal.timeout(6000) }
     );
     if (!r.ok) return null;
-    const d = await safeJson(r, 'CrossRef DOI lookup');
-    const items = d.message?.items || [];
-    for (const item of items) {
-      const t = (item.title||[])[0] || '';
+    const d = await safeJson(r, 'CrossRef');
+    for (const item of d.message?.items||[]) {
+      const t = (item.title||[])[0]||'';
       if (item.DOI && titleMatch(t, title)) return item.DOI;
     }
     return null;
   } catch { return null; }
 }
 
-// Entry point — chiamato da onclick
-async function sciHubExact(iid, btn) {
+// Unpaywall: returns best OA PDF URL for a DOI
+async function unpaywallLookup(doi) {
+  if (!doi) return null;
+  try {
+    const r = await fetch(
+      `https://api.unpaywall.org/v2/${enc(doi)}?email=academisearch@alexio.tf`,
+      { signal: AbortSignal.timeout(7000) }
+    );
+    if (!r.ok) return null;
+    const d = await safeJson(r, 'Unpaywall');
+    return d.best_oa_location?.url_for_pdf || d.best_oa_location?.url || null;
+  } catch { return null; }
+}
+
+// OA Button: returns best OA URL for a DOI or URL
+async function oaButtonLookup(doi) {
+  if (!doi) return null;
+  try {
+    const r = await fetch(
+      `https://api.openaccessbutton.org/find?url=${enc('https://doi.org/'+doi)}`,
+      { signal: AbortSignal.timeout(8000) }
+    );
+    if (!r.ok) return null;
+    const d = await safeJson(r, 'OA Button');
+    return d.url || null;
+  } catch { return null; }
+}
+
+// Injectează DOI și buton OA în card după lookup
+function injectDoiInCard(btn, doi, iid) {
+  const card = btn?.closest?.('.r-card');
+  if (!card) return;
+  const metaRow = card.querySelector('.r-meta');
+  if (metaRow && !metaRow.querySelector('.r-doi')) {
+    const badge = document.createElement('span');
+    badge.className = 'r-doi';
+    badge.textContent = `DOI:${doi}`;
+    metaRow.appendChild(badge);
+  }
+  _items[iid].doi = doi;
+}
+
+// Entry point principal — apelat din onclick pe carduri
+async function oaExact(iid, btn) {
   const item = _items[iid];
   if (!item) return;
 
-  const orig = btn ? btn.innerHTML : null;
-  const setBtn = (html, disabled=false) => { if(btn){ btn.innerHTML=html; btn.disabled=disabled; } };
+  const orig     = btn?.innerHTML || '🔓 Acces Liber';
+  const setBtn   = (html, dis=false) => { if(btn){ btn.innerHTML=html; btn.disabled=dis; } };
+  const openUrl  = url => window.open(url, '_blank', 'noopener,noreferrer');
 
-  // ── TIER 1: DOI già disponibile ───────────────────────
-  if (item.doi) {
-    setBtn('⏳ Deschide…', true);
-    await sciHubOpen(item.doi, null);
-    setBtn(orig, false);
-    return;
+  let doi = item.doi;
+
+  // ── Dacă nu avem DOI, îl căutăm mai întâi ───────────────
+  if (!doi) {
+    setBtn('🔍 Caută DOI…', true);
+    doi = await lookupDOI(item.title, item.authors, item.year);
+    if (doi) injectDoiInCard(btn, doi, iid);
   }
 
-  // ── TIER 2: cerca DOI su CrossRef ────────────────────
-  setBtn('🔍 Caută DOI…', true);
-  const doi = await lookupDOI(item.title, item.authors, item.year);
-
+  // ── Tier 1: Unpaywall ────────────────────────────────────
   if (doi) {
-    // Aggiorna badge DOI nella card
-    setBtn('✅ DOI găsit!', true);
-    // Aggiorna visivamente il badge DOI nella card
-    const card = btn.closest('.r-card');
-    if (card) {
-      const metaRow = card.querySelector('.r-meta');
-      if (metaRow && !metaRow.querySelector('.r-doi')) {
-        const doiBadge = document.createElement('span');
-        doiBadge.className = 'r-doi';
-        doiBadge.textContent = `DOI:${doi}`;
-        metaRow.appendChild(doiBadge);
-      }
-      // Aggiorna pulsante OA se non c'è
-      const actions = card.querySelector('.r-actions');
-      if (actions && !card.querySelector('.btn-teal')) {
-        const oaBtn = document.createElement('button');
-        oaBtn.className = 'btn btn-teal';
-        oaBtn.onclick = () => openUnpaywall(doi);
-        oaBtn.textContent = '🔓 OA';
-        actions.insertBefore(oaBtn, btn);
-      }
+    setBtn('⏳ Unpaywall…', true);
+    const upUrl = await unpaywallLookup(doi);
+    if (upUrl) {
+      setBtn('✅ OA găsit!', true);
+      setTimeout(()=>setBtn(orig,false), 1200);
+      openUrl(upUrl);
+      return;
     }
-    // Aggiorna item store
-    _items[iid].doi = doi;
-    setTimeout(() => {
-      setBtn('🎯 Sci-Hub (DOI)', false);
-      if (btn) btn.className = btn.className.replace('btn-out','btn-gold');
-    }, 800);
-    await sciHubOpen(doi, null);
+
+    // ── Tier 2: OA Button ────────────────────────────────────
+    setBtn('⏳ OA Button…', true);
+    const oaUrl = await oaButtonLookup(doi);
+    if (oaUrl) {
+      setBtn('✅ OA găsit!', true);
+      setTimeout(()=>setBtn(orig,false), 1200);
+      openUrl(oaUrl);
+      return;
+    }
+
+    // ── Tier 3: OA Button request page (ILL / email autor) ───
+    setBtn('📩 Solicită acces', true);
+    setTimeout(()=>setBtn(orig,false), 1500);
+    openUrl(`https://openaccessbutton.org/access?url=https://doi.org/${doi}`);
     return;
   }
 
-  // ── TIER 3: fallback titlu ────────────────────────────
-  setBtn('🔑 Titlu…', true);
-  await sciHubOpen(enc(item.title), null);
+  // ── Fallback complet fără DOI: căutare OA Button cu titlu ─
+  setBtn('🔓 Caută…', true);
+  openUrl(`https://openaccessbutton.org/access?url=${enc(item.title)}`);
   setBtn(orig, false);
 }
 
-// Wrapper simplu pentru apeluri vechi (DOI row)
-function sciHubLookup(title, btn) { sciHubOpen(enc(title), btn||null); }
 function openUnpaywall(doi){ window.open(`https://unpaywall.org/${doi}`,'_blank','noopener,noreferrer'); }
 
 // DOI row handlers
-document.getElementById('doiSciHub').addEventListener('click', async function() {
+document.getElementById('doiOA').addEventListener('click', async function() {
   const v = document.getElementById('doiInput').value.trim(); if(!v) return;
-  const path = v.replace(/^https?:\/\/(dx\.)?doi\.org\//, '');
-  await sciHubOpen(path, this);
+  const doi = v.replace(/^https?:\/\/(dx\.)?doi\.org\//, '');
+  const orig = this.innerHTML;
+  this.innerHTML='⏳…'; this.disabled=true;
+  let url = await unpaywallLookup(doi) || await oaButtonLookup(doi);
+  this.innerHTML=orig; this.disabled=false;
+  if (url) window.open(url,'_blank','noopener,noreferrer');
+  else window.open(`https://openaccessbutton.org/access?url=https://doi.org/${doi}`,'_blank','noopener,noreferrer');
 });
 document.getElementById('doiUnpay').addEventListener('click',()=>{
   const v=document.getElementById('doiInput').value.trim(); if(!v) return;
   window.open(`https://unpaywall.org/${v.replace(/^https?:\/\/(dx\.)?doi\.org\//,'')}`, '_blank','noopener,noreferrer');
 });
-document.getElementById('doiInput').addEventListener('keydown',e=>{ if(e.key==='Enter') document.getElementById('doiSciHub').click(); });
+document.getElementById('doiInput').addEventListener('keydown',e=>{ if(e.key==='Enter') document.getElementById('doiOA').click(); });
 
 // ════════════════════════════════════════════════════════
 //  MAIN SEARCH
@@ -1548,8 +1474,6 @@ document.getElementById('toggleHdr').addEventListener('keydown', e => {
 
 // ── Init ────────────────────────────────────────────────────────────────────
 buildChips();
-// Warm up mirror probe in background so first Sci-Hub click is instant
-findActiveMirror().catch(()=>{});
 </script>
 </body>
 </html>
