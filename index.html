@@ -202,74 +202,244 @@ header{text-align:center;padding:48px 20px 28px}
 .legal-link{color:var(--gold2);text-decoration:none;cursor:pointer;background:none;border:none;font-family:inherit;font-size:inherit;letter-spacing:inherit}
 .legal-link:hover{color:var(--gold)}
 
+
+/* ── Language Switcher ── */
+.lang-switcher{display:flex;align-items:center;gap:3px;margin-left:auto;flex-shrink:0}
+.lang-sw-btn{background:transparent;border:1px solid transparent;border-radius:3px;
+  cursor:pointer;font-size:1.1rem;padding:3px 5px;line-height:1;
+  transition:border-color .15s,background .15s;opacity:.55}
+.lang-sw-btn:hover{opacity:1;border-color:var(--border)}
+.lang-sw-btn.active{opacity:1;border-color:var(--gold2);background:rgba(200,168,75,.1)}
+.lang-sw-btn .lang-code{font-family:'Inconsolata',monospace;font-size:.55rem;
+  display:block;text-align:center;color:var(--muted);margin-top:-1px;line-height:1}
+
 footer{text-align:center;border-top:1px solid var(--border);padding:22px 20px;font-family:'Inconsolata',monospace;font-size:.62rem;color:var(--muted);letter-spacing:.09em}
 footer a{color:var(--gold2);text-decoration:none}
 footer a:hover{color:var(--gold)}
+#srcTip{
+  position:fixed; z-index:8000; pointer-events:none;
+  background:var(--surf2); border:1px solid var(--border);
+  border-radius:4px; padding:12px 15px; max-width:280px; min-width:180px;
+  box-shadow:0 8px 32px rgba(0,0,0,.55);
+  opacity:0; transform:translateY(6px);
+  transition:opacity .15s, transform .15s;
+}
+#srcTip.show{ opacity:1; transform:translateY(0); pointer-events:auto; }
+#srcTip .stt-hdr{ display:flex; align-items:center; gap:8px; margin-bottom:7px; }
+#srcTip .stt-dot{ width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+#srcTip .stt-name{ font-family:'Inconsolata',monospace; font-size:.78rem; font-weight:600; color:var(--text); }
+#srcTip .stt-flags{ font-size:.78rem; margin-left:auto; letter-spacing:-.05em; }
+#srcTip .stt-desc{ font-family:'Libre Baskerville',serif; font-size:.78rem; color:var(--muted); line-height:1.5; margin-bottom:9px; }
+#srcTip .stt-link{
+  display:inline-flex; align-items:center; gap:5px;
+  font-family:'Inconsolata',monospace; font-size:.67rem;
+  color:var(--gold); text-decoration:none;
+  border:1px solid var(--gold2); border-radius:2px;
+  padding:3px 10px; transition:background .14s;
+}
+#srcTip .stt-link:hover{ background:rgba(200,168,75,.1); }
+
+/* ═══════════════════════════════════════════════════════════════
+   RESULTS MODAL — fullscreen, slide-up, responsive
+═══════════════════════════════════════════════════════════════ */
+.rm{position:fixed;inset:0;z-index:9000;display:flex;flex-direction:column;
+  background:var(--bg);transform:translateY(100%);
+  transition:transform .35s cubic-bezier(.22,.61,.36,1);overflow:hidden}
+.rm.open{transform:translateY(0)}
+
+/* ── Header ── */
+.rm-hdr{flex-shrink:0;background:var(--surf);border-bottom:1px solid var(--border)}
+.rm-hdr-top{display:flex;align-items:center;gap:12px;padding:14px 20px 8px;flex-wrap:wrap}
+.rm-query{font-family:'Cormorant Garamond',serif;font-size:clamp(1.1rem,3vw,1.5rem);font-weight:700;
+  color:var(--gold);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rm-count{font-family:'Inconsolata',monospace;font-size:.68rem;color:var(--muted);white-space:nowrap}
+.rm-close-btn{background:transparent;border:1px solid var(--border);border-radius:3px;
+  color:var(--muted);font-family:'Inconsolata',monospace;font-size:.75rem;
+  padding:7px 16px;cursor:pointer;transition:all .15s;flex-shrink:0;white-space:nowrap}
+.rm-close-btn:hover{border-color:var(--red);color:var(--red);background:rgba(224,92,106,.07)}
+
+/* ── Internal search ── */
+.rm-search-row{display:flex;align-items:center;gap:10px;padding:8px 20px}
+.rm-search-wrap{flex:1;position:relative;max-width:480px}
+.rm-si{width:100%;background:var(--surf2);border:1px solid var(--border);border-radius:3px;
+  color:var(--text);font-family:'Libre Baskerville',serif;font-size:.88rem;
+  padding:8px 32px 8px 36px;outline:none;transition:border-color .2s}
+.rm-si:focus{border-color:var(--gold2)}
+.rm-si::placeholder{color:var(--muted)}
+.rm-si-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);
+  color:var(--muted);font-size:1rem;pointer-events:none}
+.rm-si-clr{position:absolute;right:9px;top:50%;transform:translateY(-50%);
+  background:none;border:none;color:var(--muted);cursor:pointer;
+  font-size:.85rem;padding:0 2px;opacity:0;transition:opacity .15s;pointer-events:none}
+.rm-si-clr.vis{opacity:1;pointer-events:auto}
+.rm-mc{font-family:'Inconsolata',monospace;font-size:.67rem;color:var(--muted);white-space:nowrap}
+
+/* ── Tag filters ── */
+.rm-tags-row{display:flex;align-items:center;gap:5px;padding:0 20px 10px;
+  overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.rm-tags-row::-webkit-scrollbar{display:none}
+.rm-tag{font-family:'Inconsolata',monospace;font-size:.63rem;letter-spacing:.04em;
+  padding:3px 11px;border-radius:20px;border:1px solid var(--border);
+  background:transparent;color:var(--muted);cursor:pointer;
+  transition:all .15s;white-space:nowrap;flex-shrink:0}
+.rm-tag.active{border-color:var(--gold);color:var(--gold);background:rgba(200,168,75,.1)}
+.rm-tag:hover:not(.active){border-color:var(--muted);color:var(--text)}
+.rm-tag[data-src].active{color:#0c0e14 !important}
+
+/* ── Stats chips ── */
+.rm-stats{display:flex;gap:4px;flex-wrap:wrap;padding:0 20px 9px}
+.rm-sc{font-family:'Inconsolata',monospace;font-size:.59rem;padding:2px 7px;
+  border-radius:20px;border:1px solid var(--border);color:var(--muted);
+  display:inline-flex;align-items:center;gap:3px}
+.rm-sc.ok{border-color:rgba(62,207,142,.28);color:var(--green)}
+.rm-sc.err{border-color:rgba(224,92,106,.28);color:var(--red)}
+.rm-sc.loading{border-color:rgba(200,168,75,.28);color:var(--gold)}
+
+/* ── Body ── */
+.rm-body{flex:1;overflow-y:auto;overflow-x:hidden;padding:18px 18px 40px;
+  scrollbar-width:thin;scrollbar-color:var(--border) transparent}
+.rm-body::-webkit-scrollbar{width:5px}
+.rm-body::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+
+/* ── Card grid ── */
+.rm-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,360px),1fr));gap:12px;margin-bottom:20px}
+
+/* ── Modal result card ── */
+.mrc{background:var(--surf);border:1px solid var(--border);border-radius:4px;
+  padding:15px 17px 13px;display:flex;flex-direction:column;
+  transition:border-color .18s,box-shadow .18s,transform .18s;
+  opacity:0;animation:mrcIn .22s forwards}
+.mrc:hover{border-color:var(--gold2);box-shadow:0 6px 28px rgba(0,0,0,.45);transform:translateY(-2px)}
+@keyframes mrcIn{to{opacity:1}}
+
+.mrc-top{display:flex;align-items:flex-start;gap:9px;margin-bottom:7px}
+.mrc-badge{font-family:'Inconsolata',monospace;font-size:.56rem;font-weight:600;
+  letter-spacing:.05em;padding:2px 8px;border-radius:2px;white-space:nowrap;flex-shrink:0;margin-top:3px}
+.mrc-title{font-family:'Cormorant Garamond',serif;font-size:1.06rem;font-weight:700;line-height:1.3;flex:1}
+.mrc-title a{color:var(--text);text-decoration:none;transition:color .15s}
+.mrc-title a:hover{color:var(--gold)}
+.mrc-meta{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:8px;font-family:'Inconsolata',monospace;font-size:.67rem}
+.mrc-authors{color:var(--gold);font-style:italic}
+.mrc-year{color:var(--muted)}
+.mrc-journal{color:var(--teal)}
+.mrc-doi{color:var(--muted);font-size:.59rem}
+.mrc-abstract{font-size:.83rem;color:var(--muted);line-height:1.52;
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
+  margin-bottom:10px;flex:1}
+.mrc-abstract mark{background:rgba(200,168,75,.25);color:var(--text);border-radius:2px;padding:0 2px}
+.mrc-actions{display:flex;gap:5px;flex-wrap:wrap;margin-top:auto}
+
+/* ── Empty state ── */
+.rm-empty{text-align:center;padding:60px 20px}
+.rm-empty-icon{font-size:2.5rem;margin-bottom:12px}
+.rm-empty-text{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-style:italic;color:var(--muted)}
+
+/* ── Portals section in modal ── */
+.rm-portals-hdr{display:flex;align-items:center;gap:12px;margin:32px 0 14px;padding-top:20px;border-top:1px solid var(--border)}
+.rm-portals-lbl{font-family:'Inconsolata',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.rm-portals-line{flex:1;height:1px;background:var(--border)}
+
+/* ── Sentinel + load-more ── */
+.rm-sentinel{height:60px}
+.rm-spinner{text-align:center;padding:14px;font-family:'Inconsolata',monospace;font-size:.7rem;color:var(--muted);display:none}
+.rm-spinner.vis{display:block}
+
+/* ── Mobile adaptations ── */
+@media(max-width:480px){
+  .rm-hdr-top{padding:10px 14px 6px}
+  .rm-search-row{padding:6px 14px}
+  .rm-tags-row{padding:0 14px 8px}
+  .rm-body{padding:12px 12px 30px}
+  .rm-grid{gap:9px}
+  .mrc{padding:12px 14px 11px}
+  .mrc-title{font-size:.98rem}
+}
+
+
 </style>
 </head>
 <body>
 
 <header>
   <div class="logo">Academi<em>Search</em></div>
-  <div class="tagline">Motor Academic Unificat · v4 · 42 Surse · 7 Limbi + Multilingv</div>
+  <div class="lang-row">
+  <div class="tagline" data-i18n="tagline">Motor Academic Unificat · v4 · 42 Surse · 7 Limbi + Multilingv</div>
+  <div class="lang-switcher" aria-label="Schimbă limba interfeței">
+    <button class="lang-sw-btn" data-l="ro" onclick="setLang('ro')" title="Română"><span>🇷🇴</span><span class="lang-code">RO</span></button>
+    <button class="lang-sw-btn" data-l="en" onclick="setLang('en')" title="English"><span>🇬🇧</span><span class="lang-code">EN</span></button>
+    <button class="lang-sw-btn" data-l="fr" onclick="setLang('fr')" title="Français"><span>🇫🇷</span><span class="lang-code">FR</span></button>
+    <button class="lang-sw-btn" data-l="de" onclick="setLang('de')" title="Deutsch"><span>🇩🇪</span><span class="lang-code">DE</span></button>
+    <button class="lang-sw-btn" data-l="es" onclick="setLang('es')" title="Español"><span>🇪🇸</span><span class="lang-code">ES</span></button>
+    <button class="lang-sw-btn" data-l="pt" onclick="setLang('pt')" title="Português"><span>🇵🇹</span><span class="lang-code">PT</span></button>
+    <button class="lang-sw-btn" data-l="it" onclick="setLang('it')" title="Italiano"><span>🇮🇹</span><span class="lang-code">IT</span></button>
+  </div>
+  </div>
   <div class="rule"></div>
   <div class="profile-row">
-    <button class="profile-tab active" data-p="all"       onclick="setProfile('all')">🔍 Toate sursele</button>
-    <button class="profile-tab"        data-p="student"   onclick="setProfile('student')">🎓 Student / Doctorand</button>
-    <button class="profile-tab"        data-p="researcher"onclick="setProfile('researcher')">🔬 Cercetător / Cadru didactic</button>
-    <button class="profile-tab"        data-p="books"     onclick="setProfile('books')">📚 Cărți & Manuale</button>
-    <button class="profile-tab"        data-p="ro"        onclick="setProfile('ro')">🇷🇴 Surse Românești</button>
-    <button class="profile-tab"        data-p="romance"   onclick="setProfile('romance')">🌍 Limbi Romanice</button>
+    <button class="profile-tab active" data-p="all"       onclick="setProfile('all')" data-i18n="profile.all">🔍 Toate sursele</button>
+    <button class="profile-tab"        data-p="student"   onclick="setProfile('student')" data-i18n="profile.student">🎓 Student / Doctorand</button>
+    <button class="profile-tab"        data-p="researcher"onclick="setProfile('researcher')" data-i18n="profile.researcher">🔬 Cercetător / Cadru didactic</button>
+    <button class="profile-tab"        data-p="books"     onclick="setProfile('books')" data-i18n="profile.books">📚 Cărți & Manuale</button>
+    <button class="profile-tab"        data-p="ro"        onclick="setProfile('ro')" data-i18n="profile.ro">🇷🇴 Surse Românești</button>
+    <button class="profile-tab"        data-p="romance"   onclick="setProfile('romance')" data-i18n="profile.romance">🌍 Limbi Romanice</button>
   </div>
 </header>
 
 <div class="search-wrap">
   <div class="search-box">
     <input type="text" class="search-input" id="queryInput"
-      placeholder="Titlu, autor, subiect, cuvinte cheie, ISSN…" autocomplete="off" spellcheck="false"
+      placeholder="Titlu, autor, subiect, cuvinte cheie, ISSN…" data-i18n-ph="search.placeholder" autocomplete="off" spellcheck="false"
       aria-label="Câmp de căutare principală">
-    <button class="search-btn" id="searchBtn" aria-label="Caută în toate sursele selectate">CAUTĂ</button>
+    <button class="search-btn" id="searchBtn" aria-label="Caută în toate sursele selectate" data-i18n="search.btn">CAUTĂ</button>
   </div>
   <div class="doi-row">
-    <span class="doi-label">DOI / URL →</span>
-    <input type="text" class="doi-input" id="doiInput" placeholder="10.1000/xyz123 sau URL complet articol" aria-label="Câmp DOI sau URL articol">
-    <button class="doi-btn" id="doiOA" aria-label="Găsește versiunea open-access legitimă">🔓 Acces Liber</button>
-    <button class="doi-btn teal" id="doiUnpay" aria-label="Verifică disponibilitate open-access pe Unpaywall">🔍 Unpaywall</button>
+    <span class="doi-label" data-i18n="doi.label">DOI / URL →</span>
+    <input type="text" class="doi-input" id="doiInput"
+      placeholder="10.1000/xyz123 sau URL complet articol"
+      value="10.48550/arXiv.2205.01833"
+      aria-label="Câmp DOI sau URL articol"
+      title="Exemplu precompletat: OpenAlex: A fully-open index of scholarly works — Priem, Piwowar &amp; Orr (2022)">
+    <button class="doi-btn" id="doiOA" aria-label="Găsește versiunea open-access legitimă" data-i18n="doi.oa">🔓 Acces Liber</button>
+    <button class="doi-btn teal" id="doiUnpay" aria-label="Verifică disponibilitate open-access pe Unpaywall" data-i18n="doi.unpay">🔍 Unpaywall</button>
   </div>
 </div>
 
 <div class="api-bar">
   <span class="api-label">CORE KEY:</span>
-  <input class="api-input" type="password" id="coreKey" placeholder="Obții gratuit la core.ac.uk/services/api" aria-label="Cheie API CORE (opțională)">
-  <button class="api-save" id="coreSave" aria-label="Salvează cheia CORE în localStorage">Salvează</button>
+  <input class="api-input" type="password" id="coreKey"
+    placeholder="ex: a1b2c3d4-e5f6-7890-abcd-ef1234567890  →  core.ac.uk/services/api"
+    aria-label="Cheie API CORE (opțională)">
+  <button class="api-save" id="coreSave" aria-label="Salvează cheia CORE în localStorage" data-i18n="api.save">Salvează</button>
   <span class="api-label" style="margin-left:6px">S2 KEY:</span>
-  <input class="api-input" type="password" id="s2Key" placeholder="semanticscholar.org/product/api" aria-label="Cheie API Semantic Scholar (opțională)">
-  <button class="api-save" id="s2Save" aria-label="Salvează cheia Semantic Scholar în localStorage">Salvează</button>
-  <span class="api-label" style="color:var(--muted);font-size:.58rem;margin-left:4px" title="Fără cheie CORE, căutările pot fi limitate de rate-limit. Cheia este gratuită și se obține la core.ac.uk">ⓘ Cheile sunt opționale dar recomandate</span>
+  <input class="api-input" type="password" id="s2Key"
+    placeholder="ex: A1b2C3d4E5f6G7h8I9j0K1l2M3n4O5p6Q7r8S9t0  →  semanticscholar.org/product/api"
+    aria-label="Cheie API Semantic Scholar (opțională)">
+  <button class="api-save" id="s2Save" aria-label="Salvează cheia Semantic Scholar în localStorage" data-i18n="api.save">Salvează</button>
+  <span class="api-label" style="color:var(--muted);font-size:.58rem;margin-left:4px" title="Fără cheie CORE, căutările pot fi limitate de rate-limit. Cheia este gratuită și se obține la core.ac.uk"><span data-i18n="api.hint">ⓘ Cheile sunt opționale dar recomandate</span></span>
 </div>
 
 <div class="toggle-bar">
   <div class="toggle-header" id="toggleHdr" role="button" aria-expanded="true" aria-controls="srcGrid" tabindex="0">
-    <span class="toggle-label">Surse activate</span>
+    <span class="toggle-label" data-i18n="sources.label">Surse activate</span>
     <span class="toggle-arrow open" id="toggleArrow" aria-hidden="true">▲</span>
-    <button class="toggle-select-all" id="selAllBtn" aria-label="Selectează sau deselectează toate sursele vizibile">Toate</button>
+    <button class="toggle-select-all" id="selAllBtn" aria-label="Selectează sau deselectează toate sursele vizibile" data-i18n="sources.selall">Toate</button>
   </div>
 
   <!-- Category filter -->
   <div class="filter-row open" id="catRow">
-    <span class="filter-row-label">CATEGORIE:</span>
-    <button class="fpill active" data-cat="all"       onclick="filterCat('all')">🔍 Toate</button>
-    <button class="fpill"        data-cat="articles"  onclick="filterCat('articles')">📄 Articole</button>
-    <button class="fpill"        data-cat="preprints" onclick="filterCat('preprints')">🧪 Preprint</button>
-    <button class="fpill"        data-cat="books"     onclick="filterCat('books')">📚 Cărți</button>
-    <button class="fpill"        data-cat="theses"    onclick="filterCat('theses')">🎓 Teze</button>
-    <button class="fpill"        data-cat="data"      onclick="filterCat('data')">🗄 Date</button>
+    <span class="filter-row-label" data-i18n="cat.label">CATEGORIE:</span>
+    <button class="fpill active" data-cat="all"       onclick="filterCat('all')" data-i18n="cat.all">🔍 Toate</button>
+    <button class="fpill"        data-cat="articles"  onclick="filterCat('articles')" data-i18n="cat.articles">📄 Articole</button>
+    <button class="fpill"        data-cat="preprints" onclick="filterCat('preprints')" data-i18n="cat.preprints">🧪 Preprint</button>
+    <button class="fpill"        data-cat="books"     onclick="filterCat('books')" data-i18n="cat.books">📚 Cărți</button>
+    <button class="fpill"        data-cat="theses"    onclick="filterCat('theses')" data-i18n="cat.theses">🎓 Teze</button>
+    <button class="fpill"        data-cat="data"      onclick="filterCat('data')" data-i18n="cat.data">🗄 Date</button>
   </div>
 
   <!-- Language filter -->
   <div class="filter-row open" id="langRow">
-    <span class="filter-row-label">LIMBĂ:</span>
-    <button class="fpill active" data-lang="all" onclick="filterLang('all')">🌍 Toate</button>
+    <span class="filter-row-label" data-i18n="lang.label">LIMBĂ:</span>
+    <button class="fpill active" data-lang="all" onclick="filterLang('all')" data-i18n="lang.all">🌍 Toate</button>
     <button class="fpill" data-lang="en" onclick="filterLang('en')">🇬🇧 EN</button>
     <button class="fpill" data-lang="ro" onclick="filterLang('ro')">🇷🇴 RO</button>
     <button class="fpill" data-lang="fr" onclick="filterLang('fr')">🇫🇷 FR</button>
@@ -292,7 +462,7 @@ footer a:hover{color:var(--gold)}
   <div id="resArea">
     <div class="welcome">
       <div class="welcome-icon">🌐</div>
-      <div class="welcome-text">42 surse academice · 7 limbi + multilingv</div>
+      <div class="welcome-text" data-i18n="welcome.text">42 surse academice · 7 limbi + multilingv</div>
       <div class="welcome-sub">11 surse cu rezultate live prin API · 31 portaluri cu link direct<br>Română · English · Français · Deutsch · Español · Português · Italiano · Multilingv</div>
       <div class="welcome-langs">
         <span class="wlang">🇷🇴 CEEOL</span>
@@ -309,12 +479,71 @@ footer a:hover{color:var(--gold)}
 </div>
 
 <footer>
-  AcademiSearch v4 · 42 surse open-access multilingve · instrument gratuit pentru cercetare academică<br>
-  Respectă termenii de utilizare ai fiecărei platforme &nbsp;·&nbsp;
-  <a href="https://openaccessbutton.org" target="_blank">Open Access Button</a> &nbsp;·&nbsp;
+  AcademiSearch v4 · 42 surse open-access multilingve · <span data-i18n="footer.main">instrument gratuit pentru cercetare academică</span><br>
+  <span data-i18n="footer.terms">Respectă termenii de utilizare ai fiecărei platforme</span> &nbsp;·&nbsp;
   <a href="https://unpaywall.org" target="_blank">Unpaywall</a> &nbsp;·&nbsp;
-  <button class="legal-link" onclick="openLegal()">⚖ Termeni legali & GDPR</button>
+  <a href="https://explore.openaire.eu" target="_blank">OpenAIRE EXPLORE</a> &nbsp;·&nbsp;
+  <button class="legal-link" onclick="openLegal()" data-i18n="footer.legal">⚖ Termeni legali & GDPR</button>
 </footer>
+
+<!-- ══ RESULTS MODAL ══════════════════════════════════════════════════════ -->
+<div id="resultsModal" class="rm" role="dialog" aria-modal="true" aria-label="Rezultate căutare">
+
+  <!-- Header -->
+  <div class="rm-hdr">
+    <div class="rm-hdr-top">
+      <span class="rm-query" id="rmQuery"></span>
+      <span class="rm-count" id="rmCount">Se caută…</span>
+      <button class="rm-close-btn" id="rmCloseBtn" aria-label="Închide rezultatele și revino la căutare" data-i18n="modal.close">✕ Închide</button>
+    </div>
+
+    <div class="rm-search-row">
+      <div class="rm-search-wrap">
+        <span class="rm-si-icon">⌕</span>
+        <input class="rm-si" id="rmSearch" type="text"
+          placeholder="Filtrează rezultatele după titlu, autor, rezumat…" data-i18n-ph="modal.search"
+          aria-label="Căutare internă în rezultate" autocomplete="off">
+        <button class="rm-si-clr" id="rmSearchClr" aria-label="Șterge filtrarea internă">✕</button>
+      </div>
+      <span class="rm-mc" id="rmMatchCount"></span>
+    </div>
+
+    <div class="rm-tags-row" id="rmTagsRow">
+      <button class="rm-tag active" data-filter="all" data-i18n="modal.tag.all">🔍 Toate</button>
+      <button class="rm-tag" data-filter="pdf" data-i18n="modal.tag.pdf">⬇ Cu PDF</button>
+      <button class="rm-tag" data-filter="doi" data-i18n="modal.tag.doi">🔗 Cu DOI</button>
+      <span style="width:1px;height:16px;background:var(--border);flex-shrink:0;margin:0 3px"></span>
+      <!-- source tags injected dynamically -->
+    </div>
+
+    <div class="rm-stats" id="rmStats"></div>
+  </div>
+
+  <!-- Body -->
+  <div class="rm-body" id="rmBody">
+    <div class="rm-grid" id="rmGrid"></div>
+    <div class="rm-empty" id="rmEmpty" style="display:none">
+      <div class="rm-empty-icon">🔍</div>
+      <div class="rm-empty-text" data-i18n="modal.empty">Niciun rezultat pentru filtrele selectate</div>
+    </div>
+    <div id="rmPortalWrap"></div>
+    <div class="rm-sentinel" id="rmSentinel"></div>
+    <div class="rm-spinner" id="rmSpinner">
+      <span class="loader"></span> Se încarcă mai multe rezultate…
+    </div>
+  </div>
+</div>
+
+<!-- ── SOURCE CHIP TOOLTIP ──────────────────────────────────────────────── -->
+<div id="srcTip" role="tooltip" aria-hidden="true">
+  <div class="stt-hdr">
+    <span class="stt-dot" id="sTipDot"></span>
+    <span class="stt-name" id="sTipName"></span>
+    <span class="stt-flags" id="sTipFlags"></span>
+  </div>
+  <div class="stt-desc" id="sTipDesc"></div>
+  <a class="stt-link" id="sTipLink" target="_blank" rel="noopener">↗ Deschide site</a>
+</div>
 
 <!-- ══ MODAL LEGAL & GDPR ══════════════════════════════════════════════════ -->
 <div class="modal-overlay" id="legalModal" onclick="closeLegalOutside(event)" role="dialog" aria-modal="true" aria-labelledby="legalModalTitle" aria-describedby="legalModalDesc">
@@ -403,40 +632,44 @@ footer a:hover{color:var(--gold)}
           care operează în afara cadrului legal al dreptului de autor.
         </p>
 
-        <div class="legal-h" style="margin-top:14px">Open Access Button</div>
-        <p class="legal-p">
-          <a href="https://openaccessbutton.org" target="_blank" rel="noopener">Open Access Button</a>
-          este un serviciu non-profit care identifică automat versiunile legal disponibile ale articolelor academice,
-          inclusiv copii depuse în repozitoarii instituționale, versiuni acceptate de autor (<em>accepted manuscripts</em>),
-          preprint-uri și versiuni din PubMed Central. Dacă nu găsește o versiune OA, facilitează solicitarea
-          documentului prin împrumut interbibliotecar sau direct de la autor.
-        </p>
-        <p class="legal-p">
-          AcademiSearch integrează API-ul public Open Access Button (<code>api.openaccessbutton.org</code>)
-          pentru a oferi acces direct la versiunile legale ale articolelor găsite în căutare.
-        </p>
-
         <div class="legal-h" style="margin-top:14px">Unpaywall</div>
         <p class="legal-p">
           <a href="https://unpaywall.org" target="_blank" rel="noopener">Unpaywall</a> este o bază de date
           non-profit care indexează peste 50 de milioane de articole cu versiuni legale open-access, colectate
           direct de la editori, repozitoarii instituționale și PubMed Central. Acoperă aproximativ 50% din
-          articolele publicate după anul 2000.
+          articolele publicate după anul 2000 și este considerat cel mai precis instrument OA disponibil public.
         </p>
         <p class="legal-p">
-          AcademiSearch utilizează API-ul public Unpaywall (<code>api.unpaywall.org/v2/</code>) pentru a
-          verifica și accesa versiunile OA ale articolelor identificate prin DOI. Nu se utilizează nicio
-          versiune cu plată sau cu autentificare a acestui API.
+          AcademiSearch utilizează API-ul public Unpaywall în două moduri: căutare prin DOI
+          (<code>api.unpaywall.org/v2/{doi}</code>) și căutare prin titlu
+          (<code>api.unpaywall.org/v2/search?query=...</code>). Niciun cont sau autentificare nu este necesară.
+          Limita de utilizare: 100.000 cereri/zi (depășit cu mult de necesitățile acestei aplicații).
+        </p>
+
+        <div class="legal-h" style="margin-top:14px">OpenAIRE EXPLORE</div>
+        <p class="legal-p">
+          <a href="https://explore.openaire.eu" target="_blank" rel="noopener">OpenAIRE EXPLORE</a> este un portal
+          pan-european finanțat de Comisia Europeană prin programul Horizon Europe, care oferă acces la
+          <strong>145M+ publicații, seturi de date și programe software</strong> din repozitoarii globale.
+          AcademiSearch integrează API-ul public OpenAIRE (<code>api.openaire.eu/search/publications</code>)
+          ca sursă secundară de verificare OA, după Unpaywall.
         </p>
 
         <div class="legal-note">
           <p>
-            <strong>Strategia de acces în doi pași:</strong> la apăsarea butonului <strong>🔓 Acces Liber</strong>,
-            aplicația interoghează mai întâi Unpaywall (răspuns rapid), apoi Open Access Button (acoperire extinsă).
-            Dacă se găsește o versiune legală, se deschide direct. Dacă nu, utilizatorul este redirecționat
-            către pagina de solicitare OA Button unde poate cere documentul prin ILL sau email autor.
+            <strong>Strategia automată de acces în 4 trepte:</strong> la apăsarea butonului
+            <strong>🔓 Acces Liber</strong>, aplicația: (1) caută DOI via CrossRef dacă lipsește,
+            (2) interoghează Unpaywall prin DOI, (3) interoghează OpenAIRE prin DOI,
+            (4) caută prin titlu în Unpaywall. Dacă nicio versiune OA nu este găsită, utilizatorul
+            este redirecționat spre pagina Unpaywall pentru căutare manuală.
           </p>
         </div>
+
+        <p class="legal-p" style="margin-top:8px">
+          <em>Notă istorică:</em> aplicația a utilizat anterior și API-ul Open Access Button, care a
+          încetat să funcționeze pe <strong>18 noiembrie 2025</strong>. Echipa OA.Works a recomandat
+          Unpaywall drept alternativă principală.
+        </p>
       </div>
 
       <div class="legal-section">
@@ -574,6 +807,31 @@ footer a:hover{color:var(--gold)}
 
 <script>
 'use strict';
+// ════════════════════════════════════════════════════════
+//  I18N — 7 limbi complete
+// ════════════════════════════════════════════════════════
+const TRANSLATIONS = {
+ro:{tagline:'Motor Academic Unificat · v4 · 42 Surse · 7 Limbi + Multilingv','profile.all':'🔍 Toate sursele','profile.student':'🎓 Student / Doctorand','profile.researcher':'🔬 Cercetător / Cadru didactic','profile.books':'📚 Cărți & Manuale','profile.ro':'🇷🇴 Surse Românești','profile.romance':'🌍 Limbi Romanice','search.placeholder':'Titlu, autor, subiect, cuvinte cheie, ISSN…','search.btn':'CAUTĂ','doi.label':'DOI / URL →','doi.oa':'🔓 Acces Liber','doi.unpay':'🔍 Unpaywall','api.save':'Salvează','api.hint':'ⓘ Cheile sunt opționale dar recomandate','sources.label':'Surse activate','sources.selall':'Toate','cat.label':'CATEGORIE:','cat.all':'🔍 Toate','cat.articles':'📄 Articole','cat.preprints':'🧪 Preprint','cat.books':'📚 Cărți','cat.theses':'🎓 Teze','cat.data':'🗄 Date','lang.label':'LIMBĂ:','lang.all':'🌍 Toate','welcome.text':'42 surse academice · 7 limbi + multilingv','welcome.sub':'11 surse cu rezultate live prin API · 31 portaluri cu link direct','modal.close':'✕ Închide','modal.search':'Filtrează după titlu, autor, rezumat…','modal.tag.all':'🔍 Toate','modal.tag.pdf':'⬇ Cu PDF','modal.tag.doi':'🔗 Cu DOI','modal.loading':'Se caută…','modal.empty':'Niciun rezultat pentru filtrele selectate','portal.open':'↗ Caută pe','portal.section':'Portaluri — Deschide în Browser','portal.sources':'surse','cat.label.articles':'Articole & Reviste','cat.label.preprints':'Preprint & Working Papers','cat.label.books':'Cărți & Manuale','cat.label.theses':'Teze & Disertații','cat.label.data':'Repozitoarii Date','footer.main':'instrument gratuit pentru cercetare academică','footer.terms':'Respectă termenii de utilizare ai fiecărei platforme','footer.legal':'⚖ Termeni legali & GDPR','card.open':'↗ Deschide','card.pdf':'⬇ PDF','card.unpay':'🔍 Unpaywall','card.oa':'🔓 Acces Liber','card.oadoi':'🔓 Acces Liber (DOI)','card.title_unknown':'Titlu necunoscut'},
+en:{tagline:'Unified Academic Search · v4 · 42 Sources · 7 Languages + Multilingual','profile.all':'🔍 All sources','profile.student':'🎓 Student / PhD candidate','profile.researcher':'🔬 Researcher / Academic','profile.books':'📚 Books & Textbooks','profile.ro':'🇷🇴 Romanian Sources','profile.romance':'🌍 Romance Languages','search.placeholder':'Title, author, subject, keywords, ISSN…','search.btn':'SEARCH','doi.label':'DOI / URL →','doi.oa':'🔓 Open Access','doi.unpay':'🔍 Unpaywall','api.save':'Save','api.hint':'ⓘ Keys are optional but recommended','sources.label':'Active sources','sources.selall':'All','cat.label':'CATEGORY:','cat.all':'🔍 All','cat.articles':'📄 Articles','cat.preprints':'🧪 Preprints','cat.books':'📚 Books','cat.theses':'🎓 Theses','cat.data':'🗄 Data','lang.label':'LANGUAGE:','lang.all':'🌍 All','welcome.text':'42 academic sources · 7 languages + multilingual','welcome.sub':'11 sources with live API results · 31 portals with direct links','modal.close':'✕ Close','modal.search':'Filter by title, author, abstract…','modal.tag.all':'🔍 All','modal.tag.pdf':'⬇ With PDF','modal.tag.doi':'🔗 With DOI','modal.loading':'Searching…','modal.empty':'No results for the selected filters','portal.open':'↗ Search on','portal.section':'Portals — Open in Browser','portal.sources':'sources','cat.label.articles':'Articles & Journals','cat.label.preprints':'Preprints & Working Papers','cat.label.books':'Books & Textbooks','cat.label.theses':'Theses & Dissertations','cat.label.data':'Data Repositories','footer.main':'free tool for academic research','footer.terms':'Respect the terms of use of each platform','footer.legal':'⚖ Legal terms & GDPR','card.open':'↗ Open','card.pdf':'⬇ PDF','card.unpay':'🔍 Unpaywall','card.oa':'🔓 Open Access','card.oadoi':'🔓 Open Access (DOI)','card.title_unknown':'Unknown title'},
+fr:{tagline:'Moteur Académique Unifié · v4 · 42 Sources · 7 Langues + Multilingue','profile.all':'🔍 Toutes les sources','profile.student':'🎓 Étudiant / Doctorant','profile.researcher':'🔬 Chercheur / Enseignant','profile.books':'📚 Livres & Manuels','profile.ro':'🇷🇴 Sources Roumaines','profile.romance':'🌍 Langues Romanes','search.placeholder':'Titre, auteur, sujet, mots-clés, ISSN…','search.btn':'CHERCHER','doi.label':'DOI / URL →','doi.oa':'🔓 Accès Libre','doi.unpay':'🔍 Unpaywall','api.save':'Sauvegarder','api.hint':'ⓘ Les clés sont optionnelles mais recommandées','sources.label':'Sources actives','sources.selall':'Toutes','cat.label':'CATÉGORIE :','cat.all':'🔍 Toutes','cat.articles':'📄 Articles','cat.preprints':'🧪 Prépublications','cat.books':'📚 Livres','cat.theses':'🎓 Thèses','cat.data':'🗄 Données','lang.label':'LANGUE :','lang.all':'🌍 Toutes','welcome.text':'42 sources académiques · 7 langues + multilingue','welcome.sub':'11 sources avec résultats en direct par API · 31 portails avec lien direct','modal.close':'✕ Fermer','modal.search':'Filtrer par titre, auteur, résumé…','modal.tag.all':'🔍 Tous','modal.tag.pdf':'⬇ Avec PDF','modal.tag.doi':'🔗 Avec DOI','modal.loading':'Recherche en cours…','modal.empty':'Aucun résultat pour les filtres sélectionnés','portal.open':'↗ Chercher sur','portal.section':'Portails — Ouvrir dans le navigateur','portal.sources':'sources','cat.label.articles':'Articles & Revues','cat.label.preprints':'Prépublications & Documents','cat.label.books':'Livres & Manuels','cat.label.theses':'Thèses & Dissertations','cat.label.data':'Répertoires de données','footer.main':'outil gratuit pour la recherche académique','footer.terms':"Respectez les conditions d'utilisation de chaque plateforme",'footer.legal':'⚖ Mentions légales & RGPD','card.open':'↗ Ouvrir','card.pdf':'⬇ PDF','card.unpay':'🔍 Unpaywall','card.oa':'🔓 Accès libre','card.oadoi':'🔓 Accès libre (DOI)','card.title_unknown':'Titre inconnu'},
+de:{tagline:'Einheitliche Akademische Suche · v4 · 42 Quellen · 7 Sprachen + Mehrsprachig','profile.all':'🔍 Alle Quellen','profile.student':'🎓 Student / Doktorand','profile.researcher':'🔬 Forscher / Wissenschaftler','profile.books':'📚 Bücher & Lehrbücher','profile.ro':'🇷🇴 Rumänische Quellen','profile.romance':'🌍 Romanische Sprachen','search.placeholder':'Titel, Autor, Thema, Stichwörter, ISSN…','search.btn':'SUCHEN','doi.label':'DOI / URL →','doi.oa':'🔓 Open Access','doi.unpay':'🔍 Unpaywall','api.save':'Speichern','api.hint':'ⓘ Schlüssel sind optional, aber empfohlen','sources.label':'Aktive Quellen','sources.selall':'Alle','cat.label':'KATEGORIE:','cat.all':'🔍 Alle','cat.articles':'📄 Artikel','cat.preprints':'🧪 Preprints','cat.books':'📚 Bücher','cat.theses':'🎓 Abschlussarbeiten','cat.data':'🗄 Daten','lang.label':'SPRACHE:','lang.all':'🌍 Alle','welcome.text':'42 akademische Quellen · 7 Sprachen + mehrsprachig','welcome.sub':'11 Quellen mit Live-API-Ergebnissen · 31 Portale mit direktem Link','modal.close':'✕ Schließen','modal.search':'Nach Titel, Autor, Abstract filtern…','modal.tag.all':'🔍 Alle','modal.tag.pdf':'⬇ Mit PDF','modal.tag.doi':'🔗 Mit DOI','modal.loading':'Suche läuft…','modal.empty':'Keine Ergebnisse für die gewählten Filter','portal.open':'↗ Suchen auf','portal.section':'Portale — Im Browser öffnen','portal.sources':'Quellen','cat.label.articles':'Artikel & Zeitschriften','cat.label.preprints':'Preprints & Arbeitspapiere','cat.label.books':'Bücher & Lehrbücher','cat.label.theses':'Abschlussarbeiten & Dissertationen','cat.label.data':'Datenrepositorien','footer.main':'kostenloses Werkzeug für akademische Forschung','footer.terms':'Bitte beachten Sie die Nutzungsbedingungen jeder Plattform','footer.legal':'⚖ Rechtliche Hinweise & DSGVO','card.open':'↗ Öffnen','card.pdf':'⬇ PDF','card.unpay':'🔍 Unpaywall','card.oa':'🔓 Open Access','card.oadoi':'🔓 Open Access (DOI)','card.title_unknown':'Unbekannter Titel'},
+es:{tagline:'Buscador Académico Unificado · v4 · 42 Fuentes · 7 Idiomas + Multilingüe','profile.all':'🔍 Todas las fuentes','profile.student':'🎓 Estudiante / Doctorando','profile.researcher':'🔬 Investigador / Docente','profile.books':'📚 Libros & Manuales','profile.ro':'🇷🇴 Fuentes Rumanas','profile.romance':'🌍 Lenguas Romances','search.placeholder':'Título, autor, tema, palabras clave, ISSN…','search.btn':'BUSCAR','doi.label':'DOI / URL →','doi.oa':'🔓 Acceso Libre','doi.unpay':'🔍 Unpaywall','api.save':'Guardar','api.hint':'ⓘ Las claves son opcionales pero recomendadas','sources.label':'Fuentes activas','sources.selall':'Todas','cat.label':'CATEGORÍA:','cat.all':'🔍 Todas','cat.articles':'📄 Artículos','cat.preprints':'🧪 Preprints','cat.books':'📚 Libros','cat.theses':'🎓 Tesis','cat.data':'🗄 Datos','lang.label':'IDIOMA:','lang.all':'🌍 Todos','welcome.text':'42 fuentes académicas · 7 idiomas + multilingüe','welcome.sub':'11 fuentes con resultados en vivo por API · 31 portales con enlace directo','modal.close':'✕ Cerrar','modal.search':'Filtrar por título, autor, resumen…','modal.tag.all':'🔍 Todos','modal.tag.pdf':'⬇ Con PDF','modal.tag.doi':'🔗 Con DOI','modal.loading':'Buscando…','modal.empty':'Sin resultados para los filtros seleccionados','portal.open':'↗ Buscar en','portal.section':'Portales — Abrir en el navegador','portal.sources':'fuentes','cat.label.articles':'Artículos & Revistas','cat.label.preprints':'Preprints & Documentos','cat.label.books':'Libros & Manuales','cat.label.theses':'Tesis & Disertaciones','cat.label.data':'Repositorios de datos','footer.main':'herramienta gratuita para investigación académica','footer.terms':'Respetar los términos de uso de cada plataforma','footer.legal':'⚖ Términos legales & RGPD','card.open':'↗ Abrir','card.pdf':'⬇ PDF','card.unpay':'🔍 Unpaywall','card.oa':'🔓 Acceso libre','card.oadoi':'🔓 Acceso libre (DOI)','card.title_unknown':'Título desconocido'},
+pt:{tagline:'Motor Académico Unificado · v4 · 42 Fontes · 7 Línguas + Multilíngue','profile.all':'🔍 Todas as fontes','profile.student':'🎓 Estudante / Doutorando','profile.researcher':'🔬 Investigador / Docente','profile.books':'📚 Livros & Manuais','profile.ro':'🇷🇴 Fontes Romenas','profile.romance':'🌍 Línguas Românicas','search.placeholder':'Título, autor, assunto, palavras-chave, ISSN…','search.btn':'PESQUISAR','doi.label':'DOI / URL →','doi.oa':'🔓 Acesso Livre','doi.unpay':'🔍 Unpaywall','api.save':'Guardar','api.hint':'ⓘ As chaves são opcionais mas recomendadas','sources.label':'Fontes ativas','sources.selall':'Todas','cat.label':'CATEGORIA:','cat.all':'🔍 Todas','cat.articles':'📄 Artigos','cat.preprints':'🧪 Preprints','cat.books':'📚 Livros','cat.theses':'🎓 Teses','cat.data':'🗄 Dados','lang.label':'LÍNGUA:','lang.all':'🌍 Todas','welcome.text':'42 fontes académicas · 7 línguas + multilíngue','welcome.sub':'11 fontes com resultados em tempo real por API · 31 portais com ligação direta','modal.close':'✕ Fechar','modal.search':'Filtrar por título, autor, resumo…','modal.tag.all':'🔍 Todos','modal.tag.pdf':'⬇ Com PDF','modal.tag.doi':'🔗 Com DOI','modal.loading':'A pesquisar…','modal.empty':'Nenhum resultado para os filtros selecionados','portal.open':'↗ Pesquisar em','portal.section':'Portais — Abrir no navegador','portal.sources':'fontes','cat.label.articles':'Artigos & Revistas','cat.label.preprints':'Preprints & Documentos','cat.label.books':'Livros & Manuais','cat.label.theses':'Teses & Dissertações','cat.label.data':'Repositórios de dados','footer.main':'ferramenta gratuita para investigação académica','footer.terms':'Respeitar os termos de utilização de cada plataforma','footer.legal':'⚖ Termos legais & RGPD','card.open':'↗ Abrir','card.pdf':'⬇ PDF','card.unpay':'🔍 Unpaywall','card.oa':'🔓 Acesso livre','card.oadoi':'🔓 Acesso livre (DOI)','card.title_unknown':'Título desconhecido'},
+it:{tagline:'Motore Accademico Unificato · v4 · 42 Fonti · 7 Lingue + Multilingue','profile.all':'🔍 Tutte le fonti','profile.student':'🎓 Studente / Dottorando','profile.researcher':'🔬 Ricercatore / Docente','profile.books':'📚 Libri & Manuali','profile.ro':'🇷🇴 Fonti Rumene','profile.romance':'🌍 Lingue Romanze','search.placeholder':'Titolo, autore, argomento, parole chiave, ISSN…','search.btn':'CERCA','doi.label':'DOI / URL →','doi.oa':'🔓 Accesso Aperto','doi.unpay':'🔍 Unpaywall','api.save':'Salva','api.hint':'ⓘ Le chiavi sono opzionali ma consigliate','sources.label':'Fonti attive','sources.selall':'Tutte','cat.label':'CATEGORIA:','cat.all':'🔍 Tutte','cat.articles':'📄 Articoli','cat.preprints':'🧪 Preprint','cat.books':'📚 Libri','cat.theses':'🎓 Tesi','cat.data':'🗄 Dati','lang.label':'LINGUA:','lang.all':'🌍 Tutte','welcome.text':'42 fonti accademiche · 7 lingue + multilingue','welcome.sub':'11 fonti con risultati live tramite API · 31 portali con link diretto','modal.close':'✕ Chiudi','modal.search':'Filtra per titolo, autore, abstract…','modal.tag.all':'🔍 Tutti','modal.tag.pdf':'⬇ Con PDF','modal.tag.doi':'🔗 Con DOI','modal.loading':'Ricerca in corso…','modal.empty':'Nessun risultato per i filtri selezionati','portal.open':'↗ Cerca su','portal.section':'Portali — Apri nel browser','portal.sources':'fonti','cat.label.articles':'Articoli & Riviste','cat.label.preprints':'Preprint & Documenti','cat.label.books':'Libri & Manuali','cat.label.theses':'Tesi & Dissertazioni','cat.label.data':'Archivi di dati','footer.main':'strumento gratuito per la ricerca accademica','footer.terms':'Rispettare i termini di utilizzo di ogni piattaforma','footer.legal':'⚖ Termini legali & GDPR','card.open':'↗ Apri','card.pdf':'⬇ PDF','card.unpay':'🔍 Unpaywall','card.oa':'🔓 Accesso aperto','card.oadoi':'🔓 Accesso aperto (DOI)','card.title_unknown':'Titolo sconosciuto'},
+};
+let _lang=localStorage.getItem('ui_lang')||(navigator.language?.slice(0,2).match(/^(ro|en|fr|de|es|pt|it)$/)?navigator.language.slice(0,2):'ro');
+function T(key){return(TRANSLATIONS[_lang]||TRANSLATIONS.ro)[key]||TRANSLATIONS.ro[key]||key;}
+function setLang(code){
+  if(!TRANSLATIONS[code])return;
+  _lang=code; localStorage.setItem('ui_lang',code); document.documentElement.lang=code;
+  document.querySelectorAll('[data-i18n]').forEach(el=>el.textContent=T(el.dataset.i18n));
+  document.querySelectorAll('[data-i18n-ph]').forEach(el=>el.placeholder=T(el.dataset.i18nPh));
+  document.querySelectorAll('.lang-sw-btn').forEach(b=>b.classList.toggle('active',b.dataset.l===code));
+  CAT_LABELS.articles=T('cat.label.articles'); CAT_LABELS.preprints=T('cat.label.preprints');
+  CAT_LABELS.books=T('cat.label.books'); CAT_LABELS.theses=T('cat.label.theses');
+  CAT_LABELS.data=T('cat.label.data');
+}
+
 const enc = s => encodeURIComponent(s);
 const esc = s => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 
@@ -587,26 +845,37 @@ const LANG_LABELS = { en:'🇬🇧', ro:'🇷🇴', fr:'🇫🇷', de:'🇩🇪'
 // ════════════════════════════════════════════════════════
 const API_SOURCES = [
   { id:'arxiv',     name:'arXiv',            color:'#c8a84b', cat:'preprints', langs:['en','multi'],
+    home:'https://arxiv.org',
     desc:'Preprint fizică, matematică, informatică, biologie, economie' },
   { id:'oplib',     name:'Open Library',     color:'#3ecf8e', cat:'books',     langs:['multi'],
+    home:'https://openlibrary.org',
     desc:'Catalogul Open Library — milioane de cărți digitalizate' },
   { id:'archive',   name:'Archive.org',      color:'#5b8dee', cat:'books',     langs:['multi'],
+    home:'https://archive.org',
     desc:'Texte digitalizate, cărți, periodice, documente istorice' },
   { id:'gutenberg', name:'Gutenberg',         color:'#9b72ef', cat:'books',     langs:['multi'],
+    home:'https://www.gutenberg.org',
     desc:'70.000+ cărți clasice în domeniu public — RO, FR, DE, ES inclus' },
   { id:'core',      name:'CORE',             color:'#e05c6a', cat:'articles',  langs:['multi'],
+    home:'https://core.ac.uk',
     desc:'200M+ articole open-access agregate din repozitoarii globale' },
   { id:'semantic',  name:'Semantic Scholar', color:'#2ec9c9', cat:'articles',  langs:['en','multi'],
+    home:'https://www.semanticscholar.org',
     desc:'215M+ lucrări cu citări, grafuri de cunoaștere și PDF-uri OA' },
   { id:'openalex',  name:'OpenAlex',         color:'#e8893a', cat:'articles',  langs:['multi'],
+    home:'https://openalex.org',
     desc:'250M+ lucrări, autori, reviste, finanțatori — date structurate' },
   { id:'crossref',  name:'CrossRef',         color:'#4ade80', cat:'articles',  langs:['multi'],
+    home:'https://www.crossref.org',
     desc:'155M+ metadate DOI — reviste, conferințe, cărți cu link PDF' },
   { id:'zenodo',    name:'Zenodo',           color:'#60a5fa', cat:'data',      langs:['multi'],
+    home:'https://zenodo.org',
     desc:'Repozitoriu CERN — articole, date, software, teze, prezentări' },
   { id:'doaj',      name:'DOAJ',             color:'#f472b6', cat:'articles',  langs:['multi'],
+    home:'https://doaj.org',
     desc:'21.000+ reviste open-access peer-reviewed din toate disciplinele' },
   { id:'europepmc', name:'Europe PMC',       color:'#a78bfa', cat:'articles',  langs:['en','multi'],
+    home:'https://europepmc.org',
     desc:'40M+ articole biomedicale cu acces la full-text PubMed Central' },
 ];
 
@@ -631,10 +900,10 @@ const PORTAL_SOURCES = [
     url:q=>`https://pubmed.ncbi.nlm.nih.gov/?term=${enc(q)}` },
   { id:'jstor',       name:'JSTOR',               color:'#8b5e3c', cat:'articles',  langs:['en'],
     desc:'Reviste academice arhivate — științe sociale, umane, economie',
-    url:q=>`https://www.jstor.org/action/doBasicSearch?Query=${enc(q)}&so=rel` },
+    url:q=>`https://www.jstor.org/action/doBasicSearch?Query=${enc(q)}&so=rel&fc=on` },
   { id:'ssrn',        name:'SSRN',                color:'#1e3a8a', cat:'preprints', langs:['en','multi'],
     desc:'Social Sciences Research Network — economie, drept, finanțe, management',
-    url:q=>`https://papers.ssrn.com/sol3/results.cfm?txtkey=${enc(q)}&form_name=journalBrowse` },
+    url:q=>`https://papers.ssrn.com/sol3/results.cfm?txtkey=${enc(q)}` },
   { id:'biorxiv',     name:'bioRxiv / medRxiv',   color:'#6d28d9', cat:'preprints', langs:['en'],
     desc:'Preprint biologie, medicină, neuroștiințe, psihologie (Cold Spring Harbor)',
     url:q=>`https://www.biorxiv.org/search/${enc(q)}` },
@@ -646,7 +915,7 @@ const PORTAL_SOURCES = [
     url:q=>`https://philpapers.org/s/${enc(q)}` },
   { id:'repec',       name:'REPEC / IDEAS',       color:'#065f46', cat:'preprints', langs:['en','multi'],
     desc:'Research Papers in Economics — 4M+ lucrări economie și finanțe',
-    url:q=>`https://ideas.repec.org/cgi-bin/htsearch?q=${enc(q)}` },
+    url:q=>`https://ideas.repec.org/search.html?query=${enc(q)}` },
   { id:'researchgate',name:'ResearchGate',        color:'#00ccbb', cat:'articles',  langs:['multi'],
     desc:'Rețea academică globală — profiluri cercetători și full-text articole',
     url:q=>`https://www.researchgate.net/search?q=${enc(q)}` },
@@ -656,7 +925,7 @@ const PORTAL_SOURCES = [
   // ── Cărți
   { id:'doab',        name:'DOAB',                color:'#059669', cat:'books',     langs:['multi'],
     desc:'Directory of Open Access Books — 80.000+ cărți academice peer-reviewed',
-    url:q=>`https://www.doabooks.org/doab?func=search&query=${enc(q)}&uiLanguage=en` },
+    url:q=>`https://directory.doabooks.org/discover?query=${enc(q)}` },
   { id:'oapen',       name:'OAPEN Library',       color:'#7c3aed', cat:'books',     langs:['multi'],
     desc:'Monografii academice europene open-access — EN, FR, DE, NL, ES',
     url:q=>`https://library.oapen.org/discover?query=${enc(q)}` },
@@ -667,19 +936,19 @@ const PORTAL_SOURCES = [
     desc:'Descarcă documente Scribd — inserează URL-ul documentului în câmpul de pe site',
     url:q=>`https://scribd.vdownloaders.com/` },
   // ── Teze
-  { id:'dart',        name:'DART-Europe',         color:'#c2410c', cat:'theses',    langs:['multi'],
-    desc:'Teze europene de doctorat în acces deschis — 1M+ din 28 țări',
-    url:q=>`https://www.dart-europe.org/basic-search.php?value%5B%5D=${enc(q)}` },
+  { id:'oatd',        name:'OATD',                color:'#7c3aed', cat:'theses',    langs:['multi'],
+    desc:'Open Access Theses & Dissertations — 7.4M+ teze din 1100+ instituții globale (include instituții europene)',
+    url:q=>`https://oatd.org/?q=${enc(q)}` },
   { id:'ethos',       name:'EThOS',               color:'#9d174d', cat:'theses',    langs:['en'],
-    desc:'British Library — 600.000+ teze de doctorat din Marea Britanie',
-    url:q=>`https://ethos.bl.uk/Home.do#search/${enc(q)}` },
+    desc:'British Library EThOS — 600.000+ teze UK (platformă interim 2026 după cyberattack oct. 2023)',
+    url:q=>`https://ethos.bl.uk/SearchResults.do?query=${enc(q)}` },
   { id:'ndltd',       name:'NDLTD',               color:'#6b21a8', cat:'theses',    langs:['multi'],
     desc:'Networked Digital Library of Theses — global, multilingv, 6M+ teze',
-    url:q=>`https://ndltd.org/cgi-bin/simple-search.pl?query=${enc(q)}` },
+    url:q=>`https://ndltd.org/search?q=${enc(q)}` },
   // ── Acces Liber Legitim
-  { id:'oabutton',    name:'Open Access Button',  color:'#16a34a', cat:'articles',  langs:['multi'],
-    desc:'Găsește versiunea legală OA a oricărui articol — depozite instituționale, preprint-uri, email autor, ILL',
-    url:q=>`https://openaccessbutton.org/access?url=${enc(q)}` },
+  { id:'openaire',    name:'OpenAIRE EXPLORE',    color:'#16a34a', cat:'articles',  langs:['multi'],
+    desc:'Portal european open science — 145M+ publicații, date, software legate de finanțare UE',
+    url:q=>`https://explore.openaire.eu/search/find?keyword=${enc(q)}&type=publications` },
   { id:'core_p',      name:'CORE (portal)',       color:'#be185d', cat:'articles',  langs:['multi'],
     desc:'Interfața web CORE cu filtre avansate: disciplină, an, țară sursă',
     url:q=>`https://core.ac.uk/search?q=${enc(q)}` },
@@ -689,28 +958,28 @@ const PORTAL_SOURCES = [
   // ── Franceză 🇫🇷
   { id:'gallica',     name:'Gallica (BnF)',       color:'#dc2626', cat:'books',     langs:['fr','multi'],
     desc:'🇫🇷 Biblioteca Națională a Franței — 8M+ documente: cărți, periodice, manuscrise, fotografii',
-    url:q=>`https://gallica.bnf.fr/services/engine/search/sru?operation=searchRetrieve&version=1.2&query=${enc(q)}&suggest=10&rk=1` },
+    url:q=>`https://gallica.bnf.fr/services/engine/search/sru?operation=searchRetrieve&version=1.2&query=all+all+${enc(q)}&suggest=10&rk=1` },
   { id:'persee',      name:'Persée',              color:'#b45309', cat:'articles',  langs:['fr','multi'],
     desc:'🇫🇷 Arhivă digitală reviste academice franceze — drept, istorie, filozofie, sociologie',
-    url:q=>`https://www.persee.fr/search#q=${enc(q)}` },
+    url:q=>`https://www.persee.fr/search?q=${enc(q)}` },
 
   { id:'hal',         name:'HAL Science',         color:'#b91c1c', cat:'articles',  langs:['fr','multi'],
     desc:'🇫🇷 Arhivă deschisă franceză — 1M+ lucrări multidisciplinare, teze, rapoarte',
-    url:q=>`https://hal.science/search/index/?q=${enc(q)}&rows=30` },
+    url:q=>`https://hal.science/search/index/?q=${enc(q)}&rows=30&sort=relevance_desc` },
 
   // ── Spaniolă / Portugheză 🇪🇸🇵🇹
   { id:'dialnet',     name:'Dialnet',             color:'#c2410c', cat:'articles',  langs:['es','pt'],
     desc:'🇪🇸🇵🇹 Cel mai mare portal academic ibero-american — 10M+ documente, reviste, teze',
-    url:q=>`https://dialnet.unirioja.es/buscar/documentos/?querysDismax.TITULAR=${enc(q)}` },
+    url:q=>`https://dialnet.unirioja.es/buscar/documentos/?querysDismax=${enc(q)}` },
   { id:'scielo',      name:'SciELO',              color:'#0d9488', cat:'articles',  langs:['es','pt','multi'],
     desc:'🌎 Scientific Electronic Library Online — reviste latinoamericane, spaniole, portugheze, OA',
     url:q=>`https://search.scielo.org/?q=${enc(q)}&lang=en` },
   { id:'redalyc',     name:'Redalyc',             color:'#0891b2', cat:'articles',  langs:['es','pt'],
     desc:'🇲🇽🇪🇸 Red de Revistas Científicas — 800.000+ articole latinoamericane și ibero-americane OA',
-    url:q=>`https://www.redalyc.org/busquedaArticuloFiltros.oa?busqueda=${enc(q)}` },
+    url:q=>`https://www.redalyc.org/busquedaArticuloFiltros.oa?busqueda=${enc(q)}&idioma=es` },
   { id:'rcaap',       name:'RCAAP',               color:'#1a56db', cat:'articles',  langs:['pt'],
     desc:'🇵🇹 Repositórios Científicos de Acesso Aberto de Portugal — teze și articole portugheze',
-    url:q=>`https://www.rcaap.pt/search.jsp?query=${enc(q)}` },
+    url:q=>`https://www.rcaap.pt/search.jsp?query=${enc(q)}&lang=pt` },
 
   // ── Germană 🇩🇪
   { id:'ssoar',       name:'SSOAR',               color:'#374151', cat:'articles',  langs:['de','en','multi'],
@@ -720,7 +989,7 @@ const PORTAL_SOURCES = [
   // ── Italiană 🇮🇹
   { id:'iris_cnr',    name:'IRIS CNR',            color:'#be123c', cat:'articles',  langs:['it','multi'],
     desc:'🇮🇹 Archivio istituzionale CNR — cercetare științifică italiană, acces la full-text',
-    url:q=>`https://iris.cnr.it/search?query=${enc(q)}&rpp=20&sort_by=score&order=desc` },
+    url:q=>`https://iris.cnr.it/search?query=${enc(q)}&sort_by=score&order=desc` },
 
   // ── Română / Europa Centrală și de Est 🇷🇴
   { id:'ceeol',       name:'CEEOL',               color:'#d97706', cat:'articles',  langs:['ro','multi'],
@@ -732,15 +1001,41 @@ const ALL_SOURCES = [...API_SOURCES, ...PORTAL_SOURCES];
 const SRC_META = {};
 ALL_SOURCES.forEach(s=>{ SRC_META[s.id]=s; });
 
+// ── URL homepage pentru fiecare sursă (folosit în tooltip) ──────────────────
+const HOMES = {
+  arxiv:'https://arxiv.org', oplib:'https://openlibrary.org',
+  archive:'https://archive.org', gutenberg:'https://www.gutenberg.org',
+  core:'https://core.ac.uk', semantic:'https://www.semanticscholar.org',
+  openalex:'https://openalex.org', crossref:'https://www.crossref.org',
+  zenodo:'https://zenodo.org', doaj:'https://doaj.org',
+  europepmc:'https://europepmc.org', scholar:'https://scholar.google.com',
+  dimensions:'https://app.dimensions.ai', base:'https://www.base-search.net',
+  pubmed:'https://pubmed.ncbi.nlm.nih.gov', jstor:'https://www.jstor.org',
+  ssrn:'https://www.ssrn.com', biorxiv:'https://www.biorxiv.org',
+  eric:'https://eric.ed.gov', philpapers:'https://philpapers.org',
+  repec:'https://ideas.repec.org', researchgate:'https://www.researchgate.net',
+  academia:'https://www.academia.edu', doab:'https://www.doabooks.org',
+  oapen:'https://library.oapen.org', books101:'https://101books.club',
+  scribd:'https://scribd.vdownloaders.com', oatd:'https://oatd.org',
+  ethos:'https://ethos.bl.uk', ndltd:'https://ndltd.org',
+  openaire:'https://explore.openaire.eu', core_p:'https://core.ac.uk',
+  gallica:'https://gallica.bnf.fr', persee:'https://www.persee.fr',
+  hal:'https://hal.science', dialnet:'https://dialnet.unirioja.es',
+  scielo:'https://scielo.org', redalyc:'https://www.redalyc.org',
+  rcaap:'https://www.rcaap.pt', ssoar:'https://www.ssoar.info',
+  iris_cnr:'https://iris.cnr.it', ceeol:'https://www.ceeol.com',
+};
+
+
 // ════════════════════════════════════════════════════════
 //  PROFILURI RAPIDE
 // ════════════════════════════════════════════════════════
 const PROFILES = {
   all:        ALL_SOURCES.map(s=>s.id),
-  student:    ['arxiv','oplib','archive','gutenberg','core','semantic','scholar','oabutton','ssrn','doab','oapen','base','dart','ethos','ndltd','books101','scribd','ceeol','dialnet','scielo','gallica'],
-  researcher: ['arxiv','core','semantic','openalex','crossref','zenodo','doaj','europepmc','scholar','dimensions','base','pubmed','jstor','ssrn','biorxiv','eric','hal','philpapers','repec','researchgate','academia','oabutton','core_p','ssoar','iris_cnr','ceeol','dialnet','scielo'],
+  student:    ['arxiv','oplib','archive','gutenberg','core','semantic','scholar','openaire','ssrn','doab','oapen','base','oatd','ethos','ndltd','books101','scribd','ceeol','dialnet','scielo','gallica'],
+  researcher: ['arxiv','core','semantic','openalex','crossref','zenodo','doaj','europepmc','scholar','dimensions','base','pubmed','jstor','ssrn','biorxiv','eric','hal','philpapers','repec','researchgate','academia','openaire','core_p','ssoar','iris_cnr','ceeol','dialnet','scielo'],
   books:      ['oplib','archive','gutenberg','doab','oapen','books101','scribd','scholar','gallica'],
-  ro:         ['ceeol','dart','ndltd','core','openalex','scholar','oabutton','base','doaj','zenodo','hal'],
+  ro:         ['ceeol','oatd','ndltd','core','openalex','scholar','openaire','base','doaj','zenodo','hal'],
   romance:    ['hal','gallica','persee','dialnet','scielo','redalyc','rcaap','iris_cnr','doaj','oapen','doab','scholar','core'],
 };
 
@@ -790,7 +1085,7 @@ function langFlags(langs) {
 function buildChips() {
   const grid = document.getElementById('srcGrid');
   grid.innerHTML = ALL_SOURCES.map(s=>`
-    <label class="src-chip on" id="chip-${s.id}" for="chk-${s.id}" data-cat="${s.cat}" title="${esc(s.desc||'')}">
+    <label class="src-chip on" id="chip-${s.id}" for="chk-${s.id}" data-cat="${s.cat}">
       <input type="checkbox" id="chk-${s.id}" checked>
       <span class="src-dot" style="background:${s.color}"></span>
       <span class="src-lbl">${esc(s.name)}</span>
@@ -804,8 +1099,62 @@ function buildChips() {
       if(chk.checked){active.add(s.id);chip.classList.add('on');}
       else{active.delete(s.id);chip.classList.remove('on');}
     });
+    chip.addEventListener('mouseenter', (e) => showSrcTip(s, chip, e));
+    chip.addEventListener('mouseleave',  ()=>hideSrcTip());
+    chip.addEventListener('focus',       ()=>showSrcTip(s, chip, null));
+    chip.addEventListener('blur',        ()=>hideSrcTip());
   });
 }
+
+// ── Source chip tooltip ──────────────────────────────────────────────────────
+let _tipTimer = null;
+
+function showSrcTip(s, chip, e) {
+  clearTimeout(_tipTimer);
+  const tip   = document.getElementById('srcTip');
+  const home  = HOMES[s.id] || '#';
+  const clean = (s.desc||'').replace(/^[🇷🇴🇫🇷🇩🇪🇪🇸🇵🇹🇮🇹🌎🌍]+\s*/u, '');
+
+  document.getElementById('sTipDot').style.background  = s.color;
+  document.getElementById('sTipName').textContent       = s.name;
+  document.getElementById('sTipFlags').textContent      = langFlags(s.langs);
+  document.getElementById('sTipDesc').textContent       = clean;
+  document.getElementById('sTipLink').href              = home;
+  document.getElementById('sTipLink').textContent       = '↗ ' + home.replace(/^https?:\/\//,'');
+
+  tip.style.display = 'block';
+  const tw = tip.offsetWidth || 290;
+  const th = tip.offsetHeight || 120;
+
+  // Poziție: la stânga mouse-ului (sau a chip-ului dacă e focus)
+  const mx = e ? e.clientX : chip.getBoundingClientRect().left;
+  const my = e ? e.clientY : chip.getBoundingClientRect().top + chip.getBoundingClientRect().height / 2;
+
+  let left = mx - tw - 10;
+  if (left < 8) left = mx + 14; // fallback dreapta dacă nu e loc
+  let top  = my - th / 2 - window.scrollY;
+  top = Math.max(8, Math.min(top, window.innerHeight - th - 8));
+  top += window.scrollY;
+
+  tip.style.left = left + 'px';
+  tip.style.top  = top  + 'px';
+
+  _tipTimer = setTimeout(()=> tip.classList.add('show'), 20);
+}
+
+function hideSrcTip() {
+  clearTimeout(_tipTimer);
+  _tipTimer = setTimeout(() => {
+    const tip = document.getElementById('srcTip');
+    tip.classList.remove('show');
+    setTimeout(() => { tip.style.display = 'none'; }, 160);
+  }, 220); // pauză de grație: mouse-ul poate traversa spre tooltip
+}
+
+// Keep tooltip visible when mouse moves over it
+document.getElementById('srcTip').addEventListener('mouseenter', ()=>clearTimeout(_tipTimer));
+document.getElementById('srcTip').addEventListener('mouseleave',  ()=>hideSrcTip());
+
 
 // Select all / none
 document.getElementById('selAllBtn').addEventListener('click',e=>{
@@ -868,24 +1217,53 @@ window.addEventListener('load',()=>{
 // ════════════════════════════════════════════════════════
 //  API FETCH FUNCTIONS
 // ════════════════════════════════════════════════════════
-async function fetchArxiv(q) {
-  let r;
-  try { r = await fetch(`https://export.arxiv.org/api/query?search_query=all:${enc(q)}&start=0&max_results=6`); }
-  catch { throw new Error('arXiv — conexiune eșuată'); }
-  let text;
-  try { text = await r.text(); } catch { throw new Error('arXiv — răspuns invalid'); }
-  const xml = new DOMParser().parseFromString(text,'text/xml');
-  if (xml.querySelector('parsererror')) throw new Error('arXiv — răspuns XML invalid');
-  return [...xml.querySelectorAll('entry')].map(e=>({
+function parseArxivXml(text) {
+  const xml = new DOMParser().parseFromString(text, 'text/xml');
+  if (xml.querySelector('parsererror')) return null;
+  const entries = [...xml.querySelectorAll('entry')];
+  if (!entries.length) return null;
+  return entries.map(e => ({
     title:    e.querySelector('title')?.textContent?.trim(),
-    authors:  [...e.querySelectorAll('author name')].map(a=>a.textContent).join(', '),
-    abstract: e.querySelector('summary')?.textContent?.trim().slice(0,280),
+    authors:  [...e.querySelectorAll('author name')].map(a => a.textContent).join(', '),
+    abstract: e.querySelector('summary')?.textContent?.trim().slice(0, 280),
     url:      e.querySelector('id')?.textContent?.trim(),
     pdf:      e.querySelector('link[title="pdf"]')?.getAttribute('href'),
-    year:     e.querySelector('published')?.textContent?.slice(0,4),
-    journal:  e.querySelector('arxiv\\:journal_ref,journal_ref')?.textContent||'',
+    year:     e.querySelector('published')?.textContent?.slice(0, 4),
+    journal:  e.querySelector('arxiv\\:journal_ref,journal_ref')?.textContent || '',
     source:   'arxiv'
   }));
+}
+
+async function fetchArxiv(q) {
+  const arxivQ = q.trim().split(/\s+/).map(w => encodeURIComponent(w)).join('+');
+  const directUrl = `https://export.arxiv.org/api/query?search_query=all:${arxivQ}&start=0&max_results=8`;
+
+  // ── Tentativa 1: direct (funcționează dacă arXiv trimite CORS headers) ──
+  let text = null;
+  try {
+    const ctrl = new AbortController();
+    const tid  = setTimeout(() => ctrl.abort(), 10000);
+    const r = await fetch(directUrl, { mode: 'cors', signal: ctrl.signal });
+    clearTimeout(tid);
+    if (r.ok) text = await r.text();
+  } catch { /* CORS blocat — continuăm cu proxy */ }
+
+  // ── Tentativa 2: CORS proxy (allorigins.win) ─────────────────────────────
+  if (!text) {
+    try {
+      const pr = await fetch(
+        `https://api.allorigins.win/get?url=${encodeURIComponent(directUrl)}`,
+        { signal: AbortSignal.timeout(12000) }
+      );
+      const pd = await pr.json();
+      if (pd.contents && pd.contents.includes('<entry>')) text = pd.contents;
+    } catch { /* proxy inaccesibil */ }
+  }
+
+  if (!text) throw new Error('arXiv — inaccesibil (CORS direct + proxy)');
+  const results = parseArxivXml(text);
+  if (!results) throw new Error('arXiv — XML invalid sau fără rezultate');
+  return results;
 }
 
 async function fetchOpenLibrary(q) {
@@ -950,53 +1328,162 @@ async function safeJson(r, sourceName) {
   catch { throw new Error(`${sourceName} — răspuns invalid (eroare server)`); }
 }
 
+// ── fetchWithRetry: retry o dată la eroare de rețea ──────────────────────────
+async function fetchWithRetry(url, opts={}, retries=1) {
+  for (let i=0; i<=retries; i++) {
+    try {
+      const ctrl = new AbortController();
+      const tid  = setTimeout(()=>ctrl.abort(), opts.timeout||10000);
+      const r = await fetch(url, { ...opts, signal: ctrl.signal });
+      clearTimeout(tid);
+      return r;
+    } catch(e) {
+      if (i===retries) throw e;
+      await new Promise(res=>setTimeout(res, 800)); // pauză 800ms între retry-uri
+    }
+  }
+}
+
 async function fetchCore(q) {
-  const key = localStorage.getItem('core_api_key')||'';
-  const headers = key ? {Authorization:`Bearer ${key}`} : {};
+  const key = localStorage.getItem('core_api_key') || '';
+
+  // ── Cu cheie API: CORE v3 (complet, 200M+ articole) ─────────────────────
+  if (key) {
+    let r;
+    try {
+      r = await fetchWithRetry(
+        `https://api.core.ac.uk/v3/search/works?q=${enc(q)}&limit=8`,
+        { headers: { 'Accept': 'application/json', Authorization: `Bearer ${key}` },
+          mode: 'cors', timeout: 12000 }
+      );
+    } catch { throw new Error('CORE — inaccesibil cu cheie API'); }
+    if (r.status === 401 || r.status === 403) throw new Error('CORE — cheie API invalidă sau expirată');
+    if (r.status === 429) throw new Error('CORE — limită zilnică depășită');
+    if (!r.ok) throw new Error(`CORE — eroare ${r.status}`);
+    const d = await safeJson(r, 'CORE');
+    return (d.results || []).map(item => ({
+      title:    item.title,
+      authors:  (item.authors || []).map(a => a.name || String(a)).join(', '),
+      year:     item.yearPublished,
+      abstract: item.abstract?.slice(0, 280),
+      url:      item.links?.[0]?.url || `https://core.ac.uk/works/${item.id}`,
+      pdf:      item.downloadUrl || null,
+      doi:      item.doi || '',
+      source:   'core'
+    }));
+  }
+
+  // ── Fără cheie: OpenAIRE API (gratuit, fără auth, 145M+ articole OA) ────
+  // OpenAIRE indexează aceleași repozitoarii instituționale ca și CORE
   let r;
-  try { r = await fetch(`https://api.core.ac.uk/v3/search/works?q=${enc(q)}&limit=6`, {headers}); }
-  catch { throw new Error('CORE — conexiune eșuată (DNS/rețea)'); }
-  if (r.status===401) throw new Error('CORE — API key lipsă sau invalidă. Obții gratuit la core.ac.uk/services/api');
-  if (r.status===429) throw new Error('CORE — limită de cereri depășită. Adaugă un API key gratuit pentru acces extins');
-  if (!r.ok)          throw new Error(`CORE — eroare ${r.status}`);
-  const d = await safeJson(r, 'CORE');
-  return (d.results||[]).map(item=>({
-    title:    item.title,
-    authors:  (item.authors||[]).map(a=>a.name||String(a)).join(', '),
-    year:     item.yearPublished,
-    abstract: item.abstract?.slice(0,280),
-    url:      item.links?.[0]?.url||`https://core.ac.uk/works/${item.id}`,
-    pdf:      item.downloadUrl,
-    source:   'core'
-  }));
+  try {
+    r = await fetchWithRetry(
+      `https://api.openaire.eu/search/publications?keywords=${enc(q)}&format=json&size=8&sortBy=relevance+descending`,
+      { headers: { 'Accept': 'application/json' }, mode: 'cors', timeout: 14000 }
+    );
+  } catch { throw new Error('CORE — CORS/rețea (fallback OpenAIRE inaccesibil). Adaugă cheie: core.ac.uk/services/api'); }
+  if (!r.ok) throw new Error(`CORE (OpenAIRE fallback) — eroare ${r.status}`);
+  const d = await safeJson(r, 'OpenAIRE-CORE');
+  const raw = d?.response?.results?.result;
+  if (!raw) return [];
+  const arr = Array.isArray(raw) ? raw : [raw];
+  return arr.map(item => {
+    const res = item?.metadata?.['oaf:entity']?.['oaf:result'];
+    if (!res) return null;
+    // Titlu
+    const titleRaw = res.title;
+    const title = Array.isArray(titleRaw)
+      ? (titleRaw.find(t => t['@classid'] === 'main title') || titleRaw[0])?.$ || ''
+      : titleRaw?.$ || '';
+    if (!title) return null;
+    // Autori
+    const cRaw = res.creator || [];
+    const authors = (Array.isArray(cRaw) ? cRaw : [cRaw]).map(c => c?.$ || '').filter(Boolean).slice(0,5).join(', ');
+    // An
+    const year = (res.dateofacceptance?.$ || res.publicationdate?.$ || '').slice(0,4);
+    // Abstract
+    const dRaw = res.description;
+    const abstract = ((Array.isArray(dRaw) ? dRaw[0]?.$ : dRaw?.$ ) || '').slice(0, 280);
+    // DOI
+    const pRaw = res.pid || [];
+    const doi = (Array.isArray(pRaw) ? pRaw : [pRaw]).find(p => p?.['@classid'] === 'doi')?.$ || '';
+    // URL / PDF
+    const instRaw = res.instances?.instance;
+    const instances = Array.isArray(instRaw) ? instRaw : instRaw ? [instRaw] : [];
+    let pageUrl = '', pdfUrl = '';
+    for (const inst of instances) {
+      const wrRaw = inst?.webresource;
+      const wrs = Array.isArray(wrRaw) ? wrRaw : wrRaw ? [wrRaw] : [];
+      for (const wr of wrs) {
+        const u = wr?.url?.$ || '';
+        if (u.match(/\.pdf(\?|$)/i) && !pdfUrl) pdfUrl = u;
+        else if (u && !pageUrl) pageUrl = u;
+      }
+    }
+    return {
+      title, authors, year, abstract, doi,
+      url:  pageUrl || (doi ? `https://doi.org/${doi}` : 'https://explore.openaire.eu/'),
+      pdf:  pdfUrl || null,
+      source: 'core'
+    };
+  }).filter(Boolean);
 }
 
 async function fetchSemantic(q) {
-  const key = localStorage.getItem('s2_api_key')||'';
-  const headers = key ? {'x-api-key':key} : {};
-  let r;
-  try { r = await fetch(`https://api.semanticscholar.org/graph/v1/paper/search?query=${enc(q)}&limit=6&fields=title,authors,year,abstract,openAccessPdf,venue`, {headers}); }
-  catch { throw new Error('Semantic Scholar — conexiune eșuată (DNS/rețea)'); }
-  if (r.status===429) throw new Error('Semantic Scholar — limită de cereri depășită. Încearcă din nou în câteva minute sau adaugă un API key');
-  if (!r.ok)          throw new Error(`Semantic Scholar — eroare ${r.status}`);
-  const d = await safeJson(r, 'Semantic Scholar');
-  return (d.data||[]).map(item=>({
+  const key = localStorage.getItem('s2_api_key') || '';
+  const headers = { 'Accept': 'application/json', ...(key ? { 'x-api-key': key } : {}) };
+  const s2Url = `https://api.semanticscholar.org/graph/v1/paper/search?query=${enc(q)}&limit=8&fields=paperId,title,authors,year,abstract,openAccessPdf,venue`;
+
+  const parseS2 = d => (d?.data || []).map(item => ({
     title:    item.title,
-    authors:  (item.authors||[]).map(a=>a.name).join(', '),
+    authors:  (item.authors || []).map(a => a.name).join(', '),
     year:     item.year,
-    abstract: item.abstract?.slice(0,280),
+    abstract: item.abstract?.slice(0, 280),
     journal:  item.venue,
     url:      `https://www.semanticscholar.org/paper/${item.paperId}`,
-    pdf:      item.openAccessPdf?.url,
+    pdf:      item.openAccessPdf?.url || null,
     source:   'semantic'
   }));
+
+  // ── Tentativa 1: direct ──────────────────────────────────────────────────
+  let d = null;
+  try {
+    const r = await fetchWithRetry(s2Url, { headers, mode: 'cors', timeout: 12000 }, 1);
+    if (r.ok) {
+      const j = await safeJson(r, 'S2');
+      if (j?.data) d = j;
+    } else if (r.status === 429) { /* throttled → fallback proxy */ }
+    else throw new Error(`Semantic Scholar — eroare ${r.status}`);
+  } catch(e) {
+    if (e.message.includes('eroare')) throw e; // eroare reală, nu CORS
+    /* CORS / timeout → continuăm cu proxy */
+  }
+
+  // ── Tentativa 2: CORS proxy ──────────────────────────────────────────────
+  if (!d) {
+    try {
+      const pr = await fetch(
+        `https://api.allorigins.win/get?url=${encodeURIComponent(s2Url)}`,
+        { signal: AbortSignal.timeout(14000) }
+      );
+      const pd = await pr.json();
+      if (pd.contents) {
+        const j = JSON.parse(pd.contents);
+        if (j?.data) d = j;
+      }
+    } catch { /* proxy inaccesibil */ }
+  }
+
+  if (!d) throw new Error('Semantic Scholar — inaccesibil (CORS direct + proxy). Adaugă cheie: semanticscholar.org/product/api');
+  return parseS2(d);
 }
+
 
 async function fetchOpenAlex(q) {
   let r;
-  try { r = await fetch(`https://api.openalex.org/works?search=${enc(q)}&per-page=6&select=title,authorships,publication_year,abstract_inverted_index,open_access,doi,primary_location`); }
-  catch { throw new Error('OpenAlex — conexiune eșuată'); }
-  if (r.status===429) throw new Error('OpenAlex — limită de cereri depășită. Încearcă din nou în câteva secunde');
+  try { r = await fetchWithRetry(`https://api.openalex.org/works?search=${enc(q)}&per-page=6&select=title,authorships,publication_year,abstract_inverted_index,open_access,doi,primary_location&mailto=academisearch@alexio.tf`, {headers:{'Accept':'application/json'}, timeout:10000}); }
+  catch { throw new Error('OpenAlex — inaccesibil'); }
+  if (r.status===429) throw new Error('OpenAlex — limită depășită. Încearcă din nou');
   if (!r.ok) throw new Error(`OpenAlex — eroare ${r.status}`);
   const d = await safeJson(r, 'OpenAlex');
   return (d.results||[]).map(item=>{
@@ -1116,10 +1603,10 @@ function resultCard(item) {
   const hasPdf   = item.pdf && String(item.pdf).startsWith('http');
   const iid      = storeItem(item);
   const hasDoi   = !!item.doi;
-  const btnLabel = hasDoi ? '🔓 Acces Liber (DOI)' : '🔓 Acces Liber';
+  const btnLabel = hasDoi ? T('card.oadoi') : T('card.oa');
   const btnClass = hasDoi ? 'btn-gold' : 'btn-out';
   return `<div class="r-card">
-    <div class="r-title"><a href="${esc(item.url||'#')}" target="_blank" rel="noopener">${esc(item.title||'Titlu necunoscut')}</a></div>
+    <div class="r-title"><a href="${esc(item.url||'#')}" target="_blank" rel="noopener">${esc(item.title||T('card.title_unknown'))}</a></div>
     <div class="r-meta">
       ${item.authors?`<span class="r-authors">${esc(String(item.authors).slice(0,90))}${String(item.authors).length>90?'…':''}</span>`:''}
       ${item.year   ?`<span class="r-year">${esc(item.year)}</span>`:''}
@@ -1131,7 +1618,7 @@ function resultCard(item) {
       <a class="btn btn-out" href="${esc(item.url||'#')}" target="_blank" rel="noopener">↗ Deschide</a>
       ${hasPdf?`<a class="btn btn-gold" href="${esc(item.pdf)}" target="_blank" rel="noopener">⬇ PDF</a>`:''}
       ${hasDoi?`<button class="btn btn-teal" onclick="openUnpaywall('${esc(item.doi)}')">🔍 Unpaywall</button>`:''}
-      <button class="btn ${btnClass}" onclick="oaExact(${iid},this)" title="${hasDoi?'Caută PDF legal via Unpaywall + OA Button':'Caută DOI, apoi PDF legal via Unpaywall + OA Button'}">${btnLabel}</button>
+      <button class="btn ${btnClass}" onclick="oaExact(${iid},this)" title="${hasDoi?'Caută PDF legal via Unpaywall + OpenAIRE':'Caută DOI via CrossRef, apoi PDF legal via Unpaywall + OpenAIRE'}">${btnLabel}</button>
     </div>
   </div>`;
 }
@@ -1173,7 +1660,7 @@ function portalSection(activePids, query) {
     const cc = CAT_COLORS[cat]||'#7a7f9a';
     const cards = groups[cat].map(p=>{
       const flags = langFlags(p.langs);
-      const actions=`<a class="btn btn-out" href="${esc(p.url(query))}" target="_blank" rel="noopener" style="font-size:.65rem">↗ Caută pe ${esc(p.name)}</a>`;
+      const actions=`<a class="btn btn-out" href="${esc(p.url(query))}" target="_blank" rel="noopener" style="font-size:.65rem">${T('portal.open')} ${esc(p.name)}</a>`;
       return `<div class="portal-card">
         <div class="p-name"><span class="p-dot" style="background:${p.color}"></span>${esc(p.name)}${flags?`<span class="p-flags">${flags}</span>`:''}</div>
         <div class="p-desc">${esc(p.desc)}</div>
@@ -1184,7 +1671,7 @@ function portalSection(activePids, query) {
       <div class="cat-div">
         <span class="cat-div-lbl" style="color:${cc}">${CAT_LABELS[cat]||cat}</span>
         <div class="cat-div-line"></div>
-        <span class="cat-div-ct">${groups[cat].length} surse</span>
+        <span class="cat-div-ct">${groups[cat].length} ${T('portal.sources')}</span>
       </div>
       <div class="portals-grid">${cards}</div>
     </div>`;
@@ -1235,7 +1722,7 @@ async function lookupDOI(title, authors, year) {
   } catch { return null; }
 }
 
-// Unpaywall: returns best OA PDF URL for a DOI
+// Unpaywall DOI lookup (primar — rapid, acoperă ~50% articole post-2000)
 async function unpaywallLookup(doi) {
   if (!doi) return null;
   try {
@@ -1249,17 +1736,53 @@ async function unpaywallLookup(doi) {
   } catch { return null; }
 }
 
-// OA Button: returns best OA URL for a DOI or URL
-async function oaButtonLookup(doi) {
+// Unpaywall title search (când nu avem DOI)
+async function unpaywallTitleSearch(title) {
+  if (!title || title.length < 10) return null;
+  try {
+    const r = await fetch(
+      `https://api.unpaywall.org/v2/search?query=${enc(title)}&email=academisearch@alexio.tf`,
+      { signal: AbortSignal.timeout(7000) }
+    );
+    if (!r.ok) return null;
+    const d = await safeJson(r, 'Unpaywall Search');
+    for (const item of (d.results||[])) {
+      if (!titleMatch(item.response?.title||'', title)) continue;
+      const loc = item.response?.best_oa_location;
+      if (loc) return loc.url_for_pdf || loc.url || null;
+    }
+    return null;
+  } catch { return null; }
+}
+
+// OpenAIRE API lookup (secundar — 145M+ publicații, fonduri europene)
+async function openaireLookup(doi) {
   if (!doi) return null;
   try {
     const r = await fetch(
-      `https://api.openaccessbutton.org/find?url=${enc('https://doi.org/'+doi)}`,
+      `https://api.openaire.eu/search/publications?doi=${enc(doi)}&format=json&size=3`,
       { signal: AbortSignal.timeout(8000) }
     );
     if (!r.ok) return null;
-    const d = await safeJson(r, 'OA Button');
-    return d.url || null;
+    const d = await safeJson(r, 'OpenAIRE');
+    const results = d.response?.results?.result || [];
+    for (const res of (Array.isArray(results)?results:[results])) {
+      const entity = res.metadata?.['oaf:entity']?.['oaf:result'];
+      if (!entity) continue;
+      const access = entity.bestaccessright?.['@classname']?.toLowerCase?.() || '';
+      if (!access.includes('open')) continue;
+      const instances = entity.instances?.instance;
+      const instArr = Array.isArray(instances) ? instances : instances ? [instances] : [];
+      for (const inst of instArr) {
+        const urls = inst.webresource;
+        const urlArr = Array.isArray(urls) ? urls : urls ? [urls] : [];
+        for (const wr of urlArr) {
+          const url = wr.url?.$ || wr.url;
+          if (url && String(url).startsWith('http')) return String(url);
+        }
+      }
+    }
+    return null;
   } catch { return null; }
 }
 
@@ -1282,20 +1805,20 @@ async function oaExact(iid, btn) {
   const item = _items[iid];
   if (!item) return;
 
-  const orig     = btn?.innerHTML || '🔓 Acces Liber';
-  const setBtn   = (html, dis=false) => { if(btn){ btn.innerHTML=html; btn.disabled=dis; } };
-  const openUrl  = url => window.open(url, '_blank', 'noopener,noreferrer');
+  const orig    = btn?.innerHTML || '🔓 Acces Liber';
+  const setBtn  = (html, dis=false) => { if(btn){ btn.innerHTML=html; btn.disabled=dis; } };
+  const openUrl = url => window.open(url, '_blank', 'noopener,noreferrer');
 
   let doi = item.doi;
 
-  // ── Dacă nu avem DOI, îl căutăm mai întâi ───────────────
+  // ── Dacă nu avem DOI, îl căutăm via CrossRef ─────────
   if (!doi) {
     setBtn('🔍 Caută DOI…', true);
     doi = await lookupDOI(item.title, item.authors, item.year);
     if (doi) injectDoiInCard(btn, doi, iid);
   }
 
-  // ── Tier 1: Unpaywall ────────────────────────────────────
+  // ── Tier 1: Unpaywall (DOI) ───────────────────────────
   if (doi) {
     setBtn('⏳ Unpaywall…', true);
     const upUrl = await unpaywallLookup(doi);
@@ -1306,27 +1829,36 @@ async function oaExact(iid, btn) {
       return;
     }
 
-    // ── Tier 2: OA Button ────────────────────────────────────
-    setBtn('⏳ OA Button…', true);
-    const oaUrl = await oaButtonLookup(doi);
+    // ── Tier 2: OpenAIRE (DOI) ───────────────────────────
+    setBtn('⏳ OpenAIRE…', true);
+    const oaUrl = await openaireLookup(doi);
     if (oaUrl) {
       setBtn('✅ OA găsit!', true);
       setTimeout(()=>setBtn(orig,false), 1200);
       openUrl(oaUrl);
       return;
     }
-
-    // ── Tier 3: OA Button request page (ILL / email autor) ───
-    setBtn('📩 Solicită acces', true);
-    setTimeout(()=>setBtn(orig,false), 1500);
-    openUrl(`https://openaccessbutton.org/access?url=https://doi.org/${doi}`);
-    return;
   }
 
-  // ── Fallback complet fără DOI: căutare OA Button cu titlu ─
-  setBtn('🔓 Caută…', true);
-  openUrl(`https://openaccessbutton.org/access?url=${enc(item.title)}`);
-  setBtn(orig, false);
+  // ── Tier 3: Unpaywall căutare după titlu ──────────────
+  if (item.title) {
+    setBtn('⏳ Caută titlu…', true);
+    const titleUrl = await unpaywallTitleSearch(item.title);
+    if (titleUrl) {
+      setBtn('✅ OA găsit!', true);
+      setTimeout(()=>setBtn(orig,false), 1200);
+      openUrl(titleUrl);
+      return;
+    }
+  }
+
+  // ── Tier 4: Fallback — pagina Unpaywall manual ────────
+  setBtn('🔍 Caută manual', true);
+  setTimeout(()=>setBtn(orig,false), 1000);
+  openUrl(doi
+    ? `https://unpaywall.org/${doi}`
+    : `https://unpaywall.org/?query=${enc(item.title)}`
+  );
 }
 
 function openUnpaywall(doi){ window.open(`https://unpaywall.org/${doi}`,'_blank','noopener,noreferrer'); }
@@ -1337,10 +1869,9 @@ document.getElementById('doiOA').addEventListener('click', async function() {
   const doi = v.replace(/^https?:\/\/(dx\.)?doi\.org\//, '');
   const orig = this.innerHTML;
   this.innerHTML='⏳…'; this.disabled=true;
-  let url = await unpaywallLookup(doi) || await oaButtonLookup(doi);
+  const url = await unpaywallLookup(doi) || await openaireLookup(doi);
   this.innerHTML=orig; this.disabled=false;
-  if (url) window.open(url,'_blank','noopener,noreferrer');
-  else window.open(`https://openaccessbutton.org/access?url=https://doi.org/${doi}`,'_blank','noopener,noreferrer');
+  window.open(url || `https://unpaywall.org/${doi}`, '_blank', 'noopener,noreferrer');
 });
 document.getElementById('doiUnpay').addEventListener('click',()=>{
   const v=document.getElementById('doiInput').value.trim(); if(!v) return;
@@ -1349,7 +1880,242 @@ document.getElementById('doiUnpay').addEventListener('click',()=>{
 document.getElementById('doiInput').addEventListener('keydown',e=>{ if(e.key==='Enter') document.getElementById('doiOA').click(); });
 
 // ════════════════════════════════════════════════════════
-//  MAIN SEARCH
+//  RESULTS MODAL ENGINE
+// ════════════════════════════════════════════════════════
+let _allResults   = [];   // {item, srcId} — toate rezultatele API
+let _filtered     = [];   // după filtre active
+let _rendered     = 0;    // câte carduri am randat
+const BATCH       = 12;   // câte revelăm la fiecare trigger
+
+let _activeFilter = 'all';      // 'all' | 'pdf' | 'doi'
+let _activeSrc    = null;        // null = toate, string = id sursă
+let _innerQuery   = '';          // textul din search-ul intern
+let _modalQuery   = '';          // query-ul căutării externe
+let _observer     = null;
+
+// ── Deschide modalul ────────────────────────────────────
+function openResultsModal(query) {
+  _modalQuery = query;
+  _allResults = [];
+  _filtered   = [];
+  _rendered   = 0;
+  _activeFilter = 'all';
+  _activeSrc    = null;
+  _innerQuery   = '';
+
+  document.getElementById('rmQuery').textContent = `„${query}"`;
+  document.getElementById('rmCount').textContent = T('modal.loading');
+  document.getElementById('rmGrid').innerHTML    = '';
+  document.getElementById('rmEmpty').style.display = 'none';
+  document.getElementById('rmPortalWrap').innerHTML = '';
+  document.getElementById('rmStats').innerHTML  = '';
+  document.getElementById('rmSearch').value     = '';
+  document.getElementById('rmMatchCount').textContent = '';
+  document.getElementById('rmSearchClr').classList.remove('vis');
+
+  // Reset tag row — păstrează primele 4 butoane statice, șterge tagurile de sursă
+  const tagRow = document.getElementById('rmTagsRow');
+  [...tagRow.querySelectorAll('[data-src]')].forEach(t=>t.remove());
+  [...tagRow.querySelectorAll('[data-filter]')].forEach(t=>{
+    t.classList.toggle('active', t.dataset.filter==='all');
+  });
+
+  document.getElementById('resultsModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('rmSearch').focus();
+  setupObserver();
+}
+
+// ── Închide modalul ─────────────────────────────────────
+function closeResultsModal() {
+  document.getElementById('resultsModal').classList.remove('open');
+  document.body.style.overflow = '';
+  document.getElementById('queryInput').focus();
+  if (_observer) { _observer.disconnect(); _observer = null; }
+}
+
+document.getElementById('rmCloseBtn').addEventListener('click', closeResultsModal);
+document.addEventListener('keydown', e=>{
+  if (e.key==='Escape' && document.getElementById('resultsModal').classList.contains('open')
+      && !document.getElementById('legalModal').classList.contains('open')) {
+    closeResultsModal();
+  }
+});
+
+// ── Adaugă rezultate (apelat pe măsură ce API-urile răspund) ──
+function addResults(srcId, items) {
+  const meta = SRC_META[srcId];
+  items.forEach(item=>{ _allResults.push({item, srcId, color: meta?.color||'#7a7f9a'}); });
+  if (items.length > 0) addSourceTag(srcId, meta, items.length);
+
+  // Fără filtre active → append direct fără a goli grid-ul (elimină flickerul)
+  const noFilter = !_innerQuery && _activeFilter==='all' && !_activeSrc;
+  if (noFilter) {
+    appendCards(items, srcId, meta?.color||'#7a7f9a');
+    _filtered = [..._allResults]; // sync _filtered
+  } else {
+    applyFilters();
+  }
+}
+
+// ── Tag de sursă dinamic ────────────────────────────────
+function addSourceTag(srcId, meta, count) {
+  const tagRow = document.getElementById('rmTagsRow');
+  if (tagRow.querySelector(`[data-src="${srcId}"]`)) return;
+  const btn = document.createElement('button');
+  btn.className = 'rm-tag';
+  btn.dataset.src = srcId;
+  btn.style.cssText = `--sc:${meta?.color||'#888'}`;
+  btn.textContent  = `${meta?.name||srcId} (${count})`;
+  btn.addEventListener('click', ()=>{ _activeSrc = _activeSrc===srcId ? null : srcId; renderTags(); applyFilters(); });
+  tagRow.appendChild(btn);
+}
+
+// ── Append incremental (fără flicker la loading) ─────────
+function appendCards(items, srcId, color) {
+  const grid = document.getElementById('rmGrid');
+  items.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'mrc';
+    card.style.borderLeftColor = color;
+    card.style.animationDelay = '0ms';
+    card.innerHTML = modalCard(item, srcId, color, '');
+    grid.appendChild(card);
+    _rendered++;
+  });
+  document.getElementById('rmEmpty').style.display = 'none';
+  document.getElementById('rmSpinner').classList.remove('vis');
+}
+
+function renderTags() {
+  document.querySelectorAll('#rmTagsRow [data-src]').forEach(b=>{
+    const on = b.dataset.src === _activeSrc;
+    b.classList.toggle('active', on);
+    if (on) { b.style.background = SRC_META[b.dataset.src]?.color||'#888'; b.style.color='#0c0e14'; }
+    else { b.style.background=''; b.style.color=''; }
+  });
+}
+
+// ── Filtru tip (Toate / Cu PDF / Cu DOI) ───────────────
+document.getElementById('rmTagsRow').addEventListener('click', e=>{
+  const btn = e.target.closest('[data-filter]');
+  if (!btn) return;
+  _activeFilter = btn.dataset.filter;
+  document.querySelectorAll('#rmTagsRow [data-filter]').forEach(b=>b.classList.toggle('active', b===btn));
+  applyFilters();
+});
+
+// ── Search intern ───────────────────────────────────────
+let _searchDebounce = null;
+document.getElementById('rmSearch').addEventListener('input', e=>{
+  _innerQuery = e.target.value;
+  document.getElementById('rmSearchClr').classList.toggle('vis', !!_innerQuery);
+  clearTimeout(_searchDebounce);
+  _searchDebounce = setTimeout(applyFilters, 220);
+});
+document.getElementById('rmSearchClr').addEventListener('click', ()=>{
+  document.getElementById('rmSearch').value = '';
+  _innerQuery = '';
+  document.getElementById('rmSearchClr').classList.remove('vis');
+  applyFilters();
+  document.getElementById('rmSearch').focus();
+});
+
+// ── Aplică toate filtrele ───────────────────────────────
+function applyFilters() {
+  const q = _innerQuery.toLowerCase().trim();
+  _filtered = _allResults.filter(({item, srcId})=>{
+    if (_activeSrc && srcId !== _activeSrc) return false;
+    if (_activeFilter==='pdf' && !(item.pdf && String(item.pdf).startsWith('http'))) return false;
+    if (_activeFilter==='doi' && !item.doi) return false;
+    if (q) {
+      const hay = [item.title, item.authors, item.abstract, item.journal].join(' ').toLowerCase();
+      if (!hay.includes(q)) return false;
+    }
+    return true;
+  });
+  _rendered = 0;
+  document.getElementById('rmGrid').innerHTML = '';
+  document.getElementById('rmEmpty').style.display = _filtered.length===0 && _allResults.length>0 ? 'block':'none';
+  renderBatch();
+  // Update match count
+  const mc = document.getElementById('rmMatchCount');
+  mc.textContent = q || _activeFilter!=='all' || _activeSrc
+    ? `${_filtered.length} / ${_allResults.length}`
+    : '';
+}
+
+// ── Render o tranșă de carduri ──────────────────────────
+function renderBatch() {
+  const grid  = document.getElementById('rmGrid');
+  const batch = _filtered.slice(_rendered, _rendered + BATCH);
+  const q     = _innerQuery.toLowerCase().trim();
+  batch.forEach(({item, srcId, color}) => {
+    const card = document.createElement('div');
+    card.className = 'mrc';
+    card.style.borderLeftColor = color;
+    card.innerHTML = modalCard(item, srcId, color, q);
+    grid.appendChild(card);
+  });
+  _rendered += batch.length;
+  const allDone = _rendered >= _filtered.length;
+  document.getElementById('rmSpinner').classList.toggle('vis', !allDone && _filtered.length>0);
+}
+
+// ── Card HTML pentru modal ──────────────────────────────
+function modalCard(item, srcId, color, highlight) {
+  const meta    = SRC_META[srcId];
+  const hasPdf  = item.pdf && String(item.pdf).startsWith('http');
+  const hasDoi  = !!item.doi;
+  const iid     = storeItem(item);
+  const title   = item.title || T('card.title_unknown');
+  const hlTitle = highlight ? hlText(title, highlight) : esc(title);
+
+  return `
+    <div class="mrc-top">
+      <span class="mrc-badge" style="background:${color}22;color:${color};border:1px solid ${color}44">
+        ${esc(meta?.name||srcId)}
+      </span>
+      <div class="mrc-title">
+        <a href="${esc(item.url||'#')}" target="_blank" rel="noopener">${hlTitle}</a>
+      </div>
+    </div>
+    <div class="mrc-meta">
+      ${item.authors?`<span class="mrc-authors">${esc(String(item.authors).slice(0,80))}${String(item.authors).length>80?'…':''}</span>`:''}
+      ${item.year   ?`<span class="mrc-year">${esc(item.year)}</span>`:''}
+      ${item.journal?`<span class="mrc-journal">${esc(String(item.journal).slice(0,50))}</span>`:''}
+      ${hasDoi      ?`<span class="mrc-doi">DOI:${esc(item.doi)}</span>`:''}
+    </div>
+    ${item.abstract?`<div class="mrc-abstract">${highlight ? hlText(item.abstract.slice(0,280), highlight) : esc(item.abstract.slice(0,280))}</div>`:''}
+    <div class="mrc-actions">
+      <a class="btn btn-out" href="${esc(item.url||'#')}" target="_blank" rel="noopener">${T('card.open')}</a>
+      ${hasPdf?`<a class="btn btn-gold" href="${esc(item.pdf)}" target="_blank" rel="noopener">${T('card.pdf')}</a>`:''}
+      ${hasDoi?`<button class="btn btn-teal" onclick="openUnpaywall('${esc(item.doi)}')">${T('card.unpay')}</button>`:''}
+      <button class="btn ${hasDoi?'btn-gold':'btn-out'}" onclick="oaExact(${iid},this)">
+        ${hasDoi?T('card.oadoi'):T('card.oa')}
+      </button>
+    </div>`;
+}
+
+// Evidențiază termenul de căutare
+function hlText(text, q) {
+  if (!q) return esc(text);
+  const safe = esc(text);
+  const safeQ = q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  return safe.replace(new RegExp(`(${safeQ})`, 'gi'), '<mark>$1</mark>');
+}
+
+// ── IntersectionObserver pentru scroll infinit ──────────
+function setupObserver() {
+  if (_observer) _observer.disconnect();
+  _observer = new IntersectionObserver(entries=>{
+    if (entries[0].isIntersecting && _rendered < _filtered.length) renderBatch();
+  }, {rootMargin:'200px'});
+  _observer.observe(document.getElementById('rmSentinel'));
+}
+
+// ════════════════════════════════════════════════════════
+//  MAIN SEARCH — deschide modalul, colectează rezultate
 // ════════════════════════════════════════════════════════
 let searchCounter = 0;
 
@@ -1357,79 +2123,57 @@ async function doSearch() {
   const query = document.getElementById('queryInput').value.trim();
   if (!query) return;
   const myId = ++searchCounter;
+
   const activeApiSrcs    = API_SOURCES.filter(s=>active.has(s.id));
   const activePortalSrcs = new Set(PORTAL_SOURCES.filter(s=>active.has(s.id)).map(s=>s.id));
 
-  const area  = document.getElementById('resArea');
-  const resSt = document.getElementById('resSt');
-  const sBar  = document.getElementById('statsBar');
-  resSt.style.display='flex'; sBar.style.display='flex';
-  document.getElementById('resTitle').textContent=`Rezultate pentru „${query}"`;
-  document.getElementById('resTotPill').textContent='Se caută…';
-  document.getElementById('resPortPill').textContent=`${activePortalSrcs.size} portaluri`;
+  // Deschide modalul imediat
+  openResultsModal(query);
 
-  sBar.innerHTML = activeApiSrcs.map(s=>
-    `<span class="sc loading" id="stat-${s.id}">
-      <span class="loader" style="width:8px;height:8px;border-width:1.5px"></span>
+  // Stats chips de loading
+  const statsEl = document.getElementById('rmStats');
+  statsEl.innerHTML = activeApiSrcs.map(s=>
+    `<span class="rm-sc loading" id="rmsc-${s.id}">
+      <span class="loader" style="width:7px;height:7px;border-width:1.5px"></span>
       ${esc(s.name)}
     </span>`).join('');
 
-  // Group API sources by category
-  const apiGrouped={};
-  activeApiSrcs.forEach(s=>{ if(!apiGrouped[s.cat]) apiGrouped[s.cat]=[]; apiGrouped[s.cat].push(s); });
-  const order=['articles','preprints','books','data','theses'];
-
-  let apiHTML='';
-  order.filter(c=>apiGrouped[c]?.length).forEach(cat=>{
-    const cc=CAT_COLORS[cat]||'#7a7f9a';
-    apiHTML+=`<div class="cat-div"><span class="cat-div-lbl" style="color:${cc}">${CAT_LABELS[cat]} — Live API</span><div class="cat-div-line"></div></div>`;
-    apiHTML+=apiGrouped[cat].map(s=>`
-      <div class="src-sec" id="sec-${s.id}">
-        <div class="src-hdr">
-          <span class="src-hdr-badge" style="background:${s.color}22;color:${s.color};border:1px solid ${s.color}44">${esc(s.name)}</span>
-          <span class="src-hdr-langs">${langFlags(s.langs)}</span>
-        </div>
-        <div class="loading-row"><span class="loader"></span>Se caută în ${esc(s.name)}…</div>
-      </div>`).join('');
-  });
-
-  const portalCount = activePortalSrcs.size;
-  area.innerHTML = apiHTML + `<div id="portal-wrap">
-    <div class="cat-div" style="margin-top:36px">
-      <span class="cat-div-lbl" style="color:var(--muted)">Portaluri — Deschide în Browser</span>
-      <div class="cat-div-line"></div>
-      <span class="cat-div-ct">${portalCount} surse active</span>
+  // Portaluri
+  document.getElementById('rmPortalWrap').innerHTML = `
+    <div class="rm-portals-hdr">
+      <span class="rm-portals-lbl">${T('portal.section')}</span>
+      <div class="rm-portals-line"></div>
+      <span style="font-family:Inconsolata,monospace;font-size:.62rem;color:var(--muted)">${activePortalSrcs.size} surse</span>
     </div>
-    ${portalSection(activePortalSrcs, query)}
-  </div>`;
+    ${portalSection(activePortalSrcs, query)}`;
 
-  let total=0;
+  // API calls în paralel
+  let total = 0;
   const promises = activeApiSrcs.map(async s=>{
     try {
-      const fn=API_FNS[s.id]; if(!fn) return;
-      const items=await fn(query);
-      if(myId!==searchCounter) return;
-      total+=items.length;
-      const el=document.getElementById(`sec-${s.id}`);
-      if(el) el.outerHTML=srcSection(s.id,items,null);
-      const chip=document.getElementById(`stat-${s.id}`);
-      if(chip){chip.className='sc ok';chip.innerHTML=`✓ ${esc(s.name)} (${items.length})`;}
+      const fn = API_FNS[s.id]; if(!fn) return;
+      const items = await fn(query);
+      if (myId!==searchCounter) return;
+      total += items.length;
+      addResults(s.id, items);
+      const chip = document.getElementById(`rmsc-${s.id}`);
+      if (chip) { chip.className='rm-sc ok'; chip.innerHTML=`✓ ${esc(s.name)} (${items.length})`; }
     } catch(err) {
-      if(myId!==searchCounter) return;
-      const el=document.getElementById(`sec-${s.id}`);
-      if(el) el.outerHTML=srcSection(s.id,[],err.message||String(err));
-      const chip=document.getElementById(`stat-${s.id}`);
-      if(chip){chip.className='sc err';chip.innerHTML=`✗ ${esc(s.name)}`;}
+      if (myId!==searchCounter) return;
+      const chip = document.getElementById(`rmsc-${s.id}`);
+      if (chip) { chip.className='rm-sc err'; chip.innerHTML=`✗ ${esc(s.name)}`; }
     }
   });
 
   await Promise.allSettled(promises);
-  if(myId!==searchCounter) return;
-  document.getElementById('resTotPill').textContent=`${total} rezultat${total!==1?'e':''} live`;
+  if (myId!==searchCounter) return;
+  document.getElementById('rmCount').textContent = `${total} rezultate live · ${activePortalSrcs.size} ${T('portal.sources')}`;
+  document.getElementById('rmSpinner').classList.remove('vis');
 }
 
 document.getElementById('searchBtn').addEventListener('click', doSearch);
 document.getElementById('queryInput').addEventListener('keydown', e=>{ if(e.key==='Enter') doSearch(); });
+
 
 // ── Legal modal ──────────────────────────────────────────────────────────────
 let _prevFocus = null;
@@ -1474,6 +2218,7 @@ document.getElementById('toggleHdr').addEventListener('keydown', e => {
 
 // ── Init ────────────────────────────────────────────────────────────────────
 buildChips();
+setLang(_lang); // aplică limba detectată/salvată
 </script>
 </body>
 </html>
