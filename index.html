@@ -1127,23 +1127,40 @@ const API_FNS = { arxiv:fetchArxiv, oplib:fetchOpenLibrary, archive:fetchArchive
 const CAT_COLORS = { articles:'#5b8dee', preprints:'#9b72ef', books:'#3ecf8e', theses:'#e8893a', data:'#2ec9c9' };
 const CAT_LABELS = { articles:'Articole & Reviste', preprints:'Preprint & Working Papers', books:'Cărți & Manuale', theses:'Teze & Disertații', data:'Repozitoarii Date' };
 
+// Item store — evită escaping nesigur în onclick strings
+const _items = {};
+let _iid = 0;
+function storeItem(item) {
+  const id = ++_iid;
+  _items[id] = {
+    doi:     item.doi    || '',
+    title:   item.title  || '',
+    authors: typeof item.authors === 'string' ? item.authors : '',
+    year:    String(item.year || '')
+  };
+  return id;
+}
+
 function resultCard(item) {
-  const hasPdf = item.pdf && String(item.pdf).startsWith('http');
-  const safeT  = (item.title||'').replace(/'/g,'&apos;').replace(/\\/g,'\\\\');
+  const hasPdf   = item.pdf && String(item.pdf).startsWith('http');
+  const iid      = storeItem(item);
+  const hasDoi   = !!item.doi;
+  const btnLabel = hasDoi ? '🎯 Sci-Hub (DOI)' : '🔑 Sci-Hub';
+  const btnClass = hasDoi ? 'btn-gold' : 'btn-out';
   return `<div class="r-card">
     <div class="r-title"><a href="${esc(item.url||'#')}" target="_blank" rel="noopener">${esc(item.title||'Titlu necunoscut')}</a></div>
     <div class="r-meta">
       ${item.authors?`<span class="r-authors">${esc(String(item.authors).slice(0,90))}${String(item.authors).length>90?'…':''}</span>`:''}
       ${item.year   ?`<span class="r-year">${esc(item.year)}</span>`:''}
       ${item.journal?`<span class="r-journal">${esc(String(item.journal).slice(0,55))}</span>`:''}
-      ${item.doi    ?`<span class="r-doi">DOI:${esc(item.doi)}</span>`:''}
+      ${hasDoi      ?`<span class="r-doi">DOI:${esc(item.doi)}</span>`:''}
     </div>
     ${item.abstract?`<div class="r-abstract">${esc(item.abstract)}</div>`:''}
     <div class="r-actions">
       <a class="btn btn-out" href="${esc(item.url||'#')}" target="_blank" rel="noopener">↗ Deschide</a>
       ${hasPdf?`<a class="btn btn-gold" href="${esc(item.pdf)}" target="_blank" rel="noopener">⬇ PDF</a>`:''}
-      ${item.doi?`<button class="btn btn-teal" onclick="openUnpaywall('${esc(item.doi)}')">🔓 OA Check</button>`:''}
-      <button class="btn btn-out" onclick="sciHubLookup('${safeT}',this)">🔑 Sci-Hub</button>
+      ${hasDoi?`<button class="btn btn-teal" onclick="openUnpaywall('${esc(item.doi)}')">🔓 OA</button>`:''}
+      <button class="btn ${btnClass}" onclick="sciHubExact(${iid},this)" title="${hasDoi?'Match exact prin DOI':'Căutare titlu sau DOI via CrossRef'}">${btnLabel}</button>
     </div>
   </div>`;
 }
@@ -1281,7 +1298,115 @@ async function sciHubOpen(path, btn) {
   window.open(`https://${host}/${path}`, '_blank', 'noopener,noreferrer');
 }
 
-// Called inline from result cards — btn is the clicked element
+// ════════════════════════════════════════════════════════
+//  SCI-HUB EXACT MATCH ENGINE  (3 tiers)
+//  1. DOI direct (exact)
+//  2. CrossRef DOI lookup (titlu+autori+an → DOI)
+//  3. Fallback: căutare titlu
+// ════════════════════════════════════════════════════════
+
+// Normalizare titlu pentru comparație
+function normTitle(s) {
+  return String(s||'').toLowerCase().replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ').trim();
+}
+
+// Similaritate titluri: returnează true dacă sunt suficient de apropiate
+function titleMatch(a, b) {
+  const na = normTitle(a), nb = normTitle(b);
+  if (!na || !nb) return false;
+  if (na === nb) return true;
+  const [shorter, longer] = na.length <= nb.length ? [na, nb] : [nb, na];
+  // Containment cu minim 20 caractere
+  if (shorter.length >= 20 && longer.includes(shorter)) return true;
+  // Word overlap ≥ 75%
+  const wa = new Set(na.split(' ').filter(w=>w.length>3));
+  const wb = new Set(nb.split(' ').filter(w=>w.length>3));
+  if (!wa.size) return false;
+  let overlap = 0;
+  wa.forEach(w=>{ if(wb.has(w)) overlap++; });
+  return overlap / wa.size >= 0.75;
+}
+
+// Tier 2: CrossRef DOI lookup
+async function lookupDOI(title, authors, year) {
+  if (!title || title.length < 10) return null;
+  try {
+    const q = [title, authors, year].filter(Boolean).join(' ');
+    const r = await fetch(
+      `https://api.crossref.org/works?query.bibliographic=${enc(q)}&rows=3&select=DOI,title,score`,
+      { signal: AbortSignal.timeout(6000) }
+    );
+    if (!r.ok) return null;
+    const d = await safeJson(r, 'CrossRef DOI lookup');
+    const items = d.message?.items || [];
+    for (const item of items) {
+      const t = (item.title||[])[0] || '';
+      if (item.DOI && titleMatch(t, title)) return item.DOI;
+    }
+    return null;
+  } catch { return null; }
+}
+
+// Entry point — chiamato da onclick
+async function sciHubExact(iid, btn) {
+  const item = _items[iid];
+  if (!item) return;
+
+  const orig = btn ? btn.innerHTML : null;
+  const setBtn = (html, disabled=false) => { if(btn){ btn.innerHTML=html; btn.disabled=disabled; } };
+
+  // ── TIER 1: DOI già disponibile ───────────────────────
+  if (item.doi) {
+    setBtn('⏳ Deschide…', true);
+    await sciHubOpen(item.doi, null);
+    setBtn(orig, false);
+    return;
+  }
+
+  // ── TIER 2: cerca DOI su CrossRef ────────────────────
+  setBtn('🔍 Caută DOI…', true);
+  const doi = await lookupDOI(item.title, item.authors, item.year);
+
+  if (doi) {
+    // Aggiorna badge DOI nella card
+    setBtn('✅ DOI găsit!', true);
+    // Aggiorna visivamente il badge DOI nella card
+    const card = btn.closest('.r-card');
+    if (card) {
+      const metaRow = card.querySelector('.r-meta');
+      if (metaRow && !metaRow.querySelector('.r-doi')) {
+        const doiBadge = document.createElement('span');
+        doiBadge.className = 'r-doi';
+        doiBadge.textContent = `DOI:${doi}`;
+        metaRow.appendChild(doiBadge);
+      }
+      // Aggiorna pulsante OA se non c'è
+      const actions = card.querySelector('.r-actions');
+      if (actions && !card.querySelector('.btn-teal')) {
+        const oaBtn = document.createElement('button');
+        oaBtn.className = 'btn btn-teal';
+        oaBtn.onclick = () => openUnpaywall(doi);
+        oaBtn.textContent = '🔓 OA';
+        actions.insertBefore(oaBtn, btn);
+      }
+    }
+    // Aggiorna item store
+    _items[iid].doi = doi;
+    setTimeout(() => {
+      setBtn('🎯 Sci-Hub (DOI)', false);
+      if (btn) btn.className = btn.className.replace('btn-out','btn-gold');
+    }, 800);
+    await sciHubOpen(doi, null);
+    return;
+  }
+
+  // ── TIER 3: fallback titlu ────────────────────────────
+  setBtn('🔑 Titlu…', true);
+  await sciHubOpen(enc(item.title), null);
+  setBtn(orig, false);
+}
+
+// Wrapper simplu pentru apeluri vechi (DOI row)
 function sciHubLookup(title, btn) { sciHubOpen(enc(title), btn||null); }
 function openUnpaywall(doi){ window.open(`https://unpaywall.org/${doi}`,'_blank','noopener,noreferrer'); }
 
