@@ -1295,7 +1295,7 @@ function setProfile(name) {
 // API Keys — salvare
 ['core','s2'].forEach(k=>{
   document.getElementById(`${k}Save`).addEventListener('click',()=>{
-    localStorage.setItem(`${k}_api_key`,document.getElementById(`${k}Key`).value.trim());
+    sessionStorage.setItem(`${k}_api_key`,document.getElementById(`${k}Key`).value.trim()); // L7: chei în sessionStorage (curățate la închiderea tab-ului)
     const btn=document.getElementById(`${k}Save`);
     btn.textContent=T('api.saved');
     setTimeout(()=>btn.textContent=T('api.save'),1500);
@@ -1441,7 +1441,7 @@ async function fetchWithRetry(url, opts={}, retries=1) {
 }
 
 async function fetchCore(q, signal) {
-  const key = localStorage.getItem('core_api_key') || '';
+  const key = sessionStorage.getItem('core_api_key') || '';
 
   // ── Cu cheie API: CORE v3 (complet, 200M+ articole) ─────────────────────
   if (key) {
@@ -1526,7 +1526,7 @@ async function fetchCore(q, signal) {
 }
 
 async function fetchSemantic(q, signal) {
-  const key = localStorage.getItem('s2_api_key') || '';
+  const key = sessionStorage.getItem('s2_api_key') || '';
   const headers = { 'Accept': 'application/json', ...(key ? { 'x-api-key': key } : {}) };
   const s2Url = `https://api.semanticscholar.org/graph/v1/paper/search?query=${enc(q)}&limit=8&fields=paperId,title,authors,year,abstract,openAccessPdf,venue`;
 
@@ -2384,7 +2384,7 @@ document.getElementById('toggleHdr').addEventListener('keydown', e => {
       setLang(_lang);
       // Restaurează cheile API salvate
       ['core','s2'].forEach(k=>{
-        const v = localStorage.getItem(k + '_api_key');
+        const v = sessionStorage.getItem(k + '_api_key');
         if (v) {
           const input = document.getElementById(k + 'Key');
           if (input && !input.value) input.value = v;
