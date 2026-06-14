@@ -54,6 +54,8 @@
 </style>
 
 <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; font-src 'self' data:; media-src 'self' blob: data:; object-src 'none'; base-uri 'self'; form-action 'self'; worker-src 'self' blob:; script-src 'self' 'unsafe-inline' blob:; connect-src 'self' https://api.crossref.org https://api.openaire.eu https://api.unpaywall.org https://api.allorigins.win https://archive.org https://openlibrary.org https://gutendex.com https://api.semanticscholar.org https://api.core.ac.uk https://api.openalex.org">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AcademiSearch — 42 Surse Academice Multilingve</title>
 <meta name="description" content="Motor de căutare academic unificat gratuit — 42 surse open-access în 7 limbi + surse multilingve: arXiv, PubMed, CORE, Zenodo, CEEOL, Gallica, Dialnet și altele. Ideal pentru studenți, doctoranzi și cercetători.">
@@ -548,8 +550,8 @@ footer a:hover{color:var(--gold)}
 <footer>
   AcademiSearch v4 · <span data-i18n="footer.tagline">42 surse open-access multilingve</span> · <span data-i18n="footer.main">instrument gratuit pentru cercetare academică</span><br>
   <span data-i18n="footer.terms">Respectă termenii de utilizare ai fiecărei platforme</span> &nbsp;·&nbsp;
-  <a href="https://unpaywall.org" target="_blank">Unpaywall</a> &nbsp;·&nbsp;
-  <a href="https://explore.openaire.eu" target="_blank">OpenAIRE EXPLORE</a> &nbsp;·&nbsp;
+  <a href="https://unpaywall.org" target="_blank" rel="noopener noreferrer">Unpaywall</a> &nbsp;·&nbsp;
+  <a href="https://explore.openaire.eu" target="_blank" rel="noopener noreferrer">OpenAIRE EXPLORE</a> &nbsp;·&nbsp;
   <button class="legal-link" onclick="openLegal()" data-i18n="footer.legal">⚖ Termeni legali & GDPR</button>
 </footer>
 
@@ -783,12 +785,12 @@ footer a:hover{color:var(--gold)}
           consultați politicile lor individuale:
         </p>
         <ul class="legal-ul">
-          <li><a href="https://core.ac.uk/about/privacy-policy" target="_blank">CORE Privacy Policy</a></li>
-          <li><a href="https://www.semanticscholar.org/privacy" target="_blank">Semantic Scholar Privacy Policy</a></li>
-          <li><a href="https://arxiv.org/help/policies/privacy_policy" target="_blank">arXiv Privacy Policy</a></li>
-          <li><a href="https://openalex.org/about" target="_blank">OpenAlex — About &amp; Privacy</a></li>
-          <li><a href="https://zenodo.org/privacy-policy" target="_blank">Zenodo Privacy Policy</a></li>
-          <li><a href="https://allorigins.win" target="_blank">api.allorigins.win</a> (subprocesor CORS pentru arXiv &amp; Semantic Scholar)</li>
+          <li><a href="https://core.ac.uk/about/privacy-policy" target="_blank" rel="noopener noreferrer">CORE Privacy Policy</a></li>
+          <li><a href="https://www.semanticscholar.org/privacy" target="_blank" rel="noopener noreferrer">Semantic Scholar Privacy Policy</a></li>
+          <li><a href="https://arxiv.org/help/policies/privacy_policy" target="_blank" rel="noopener noreferrer">arXiv Privacy Policy</a></li>
+          <li><a href="https://openalex.org/about" target="_blank" rel="noopener noreferrer">OpenAlex — About &amp; Privacy</a></li>
+          <li><a href="https://zenodo.org/privacy-policy" target="_blank" rel="noopener noreferrer">Zenodo Privacy Policy</a></li>
+          <li><a href="https://allorigins.win" target="_blank" rel="noopener noreferrer">api.allorigins.win</a> (subprocesor CORS pentru arXiv &amp; Semantic Scholar)</li>
         </ul>
       </div>
 
