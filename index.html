@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<meta charset="UTF-8">
 <!--
   ============================================================================
   AcademiSearch
@@ -53,9 +54,8 @@
 @font-face{font-family:'Libre Baskerville';font-style:italic;font-weight:400;font-display:swap;src:url(data:font/woff2;base64,d09GMgABAAAAACLEABAAAAAAUTwAACJkAAIBSAAAAAAAAAAAAAAAAAAAAAAAAAAAGoF0G6FmHIMYBmA/U1RBVEQAgwIRCArldNNxATYCJAOGGAuDDgAEIAWETAcgDAcblUUzA8HGASCz3wGPRAgbBxCKMRJFKd5k8H86oCIynTBZ7eAPC5OF2mGqhnOvRE7u8aanikN1GPKGHGZZzN19gI28w2j3s33DY/IxYTWYdjT9/Q2/+WfruwkwOunS9JkRksy2PI+Ngb5/V0TJjENUQPFLjRoQ26ZySHK54flt9j5iUF/ykyHRipEgiCLaYGBET7c2F3U6d64aXVuLxFV40T2vRxTdZu8C8iSQ1FJN5BdZtMgMrBKvjKnsodSc1Y/nCyNpC+gniVRsYodG7/wG51A3Iafn7YTbAcANCQuESZM2/Sl08xE0qbYYqaZ2w8/7dhehSJZwJcCNJS1faN8awE+97QVgAgpeHuo0ab0rAD0RS5HLPD546uqsJeIgKZ+/X7Oy/ecNURYY/Cy4U0iShOn+na7075cOLgSuBzjJQgZ4qWcpkwUAdYC8y+oYHDB7tARKntOnT56QGkjqI6pO4q4DCuAArmsSuTqgAKYqEry4Bl/whR/84f+/adPJjfrZBk+Mpjv7nM6Z0GaHKks9vhoDLhK5QqJqw85pVEAiN6Jihcyb/tsfS3/BPruj7mIZjZBihogpsvv/+zcDAfQAQCED8QcJhAXBI4AEo4DQMEBY2CBcIhAJCYiMGkTLABLKBBIhCiRGAoiFDcTOCZIuHSRTFkgOF0iefBCPEpAy5SCVakDqNYG0aAXp0AnSrQekTx/ICitAVukHGTQMssEmkC22gbxgHORFu0H2OgRyxBGQY46BnDAJAgG6UYrkt3J1mgtQ786aJkB9KrpbARUaoD0vgFw41dkKggABBBpKED/4Di++90GOQAM2JrZvYK/Pss4TF5YuTyNAOyyrv6p0GsYbQEb2rGxkK2t91M+sFWwO7r56MowuvGLAF3yvH/dJ3zSJgl+C8aRiAv8qmIVFUEa3P24yYAgRC4BDfAGBgkjpkFk04JbkyVNAUCgUlwikRLGhbiqrrKXTr19oWSAMItzRxhLGAcRvT6ITpqRA6W83phpSi2tCSRh6c482oWuwNHLboAXNAVMsx0yJA7WrUJkfNP/Ko6RseU7LVxCP84oUK0mZ08pT6awq1WrUpt5DDRo1pUNepy7dempfaVDSkGEj2eCqjTZli6SttuUFUqPG7DCeF6Em7LI7e/nts98BBx1ypB5jdoKe1+T7FKugio3VYELYp75KG4026rwdXOL3OfIslW+lIkLFBirxvUrbVbmpxl71rmswXEeDdTa0lL/SjzRkrQ1W22isTSbaKmw0jh3M9lpov8UO2emYlbziJnU35a7AOjh18uoG6+c1ysprtSlCUFO0wv30yXAMvWO14GrNVmQVxGprrLVO/zXVVNB+U4jS48lswGsh1jrOPkFWnOcqHKthjbXW6T9GCcUhcQwCMiBrVVQjw1HeEQClwLSUtKU7LqEZuzUnVKD2CtTkB82/SvoZbX+ko2eIpaZEVrbYm1ljrXXW25AtWuemrHQAderSraf2MRrkNGTYSLaw22pb3zvss78fgIMO/fMIr2PCoBDoQJOg76h6CaF+nk7/GGqJZEfU1X7GJtkwKJCMDeCZNDzgAIG9AQbKChIq6tC3xPUAqNMru7uSKy3IxFacsO9agQqIGU6lFRUS6MRu3sfu5dAhlpwufwPRZ3nLEjpCIZSC9YAcqkHAXbZ0qoZILluVamPCwApnOqE6TGjEWkJe991rjCTmC0XLFYlJKTrAcUs0xkEz+KiBAsJ5MgbHQnrAQKvfUXdQGouCma0+gKqB915RGO275mJRFHcT0ffDRHy1yYCiY2TKCENUSkzP4zPdugK7XpQHIU5cXhgpurawJDfuSweC+ylAjv/JGhGTh8EJ1rIMUUMEDZYydeFoHtVRgTqaR+O+zpZGdZmbx5FLFIClGrVPfjqYRw9dECtepxiTalSLlO7DvSSSFZX5Fi0iY7tZLFFKDmwSxTA00qEEgxFwqMTO8NAoe+ix+5ik/gihlhLIE1UPUCEP4xSjgIhT8mcolRBlgA4G5wDpnNi3w9MQLfemRAGEvy8DARlAax1TFPeKPqX3Fg4kQKFrPXrFiPlHAGjQjCK9rSZz4871U+RdFR0rMJdJ7kiidaG0bbOW7EO5TTRGVHUJvbg+O44twM4VU3VMf8Aw6hs1t0044gUcGNplR2TWzDvZVPe4h0wFqA0nHJc02jo+bKXbr5wvdxlsYpL2whsdibTYqSYxdHl3FPoyMtKGkrjIlDGDGJNB0eUd0UEki21e14YbAvHS0D7Jo8EgFDNfqyGUpG72tG1MZP6BNxrmGnMnQwkxEM9Yfe1dtF13aZWaLdrcrshVeS0+BbzQSrb55rdhCGDP8dB/Syxrxbp/6Q/2MzIOA9VUN1OoFqW3btQBW1Ov/dpPoMeuY3QCk9s5GWBVrnXuFNY2a36JJae6XAZyvdksI6AoKsYgsDPS5m1n7IAmgaSjKBuuVrWBhgc2hpjvffHUtCFm/PJdBE/VVbeOJ5hg0IHcF5vM9OT1Aw6V2CzpqkR5FJ/ASvGww5b7SV6qcqGsxx8l8Eh16GYkY4Vma1PaJE76tRgA+AMGcEAEKiDAAS5IQA4q0EIoREAcxBNz/QJgBTtJrV8L0iCbuL09IP8LMRRjydcwKIVKqIJabDDQDB3QAythVWA1QIGQdAEDZGACxE/k9kRiEAEZij8+IqUDGPyADcFABX/gAA0IgAUEBIACLgnwdQM06ElITxroIAQiECEAAoEHJMBBEPCBQfBpZUBMC4Wn/7CD8InSqv6RBxDSogAGEvgDA8jITB38IBgoEAAsgucNAoEHeEKtPwJwgAY2YIEGQcABJIrbPh4UAxTCP+YwkAH1fIkAlZ6ZJgCMnMz0xfRjDzrglSoHH+rEiZZ21XOlqplWQgUUQ3O4oQCwj532sd/DEkCpicXhB/Lmw/pAiB8hW+84fjYo5OrSi+wfiEgQSUwFGTUEQh9miCBvAPzQeA4KsakgIyWvyro6YqdHxiqnGG5NFBhaAptxu0HQ4liN2QVdruUF/kB5PZsAT9qXkJuM/qa4d8CHgCn6uPp2doF+goupj76cDtcPll9T6VcUYGgiRhleYIDFjaxx55n6bggA/xPGCfmLMlMLa0/PU5hOwJ8AaqHBWwE6QnYAnctAmW6YnyACFocsRH8pyc6aws79n6A9D2FgAE2/1LgKY6LH2h5ss7jX6/+/qVsBZPw+2u1z0v/4r+wO8vnJ469AIA+MYlglghTBK0NQjqxGsEok1ShqEVVBNKCpx9CErhFbK5YWIt0EOvF0EOrCx9VDoo/MCivJraa0lsIaKuuo9dMapDdMZ4jBCJNNQm0QZqMIW0TZJtJWMV4Qb4c4Y2KNstol0QSLFzkdkmI/u71SHZRsH4cD0h2R6ZgsOU5wmZTLK8E4m90gUHtebwAfAuRJwB1Az8tA3wWg45tAfQ4ApUHD0qhrnqqZFMsIlI+pkx7qPU1INEofTxom69SxWuOToFaxaVGDQUleeo75VkQuACRpqgWbYuhzkBtw0wMryjY5Juu+c8MEaBEfQfMRoxExRKIjWdI4IVqoZCjJxBCCQYqWmoxqagg5nKzQk9F6Mg+nxWUQI9ARBrzBjFeMWBl22/l8PJpvSyKT1XoRWmTNrcTH2PGJJBLeqwYGUmA8A82jMPHqShBhLIIm29R78TCiYeZmMtZy87HseDa/gXQeMCQaq7AQWuXoGhj+p4DBqBcrMjA7sHYR6/3LEaWZBAVfXAEB5OO3hI9sY3dNXDSRH6LAN6FS+jPdBNvYgHCxU9gpXK3F5/o+gAyPfcM1ftFev9o6zGKyxod2MC3qDcM1XAtdaQobTNmPjMev5lu40tPFtElVCQpOhnrO/YPDjtLwkgJ8ZYOLirTldmdln1Fcvr6rkPSFMVKqSv88k+E8ePa0reioaNzxwtqMhYvu2FCjxLvPHAvVqIxYS+ihwGX1A6gsMO9VlyiNJMbbDUERtcRJFZ4lyHbRyQP5J/Od44Os1KX4q3mRrl2x9TMusWhKeyK/nDhatWWisu5oysYZYifiQaEuEzehwnv85G5p9TitGNsAd547nK/ERn5RkuGwU0xjmmAVTG50c/AT6pRu5vrGYO0JLuxJhoG9/W3Fy8tjPBjYMDM9sP4CuWO9Ju7KsTKf1KtbJYWE5wsmJxFJflp6BAZPwQzO/Imemr/ni2IzdQ25RbGosoKuY5tIBs3idqC6nFaQZa5/tPdwbtyMkPQ6V2Z+rnPEeZlVLAxucChF8yAz8nJDfv3iaK19DmtePC3J6qCwCkrXg3T0ugW42lQ8tG5tljHk5nsWaa3UIMn4wvw5ZlDsJPyXe7tRX+KXEUHPoAGr9zK2CedaVXGh2f1ADrcVz/KZYtZkuhOcTkXImRSFKFrGA0dL5KTKq9T/qTNHV0fOHPAFWHD/ATiP5ScP/2kclVEntE5YgudEA4iHHD+4mLg7Tg81DfCjndqF+eVkp22JXNIDb5kYZdvHphMREkw9mj7VWr/xuX59Ow/fJFmoFLaemfeJ2FcXHAUOL3Fn5pmaWfNgfc6QLkBOvhb6z6ncavwxUjWbPIJA2+/eC+2LEKYi8Yp2SzycMlBW5ly1zs4470jcbgSwdZFowYtycGJ/gd4xhDZZJ800qtUeLA9RpGClyWyXaisP18afm6r/+nm2u30Rs6fXFOSscPipoRxqDMv1bQiFP3bBW/kvcWlrmPNxynTT49gy5ILaxDWe6L7gKIpYWkpUJFyvtbQM6CS4mEwxHiGeNP+zb/LUIXkLEopOQlE4GSEX7+lBOZlFd/odzbqsvKbDaLkynNek55vnap4kr1STw9Lmmoyrszz3bkz3GAYC5c0kDsTBuOoin7XIL5VruhPmbp+C7C3uzqQeZxwtEgmOCy18afS1YxaKxim1Ci513YUVIZi2R6bJ1mpximSSaM2niJUjr78OVkqpV2d2zZzWrYYPh1hbYbOCQfzDUrLlg36m2Vtv4971qcyEWNyvJhZ8ffG+1E8Hq13LzkLZktA42iGN2eWaQFzjYjI4pCCvul9Ycebx9mQbnEVRklAHJytubH4ys+OZoHIU/OHhquqfHjbTNsgwzbTdmbiMZc+81tpzaurIihDPbj3i/5X+zOU4hlRpbQkIyqciLrDecb4Gr81Oudno+dlzos6U5W1tlviRM8JY+rZtXWv2UmzkQxWRsEmenQQ+p6/7ojRf04PS5Mx44gSxjEYS56+18Gz4bE+ux8B8FwL5fGBOcPmuTaiRWA4E7wNKLHJ8oHCpHSqkTN05Raecmep5k0c2mxVeDjoBlr474BznLmMc+Tm2r1wbHF4BJvq7gTUK5lkdskl3lESiEz2k1fubIVR/8sOIvl3Q9Ply2mbtQs+t+ZgKZ4NSuHQbYvZQmu3O3jJFjqI5q6XJeZl1cbiHBW8Ddfvd12d2Nvk0eJeg/DS4gT8U673tMtZVJ3V8jaFpMWLVC/hTZlWWrgGOKsWKufrHqrnyyrq5XTjsMlYiBx2DRtAhF0iV/jfkyvoiRTwR97W2wLS0TXCEreJagbbYZJq4ZrcfLz26REk7G6gT3IfdB8q7m8BG0obvaNjKt7oVx7txNM/HVOKQN7c+NIFkzXjRTbh8goUipmuPhSpWzCk+OkrU2yYCS+uW0opW2bK7FxST6681VNuYbMs4uAbvHBGPYkf2bTv7wO6yOoPnrfKtlUfEAacq/B3uS+IN/s3ucZ8iJm4nbg7/b6asePs+0XdnIURlN/HV96lZ5Mp5nPLkMkSRfpjQScLstTLYK/NbQqw5y5zmzWVpmi1ZfS2etYakwuwYi1TztyygKb06PbHd4urS7fX8eSZjdXpUDph4536wbVAQszqs3x4r7o1rWJ9kmwqtKPWqgl+91XlZ/sIAjnreRboY2zPvPSUNZLcQULiMPmOeO6KJ1WlaPbJxGVcAhpvCvzAtRTF+gcXyqlG3b3RdaqiBha+Fe0WPZMEa6zfKgXR5guRVfbo0JkTOw+DUTK0z8s11dMmvGelVfJvjjC791RA/UYe+UceG6HKzXKx8gK592O9gEPNoCKZgMTobNGM8A0775rI07ZbcvjbPoMHeUBpjkYrfk2GKitwee5+lsMu41wMWIvPlxoxo9idm4Qj5RQ53A9z8Lb5KZKbmwiA0Mbx+6xW2yKu/mOCVk371hb88FHrvmXem+/JXLL4v3JvkVcuFdpJVtmNIN78/94JoMle7oO1lBByZYgo1Oc/zAMNKQ1oJzVW5/DBwZywfy/Kv+HaSrWolo2R1jSc1xxqn58vYOhblj4TnMIUOKF7pK7dOf49INi3u+P4ABdYIJjgTRM1wuS0jYnfTbaibzXqT6o32ihtJ8Mz9/a+tNFxzZ8OiJdNFwFzGw7VfbuqFGbe+bnOCEy8hx2fVSezZbJsu/0uwcTH8GNGcF8908NjvJWO8/Nbu/p6rdH6gLktvARe/+ysW3TCeFKyCBReBl/mhpP9wldy/EN0xrZJgFcrzF8HBRYPZxSipXA5VrDTc3mt2xodreVL6B3TEZiZTvty6GPrq83fg3aucts1l5dbTvcO7nXnuNelJW0rLbad6h/Y63aGWGuW0/zFsbeE6d0JjYsZy1bHK3rR2QPIK/qRO9lyqdxF4Xp8X6dvoyQ43uSsjLQTHBbZVaS9QeW+MLSvQeseOE3hbo07Tpgz2JnlcZlSsIzaZ/b1oO2A+iOIp7ohQhTFZ5rhMS6ik7mOb4VtZWqjV2tppSY4oVW6iOsWK/4QBtQVN6XqH+IBcKTc/Sw77S27XRseXNEVYdKl8MOaVl1leW35/kCEmcyLKlM60MXnp6/sor8vM/NSPtMIjtxZ7rrhHg/kK80Xw1bYVCytKfeZR1IpxtZsiahwCjHnc8od1BcybCLuf4JU8egWxvGH+u76MlpldmplYkmBuoSX9xOlG2vBuEq/pk4uBFwWVex4r77MHy2aGPMA5EboxzBrmJMFfCyb8JvhWvjsnynlM4mp6v+V916aaOcb2er7UCY5w2Xz1LXTOjL7IoRgmeBsur4/i4GKRdvYKe4X+8uV6VRVkn2a6l5/wfbPQy/RKedRAQ3QjtOlRmYBMqxF7l7xs/Csd4OKP3Gv9ZdvTlCWq3PcpNNG1hths3E3loqr67hegB2OMSrdGSDrNdVk5hTqVmW5Jzo3c9QbLTc26SeJSYAdhXJ5Ska2hD8gxDJRectkmxNg5R8JzVVXM8hBWCYX/b1SqtohVqpB8C9TfaNVyZZxzs/c8W+Izi8LTvA9Nm5NBoc0hoL5Hk1cvxmd/I7v4n5LZc2J5dltBgupPcYrBJG6Jq8pIz9ModZ+FMBfpyPs0wtrAwAt4oTU2okrYG6u3CxmWGDCIEdXy7dowaau5JisrX6cQM3FRT1d0BQWvDPMutI6z6/jrcMkI8ikWCXWoCoQVWSWhkhYVLkLZsdkSa+cHmdljpmxlBaNcxu9k8f+LdKqLmWVKSTRodNM/p/8xfnH37sPYUt3pEZLWhMrsNI9aq/fJxMYUj7UnLBHmsmBTr1SaEUX+XZnUnFIc+Et1XFSaXClm9RqtChdYtyBnmzwiWTVndqWEmiCuOoerSEjmFWJ+5V+F/Z3nKT9Hi/hDpcItx9csnXzCV7p1jvAc7vd0yssbRgoyaVEDCFduIVM8Upsq3lzXHGdOpTW8iwiesagnqcH4m+/DgXN/j4hblg82Bn52kEibt+HTCTbmTXmUOXeZhnmL8UYGLVMpj+fSl2QWemaItA2Uh0+/nBtM/5SsyHS7LunHEJvr7vH6ZVhqlqDuSUe/8P9co1YXYhJS8lOkrQdU/nQK9dzbc3ab2SkTsVcL6Se45aA5X72gZuQE/JagEcNdFHHJiWT12jfPE+AN/rDlLc/ChaNtW1nMLTLKn+w0kaQaObMGi9mPC176rKLw5YsbjB9tfMi0sNkmFsfEYuUC98Mg3NKQxGZhZAcwF/QUqYh2FP1tnMg8iT9V1zKBXSdFXYdSP0WTgH2QTgu/9iXMyHyx9eqLh2FqMGy5H/4jGGsFV8hqojpz1H9aa/MtpNt3wjwoQHVm8PD4fnFqqlPG+ESVeLAw/p0i35NGLK00Yus9TN06/UsOvVpXLNMWl+ZI9xoHT3nmr+4ojIhlKxTsr03FgNN5ctQOMEtDCFESPlbPk4wzn1N4MCKeiIqzfTP0tWUcI05bfSFo5oXGDTBmP44YFbDT83KcLSNVf3yxR0q2m825L3NugoHlH+k+ojkv+tf2U33tmfyKcTMhJ6rW5Lhf4PicnsLyzBLYpOADISkPPhTV5FdGCI6qmKuGRGyb0yFRqN8JIW1FHE4kkVtMCcbCJa/u/4+x1UllPpbA6b/xiliplJfIlAUgdXxOd7A9RwmskH2oWSsHRSxb2vbL1V/LsNk/cht1R0Q9uuSa/Bi1vFjEOoMs5fYRaRle5d7Ix4K+7+3+8McEui8hO3Kq/00CXMFoHDpVYYJFtyq7qiY6Qp+qU7ijE/RrcupqE35hF+uckhJqlcaULGA7NQ5xEaVcHREPtMv3Td4uTqUycuW8KlFAvD1FzeNWs1kQi5b4C55pz0se43rUG0vMi8xMlucgjGsMIiwPB2kDaqUtNUSvfy6j1VHpqdNYCvIGh72txLVNrjGkZqq1McmhSu55ROXR/Y5I9koFO0rLdoE6jOh/EZVgwzh+z3uaH3qqOPRUywctOeQVGwiYrTjycvvdRh+kPXQKRNj5f/A/HPH6vsZkHDEmyhleJnbcL3F8Tk1k5pwlsMhwVvXTD3GxWXajmF8sJ8mMIm2i/XuuNlem5FdzVnKSL2HRsgACYWx/uMWRqhMw9nPEslZemoCVLqCdB+swHjOHmURFga1wyJmUXOFK6VtvuXjnyre93Gn9+QXexETE2c3x5p0JeWR2QlcCjkjCk/yI5AsI08cR0gcEHOpdatDdDSezYBo1cOFmsamWXas2BHDYKWFrqSpyOL1OkStkIzK1mJlvqLRuw3M5Y/ocboWOPzlL45xm8s+azMJ1UZ2OwtxQheLeb7OV4ffAHkGeShZMKCKkaAgMQPFTcIXMRYQavu9NmLIhxmxIOWdikLM/JFO+/s/xgbZsJ5dy6o0bnAaCVXgIvd3oFhbLYWU0TmKgslZyhexSQ4elz9nT5axYVwZCMKLo8UaEttS+hBCDYcoSkYIlUx988jVNwod/cH5K1hr4kRL5gWSpWhoSt0QmoS+jiVw+ruvG+4H/kpHP/v6Nzh3ncXymVLsCHE85k2+KtaeR3VRal4tCF4hn15opiJ4o+1aKbKDSQ34Qmj9+fcZHv32Q0qqSqHQ9+Sg5Scfc25Mftip8VDcGy2HuGH2UsEreYCyiOj675QODyd9UDrm9JCGfe59Hr6Mro1JA8GuZhWaxcoJIXU6jE1i8QInwJHg4yQpl3X8bwfQmXf8ywXMiyUIiTq4AA5vQHW8w735ZgPQa3pO7TlNt3WDVAPem/onLuB0knffYBDLhn3u5QXy6hP2yVPYzSL7E+SSBJwjl8KA4Hl9cW4aUM4ONJCSRCQvByI6Oc7LgM59sJfAfChXLxnnEs69eJxGFNeDQdXgBBmU4Q65RLOTvtAkVyio2OY8Aj9WjqKwhlio+yGxGpa4EG/vWY3ldRm4S24R++7lsAOcWkaxE7lGE7CKyjh8kWzPOOIO0Dgg+6srDhuDXcmJ3pv18kwr/i6e+N4n7e9MOraXerTNCT2MfLhBQZn2tmc2aetOQ6cWH5F7fC9mv+aRQmTnSOC3HqyVUhlT2NsDNttK66xD6FJ02VIsgU85k0hSJwSRdJjIBITRD1HFOxqtFGPyHQs3xUTb3Yh1CFALcjvYFeAGE+RXwBoa+FkTZSKP/x+Qm8/lKCwCyFx8E6Ox6WhvpTvtCSvxOCnauZDNAgF/3s/s89Jvu6FrCKs6Dq8B/F5wC99np1wJ0xwmovuA7v+nlg7vpgh3YMFem4Tc4T+IcMxudLIzsl9fuNneGpCs7um3d7gyqmJ8tVSqEqhICcX1KCTnobL6vIXT0Gd05n/Xf92iOrvuD5LM4+LMJ4/uCXwC/4X3d8T3h6bojb5347u1HZtpqNJ2hLro5NBL8ssf9zb2ZqfcX5jMfvwR9uuz5EBMNSVrwSQa/4Ynf8f7RlUTAHt2KCtBtd0jTzbR1GWYjXXWQbL/uvPts1DW/N+6NTuZv7ePSmVJoNG1DKSRM5mabyexcss4787tUDeuKCJeHOpmbP/r+nCbHpW3UTeZ3mMXs9O+dnbOh/YfMg5fmuHm8a7+MMZf+i4s3SttBy1JAb8y+WpcXnCvrVSpvfpJVwpORsHV3t2FA02YY0NxRmZVfWf80fxyWZiaIS7vZvJy+VeaG5bjtprId0vQCy7mfzOUV/ewvmaO9Vncmw/fsvL082WRye7DsgTR/izSzwOLS6X86u2A/iIsby2GCZgNzNGYncFzTBjme5qa5O2/SZcYtdQpY9DsT3/7T/dGCP67GLfy7eTT7vZImNwDQxoE6o1fsqCWpE7vvddLGzBTPUZSf67twv7zPtDM+qL59CZR3Iepl5QisXUZ9QBpUPM73fZ8D9Vtd/hzZj1JUF1865QD5gdYW5J8eYQIYgfT0fbNnGV59Pyygbq7JV+RZCqn/FM9D4ICi5sCWqE/WF7eAYJTUohIhAsRR6PLIEqB8PgnELYDXOGJs0kSI6LKffwfgI7ITGtA2A6jr5IyeYBwqoQ1yZz+uTbUAOUKaJtNxzfZ3CQfwALX7wd5flJf7fxm2PYukQW1o+VmvZves4uaRFQ9+fN12vlK4+r81nsE6gVVlR67SrvJz1J+bP/+WHEgQhY9Kc0v3TG9bVH3Y3pkGgXwUIqRebICANsONn0UOgvHtuck33IZucXeW0H2vNU5AzeaNnkl9lqwqJnguIKtwMOClNAjqV1RxVXT500Agf3EBttJXi23/dZG/IttvOTdVMbB36u4/+P6lqnAMF4pXAvA4MvIbe9Dz1Zbd8Ebt7ml9FnWD6ndUsabOz6DGQ2oAxFV9Zd/o+TfPIC8NKoua4RHi949vK1UTh6/zBAQoWXt7S0dvWXDsX5Bf/RHg85uvmADgu4Eu/+eC79+Ov731UAKgAAT47WBbxxut2P8nvLzM4d074x/WGffLPxt/uJNvczRfWzMOaXJz8vm+3OsqOHzbZ3a0I6z2O8bwNtT+sFn4+6ZZo/bDXufGHObrLT+1YdhRmNQ9zz/7aWfzEGkNZi9Xjm0yu0iuk7simlvPNM+OD63aUTTsXuYVcKuyG25v8zF4r8vozbeN2bPEC1jPFWCDo6lgm0G0imqW5oHa8wMfjJModHdALuL4U3CmCwlIxo5wGHvIE7QD3X+3ugGrhJVsIUsrpjG0tLOjhC/b0EyzzYE0H782uqPAttT8KEC9Hmr6Gr0swO3nd924LX7zaC7/QftWTSbWbm/ZkwrrE2lH6LPLV20qNjftcC0hpnMX0M4WtaKPnXI1VfwdC3cZaOdBgA91Q9suAOQeVvB0swYZr0NXwKfAviNE5FFHFLzvO/qx+bMjmj6xHf2x0twhgDYjPQXokedDOvLdROkJztus2rRbrlODOvW6CRjpGRgJuApSw9Ja3kqdXdeJKnRpcndaVtdv1tx1lk5tGrGKrapFj2712sC6TpRHcXdrpzWj6ejUaSD6elTSylXbtNBp0BJYwY8V8kJ1MoZGM6sKqV6H7o41nD4jLX3STGLywLqIiWtK+joamOrs6P0wj0S6DtOmlUDKtIyfka+maCxnaHV6cvac+QHtF9o+RveKv5znw9/bCgA=) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
 </style>
 
-<meta charset="UTF-8">
   <meta name="referrer" content="no-referrer">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; font-src 'self' data:; media-src 'self' blob: data:; object-src 'none'; base-uri 'self'; form-action 'self'; worker-src 'self' blob:; script-src 'self' 'unsafe-inline' blob:; connect-src 'self' https://api.crossref.org https://api.openaire.eu https://api.unpaywall.org https://api.allorigins.win https://archive.org https://openlibrary.org https://gutendex.com https://api.semanticscholar.org https://api.core.ac.uk https://api.openalex.org">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; font-src 'self' data:; media-src 'self' blob: data:; object-src 'none'; base-uri 'self'; form-action 'self'; worker-src 'self' blob:; script-src 'self' 'unsafe-inline' blob:; connect-src 'self' https://api.crossref.org https://api.openaire.eu https://api.unpaywall.org https://api.allorigins.win https://archive.org https://openlibrary.org https://gutendex.com https://api.semanticscholar.org https://api.core.ac.uk https://api.openalex.org https://export.arxiv.org https://zenodo.org https://doaj.org https://www.ebi.ac.uk">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AcademiSearch — 42 Surse Academice Multilingve</title>
 <meta name="description" content="Motor de căutare academic unificat gratuit — 42 surse open-access în 7 limbi + surse multilingve: arXiv, PubMed, CORE, Zenodo, CEEOL, Gallica, Dialnet și altele. Ideal pentru studenți, doctoranzi și cercetători.">
@@ -475,12 +475,12 @@ footer a:hover{color:var(--gold)}
   <input class="api-input" type="password" id="coreKey"
     placeholder="ex: a1b2c3d4-e5f6-7890-abcd-ef1234567890  →  core.ac.uk/services/api"
     aria-label="Cheie API CORE (opțională)">
-  <button class="api-save" id="coreSave" aria-label="Salvează cheia CORE în localStorage" data-i18n="api.save">Salvează</button>
+  <button class="api-save" id="coreSave" aria-label="Salvează cheia CORE pentru sesiunea curentă" data-i18n="api.save">Salvează</button>
   <span class="api-label" style="margin-left:6px">S2 KEY:</span>
   <input class="api-input" type="password" id="s2Key"
     placeholder="ex: A1b2C3d4E5f6G7h8I9j0K1l2M3n4O5p6Q7r8S9t0  →  semanticscholar.org/product/api"
     aria-label="Cheie API Semantic Scholar (opțională)">
-  <button class="api-save" id="s2Save" aria-label="Salvează cheia Semantic Scholar în localStorage" data-i18n="api.save">Salvează</button>
+  <button class="api-save" id="s2Save" aria-label="Salvează cheia Semantic Scholar pentru sesiunea curentă" data-i18n="api.save">Salvează</button>
   <span class="api-label" style="color:var(--muted);font-size:.58rem;margin-left:4px" title="Fără cheie CORE, căutările pot fi limitate de rate-limit. Cheia este gratuită și se obține la core.ac.uk"><span data-i18n="api.hint">ⓘ Cheile sunt opționale dar recomandate</span></span>
 </div>
 
@@ -651,7 +651,7 @@ footer a:hover{color:var(--gold)}
           <li>Nu se utilizează cookie-uri de tracking, analitics sau publicitate</li>
           <li>Nu se înregistrează istoricul căutărilor pe niciun server</li>
           <li>Nu se transmite adresa IP sau User-Agent-ul utilizatorului către operatorul aplicației</li>
-          <li>Cheile API (CORE, Semantic Scholar) introduse de utilizator sunt stocate exclusiv în <code>localStorage</code> al browserului local și nu părăsesc dispozitivul utilizatorului decât în headerele cererilor direct către API-urile respective</li>
+          <li>Cheile API (CORE, Semantic Scholar) introduse de utilizator sunt stocate exclusiv în <code>sessionStorage</code> al browserului local (șterse la închiderea filei) și nu părăsesc dispozitivul utilizatorului decât în headerele cererilor direct către API-urile respective</li>
         </ul>
         <p class="legal-p">
           Interogările de căutare sunt transmise <strong>de browser direct</strong> către API-urile serviciilor terțe (arXiv, OpenAlex, CrossRef, Zenodo, DOAJ, Europe PMC, Open Library, Archive.org, Gutenberg, CORE / OpenAIRE, Semantic Scholar). Utilizatorul trebuie să consulte <strong>politicile de confidențialitate ale fiecărui serviciu terț</strong> accesat.
@@ -671,7 +671,7 @@ footer a:hover{color:var(--gold)}
       <div class="legal-section">
         <div class="legal-h">3. Cookie-uri și stocare locală</div>
         <p class="legal-p">
-          AcademiSearch utilizează exclusiv <strong><code>localStorage</code></strong> al browserului, strict necesar pentru:
+          AcademiSearch utilizează exclusiv stocarea browserului (<code>localStorage</code> pentru limba interfeței, <strong><code>sessionStorage</code></strong> pentru chei API), strict necesară pentru:
         </p>
         <ul class="legal-ul">
           <li>Salvarea cheii API CORE (opțional, la solicitarea explicită a utilizatorului)</li>
@@ -899,11 +899,11 @@ es:{tagline:'Buscador Académico Unificado · v4 · 42 Fuentes · 7 Idiomas + Mu
 pt:{tagline:'Motor Académico Unificado · v4 · 42 Fontes · 7 Línguas + Multilíngue','profile.all':'🔍 Todas as fontes','profile.student':'🎓 Estudante / Doutorando','profile.researcher':'🔬 Investigador / Docente','profile.books':'📚 Livros & Manuais','profile.ro':'🇷🇴 Fontes Romenas','profile.romance':'🌍 Línguas Românicas','search.placeholder':'Título, autor, assunto, palavras-chave, ISSN…','search.btn':'PESQUISAR','doi.label':'DOI / URL →','doi.oa':'🔓 Acesso Livre','doi.unpay':'🔍 Unpaywall','api.save':'Guardar','api.saved':'✓ Guardado','api.hint':'ⓘ As chaves são opcionais mas recomendadas','sources.label':'Fontes ativas','sources.selall':'Todas','sources.selnone':'Nenhuma','cat.label':'CATEGORIA:','cat.all':'🔍 Todas','cat.articles':'📄 Artigos','cat.preprints':'🧪 Preprints','cat.books':'📚 Livros','cat.theses':'🎓 Teses','cat.data':'🗄 Dados','lang.label':'LÍNGUA:','lang.all':'🌍 Todas','welcome.text':'42 fontes académicas · 7 línguas + multilíngue','welcome.sub':'11 fontes com resultados em tempo real por API · 31 portais com ligação direta','modal.close':'✕ Fechar','modal.search':'Filtrar por título, autor, resumo…','modal.tag.all':'🔍 Todos','modal.tag.pdf':'⬇ Com PDF','modal.tag.doi':'🔗 Com DOI','modal.loading':'A pesquisar…','nosrc.title':'Nenhuma fonte ativa','nosrc.sub':'Ative pelo menos uma fonte ou altere os filtros de categoria / língua.','modal.empty':'Nenhum resultado para os filtros selecionados','portal.open':'↗ Pesquisar em','portal.section':'Portais — Abrir no navegador','portal.sources':'fontes','results.live':'resultados em tempo real','results.loadmore':'A carregar mais resultados…','tip.visit':'↗ Visitar site','cat.label.articles':'Artigos & Revistas','cat.label.preprints':'Preprints & Documentos','cat.label.books':'Livros & Manuais','cat.label.theses':'Teses & Dissertações','cat.label.data':'Repositórios de dados','footer.main':'ferramenta gratuita para investigação académica','footer.tagline':'42 fontes open-access multilíngues','footer.terms':'Respeitar os termos de utilização de cada plataforma','footer.legal':'⚖ Termos legais & RGPD','card.open':'↗ Abrir','card.pdf':'⬇ PDF','card.unpay':'🔍 Unpaywall','card.oa':'🔓 Acesso livre','card.oadoi':'🔓 Acesso livre (DOI)','card.title_unknown':'Título desconhecido'},
 it:{tagline:'Motore Accademico Unificato · v4 · 42 Fonti · 7 Lingue + Multilingue','profile.all':'🔍 Tutte le fonti','profile.student':'🎓 Studente / Dottorando','profile.researcher':'🔬 Ricercatore / Docente','profile.books':'📚 Libri & Manuali','profile.ro':'🇷🇴 Fonti Rumene','profile.romance':'🌍 Lingue Romanze','search.placeholder':'Titolo, autore, argomento, parole chiave, ISSN…','search.btn':'CERCA','doi.label':'DOI / URL →','doi.oa':'🔓 Accesso Aperto','doi.unpay':'🔍 Unpaywall','api.save':'Salva','api.saved':'✓ Salvato','api.hint':'ⓘ Le chiavi sono opzionali ma consigliate','sources.label':'Fonti attive','sources.selall':'Tutte','sources.selnone':'Nessuna','cat.label':'CATEGORIA:','cat.all':'🔍 Tutte','cat.articles':'📄 Articoli','cat.preprints':'🧪 Preprint','cat.books':'📚 Libri','cat.theses':'🎓 Tesi','cat.data':'🗄 Dati','lang.label':'LINGUA:','lang.all':'🌍 Tutte','welcome.text':'42 fonti accademiche · 7 lingue + multilingue','welcome.sub':'11 fonti con risultati live tramite API · 31 portali con link diretto','modal.close':'✕ Chiudi','modal.search':'Filtra per titolo, autore, abstract…','modal.tag.all':'🔍 Tutti','modal.tag.pdf':'⬇ Con PDF','modal.tag.doi':'🔗 Con DOI','modal.loading':'Ricerca in corso…','nosrc.title':'Nessuna fonte attiva','nosrc.sub':'Attiva almeno una fonte o modifica i filtri di categoria / lingua.','modal.empty':'Nessun risultato per i filtri selezionati','portal.open':'↗ Cerca su','portal.section':'Portali — Apri nel browser','portal.sources':'fonti','results.live':'risultati live','results.loadmore':'Caricamento altri risultati…','tip.visit':'↗ Visita il sito','cat.label.articles':'Articoli & Riviste','cat.label.preprints':'Preprint & Documenti','cat.label.books':'Libri & Manuali','cat.label.theses':'Tesi & Dissertazioni','cat.label.data':'Archivi di dati','footer.main':'strumento gratuito per la ricerca accademica','footer.tagline':'42 fonti open-access multilingue','footer.terms':'Rispettare i termini di utilizzo di ogni piattaforma','footer.legal':'⚖ Termini legali & GDPR','card.open':'↗ Apri','card.pdf':'⬇ PDF','card.unpay':'🔍 Unpaywall','card.oa':'🔓 Accesso aperto','card.oadoi':'🔓 Accesso aperto (DOI)','card.title_unknown':'Titolo sconosciuto'},
 };
-let _lang=localStorage.getItem('ui_lang')||(navigator.language?.slice(0,2).match(/^(ro|en|fr|de|es|pt|it)$/)?navigator.language.slice(0,2):'ro');
+let _lang=(()=>{try{return localStorage.getItem('ui_lang');}catch(e){return null;}})()||(navigator.language?.slice(0,2).match(/^(ro|en|fr|de|es|pt|it)$/)?navigator.language.slice(0,2):'ro');
 function T(key){return(TRANSLATIONS[_lang]||TRANSLATIONS.ro)[key]||TRANSLATIONS.ro[key]||key;}
 function setLang(code){
   if(!TRANSLATIONS[code])return;
-  _lang=code; localStorage.setItem('ui_lang',code); document.documentElement.lang=code;
+  _lang=code; try{localStorage.setItem('ui_lang',code);}catch(e){} document.documentElement.lang=code;
   document.querySelectorAll('[data-i18n]').forEach(el=>el.textContent=T(el.dataset.i18n));
   document.querySelectorAll('[data-i18n-ph]').forEach(el=>el.placeholder=T(el.dataset.i18nPh));
   document.querySelectorAll('.lang-sw-btn').forEach(b=>b.classList.toggle('active',b.dataset.l===code));
@@ -913,6 +913,8 @@ function setLang(code){
 }
 
 const enc = s => encodeURIComponent(s);
+// Acceptă doar http(s) pentru href-uri provenite din API-uri externe (blochează javascript:/data:)
+const safeUrl = u => (typeof u==='string' && /^https?:\/\//i.test(u.trim())) ? u.trim() : '#';
 const esc = s => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
 // ════════════════════════════════════════════════════════
@@ -1295,7 +1297,7 @@ function setProfile(name) {
 // API Keys — salvare
 ['core','s2'].forEach(k=>{
   document.getElementById(`${k}Save`).addEventListener('click',()=>{
-    sessionStorage.setItem(`${k}_api_key`,document.getElementById(`${k}Key`).value.trim()); // L7: chei în sessionStorage (curățate la închiderea tab-ului)
+    try{sessionStorage.setItem(`${k}_api_key`,document.getElementById(`${k}Key`).value.trim());}catch(e){} // L7: chei în sessionStorage (curățate la închiderea tab-ului)
     const btn=document.getElementById(`${k}Save`);
     btn.textContent=T('api.saved');
     setTimeout(()=>btn.textContent=T('api.save'),1500);
@@ -1324,6 +1326,14 @@ function parseArxivXml(text) {
   }));
 }
 
+// Combină semnalul extern cu un timeout (altfel proxy-ul poate bloca la nesfârșit când `signal` e dat)
+function _sigTimeout(signal, ms) {
+  const c = new AbortController();
+  const t = setTimeout(() => c.abort(), ms);
+  if (signal) { if (signal.aborted) c.abort(); else signal.addEventListener('abort', () => { clearTimeout(t); c.abort(); }, { once: true }); }
+  return c.signal;
+}
+
 async function fetchArxiv(q, signal) {
   const arxivQ = q.trim().split(/\s+/).map(w => encodeURIComponent(w)).join('+');
   const directUrl = `https://export.arxiv.org/api/query?search_query=all:${arxivQ}&start=0&max_results=8`;
@@ -1344,7 +1354,7 @@ async function fetchArxiv(q, signal) {
     try {
       const pr = await fetch(
         `https://api.allorigins.win/get?url=${encodeURIComponent(directUrl)}`,
-        { signal: signal || AbortSignal.timeout(12000) }
+        { signal: _sigTimeout(signal, 12000) }
       );
       const pd = await pr.json();
       if (pd.contents && pd.contents.includes('<entry>')) text = pd.contents;
@@ -1400,7 +1410,7 @@ async function fetchGutenberg(q, signal) {
   const d = await safeJson(r, 'Gutenberg');
   return (d.results||[]).slice(0,6).map(item=>({
     title:   item.title,
-    authors: item.authors.map(a=>a.name).join(', '),
+    authors: (item.authors||[]).map(a=>a.name).join(', '),
     url:     `https://www.gutenberg.org/ebooks/${item.id}`,
     pdf:     item.formats?.['application/pdf']||item.formats?.['application/epub+zip']||null,
     source:  'gutenberg'
@@ -1561,7 +1571,7 @@ async function fetchSemantic(q, signal) {
     try {
       const pr = await fetch(
         `https://api.allorigins.win/get?url=${encodeURIComponent(s2Url)}`,
-        { signal: signal || AbortSignal.timeout(14000) }
+        { signal: _sigTimeout(signal, 14000) }
       );
       const pd = await pr.json();
       if (pd.contents) {
@@ -1578,7 +1588,7 @@ async function fetchSemantic(q, signal) {
 
 async function fetchOpenAlex(q, signal) {
   let r;
-  try { r = await fetchWithRetry(`https://api.openalex.org/works?search=${enc(q)}&per-page=6&select=title,authorships,publication_year,abstract_inverted_index,open_access,doi,primary_location&mailto=academisearch@alexio.tf`, {headers:{'Accept':'application/json'}, timeout:10000, signal}); }
+  try { r = await fetchWithRetry(`https://api.openalex.org/works?search=${enc(q)}&per-page=6&select=id,title,authorships,publication_year,abstract_inverted_index,open_access,doi,primary_location&mailto=academisearch@alexio.tf`, {headers:{'Accept':'application/json'}, timeout:10000, signal}); }
   catch(e) { if (signal?.aborted) throw e; throw new Error('OpenAlex — inaccesibil'); }
   if (r.status===429) throw new Error('OpenAlex — limită depășită. Încearcă din nou');
   if (!r.ok) throw new Error(`OpenAlex — eroare ${r.status}`);
@@ -1592,7 +1602,8 @@ async function fetchOpenAlex(q, signal) {
     }
     return { title:item.title, authors:(item.authorships||[]).slice(0,4).map(a=>a.author?.display_name).filter(Boolean).join(', '),
       year:item.publication_year, abstract, journal:item.primary_location?.source?.display_name,
-      url:item.doi?`https://doi.org/${item.doi}`:item.id, pdf:item.open_access?.oa_url, source:'openalex' };
+      doi:String(item.doi||'').replace(/^https?:\/\/(dx\.)?doi\.org\//i,''),
+      url:item.doi?`https://doi.org/${String(item.doi).replace(/^https?:\/\/(dx\.)?doi\.org\//i,'')}`:item.id, pdf:item.open_access?.oa_url, source:'openalex' };
   });
 }
 
@@ -1703,7 +1714,7 @@ function resultCard(item) {
   const btnLabel = hasDoi ? T('card.oadoi') : T('card.oa');
   const btnClass = hasDoi ? 'btn-gold' : 'btn-out';
   return `<div class="r-card">
-    <div class="r-title"><a href="${esc(item.url||'#')}" target="_blank" rel="noopener">${esc(item.title||T('card.title_unknown'))}</a></div>
+    <div class="r-title"><a href="${esc(safeUrl(item.url))}" target="_blank" rel="noopener">${esc(item.title||T('card.title_unknown'))}</a></div>
     <div class="r-meta">
       ${item.authors?`<span class="r-authors">${esc(String(item.authors).slice(0,90))}${String(item.authors).length>90?'…':''}</span>`:''}
       ${item.year   ?`<span class="r-year">${esc(item.year)}</span>`:''}
@@ -1712,9 +1723,9 @@ function resultCard(item) {
     </div>
     ${item.abstract?`<div class="r-abstract">${esc(item.abstract)}</div>`:''}
     <div class="r-actions">
-      <a class="btn btn-out" href="${esc(item.url||'#')}" target="_blank" rel="noopener">↗ Deschide</a>
-      ${hasPdf?`<a class="btn btn-gold" href="${esc(item.pdf)}" target="_blank" rel="noopener">⬇ PDF</a>`:''}
-      ${hasDoi?`<button class="btn btn-teal" onclick="openUnpaywall('${esc(item.doi)}')">🔍 Unpaywall</button>`:''}
+      <a class="btn btn-out" href="${esc(safeUrl(item.url))}" target="_blank" rel="noopener">↗ Deschide</a>
+      ${hasPdf?`<a class="btn btn-gold" href="${esc(safeUrl(item.pdf))}" target="_blank" rel="noopener">⬇ PDF</a>`:''}
+      ${hasDoi?`<button class="btn btn-teal" onclick="openUnpaywall(_items[${iid}].doi)">🔍 Unpaywall</button>`:''}
       <button class="btn ${btnClass}" onclick="oaExact(${iid},this)" title="${hasDoi?'Caută PDF legal via Unpaywall + OpenAIRE':'Caută DOI via CrossRef, apoi PDF legal via Unpaywall + OpenAIRE'}">${btnLabel}</button>
     </div>
   </div>`;
@@ -1885,16 +1896,16 @@ async function openaireLookup(doi) {
 
 // Injectează DOI și buton OA în card după lookup
 function injectDoiInCard(btn, doi, iid) {
-  const card = btn?.closest?.('.r-card');
+  if (_items[iid]) _items[iid].doi = doi;
+  const card = btn?.closest?.('.r-card, .mrc');
   if (!card) return;
-  const metaRow = card.querySelector('.r-meta');
-  if (metaRow && !metaRow.querySelector('.r-doi')) {
+  const metaRow = card.querySelector('.r-meta, .mrc-meta');
+  if (metaRow && !metaRow.querySelector('.r-doi, .mrc-doi')) {
     const badge = document.createElement('span');
-    badge.className = 'r-doi';
+    badge.className = card.classList.contains('mrc') ? 'mrc-doi' : 'r-doi';
     badge.textContent = `DOI:${doi}`;
     metaRow.appendChild(badge);
   }
-  _items[iid].doi = doi;
 }
 
 // Entry point principal — apelat din onclick pe carduri
@@ -1904,7 +1915,7 @@ async function oaExact(iid, btn) {
 
   const orig    = btn?.innerHTML || '🔓 Acces Liber';
   const setBtn  = (html, dis=false) => { if(btn){ btn.innerHTML=html; btn.disabled=dis; } };
-  const openUrl = url => window.open(url, '_blank', 'noopener,noreferrer');
+  const openUrl = url => { if (/^https?:\/\//i.test(String(url))) window.open(url, '_blank', 'noopener,noreferrer'); };
 
   let doi = item.doi;
 
@@ -2210,7 +2221,7 @@ function modalCard(item, srcId, color, highlight) {
         ${esc(meta?.name||srcId)}
       </span>
       <div class="mrc-title">
-        <a href="${esc(item.url||'#')}" target="_blank" rel="noopener">${hlTitle}</a>
+        <a href="${esc(safeUrl(item.url))}" target="_blank" rel="noopener">${hlTitle}</a>
       </div>
     </div>
     <div class="mrc-meta">
@@ -2221,9 +2232,9 @@ function modalCard(item, srcId, color, highlight) {
     </div>
     ${item.abstract?`<div class="mrc-abstract">${highlight ? hlText(item.abstract.slice(0,280), highlight) : esc(item.abstract.slice(0,280))}</div>`:''}
     <div class="mrc-actions">
-      <a class="btn btn-out" href="${esc(item.url||'#')}" target="_blank" rel="noopener">${T('card.open')}</a>
-      ${hasPdf?`<a class="btn btn-gold" href="${esc(item.pdf)}" target="_blank" rel="noopener">${T('card.pdf')}</a>`:''}
-      ${hasDoi?`<button class="btn btn-teal" onclick="openUnpaywall('${esc(item.doi)}')">${T('card.unpay')}</button>`:''}
+      <a class="btn btn-out" href="${esc(safeUrl(item.url))}" target="_blank" rel="noopener">${T('card.open')}</a>
+      ${hasPdf?`<a class="btn btn-gold" href="${esc(safeUrl(item.pdf))}" target="_blank" rel="noopener">${T('card.pdf')}</a>`:''}
+      ${hasDoi?`<button class="btn btn-teal" onclick="openUnpaywall(_items[${iid}].doi)">${T('card.unpay')}</button>`:''}
       <button class="btn ${hasDoi?'btn-gold':'btn-out'}" onclick="oaExact(${iid},this)">
         ${hasDoi?T('card.oadoi'):T('card.oa')}
       </button>
@@ -2234,7 +2245,7 @@ function modalCard(item, srcId, color, highlight) {
 function hlText(text, q) {
   if (!q) return esc(text);
   const safe = esc(text);
-  const safeQ = q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  const safeQ = esc(q).replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
   return safe.replace(new RegExp(`(${safeQ})`, 'gi'), '<mark>$1</mark>');
 }
 
