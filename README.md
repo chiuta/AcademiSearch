@@ -38,7 +38,7 @@ AcademiSearch este o aplicație dintr-un singur fișier `index.html` care intero
 - Dacă browserul blochează cererea directă (CORS) către arXiv sau Semantic Scholar, cererea trece prin proxy-ul public `api.allorigins.win`, care poate vedea URL-ul interogării. Din panoul „Surse activate" se pot dezactiva aceste două surse.
 - Cererile către OpenAlex și Unpaywall includ adresa de contact a operatorului (`academisearch@alexio.tf`), conform convenției „polite pool".
 - Portalurile cu link direct sunt contactate doar dacă deschideți linkul.
-- Fonturi/CDN: nu am verificat o dependență de CDN în afara celor de mai sus.
+- Fonturi/CDN: verificat la audit (2026-10-10): nu există scripturi, fonturi sau stiluri încărcate de la CDN; fonturile sunt integrate, iar politica CSP din pagină (`connect-src`) limitează cererile la gazdele de mai sus.
 
 ## Rulare locală / offline
 
@@ -55,3 +55,5 @@ Alexio — Alexandru-Ionuț Chiuță, contact: alexio@trom.tf
 ## English summary
 
 AcademiSearch is a single-file HTML meta-search tool over 42 open-access academic sources (11 with live API results, 31 as direct-link portals), with a 7-language UI. It is not offline: searches go directly from the browser to third-party APIs, and arXiv/Semantic Scholar may fall back to the allorigins.win CORS proxy. Only the UI language (localStorage) and optional API keys (sessionStorage) are stored. CC0 licence.
+
+Audit: 2026-10-10 — verificat codul (cereri de rețea, escapare rezultate API, proxy CORS: cheile API se trimit doar în antet direct, niciodată prin proxy), accesibilitate (axe) și funcționarea (căutare offline: erori de sursă gestionate). Numărul „42 de surse” corespunde: 11 API + 31 portaluri.

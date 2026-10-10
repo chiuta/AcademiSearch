@@ -85,8 +85,8 @@
 <style>
 :root{
   --bg:#0c0e14; --surf:#13161f; --surf2:#1a1e2c; --border:#252a3a;
-  --text:#e4dff5; --muted:#7a7f9a;
-  --gold:#c8a84b; --gold2:#8a6f2e;
+  --text:#e4dff5; --muted:#8a8fa8;
+  --gold:#c8a84b; --gold2:#a68a3a;
   --green:#3ecf8e; --red:#e05c6a; --blue:#5b8dee;
   --purple:#9b72ef; --teal:#2ec9c9; --orange:#e8893a;
 }
@@ -138,6 +138,8 @@ header{text-align:center;padding:48px 20px 28px}
 .toggle-label{font-family:'Inconsolata',monospace;font-size:.68rem;letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
 .toggle-arrow{font-size:.58rem;color:var(--muted);transition:transform .2s}
 .toggle-arrow.open{transform:rotate(180deg)}
+.toggle-arrow{cursor:pointer;padding:4px 6px}
+.toggle-arrow:focus-visible{outline:2px solid var(--gold);outline-offset:1px}
 .toggle-select-all{margin-left:auto;font-family:'Inconsolata',monospace;font-size:.68rem;color:var(--gold2);cursor:pointer;background:none;border:none;transition:color .15s}
 .toggle-select-all:hover{color:var(--gold)}
 
@@ -275,14 +277,14 @@ header{text-align:center;padding:48px 20px 28px}
 .lang-switcher{display:flex;justify-content:center;align-items:center;gap:3px;flex-wrap:wrap;margin:14px auto 0}
 .lang-sw-btn{background:transparent;border:1px solid transparent;border-radius:3px;
   cursor:pointer;font-size:1.1rem;padding:3px 5px;line-height:1;
-  transition:border-color .15s,background .15s;opacity:.55}
+  transition:border-color .15s,background .15s;opacity:.85}
 .lang-sw-btn:hover{opacity:1;border-color:var(--border)}
 .lang-sw-btn.active{opacity:1;border-color:var(--gold2);background:rgba(200,168,75,.1)}
 .lang-sw-btn .lang-code{font-family:'Inconsolata',monospace;font-size:.55rem;
   display:block;text-align:center;color:var(--muted);margin-top:-1px;line-height:1}
 
 footer{text-align:center;border-top:1px solid var(--border);padding:22px 20px;font-family:'Inconsolata',monospace;font-size:.62rem;color:var(--muted);letter-spacing:.09em}
-footer a{color:var(--gold2);text-decoration:none}
+footer a{color:var(--gold2);text-decoration:underline}
 footer a:hover{color:var(--gold)}
 #srcTip{
   position:fixed; z-index:8000; pointer-events:none;
@@ -485,9 +487,9 @@ footer a:hover{color:var(--gold)}
 </div>
 
 <div class="toggle-bar">
-  <div class="toggle-header" id="toggleHdr" role="button" aria-expanded="false" aria-controls="srcGrid" tabindex="0">
-    <span class="toggle-label" data-i18n="sources.label">Surse activate</span>
-    <span class="toggle-arrow open" id="toggleArrow" aria-hidden="true">▲</span>
+  <div class="toggle-header" id="toggleHdr">
+    <span class="toggle-label" id="toggleLbl" data-i18n="sources.label">Surse activate</span>
+    <span class="toggle-arrow open" id="toggleArrow" role="button" tabindex="0" aria-labelledby="toggleLbl" aria-expanded="true" aria-controls="srcGrid">▲</span>
     <button class="toggle-select-all" id="selAllBtn" aria-label="Selectează sau deselectează toate sursele vizibile" data-i18n="sources.selall">Toate</button>
   </div>
 
@@ -1276,7 +1278,7 @@ document.getElementById('toggleHdr').addEventListener('click',function(e){
   cat.classList.toggle('open',open);
   lang.classList.toggle('open',open);
   arrow.classList.toggle('open',open);
-  this.setAttribute('aria-expanded', open ? 'true' : 'false');
+  arrow.setAttribute('aria-expanded', open ? 'true' : 'false');
 });
 
 // Profile switcher
