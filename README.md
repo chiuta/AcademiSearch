@@ -4,7 +4,7 @@ Motor de căutare academic unificat, într-un singur fișier HTML: 42 de surse o
 
 **Live:** https://chiuta.github.io/AcademiSearch/
 
-**Ultima actualizare:** 11 octombrie 2026 · versiune 4.0.1
+**Ultima actualizare:** 11 octombrie 2026 · versiune 4.0.2
 
 ![Captura de ecran](screenshot.png)
 
@@ -21,6 +21,8 @@ AcademiSearch este o aplicație dintr-un singur fișier `index.html` care intero
 - Rezultate cu filtre „Cu PDF" și „Cu DOI" și încărcare progresivă a rezultatelor.
 - Câmp „DOI / URL" cu butoanele „Acces Liber" și „Unpaywall": aplicația caută o versiune open-access prin CrossRef (dacă lipsește DOI-ul), Unpaywall, OpenAIRE și căutare după titlu în Unpaywall.
 - Câmpuri opționale pentru cheie API CORE și cheie API Semantic Scholar.
+- Export al rezultatelor filtrate în BibTeX, RIS sau CSV (fișier generat local în browser, fără cereri de rețea). Lista de autori se exportă așa cum o returnează sursa (unele surse trunchiază lista), iar câmpurile CSV care încep cu `=`, `+`, `-` sau `@` sunt neutralizate.
+- Câmpul „DOI / URL" curăță prefixele (`doi:`, `https://doi.org/`) și afișează un mesaj clar când formatul DOI este nevalid.
 - Fereastră „Termeni legali & GDPR".
 
 ## Manual de utilizare
@@ -40,13 +42,18 @@ AcademiSearch este o aplicație dintr-un singur fișier `index.html` care intero
 - Proxy CORS (opt-in, dezactivat implicit): arXiv și Semantic Scholar sunt interogate direct. Numai dacă bifați explicit „Permit proxy-ul public allorigins.win" (lângă câmpurile pentru chei API; valabil pe durata filei) și browserul blochează cererea directă (CORS), cererea respectivă este retrimisă prin `api.allorigins.win`, care poate vedea URL-ul interogării (termenul căutat). Cheile API nu trec niciodată prin proxy.
 - Cererile către OpenAlex și Unpaywall includ adresa de contact a operatorului (`academisearch@alexio.tf`), conform convenției „polite pool".
 - Portalurile cu link direct sunt contactate doar dacă deschideți linkul.
-- Fonturi/CDN: verificat la audit (2026-10-10): nu există scripturi, fonturi sau stiluri încărcate de la CDN; fonturile sunt integrate, iar politica CSP din pagină (`connect-src`) limitează cererile la gazdele de mai sus.
+- Fonturi/CDN: verificat la audit (2026-10-10): nu există scripturi, fonturi sau stiluri încărcate de la CDN; fonturile sunt integrate, iar politica CSP din pagină (`connect-src`; `script-src` cu hash, fără `unsafe-inline`) limitează cererile la gazdele de mai sus.
 
 ## Rulare locală / offline
 
 Descărcați `index.html` și deschideți-l în browser. Interfața pornește local, dar căutarea necesită conexiune la internet.
 
 ## Istoric / Changelog
+
+### 11 octombrie 2026 (v4.0.2)
+- Securitate: toate cele 34 de atribute `on*` inline au fost înlocuite cu un dispatcher delegat (`data-act` + un singur listener); politica CSP folosește acum `script-src` cu hash, fără `'unsafe-inline'` pentru scripturi.
+- Export BibTeX / RIS / CSV al rezultatelor filtrate; mesaje în toate cele 7 limbi.
+- Validare și curățare a câmpului DOI, cu mesaj de eroare accesibil (`role="status"`).
 
 ### 11 octombrie 2026 (v4.0.1)
 - Accesibilitate: conținutul este încadrat în <main>, sursele sunt acum elemente cu rol `checkbox` valid (axe: 0 violări).
@@ -63,6 +70,6 @@ Alexio — Alexandru-Ionuț Chiuță, contact: alexio@trom.tf
 
 ## English summary
 
-AcademiSearch is a single-file HTML meta-search tool over 42 open-access academic sources (11 with live API results, 31 as direct-link portals), with a 7-language UI. It is not offline: searches go directly from the browser to third-party APIs, and arXiv/Semantic Scholar can use the allorigins.win CORS proxy only if you explicitly tick an opt-in checkbox (off by default). Only the UI language (localStorage) and optional API keys (sessionStorage) are stored. CC0 licence.
+AcademiSearch is a single-file HTML meta-search tool over 42 open-access academic sources (11 with live API results, 31 as direct-link portals), with a 7-language UI. It is not offline: searches go directly from the browser to third-party APIs, and arXiv/Semantic Scholar can use the allorigins.win CORS proxy only if you explicitly tick an opt-in checkbox (off by default). Only the UI language (localStorage) and optional API keys (sessionStorage) are stored. CC0 licence. Filtered results can be exported as BibTeX, RIS or CSV (generated locally).
 
 Audit rundă 2 (2026-10-11): proxy-ul allorigins.win a devenit opt-in. Audit: 2026-10-10 — verificat codul (cereri de rețea, escapare rezultate API, proxy CORS: cheile API se trimit doar în antet direct, niciodată prin proxy), accesibilitate (axe) și funcționarea (căutare offline: erori de sursă gestionate). Numărul „42 de surse” corespunde: 11 API + 31 portaluri.
