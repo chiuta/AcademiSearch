@@ -4,7 +4,7 @@ Motor de căutare academic unificat, într-un singur fișier HTML: 42 de surse o
 
 **Live:** https://chiuta.github.io/AcademiSearch/
 
-**Ultima actualizare:** 11 octombrie 2026 · versiune 4.0.2
+**Ultima actualizare:** 11 octombrie 2026 · versiune 4.0.3
 
 ![Captura de ecran](screenshot.png)
 
@@ -23,6 +23,7 @@ AcademiSearch este o aplicație dintr-un singur fișier `index.html` care intero
 - Câmpuri opționale pentru cheie API CORE și cheie API Semantic Scholar.
 - Export al rezultatelor filtrate în BibTeX, RIS sau CSV (fișier generat local în browser, fără cereri de rețea). Lista de autori se exportă așa cum o returnează sursa (unele surse trunchiază lista), iar câmpurile CSV care încep cu `=`, `+`, `-` sau `@` sunt neutralizate.
 - Câmpul „DOI / URL" curăță prefixele (`doi:`, `https://doi.org/`) și afișează un mesaj clar când formatul DOI este nevalid.
+- Tasta `/` mută focusul în câmpul de căutare; căutările din sesiunea curentă sunt sugerate (nu se salvează nimic).
 - Fereastră „Termeni legali & GDPR".
 
 ## Manual de utilizare
@@ -50,7 +51,11 @@ Descărcați `index.html` și deschideți-l în browser. Interfața pornește lo
 
 ## Istoric / Changelog
 
-### 11 octombrie 2026 (v4.0.2)
+### 11 octombrie 2026 (v4.0.3)
+- Corectat butonul CAUTĂ tăiat pe ecrane de 360 px și mărite țintele tactile mici (butoane, filtre, casete).
+- Tasta „/” mută focusul în câmpul de căutare; căutările din sesiunea curentă apar ca sugestii (doar în memorie, nu se salvează).
+
+### 11 octombrie 2026 (v4.0.3)
 - Securitate: toate cele 34 de atribute `on*` inline au fost înlocuite cu un dispatcher delegat (`data-act` + un singur listener); politica CSP folosește acum `script-src` cu hash, fără `'unsafe-inline'` pentru scripturi.
 - Export BibTeX / RIS / CSV al rezultatelor filtrate; mesaje în toate cele 7 limbi.
 - Validare și curățare a câmpului DOI, cu mesaj de eroare accesibil (`role="status"`).

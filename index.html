@@ -55,7 +55,7 @@
 </style>
 
   <meta name="referrer" content="no-referrer">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; font-src 'self' data:; media-src 'self' blob: data:; object-src 'none'; base-uri 'self'; form-action 'self'; worker-src 'self' blob:; script-src 'self'  blob: 'sha256-OU4uCYkW0+wK2/o+e0a6pYN3rpyj+ZokwIAHMWLAnaI='; connect-src 'self' https://api.crossref.org https://api.openaire.eu https://api.unpaywall.org https://api.allorigins.win https://archive.org https://openlibrary.org https://gutendex.com https://api.semanticscholar.org https://api.core.ac.uk https://api.openalex.org https://export.arxiv.org https://zenodo.org https://doaj.org https://www.ebi.ac.uk">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; font-src 'self' data:; media-src 'self' blob: data:; object-src 'none'; base-uri 'self'; form-action 'self'; worker-src 'self' blob:; script-src 'self'  blob: 'sha256-G3jwdfi+r5LcMprvimC1dp4EPigZFV5NytsZytIKQJs='; connect-src 'self' https://api.crossref.org https://api.openaire.eu https://api.unpaywall.org https://api.allorigins.win https://archive.org https://openlibrary.org https://gutendex.com https://api.semanticscholar.org https://api.core.ac.uk https://api.openalex.org https://export.arxiv.org https://zenodo.org https://doaj.org https://www.ebi.ac.uk">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AcademiSearch — 42 Surse Academice Multilingve</title>
 <meta name="description" content="Motor de căutare academic unificat gratuit — 42 surse open-access în 7 limbi + surse multilingve: arXiv, PubMed, CORE, Zenodo, CEEOL, Gallica, Dialnet și altele. Ideal pentru studenți, doctoranzi și cercetători.">
@@ -462,8 +462,8 @@ footer a:hover{color:var(--gold)}
 <div class="search-wrap">
   <div class="search-box">
     <input type="text" class="search-input" id="queryInput"
-      placeholder="Titlu, autor, subiect, cuvinte cheie, ISSN…" data-i18n-ph="search.placeholder" autocomplete="off" spellcheck="false"
-      aria-label="Câmp de căutare principală">
+      placeholder="Titlu, autor, subiect, cuvinte cheie, ISSN…" data-i18n-ph="search.placeholder" autocomplete="off" spellcheck="false" list="qHist"
+      aria-label="Câmp de căutare principală"><datalist id="qHist"></datalist>
     <button class="search-btn" id="searchBtn" aria-label="Caută în toate sursele selectate" data-i18n="search.btn">CAUTĂ</button>
   </div>
   <div class="doi-row">
@@ -639,7 +639,7 @@ footer a:hover{color:var(--gold)}
     <div class="modal-hdr">
       <div>
         <div class="modal-title" id="legalModalTitle">⚖ Termeni Legali &amp; Politică GDPR</div>
-        <div class="modal-sub" id="legalModalDesc">ACADEMISEARCH · versiunea 4.0.2 · actualizat 11 octombrie 2026</div>
+        <div class="modal-sub" id="legalModalDesc">ACADEMISEARCH · versiunea 4.0.3 · actualizat 11 octombrie 2026</div>
       </div>
       <button class="modal-close" data-act="closeLegal" aria-label="Închide fereastra cu termeni legali">✕ Închide</button>
     </div>
@@ -2368,6 +2368,7 @@ let _activeCtrl   = null; // AbortController global pentru căutarea curentă
 async function doSearch() {
   const query = document.getElementById('queryInput').value.trim();
   if (!query) return;
+  try{const dl=document.getElementById('qHist');if(![...dl.options].some(o=>o.value===query)){const o=document.createElement('option');o.value=query;dl.insertBefore(o,dl.firstChild);while(dl.options.length>8)dl.removeChild(dl.lastChild);}}catch(e){}
 
   // ── Anulează request-urile căutării anterioare ────────
   if (_activeCtrl) { try { _activeCtrl.abort(); } catch {} }
@@ -2442,6 +2443,14 @@ async function doSearch() {
 }
 
 document.getElementById('searchBtn').addEventListener('click', doSearch);
+// r7: tasta „/” mută focusul în câmpul de căutare (în afara câmpurilor de text)
+document.addEventListener('keydown', e=>{
+  if(e.key!=='/'||e.ctrlKey||e.metaKey||e.altKey) return;
+  const t=e.target, tag=t&&t.tagName;
+  if(tag==='INPUT'||tag==='TEXTAREA'||tag==='SELECT'||(t&&t.isContentEditable)) return;
+  if(document.querySelector('.rm-overlay.open,#resultsModal.open,#legalModal.open')) return;
+  e.preventDefault(); document.getElementById('queryInput').focus();
+});
 document.getElementById('queryInput').addEventListener('keydown', e=>{ if(e.key==='Enter') doSearch(); });
 
 
@@ -2531,6 +2540,18 @@ document.getElementById('toggleHdr').addEventListener('keydown', e => {
 #tf-donate .tf-cb:checked ~ .tf-open{display:inline-flex}
 @media (max-width:560px){#tf-donate .tf-lbl{display:none}}
 @media print{#tf-donate{display:none}}
+
+/* r7: ținte tactile și bara de căutare pe ecrane înguste */
+.search-input{min-width:0}
+.api-save{min-height:28px}
+.fpill,.rm-tag{min-height:26px;display:inline-flex;align-items:center}
+.toggle-arrow{display:inline-block;min-width:28px;min-height:28px;text-align:center;box-sizing:border-box}
+.toggle-select-all{min-height:26px;min-width:28px}
+.rm-si-clr{min-width:26px;min-height:26px}
+.legal-link,footer a,.rm-body a{padding:4px 0}
+#proxyOpt{width:20px;height:20px;flex:none}
+footer a,.legal-link,.rm-body a{display:inline-block}
+@media(max-width:480px){.search-btn{padding:0 14px;font-size:.76rem;letter-spacing:.03em}.search-input{padding:14px 12px;font-size:1rem}.search-wrap{padding:0 12px}}
 </style>
 <input type="checkbox" id="tf-donate-cb" class="tf-cb" aria-hidden="true">
 <div class="tf-panel">
