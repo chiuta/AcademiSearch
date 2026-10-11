@@ -453,6 +453,7 @@ footer a:hover{color:var(--gold)}
   </div>
 </header>
 
+<main id="main">
 <div class="search-wrap">
   <div class="search-box">
     <input type="text" class="search-input" id="queryInput"
@@ -550,6 +551,8 @@ footer a:hover{color:var(--gold)}
   </div>
 </div>
 
+</main>
+
 <footer>
   AcademiSearch v4 · <span data-i18n="footer.tagline">42 surse open-access multilingve</span> · <span data-i18n="footer.main">instrument gratuit pentru cercetare academică</span><br>
   <span data-i18n="footer.terms">Respectă termenii de utilizare ai fiecărei platforme</span> &nbsp;·&nbsp;
@@ -623,7 +626,7 @@ footer a:hover{color:var(--gold)}
     <div class="modal-hdr">
       <div>
         <div class="modal-title" id="legalModalTitle">⚖ Termeni Legali &amp; Politică GDPR</div>
-        <div class="modal-sub" id="legalModalDesc">ACADEMISEARCH · versiunea 4.0 · actualizat aprilie 2026</div>
+        <div class="modal-sub" id="legalModalDesc">ACADEMISEARCH · versiunea 4.0.1 · actualizat 11 octombrie 2026</div>
       </div>
       <button class="modal-close" onclick="closeLegal()" aria-label="Închide fereastra cu termeni legali">✕ Închide</button>
     </div>
@@ -1015,10 +1018,10 @@ const PORTAL_SOURCES = [
     desc:'Monografii academice europene open-access — EN, FR, DE, NL, ES',
     url:q=>`https://library.oapen.org/discover?query=${enc(q)}` },
   { id:'books101',    name:'101books.club',       color:'#0f766e', cat:'books',     langs:['multi'],
-    desc:'Bibliotecă online cu cărți descărcabile din mai multe limbi',
+    desc:'Bibliotecă online cu cărți descărcabile din mai multe limbi. Atenție: verificați statutul drepturilor de autor al fiecărei cărți; descărcați doar ce este liber sau la care aveți drept de acces',
     url:q=>`https://101books.club/search?q=${enc(q)}` },
   { id:'scribd',      name:'Scribd Downloader',   color:'#1e40af', cat:'books',     langs:['multi'],
-    desc:'Descarcă documente Scribd — inserează URL-ul documentului în câmpul de pe site',
+    desc:'Serviciu terț pentru documente Scribd — inserează URL-ul documentului în câmpul de pe site. Atenție: nu este o sursă open-access; folosiți-l doar pentru documente la care aveți dreptul de acces, respectând drepturile de autor și termenii Scribd',
     url:q=>`https://scribd.vdownloaders.com/` },
   // ── Teze
   { id:'oatd',        name:'OATD',                color:'#7c3aed', cat:'theses',    langs:['multi'],
@@ -1175,12 +1178,12 @@ function langFlags(langs) {
 function buildChips() {
   const grid = document.getElementById('srcGrid');
   grid.innerHTML = ALL_SOURCES.map(s=>`
-    <label class="src-chip on" id="chip-${s.id}" for="chk-${s.id}" data-cat="${s.cat}" role="checkbox" aria-checked="true" tabindex="0" aria-label="${esc(s.name)} — ${esc(s.desc||'')}">
+    <div class="src-chip on" id="chip-${s.id}" data-cat="${s.cat}" role="checkbox" aria-checked="true" tabindex="0" aria-label="${esc(s.name)} — ${esc(s.desc||'')}">
       <input type="checkbox" id="chk-${s.id}" checked aria-hidden="true">
       <span class="src-dot" style="background:${s.color}"></span>
       <span class="src-lbl">${esc(s.name)}</span>
       <span class="src-flags">${langFlags(s.langs)}</span>
-    </label>`).join('');
+    </div>`).join('');
 
   ALL_SOURCES.forEach(s=>{
     const chk  = document.getElementById(`chk-${s.id}`);
@@ -1189,6 +1192,7 @@ function buildChips() {
       if(chk.checked){active.add(s.id);chip.classList.add('on');chip.setAttribute('aria-checked','true');}
       else{active.delete(s.id);chip.classList.remove('on');chip.setAttribute('aria-checked','false');}
     });
+    chip.addEventListener('click', (e)=>{ if(e.target===chk) return; chk.checked = !chk.checked; chk.dispatchEvent(new Event('change')); });
     // Tastatură: Space / Enter toggle
     chip.addEventListener('keydown', (e)=>{
       if (e.key === ' ' || e.key === 'Enter') {
@@ -2421,7 +2425,7 @@ document.getElementById('toggleHdr').addEventListener('keydown', e => {
 })();
 </script>
 <!-- tf-donate: sprijin voluntar (Patreon + Buy Me a Coffee) — self-contained, fără resurse externe, fără JS -->
-<div id="tf-donate" aria-label="Sprijină autorul">
+<div id="tf-donate" role="complementary" aria-label="Sprijină autorul">
 <style>
 #tf-donate{position:fixed;right:14px;bottom:14px;z-index:2147483600;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1}
 #tf-donate *{box-sizing:border-box}

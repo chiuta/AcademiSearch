@@ -4,6 +4,8 @@ Motor de căutare academic unificat, într-un singur fișier HTML: 42 de surse o
 
 **Live:** https://chiuta.github.io/AcademiSearch/
 
+**Ultima actualizare:** 11 octombrie 2026 · versiune 4.0.1
+
 ![Captura de ecran](screenshot.png)
 
 ## Ce este
@@ -43,6 +45,13 @@ AcademiSearch este o aplicație dintr-un singur fișier `index.html` care intero
 ## Rulare locală / offline
 
 Descărcați `index.html` și deschideți-l în browser. Interfața pornește local, dar căutarea necesită conexiune la internet.
+
+## Istoric / Changelog
+
+### 11 octombrie 2026 (v4.0.1)
+- Accesibilitate: conținutul este încadrat în <main>, sursele sunt acum elemente cu rol `checkbox` valid (axe: 0 violări).
+- Avertisment de drepturi de autor adăugat la sursele 101books.club și Scribd Downloader (descriere/tooltip), clarificând că nu sunt surse open-access.
+- Versiunea din fereastra „Termeni legali” și data actualizării: 4.0.1, 11 octombrie 2026.
 
 ## Licență
 
