@@ -1,0 +1,163 @@
+{
+  "schema": 1,
+  "slug": "academisearch",
+  "name": "AcademiSearch — 42 Surse Academice Multilingve",
+  "version": "4.1.0",
+  "updated": "2026-10-14",
+  "description": "Motor de căutare academic unificat gratuit — 42 surse open-access în 7 limbi + surse multilingve: arXiv, PubMed, CORE, Zenodo, CEEOL, Gallica, Dialnet și altele. Ideal pentru studenți, doctoranzi și cercetători.",
+  "egress": [
+    {
+      "host": "api.allorigins.win",
+      "via": [
+        "csp:connect-src",
+        "fetch"
+      ]
+    },
+    {
+      "host": "api.core.ac.uk",
+      "via": [
+        "csp:connect-src"
+      ]
+    },
+    {
+      "host": "api.crossref.org",
+      "via": [
+        "csp:connect-src",
+        "fetch"
+      ]
+    },
+    {
+      "host": "api.openaire.eu",
+      "via": [
+        "csp:connect-src",
+        "fetch"
+      ]
+    },
+    {
+      "host": "api.openalex.org",
+      "via": [
+        "csp:connect-src"
+      ]
+    },
+    {
+      "host": "api.semanticscholar.org",
+      "via": [
+        "csp:connect-src"
+      ]
+    },
+    {
+      "host": "api.unpaywall.org",
+      "via": [
+        "csp:connect-src",
+        "fetch"
+      ]
+    },
+    {
+      "host": "archive.org",
+      "via": [
+        "csp:connect-src",
+        "fetch"
+      ]
+    },
+    {
+      "host": "doaj.org",
+      "via": [
+        "csp:connect-src"
+      ]
+    },
+    {
+      "host": "export.arxiv.org",
+      "via": [
+        "csp:connect-src"
+      ]
+    },
+    {
+      "host": "gutendex.com",
+      "via": [
+        "csp:connect-src",
+        "fetch"
+      ]
+    },
+    {
+      "host": "openlibrary.org",
+      "via": [
+        "csp:connect-src",
+        "fetch"
+      ]
+    },
+    {
+      "host": "www.ebi.ac.uk",
+      "via": [
+        "csp:connect-src"
+      ]
+    },
+    {
+      "host": "zenodo.org",
+      "via": [
+        "csp:connect-src"
+      ]
+    }
+  ],
+  "permissions": [
+    "serviceWorker",
+    "localStorage"
+  ],
+  "storageKeys": [
+    "ui_lang"
+  ],
+  "sizeBytes": 709756,
+  "sha256": "9f76878f069d2e21304b90043c6f2678133388ba8bfbee47bbf5c4bc9382e536",
+  "csp": {
+    "present": true,
+    "directives": {
+      "default-src": "'self'",
+      "img-src": "'self' data: blob:",
+      "style-src": "'self' 'unsafe-inline'",
+      "font-src": "'self' data:",
+      "media-src": "'self' blob: data:",
+      "object-src": "'none'",
+      "base-uri": "'self'",
+      "form-action": "'self'",
+      "worker-src": "'self' blob:",
+      "script-src": "'self' blob: sha256×3",
+      "connect-src": "'self' https://api.crossref.org https://api.openaire.eu https://api.unpaywall.org https://api.allorigins.win https://archive.org https://openlibrary.org https://gutendex.com https://api.semanticscholar.org https://api.core.ac.uk https://api.openalex.org https://export.arxiv.org https://zenodo.org https://doaj.org https://www.ebi.ac.uk",
+      "manifest-src": "'self'"
+    },
+    "scriptInline": "hash",
+    "connect": "'self' https://api.crossref.org https://api.openaire.eu https://api.unpaywall.org https://api.allorigins.win https://archive.org https://openlibrary.org https://gutendex.com https://api.semanticscholar.org https://api.core.ac.uk https://api.openalex.org https://export.arxiv.org https://zenodo.org https://doaj.org https://www.ebi.ac.uk"
+  },
+  "features": {
+    "export": true,
+    "import": true,
+    "i18n": [
+      "ro",
+      "en",
+      "fr",
+      "it",
+      "es",
+      "pt",
+      "hu",
+      "de"
+    ],
+    "pwa": {
+      "manifest": true,
+      "serviceWorker": true
+    },
+    "modules": [
+      "core",
+      "label",
+      "bundle",
+      "search"
+    ]
+  },
+  "kit": {
+    "version": "1.0.0",
+    "modules": [
+      "core",
+      "label",
+      "bundle",
+      "search"
+    ]
+  },
+  "selfSerializing": false
+}
