@@ -105,8 +105,8 @@
   "storageKeys": [
     "ui_lang"
   ],
-  "sizeBytes": 710265,
-  "sha256": "bb5f9b1c936755b9ec7419b376e821b698785a40ee7a0e6f1b6599cd49bfa503",
+  "sizeBytes": 706693,
+  "sha256": "17abef01d0017b3a08ee24ae3fcd007e6e1aac36de62d49f84b8e7381b1d3796",
   "csp": {
     "present": true,
     "directives": {
