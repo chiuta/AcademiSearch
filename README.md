@@ -4,7 +4,7 @@ Motor de căutare academic unificat, într-un singur fișier HTML: 42 de surse o
 
 **Live:** https://chiuta.github.io/AcademiSearch/
 
-**Versiune:** 4.1.1 · **Ultima actualizare:** 18 octombrie 2026
+**Versiune:** 4.2.0 · **Ultima actualizare:** 18 octombrie 2026
 
 ![Captura de ecran](screenshot.png)
 
@@ -57,6 +57,9 @@ AcademiSearch este o aplicație dintr-un singur fișier `index.html` care intero
 Descărcați `index.html` și deschideți-l în browser. Interfața pornește local, dar căutarea necesită conexiune la internet.
 
 ## Istoric / Changelog
+
+### 18 octombrie 2026 (v4.2.0)
+- Nou: legătură de intrare `#q=<termen>` (ex. din Nota Zero) care doar precompletează câmpul de căutare; căutarea nu pornește singură, iar fragmentul se șterge din adresă după citire.
 
 ### 18 octombrie 2026 (v4.1.1)
 - Surse care nu mai rămân roșii/blocate: arXiv (fără CORS) trece automat pe preprinturile arXiv din OpenAlex; CORE fără cheie trece pe OpenAIRE, apoi pe repozitorii OA din OpenAlex; Semantic Scholar reîncearcă după 429 și apoi trece pe OpenAlex; Gutenberg are timeout 8 s și fallback pe colecția Gutenberg din Archive.org.
