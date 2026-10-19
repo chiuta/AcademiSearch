@@ -10,7 +10,7 @@ Un buscador académico unificado en un único archivo HTML: 42 fuentes de acceso
 
 **Aplicación en línea:** https://chiuta.github.io/AcademiSearch/
 
-![Captura de pantalla](screenshot.png)
+![Captura de pantalla](screenshot.es.png)
 
 ## Qué es
 

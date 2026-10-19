@@ -10,7 +10,7 @@ Un motore di ricerca accademico unificato in un unico file HTML: 42 fonti ad acc
 
 **Applicazione online:** https://chiuta.github.io/AcademiSearch/
 
-![Schermata](screenshot.png)
+![Schermata](screenshot.it.png)
 
 ## Che cos'è
 

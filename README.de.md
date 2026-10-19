@@ -10,7 +10,7 @@ Eine einheitliche akademische Suchmaschine in einer einzigen HTML-Datei: 42 Open
 
 **Online-Anwendung:** https://chiuta.github.io/AcademiSearch/
 
-![Screenshot](screenshot.png)
+![Screenshot](screenshot.de.png)
 
 ## Was es ist
 

@@ -10,7 +10,7 @@ Um motor de pesquisa académico unificado num único ficheiro HTML: 42 fontes de
 
 **Aplicação online:** https://chiuta.github.io/AcademiSearch/
 
-![Captura de ecrã](screenshot.png)
+![Captura de ecrã](screenshot.pt.png)
 
 ## O que é
 

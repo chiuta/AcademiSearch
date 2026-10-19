@@ -10,7 +10,7 @@ Egységes tudományos keresőmotor egyetlen HTML-fájlban: 42 nyílt hozzáfér�
 
 **Online alkalmazás:** https://chiuta.github.io/AcademiSearch/
 
-![Képernyőkép](screenshot.png)
+![Képernyőkép](screenshot.hu.png)
 
 ## Mi ez
 

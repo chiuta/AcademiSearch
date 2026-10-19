@@ -10,7 +10,7 @@ A unified academic search engine in a single HTML file: 42 open-access sources, 
 
 **Live app:** https://chiuta.github.io/AcademiSearch/
 
-![Screenshot](screenshot.png)
+![Screenshot](screenshot.en.png)
 
 ## What it is
 

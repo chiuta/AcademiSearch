@@ -10,7 +10,7 @@ Un moteur de recherche académique unifié dans un seul fichier HTML : 42 source
 
 **Application en ligne :** https://chiuta.github.io/AcademiSearch/
 
-![Capture d'écran](screenshot.png)
+![Capture d'écran](screenshot.fr.png)
 
 ## Ce que c'est
 

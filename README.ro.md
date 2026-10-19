@@ -10,7 +10,7 @@ Motor de căutare academic unificat, într-un singur fișier HTML: 42 de surse o
 
 **Live:** https://chiuta.github.io/AcademiSearch/
 
-![Captura de ecran](screenshot.png)
+![Captura de ecran](screenshot.ro.png)
 
 ## Ce este
 
