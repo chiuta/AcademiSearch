@@ -39,7 +39,7 @@ const seed = (page) => page.evaluate((items) => { openResultsModal('test'); addR
 {
   const {ctx, page, errs, net} = await open();
   check('kitul e prezent (FFF.search, bundle, label)', await page.evaluate(() => !!(window.FFF && FFF.search && FFF.bundle && FFF.label)));
-  check('versiune 4.3.1 în meta și în #app-version', await page.evaluate(() => document.querySelector('meta[name=application-version]').content === '4.3.1' && /^v 4\.3\.1 · 2026-10-19$/.test(document.getElementById('app-version').textContent.trim())));
+  check('versiune 4.3.2 în meta și în #app-version', await page.evaluate(() => document.querySelector('meta[name=application-version]').content === '4.3.2' && /^v 4\.3\.2 · 2026-10-19$/.test(document.getElementById('app-version').textContent.trim())));
 
   // --- relevanță locală în filtrul intern ---
   await seed(page);
