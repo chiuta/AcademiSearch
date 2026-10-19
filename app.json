@@ -106,8 +106,8 @@
     "as_library",
     "ui_lang"
   ],
-  "sizeBytes": 711193,
-  "sha256": "d7b1af36aec9d0ec1d91eab06b619d609753675786ede49bbbceba8c19aa316b",
+  "sizeBytes": 711829,
+  "sha256": "abe22586401b1a7cddffb6340f49591922ddafe0c4d3e38e322fadcfb2347f71",
   "csp": {
     "present": true,
     "directives": {
@@ -152,7 +152,7 @@
     ]
   },
   "kit": {
-    "version": "1.1.0",
+    "version": "1.1.1",
     "modules": [
       "core",
       "label",
