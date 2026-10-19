@@ -1,103 +1,105 @@
 # AcademiSearch
 
-Motor de căutare academic unificat, într-un singur fișier HTML: 42 de surse open-access, 7 limbi de interfață.
+**English** · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Live:** https://chiuta.github.io/AcademiSearch/
+**Version:** 4.2.0 · **Last updated:** 2026-10-18
 
-**Versiune:** 4.2.0 · **Ultima actualizare:** 18 octombrie 2026
+A unified academic search engine in a single HTML file: 42 open-access sources, 7 interface languages.
 
-![Captura de ecran](screenshot.png)
+**Live app:** https://chiuta.github.io/AcademiSearch/
 
-## Ce este
+![Screenshot](screenshot.png)
 
-AcademiSearch este o aplicație dintr-un singur fișier `index.html` care interoghează simultan mai multe surse academice (articole, preprinturi, cărți, teze, date de cercetare) și afișează rezultatele într-o fereastră comună. Pentru o parte din surse rezultatele sunt aduse direct prin API; pentru restul aplicația oferă link direct către pagina de căutare a portalului respectiv. Conform textului din aplicație, sunt 42 de surse: 11 cu rezultate live prin API și 31 de portaluri cu link direct.
+## What it is
 
-## Funcții
+AcademiSearch is an application in a single `index.html` file that queries several academic sources at once (articles, preprints, books, theses, research data) and shows the results in a common window. For some of the sources the results are fetched directly through an API; for the rest the app offers a direct link to that portal's search page. According to the text in the app, there are 42 sources: 11 with live results through an API and 31 portals with a direct link.
 
-- Interfață în 7 limbi: română, engleză, franceză, germană, spaniolă, portugheză, italiană (butoane RO / EN / FR / DE / ES / PT / IT).
-- Presetări de căutare: „Toate sursele", „Student / Doctorand", „Cercetător / Cadru didactic", „Cărți & Manuale", „Surse Românești", „Limbi Romanice".
-- Panou „Surse activate" cu bifarea individuală a surselor.
-- Filtre după categorie (Articole, Preprint, Cărți, Teze, Date) și după limbă (EN, RO, FR, DE, ES, PT, IT).
-- Rezultate cu filtre „Cu PDF" și „Cu DOI" și încărcare progresivă a rezultatelor.
-- Câmp „DOI / URL" cu butoanele „Acces Liber" și „Unpaywall": aplicația caută o versiune open-access prin CrossRef (dacă lipsește DOI-ul), Unpaywall, OpenAIRE și căutare după titlu în Unpaywall.
-- Câmpuri opționale pentru cheie API CORE și cheie API Semantic Scholar.
-- Export al rezultatelor filtrate în BibTeX, RIS sau CSV (fișier generat local în browser, fără cereri de rețea). Lista de autori se exportă așa cum o returnează sursa (unele surse trunchiază lista), iar câmpurile CSV care încep cu `=`, `+`, `-` sau `@` sunt neutralizate.
-- Câmpul „DOI / URL" curăță prefixele (`doi:`, `https://doi.org/`) și afișează un mesaj clar când formatul DOI este nevalid.
-- Tasta `/` mută focusul în câmpul de căutare; căutările din sesiunea curentă sunt sugerate (nu se salvează nimic).
-- Fereastră „Termeni legali & GDPR".
+## Features
 
-## Funcții noi (4.1.0)
+- Interface in 7 languages: Romanian, English, French, German, Spanish, Portuguese, Italian (RO / EN / FR / DE / ES / PT / IT buttons).
+- Search presets: "All sources", "Student / Doctoral candidate", "Researcher / Teaching staff", "Books & Textbooks", "Romanian Sources", "Romance Languages".
+- An "Enabled sources" panel with individual ticking of the sources.
+- Filters by category (Articles, Preprint, Books, Theses, Data) and by language (EN, RO, FR, DE, ES, PT, IT).
+- Results with "With PDF" and "With DOI" filters and progressive loading of results.
+- A "DOI / URL" field with the "Open Access" and "Unpaywall" buttons: the app looks for an open-access version through CrossRef (if the DOI is missing), Unpaywall, OpenAIRE and a title search in Unpaywall.
+- Optional fields for a CORE API key and a Semantic Scholar API key.
+- Export of the filtered results to BibTeX, RIS or CSV (a file generated locally in the browser, with no network requests). The author list is exported as the source returns it (some sources truncate the list), and CSV fields that begin with `=`, `+`, `-` or `@` are neutralised.
+- The "DOI / URL" field cleans the prefixes (`doi:`, `https://doi.org/`) and displays a clear message when the DOI format is invalid.
+- The `/` key moves focus to the search field; the searches of the current session are suggested (nothing is saved).
+- A "Legal terms & GDPR" window.
 
-- **Ordonare după relevanță** a rezultatelor filtrate din fereastra de rezultate: căutare locală (BM25, toleranță la greșeli de scriere, diacritice ignorate) peste titlurile și rezumatele deja aduse; potrivirea literală veche rămâne. Nu face nicio cerere de rețea.
-- **„Biblioteca mea”**: butoane de salvare/eliminare pe fiecare card; fereastră cu căutare în bibliotecă, export BibTeX / RIS / CSV și ștergere în doi pași. Maximum 500 de înregistrări, păstrate numai în acest browser.
-- Copie de siguranță `.fff.json` (modul comun „fff-kit”, local, fără rețea): se deschide din dialogul care apare la clic pe versiunea din subsol (export, export criptat cu parolă, import cu confirmare, ștergerea datelor aplicației). Copia include biblioteca și limba interfeței.
-- Textele noi ale bibliotecii sunt în română, engleză, franceză, germană, spaniolă, portugheză și italiană; **traducerile nu au fost verificate de vorbitori nativi.**
+## New features (4.1.0)
 
-## Manual de utilizare
+- **Sorting by relevance** of the filtered results in the results window: local search (BM25, tolerance for typos, diacritics ignored) over the titles and abstracts already fetched; the old literal matching remains. It makes no network requests.
+- **"My library"**: save/remove buttons on each card; a window with search in the library, BibTeX / RIS / CSV export and two-step deletion. At most 500 records, kept only in this browser.
+- `.fff.json` backup copy (the common "fff-kit" module, local, no network): it opens from the dialog that appears when you click the version in the footer (export, password-encrypted export, import with confirmation, deletion of the app's data). The copy includes the library and the interface language.
+- The new library texts are in Romanian, English, French, German, Spanish, Portuguese and Italian; **the translations have not been verified by native speakers.**
 
-1. Deschideți pagina și alegeți limba interfeței din colțul de sus (RO, EN, FR, DE, ES, PT, IT).
-2. Alegeți o presetare (de exemplu „Student / Doctorand") sau deschideți „Surse activate" și bifați manual sursele dorite.
-3. Opțional, restrângeți după CATEGORIE și LIMBĂ.
-4. Scrieți termenul în câmpul de căutare și apăsați Enter sau butonul „CAUTĂ".
-5. În fereastra de rezultate folosiți filtrele „Cu PDF" / „Cu DOI"; închideți cu „Închide" sau tasta Escape.
-6. Pentru un articol cunoscut, lipiți DOI-ul sau URL-ul în câmpul „DOI / URL" și apăsați „Acces Liber" (sau „Unpaywall").
-7. Pentru CORE și Semantic Scholar puteți introduce cheia API și apăsați „Salvează" (cheile sunt opționale).
+## User guide
 
-## Confidențialitate și rețea
+1. Open the page and choose the interface language from the top corner (RO, EN, FR, DE, ES, PT, IT).
+2. Choose a preset (for example "Student / Doctoral candidate") or open "Enabled sources" and tick the sources you want manually.
+3. Optionally, narrow down by CATEGORY and LANGUAGE.
+4. Type the term in the search field and press Enter or the "SEARCH" button.
+5. In the results window use the "With PDF" / "With DOI" filters; close with "Close" or the Escape key.
+6. For a known article, paste the DOI or URL in the "DOI / URL" field and press "Open Access" (or "Unpaywall").
+7. For CORE and Semantic Scholar you can enter the API key and press "Save" (the keys are optional).
 
-- Local: limba interfeței se păstrează în `localStorage` (`ui_lang`); biblioteca personală, în `localStorage` (`as_library`, maximum 500 de înregistrări, nu părăsește browserul); cheile API introduse se păstrează în `sessionStorage` și dispar la închiderea filei. Aplicația nu folosește cookie-uri.
-- Rețea: aplicația NU este offline. La fiecare căutare, termenul căutat este trimis către serviciile externe active, direct din browser: OpenAlex, CrossRef, CORE, Semantic Scholar, arXiv, Europe PMC (ebi.ac.uk), DOAJ, Zenodo, Open Library, Internet Archive, Project Gutenberg (gutendex.com). La „Acces Liber" / „Unpaywall" sunt contactate CrossRef, Unpaywall și OpenAIRE.
-- Proxy CORS (opt-in, dezactivat implicit): arXiv și Semantic Scholar sunt interogate direct. Numai dacă bifați explicit „Permit proxy-ul public allorigins.win" (lângă câmpurile pentru chei API; valabil pe durata filei) și browserul blochează cererea directă (CORS), cererea respectivă este retrimisă prin `api.allorigins.win`, care poate vedea URL-ul interogării (termenul căutat). Cheile API nu trec niciodată prin proxy.
-- Cererile către OpenAlex și Unpaywall includ adresa de contact a operatorului (`academisearch@alexio.tf`), conform convenției „polite pool".
-- Portalurile cu link direct sunt contactate doar dacă deschideți linkul.
-- Fonturi/CDN: verificat la audit (2026-10-10): nu există scripturi, fonturi sau stiluri încărcate de la CDN; fonturile sunt integrate, iar politica CSP din pagină (`connect-src`; `script-src` cu hash, fără `unsafe-inline`) limitează cererile la gazdele de mai sus.
+## Privacy and network
 
-## Rulare locală / offline
+- Local: the interface language is kept in `localStorage` (`ui_lang`); the personal library in `localStorage` (`as_library`, at most 500 records, it does not leave the browser); the API keys entered are kept in `sessionStorage` and disappear when the tab is closed. The app does not use cookies.
+- Network: the app is NOT offline. With every search, the searched term is sent to the active external services, directly from the browser: OpenAlex, CrossRef, CORE, Semantic Scholar, arXiv, Europe PMC (ebi.ac.uk), DOAJ, Zenodo, Open Library, Internet Archive, Project Gutenberg (gutendex.com). With "Open Access" / "Unpaywall", CrossRef, Unpaywall and OpenAIRE are contacted.
+- CORS proxy (opt-in, off by default): arXiv and Semantic Scholar are queried directly. Only if you explicitly tick "Allow the public proxy allorigins.win" (next to the API key fields; valid for the duration of the tab) and the browser blocks the direct request (CORS), that request is resent through `api.allorigins.win`, which can see the query URL (the searched term). The API keys never pass through the proxy.
+- Requests to OpenAlex and Unpaywall include the operator's contact address (`academisearch@alexio.tf`), following the "polite pool" convention.
+- The portals with a direct link are contacted only if you open the link.
+- Fonts/CDN: verified at the audit (2026-10-10): there are no scripts, fonts or styles loaded from a CDN; the fonts are built in, and the page's CSP policy (`connect-src`; `script-src` with a hash, no `unsafe-inline`) limits requests to the hosts above.
 
-Descărcați `index.html` și deschideți-l în browser. Interfața pornește local, dar căutarea necesită conexiune la internet.
+## Running locally / offline
 
-## Istoric / Changelog
+Download `index.html` and open it in a browser. The interface starts locally, but searching requires an internet connection.
 
-### 18 octombrie 2026 (v4.2.0)
-- Nou: legătură de intrare `#q=<termen>` (ex. din Nota Zero) care doar precompletează câmpul de căutare; căutarea nu pornește singură, iar fragmentul se șterge din adresă după citire.
+## History / Changelog
 
-### 18 octombrie 2026 (v4.1.1)
-- Surse care nu mai rămân roșii/blocate: arXiv (fără CORS) trece automat pe preprinturile arXiv din OpenAlex; CORE fără cheie trece pe OpenAIRE, apoi pe repozitorii OA din OpenAlex; Semantic Scholar reîncearcă după 429 și apoi trece pe OpenAlex; Gutenberg are timeout 8 s și fallback pe colecția Gutenberg din Archive.org.
-- Fiecare sursă are timeout de 30 s, iar motivul erorii apare ca tooltip pe chip-ul roșu.
+### 18 October 2026 (v4.2.0)
+- New: an entry link `#q=<term>` (e.g. from Nota Zero) that only pre-fills the search field; the search does not start by itself, and the fragment is removed from the address after reading.
 
-### 14 octombrie 2026 (v4.1.0)
-- Ordonare locală după relevanță în fereastra de rezultate (FFF.search).
-- „Biblioteca mea” (cheia `localStorage` `as_library`) cu căutare și export BibTeX/RIS/CSV.
-- Copie de siguranță `.fff.json` prin modulele comune (core, label, bundle, search); versiunea afișată în subsol.
-- Teste noi: `tests/fff-r8.test.mjs`.
+### 18 October 2026 (v4.1.1)
+- Sources that no longer stay red/blocked: arXiv (without CORS) automatically switches to the arXiv preprints in OpenAlex; CORE without a key switches to OpenAIRE, then to the OA repositories in OpenAlex; Semantic Scholar retries after a 429 and then switches to OpenAlex; Gutenberg has an 8 s timeout and a fallback to the Gutenberg collection on Archive.org.
+- Each source has a 30 s timeout, and the reason for the error appears as a tooltip on the red chip.
 
-### 12 octombrie 2026 (v4.0.4)
-- 4.0.4 — 2026-10-12: versiunea și data ultimei actualizări sunt afișate în aplicație
+### 14 October 2026 (v4.1.0)
+- Local sorting by relevance in the results window (FFF.search).
+- "My library" (the `localStorage` key `as_library`) with search and BibTeX/RIS/CSV export.
+- `.fff.json` backup copy through the common modules (core, label, bundle, search); the version shown in the footer.
+- New tests: `tests/fff-r8.test.mjs`.
 
-### 11 octombrie 2026 (v4.0.3)
-- Corectat butonul CAUTĂ tăiat pe ecrane de 360 px și mărite țintele tactile mici (butoane, filtre, casete).
-- Tasta „/” mută focusul în câmpul de căutare; căutările din sesiunea curentă apar ca sugestii (doar în memorie, nu se salvează).
+### 12 October 2026 (v4.0.4)
+- 4.0.4 — 2026-10-12: the version and the date of the last update are shown in the app
 
-### 11 octombrie 2026 (v4.0.3)
-- Securitate: toate cele 34 de atribute `on*` inline au fost înlocuite cu un dispatcher delegat (`data-act` + un singur listener); politica CSP folosește acum `script-src` cu hash, fără `'unsafe-inline'` pentru scripturi.
-- Export BibTeX / RIS / CSV al rezultatelor filtrate; mesaje în toate cele 7 limbi.
-- Validare și curățare a câmpului DOI, cu mesaj de eroare accesibil (`role="status"`).
+### 11 October 2026 (v4.0.3)
+- Fixed the SEARCH button being cut off on 360 px screens and enlarged the small touch targets (buttons, filters, boxes).
+- The "/" key moves focus to the search field; the searches of the current session appear as suggestions (in memory only, not saved).
 
-### 11 octombrie 2026 (v4.0.1)
-- Accesibilitate: conținutul este încadrat în <main>, sursele sunt acum elemente cu rol `checkbox` valid (axe: 0 violări).
-- Avertisment de drepturi de autor adăugat la sursele 101books.club și Scribd Downloader (descriere/tooltip), clarificând că nu sunt surse open-access.
-- Versiunea din fereastra „Termeni legali” și data actualizării: 4.0.1, 11 octombrie 2026.
+### 11 October 2026 (v4.0.3)
+- Security: all 34 inline `on*` attributes were replaced with a delegated dispatcher (`data-act` + a single listener); the CSP policy now uses `script-src` with a hash, without `'unsafe-inline'` for scripts.
+- BibTeX / RIS / CSV export of the filtered results; messages in all 7 languages.
+- Validation and cleaning of the DOI field, with an accessible error message (`role="status"`).
 
-## Licență
+### 11 October 2026 (v4.0.1)
+- Accessibility: the content is wrapped in <main>, the sources are now elements with a valid `checkbox` role (axe: 0 violations).
+- Copyright warning added to the 101books.club and Scribd Downloader sources (description/tooltip), making clear that they are not open-access sources.
+- The version in the "Legal terms" window and the update date: 4.0.1, 11 October 2026.
 
-MIT — vezi fișierul LICENSE
+## Licence
 
-## Autor
+MIT — see the LICENSE file
+
+## Author
 
 Alexio — Alexandru-Ionuț Chiuță, contact: alexio@trom.tf
 
-## English summary
+## Summary
 
 AcademiSearch is a single-file HTML meta-search tool over 42 open-access academic sources (11 with live API results, 31 as direct-link portals), with a 7-language UI. It is not offline: searches go directly from the browser to third-party APIs, and arXiv/Semantic Scholar can use the allorigins.win CORS proxy only if you explicitly tick an opt-in checkbox (off by default). Only the UI language (localStorage) and optional API keys (sessionStorage) are stored. MIT licence. Filtered results can be exported as BibTeX, RIS or CSV (generated locally).
 
-Audit rundă 2 (2026-10-11): proxy-ul allorigins.win a devenit opt-in. Audit: 2026-10-10 — verificat codul (cereri de rețea, escapare rezultate API, proxy CORS: cheile API se trimit doar în antet direct, niciodată prin proxy), accesibilitate (axe) și funcționarea (căutare offline: erori de sursă gestionate). Numărul „42 de surse” corespunde: 11 API + 31 portaluri.
+Round 2 audit (2026-10-11): the allorigins.win proxy became opt-in. Audit: 2026-10-10 — verified the code (network requests, escaping of API results, CORS proxy: API keys are sent only in the direct header, never through the proxy), accessibility (axe) and operation (offline search: source errors handled). The figure "42 sources" matches: 11 API + 31 portals.
