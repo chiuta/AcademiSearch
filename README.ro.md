@@ -100,8 +100,8 @@ MIT — vezi fișierul LICENSE
 
 Alexio — Alexandru-Ionuț Chiuță, contact: alexio@trom.tf
 
-## English summary
+## Rezumat
 
-AcademiSearch is a single-file HTML meta-search tool over 42 open-access academic sources (11 with live API results, 31 as direct-link portals), with an 8-language UI. It is not offline: searches go directly from the browser to third-party APIs, and arXiv/Semantic Scholar can use the allorigins.win CORS proxy only if you explicitly tick an opt-in checkbox (off by default). Only the UI language (localStorage) and optional API keys (sessionStorage) are stored. MIT licence. Filtered results can be exported as BibTeX, RIS or CSV (generated locally).
+AcademiSearch este un instrument de meta-căutare într-un singur fișier HTML peste 42 de surse academice cu acces deschis (11 cu rezultate API în direct, 31 ca portaluri cu link direct), cu interfață în 8 limbi. Nu este offline: căutările pleacă direct din browser către API-uri terțe, iar arXiv/Semantic Scholar pot folosi proxy-ul CORS allorigins.win doar dacă bifezi explicit o casetă opt-in (dezactivată implicit). Se stochează doar limba interfeței (localStorage) și cheile API opționale (sessionStorage). Licență MIT. Rezultatele filtrate pot fi exportate ca BibTeX, RIS sau CSV (generate local).
 
 Audit rundă 2 (2026-10-11): proxy-ul allorigins.win a devenit opt-in. Audit: 2026-10-10 — verificat codul (cereri de rețea, escapare rezultate API, proxy CORS: cheile API se trimit doar în antet direct, niciodată prin proxy), accesibilitate (axe) și funcționarea (căutare offline: erori de sursă gestionate). Numărul „42 de surse” corespunde: 11 API + 31 portaluri.
