@@ -2,9 +2,11 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · **Português** · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versão:** 4.2.0 · **Última atualização:** 2026-10-18
+**Versão:** 4.3.0 · **Última atualização:** 2026-10-19
 
-Um motor de pesquisa académico unificado num único ficheiro HTML: 42 fontes de acesso aberto, 7 idiomas de interface.
+Idiomas da interface: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
+
+Um motor de pesquisa académico unificado num único ficheiro HTML: 42 fontes de acesso aberto, 8 idiomas de interface.
 
 **Aplicação online:** https://chiuta.github.io/AcademiSearch/
 
@@ -16,7 +18,7 @@ O AcademiSearch é uma aplicação contida num único ficheiro `index.html` que 
 
 ## Funcionalidades
 
-- Interface em 7 idiomas: romeno, inglês, francês, alemão, espanhol, português, italiano (botões RO / EN / FR / DE / ES / PT / IT).
+- Interface em 8 idiomas: romeno, inglês, francês, alemão, espanhol, português, italiano (botões RO / EN / FR / DE / ES / PT / IT / HU).
 - Predefinições de pesquisa: «Todas as fontes», «Estudante / Doutorando», «Investigador / Pessoal docente», «Livros e manuais», «Fontes romenas», «Línguas românicas».
 - Um painel «Fontes ativadas» com seleção individual das fontes.
 - Filtros por categoria (Artigos, Preprint, Livros, Teses, Dados) e por idioma (EN, RO, FR, DE, ES, PT, IT).
@@ -37,7 +39,7 @@ O AcademiSearch é uma aplicação contida num único ficheiro `index.html` que 
 
 ## Manual de utilização
 
-1. Abra a página e escolha o idioma da interface no canto superior (RO, EN, FR, DE, ES, PT, IT).
+1. Abra a página e escolha o idioma da interface no canto superior (RO, EN, FR, DE, ES, PT, IT, HU).
 2. Escolha uma predefinição (por exemplo «Estudante / Doutorando») ou abra «Fontes ativadas» e assinale manualmente as fontes pretendidas.
 3. Opcionalmente, restrinja por CATEGORIA e IDIOMA.
 4. Escreva o termo no campo de pesquisa e prima Enter ou o botão «PESQUISAR».
@@ -100,6 +102,6 @@ Alexio — Alexandru-Ionuț Chiuță, contacto: alexio@trom.tf
 
 ## Resumo
 
-O AcademiSearch é uma ferramenta HTML de metapesquisa num único ficheiro sobre 42 fontes académicas de acesso aberto (11 com resultados em direto por API, 31 como portais com ligação direta), com interface em 7 idiomas. Não funciona offline: as pesquisas vão diretamente do navegador para API de terceiros, e o arXiv/Semantic Scholar só podem usar o proxy CORS allorigins.win se assinalar explicitamente uma caixa opt-in (desativada por predefinição). Apenas são guardados o idioma da interface (localStorage) e as chaves API opcionais (sessionStorage). Licença MIT. Os resultados filtrados podem ser exportados como BibTeX, RIS ou CSV (gerados localmente).
+O AcademiSearch é uma ferramenta HTML de metapesquisa num único ficheiro sobre 42 fontes académicas de acesso aberto (11 com resultados em direto por API, 31 como portais com ligação direta), com interface em 8 idiomas. Não funciona offline: as pesquisas vão diretamente do navegador para API de terceiros, e o arXiv/Semantic Scholar só podem usar o proxy CORS allorigins.win se assinalar explicitamente uma caixa opt-in (desativada por predefinição). Apenas são guardados o idioma da interface (localStorage) e as chaves API opcionais (sessionStorage). Licença MIT. Os resultados filtrados podem ser exportados como BibTeX, RIS ou CSV (gerados localmente).
 
 Auditoria da ronda 2 (2026-10-11): o proxy allorigins.win passou a ser opt-in. Auditoria: 2026-10-10 — verificado o código (pedidos de rede, escape dos resultados da API, proxy CORS: as chaves API são enviadas apenas no cabeçalho direto, nunca através do proxy), a acessibilidade (axe) e o funcionamento (pesquisa offline: erros de fonte tratados). O número «42 fontes» corresponde: 11 API + 31 portais.

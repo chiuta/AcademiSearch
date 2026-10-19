@@ -2,9 +2,11 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · **Magyar**
 
-**Verzió:** 4.2.0 · **Utolsó frissítés:** 2026-10-18
+**Verzió:** 4.3.0 · **Utolsó frissítés:** 2026-10-19
 
-Egységes tudományos keresőmotor egyetlen HTML-fájlban: 42 nyílt hozzáférésű forrás, 7 felületi nyelv.
+A felület nyelvei: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
+
+Egységes tudományos keresőmotor egyetlen HTML-fájlban: 42 nyílt hozzáférésű forrás, 8 felületi nyelv.
 
 **Online alkalmazás:** https://chiuta.github.io/AcademiSearch/
 
@@ -16,7 +18,7 @@ Az AcademiSearch egyetlen `index.html` fájlban lévő alkalmazás, amely egysze
 
 ## Funkciók
 
-- Felület 7 nyelven: román, angol, francia, német, spanyol, portugál, olasz (RO / EN / FR / DE / ES / PT / IT gombok).
+- Felület 8 nyelven: román, angol, francia, német, spanyol, portugál, olasz (RO / EN / FR / DE / ES / PT / IT / HU gombok).
 - Keresési előbeállítások: „Minden forrás”, „Egyetemi hallgató / Doktorandusz”, „Kutató / Oktató”, „Könyvek és tankönyvek”, „Román források”, „Újlatin nyelvek”.
 - Egy „Bekapcsolt források” panel a források egyenkénti bejelölésével.
 - Szűrők kategória (Cikkek, Preprint, Könyvek, Értekezések, Adatok) és nyelv (EN, RO, FR, DE, ES, PT, IT) szerint.
@@ -37,7 +39,7 @@ Az AcademiSearch egyetlen `index.html` fájlban lévő alkalmazás, amely egysze
 
 ## Használati útmutató
 
-1. Nyisd meg az oldalt, és válaszd ki a felület nyelvét a felső sarokban (RO, EN, FR, DE, ES, PT, IT).
+1. Nyisd meg az oldalt, és válaszd ki a felület nyelvét a felső sarokban (RO, EN, FR, DE, ES, PT, IT, HU).
 2. Válassz egy előbeállítást (például „Egyetemi hallgató / Doktorandusz”), vagy nyisd meg a „Bekapcsolt források” panelt, és jelöld be kézzel a kívánt forrásokat.
 3. Szükség esetén szűkíts KATEGÓRIA és NYELV szerint.
 4. Írd be a kifejezést a keresőmezőbe, és nyomd meg az Entert vagy a „KERESÉS” gombot.
@@ -100,6 +102,6 @@ Alexio — Alexandru-Ionuț Chiuță, kapcsolat: alexio@trom.tf
 
 ## Összefoglaló
 
-Az AcademiSearch egy egyfájlos HTML metakereső eszköz 42 nyílt hozzáférésű tudományos forráshoz (11 élő API-eredménnyel, 31 közvetlen hivatkozású portálként), 7 nyelvű felülettel. Nem offline: a keresések közvetlenül a böngészőből mennek harmadik felek API-jaihoz, és az arXiv/Semantic Scholar csak akkor használhatja az allorigins.win CORS-proxyt, ha kifejezetten bejelölsz egy opt-in jelölőnégyzetet (alapértelmezés szerint kikapcsolva). Csak a felület nyelve (localStorage) és az opcionális API-kulcsok (sessionStorage) kerülnek tárolásra. MIT licenc. A szűrt eredmények exportálhatók BibTeX, RIS vagy CSV formátumban (helyben generálva).
+Az AcademiSearch egy egyfájlos HTML metakereső eszköz 42 nyílt hozzáférésű tudományos forráshoz (11 élő API-eredménnyel, 31 közvetlen hivatkozású portálként), 8 nyelvű felülettel. Nem offline: a keresések közvetlenül a böngészőből mennek harmadik felek API-jaihoz, és az arXiv/Semantic Scholar csak akkor használhatja az allorigins.win CORS-proxyt, ha kifejezetten bejelölsz egy opt-in jelölőnégyzetet (alapértelmezés szerint kikapcsolva). Csak a felület nyelve (localStorage) és az opcionális API-kulcsok (sessionStorage) kerülnek tárolásra. MIT licenc. A szűrt eredmények exportálhatók BibTeX, RIS vagy CSV formátumban (helyben generálva).
 
 2. forduló auditja (2026-10-11): az allorigins.win proxy opt-in lett. Audit: 2026-10-10 — ellenőrizve a kód (hálózati kérések, az API-eredmények escape-elése, CORS-proxy: az API-kulcsok csak a közvetlen fejlécben kerülnek elküldésre, soha nem a proxyn keresztül), a hozzáférhetőség (axe) és a működés (offline keresés: a forráshibák kezelve). A „42 forrás” szám egyezik: 11 API + 31 portál.

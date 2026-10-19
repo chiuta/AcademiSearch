@@ -2,9 +2,11 @@
 
 [English](README.md) · **Română** · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versiune:** 4.2.0 · **Ultima actualizare:** 2026-10-18
+**Versiune:** 4.3.0 · **Ultima actualizare:** 2026-10-19
 
-Motor de căutare academic unificat, într-un singur fișier HTML: 42 de surse open-access, 7 limbi de interfață.
+Limbile interfeței: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
+
+Motor de căutare academic unificat, într-un singur fișier HTML: 42 de surse open-access, 8 limbi de interfață.
 
 **Live:** https://chiuta.github.io/AcademiSearch/
 
@@ -16,7 +18,7 @@ AcademiSearch este o aplicație dintr-un singur fișier `index.html` care intero
 
 ## Funcții
 
-- Interfață în 7 limbi: română, engleză, franceză, germană, spaniolă, portugheză, italiană (butoane RO / EN / FR / DE / ES / PT / IT).
+- Interfață în 8 limbi: română, engleză, franceză, germană, spaniolă, portugheză, italiană (butoane RO / EN / FR / DE / ES / PT / IT / HU).
 - Presetări de căutare: „Toate sursele", „Student / Doctorand", „Cercetător / Cadru didactic", „Cărți & Manuale", „Surse Românești", „Limbi Romanice".
 - Panou „Surse activate" cu bifarea individuală a surselor.
 - Filtre după categorie (Articole, Preprint, Cărți, Teze, Date) și după limbă (EN, RO, FR, DE, ES, PT, IT).
@@ -37,7 +39,7 @@ AcademiSearch este o aplicație dintr-un singur fișier `index.html` care intero
 
 ## Manual de utilizare
 
-1. Deschideți pagina și alegeți limba interfeței din colțul de sus (RO, EN, FR, DE, ES, PT, IT).
+1. Deschideți pagina și alegeți limba interfeței din colțul de sus (RO, EN, FR, DE, ES, PT, IT, HU).
 2. Alegeți o presetare (de exemplu „Student / Doctorand") sau deschideți „Surse activate" și bifați manual sursele dorite.
 3. Opțional, restrângeți după CATEGORIE și LIMBĂ.
 4. Scrieți termenul în câmpul de căutare și apăsați Enter sau butonul „CAUTĂ".
@@ -100,6 +102,6 @@ Alexio — Alexandru-Ionuț Chiuță, contact: alexio@trom.tf
 
 ## English summary
 
-AcademiSearch is a single-file HTML meta-search tool over 42 open-access academic sources (11 with live API results, 31 as direct-link portals), with a 7-language UI. It is not offline: searches go directly from the browser to third-party APIs, and arXiv/Semantic Scholar can use the allorigins.win CORS proxy only if you explicitly tick an opt-in checkbox (off by default). Only the UI language (localStorage) and optional API keys (sessionStorage) are stored. MIT licence. Filtered results can be exported as BibTeX, RIS or CSV (generated locally).
+AcademiSearch is a single-file HTML meta-search tool over 42 open-access academic sources (11 with live API results, 31 as direct-link portals), with an 8-language UI. It is not offline: searches go directly from the browser to third-party APIs, and arXiv/Semantic Scholar can use the allorigins.win CORS proxy only if you explicitly tick an opt-in checkbox (off by default). Only the UI language (localStorage) and optional API keys (sessionStorage) are stored. MIT licence. Filtered results can be exported as BibTeX, RIS or CSV (generated locally).
 
 Audit rundă 2 (2026-10-11): proxy-ul allorigins.win a devenit opt-in. Audit: 2026-10-10 — verificat codul (cereri de rețea, escapare rezultate API, proxy CORS: cheile API se trimit doar în antet direct, niciodată prin proxy), accesibilitate (axe) și funcționarea (căutare offline: erori de sursă gestionate). Numărul „42 de surse” corespunde: 11 API + 31 portaluri.

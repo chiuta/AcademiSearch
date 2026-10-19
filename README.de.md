@@ -2,9 +2,11 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · **Deutsch** · [Magyar](README.hu.md)
 
-**Version:** 4.2.0 · **Zuletzt aktualisiert:** 2026-10-18
+**Version:** 4.3.0 · **Zuletzt aktualisiert:** 2026-10-19
 
-Eine einheitliche akademische Suchmaschine in einer einzigen HTML-Datei: 42 Open-Access-Quellen, 7 Oberflächensprachen.
+Oberflächensprachen: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
+
+Eine einheitliche akademische Suchmaschine in einer einzigen HTML-Datei: 42 Open-Access-Quellen, 8 Oberflächensprachen.
 
 **Online-Anwendung:** https://chiuta.github.io/AcademiSearch/
 
@@ -16,7 +18,7 @@ AcademiSearch ist eine Anwendung in einer einzigen Datei `index.html`, die mehre
 
 ## Funktionen
 
-- Oberfläche in 7 Sprachen: Rumänisch, Englisch, Französisch, Deutsch, Spanisch, Portugiesisch, Italienisch (Schaltflächen RO / EN / FR / DE / ES / PT / IT).
+- Oberfläche in 8 Sprachen: Rumänisch, Englisch, Französisch, Deutsch, Spanisch, Portugiesisch, Italienisch (Schaltflächen RO / EN / FR / DE / ES / PT / IT / HU).
 - Suchvoreinstellungen: „Alle Quellen“, „Student / Doktorand“, „Forscher / Lehrkraft“, „Bücher & Lehrbücher“, „Rumänische Quellen“, „Romanische Sprachen“.
 - Ein Bereich „Aktivierte Quellen“ mit einzelnem Anhaken der Quellen.
 - Filter nach Kategorie (Artikel, Preprint, Bücher, Abschlussarbeiten, Daten) und nach Sprache (EN, RO, FR, DE, ES, PT, IT).
@@ -37,7 +39,7 @@ AcademiSearch ist eine Anwendung in einer einzigen Datei `index.html`, die mehre
 
 ## Anleitung
 
-1. Öffnen Sie die Seite und wählen Sie die Oberflächensprache in der oberen Ecke (RO, EN, FR, DE, ES, PT, IT).
+1. Öffnen Sie die Seite und wählen Sie die Oberflächensprache in der oberen Ecke (RO, EN, FR, DE, ES, PT, IT, HU).
 2. Wählen Sie eine Voreinstellung (zum Beispiel „Student / Doktorand“) oder öffnen Sie „Aktivierte Quellen“ und haken Sie die gewünschten Quellen manuell an.
 3. Optional können Sie nach KATEGORIE und SPRACHE eingrenzen.
 4. Geben Sie den Begriff in das Suchfeld ein und drücken Sie die Eingabetaste oder die Schaltfläche „SUCHEN“.
@@ -100,6 +102,6 @@ Alexio — Alexandru-Ionuț Chiuță, Kontakt: alexio@trom.tf
 
 ## Zusammenfassung
 
-AcademiSearch ist ein HTML-Metasuchwerkzeug in einer einzigen Datei über 42 akademische Open-Access-Quellen (11 mit Live-API-Ergebnissen, 31 als Portale mit direktem Link), mit einer Oberfläche in 7 Sprachen. Es ist nicht offline: Suchen gehen direkt vom Browser an APIs von Drittanbietern, und arXiv/Semantic Scholar können den CORS-Proxy allorigins.win nur verwenden, wenn Sie ein Opt-in-Kontrollkästchen ausdrücklich anhaken (standardmäßig aus). Gespeichert werden nur die Oberflächensprache (localStorage) und optionale API-Schlüssel (sessionStorage). MIT-Lizenz. Gefilterte Ergebnisse können als BibTeX, RIS oder CSV exportiert werden (lokal erzeugt).
+AcademiSearch ist ein HTML-Metasuchwerkzeug in einer einzigen Datei über 42 akademische Open-Access-Quellen (11 mit Live-API-Ergebnissen, 31 als Portale mit direktem Link), mit einer Oberfläche in 8 Sprachen. Es ist nicht offline: Suchen gehen direkt vom Browser an APIs von Drittanbietern, und arXiv/Semantic Scholar können den CORS-Proxy allorigins.win nur verwenden, wenn Sie ein Opt-in-Kontrollkästchen ausdrücklich anhaken (standardmäßig aus). Gespeichert werden nur die Oberflächensprache (localStorage) und optionale API-Schlüssel (sessionStorage). MIT-Lizenz. Gefilterte Ergebnisse können als BibTeX, RIS oder CSV exportiert werden (lokal erzeugt).
 
 Audit der Runde 2 (2026-10-11): Der Proxy allorigins.win wurde zum Opt-in. Audit: 2026-10-10 — geprüft wurden der Code (Netzwerkanfragen, Escaping der API-Ergebnisse, CORS-Proxy: API-Schlüssel werden nur im direkten Header gesendet, nie über den Proxy), die Barrierefreiheit (axe) und die Funktion (Offline-Suche: Quellenfehler werden behandelt). Die Zahl „42 Quellen“ stimmt: 11 API + 31 Portale.
