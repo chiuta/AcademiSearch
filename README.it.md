@@ -18,7 +18,7 @@ AcademiSearch è un'applicazione contenuta in un unico file `index.html` che int
 
 ## Funzioni
 
-- Interfaccia in 8 lingue: rumeno, inglese, francese, tedesco, spagnolo, portoghese, italiano (pulsanti RO / EN / FR / DE / ES / PT / IT / HU).
+- Interfaccia in 8 lingue: rumeno, inglese, francese, tedesco, spagnolo, portoghese, italiano, ungherese (pulsanti RO / EN / FR / DE / ES / PT / IT / HU).
 - Preimpostazioni di ricerca: «Tutte le fonti», «Studente / Dottorando», «Ricercatore / Docente», «Libri & Manuali», «Fonti romene», «Lingue romanze».
 - Un pannello «Fonti attivate» con selezione individuale delle fonti.
 - Filtri per categoria (Articoli, Preprint, Libri, Tesi, Dati) e per lingua (EN, RO, FR, DE, ES, PT, IT).
@@ -28,14 +28,15 @@ AcademiSearch è un'applicazione contenuta in un unico file `index.html` che int
 - Esportazione dei risultati filtrati in BibTeX, RIS o CSV (file generato localmente nel browser, senza richieste di rete). L'elenco degli autori viene esportato così come lo restituisce la fonte (alcune fonti troncano l'elenco), e i campi CSV che iniziano con `=`, `+`, `-` o `@` vengono neutralizzati.
 - Il campo «DOI / URL» ripulisce i prefissi (`doi:`, `https://doi.org/`) e mostra un messaggio chiaro quando il formato del DOI non è valido.
 - Il tasto `/` sposta il focus nel campo di ricerca; le ricerche della sessione corrente vengono suggerite (non viene salvato nulla).
-- Una finestra «Termini legali & GDPR».
+- Una finestra «Termini legali & GDPR», mostrata nella lingua dell'interfaccia: il testo in rumeno è l'originale; le traduzioni nelle altre 7 lingue (11 sezioni) sono automatiche, non aggiungono clausole e **richiedono la revisione di uno specialista legale**.
+- Le descrizioni delle 42 fonti (chip, suggerimenti, titoli di sezione e schede dei portali) sono disponibili in tutte e 8 le lingue; le traduzioni diverse da RO e EN sono automatiche e non verificate da madrelingua.
 
 ## Nuove funzioni (4.1.0)
 
 - **Ordinamento per rilevanza** dei risultati filtrati nella finestra dei risultati: ricerca locale (BM25, tolleranza agli errori di battitura, segni diacritici ignorati) su titoli e riassunti già recuperati; la vecchia corrispondenza letterale resta. Non effettua alcuna richiesta di rete.
 - **«La mia biblioteca»**: pulsanti di salvataggio/rimozione su ogni scheda; una finestra con ricerca nella biblioteca, esportazione BibTeX / RIS / CSV ed eliminazione in due passaggi. Al massimo 500 record, conservati solo in questo browser.
 - Copia di riserva `.fff.json` (modulo comune «fff-kit», locale, senza rete): si apre dalla finestra di dialogo che compare facendo clic sulla versione nel piè di pagina (esportazione, esportazione cifrata con password, importazione con conferma, cancellazione dei dati dell'applicazione). La copia comprende la biblioteca e la lingua dell'interfaccia.
-- I nuovi testi della biblioteca sono in rumeno, inglese, francese, tedesco, spagnolo, portoghese e italiano; **le traduzioni non sono state verificate da madrelingua.**
+- I nuovi testi della biblioteca sono in rumeno, inglese, francese, tedesco, spagnolo, portoghese, italiano e ungherese; **le traduzioni non sono state verificate da madrelingua.**
 
 ## Guida all'uso
 
@@ -61,6 +62,10 @@ AcademiSearch è un'applicazione contenuta in un unico file `index.html` che int
 Scarica `index.html` e aprilo in un browser. L'interfaccia si avvia in locale, ma la ricerca richiede una connessione a internet.
 
 ## Cronologia / Changelog
+
+### 19 ottobre 2026 (v4.3.1–4.3.3)
+- Le descrizioni delle 42 fonti e la finestra «Termini legali & GDPR» sono tradotte in tutte e 8 le lingue (il testo legale in rumeno resta l'originale; le traduzioni richiedono una revisione legale).
+- Corretto: la finestra «La mia biblioteca» non aveva i colori del tema (testo illeggibile sul tema scuro); ora usa le variabili del tema.
 
 ### 18 ottobre 2026 (v4.2.0)
 - Novità: link di ingresso `#q=<termine>` (ad es. da Nota Zero) che si limita a precompilare il campo di ricerca; la ricerca non parte da sola e il frammento viene rimosso dall'indirizzo dopo la lettura.

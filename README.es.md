@@ -18,7 +18,7 @@ AcademiSearch es una aplicación contenida en un único archivo `index.html` que
 
 ## Funciones
 
-- Interfaz en 8 idiomas: rumano, inglés, francés, alemán, español, portugués, italiano (botones RO / EN / FR / DE / ES / PT / IT / HU).
+- Interfaz en 8 idiomas: rumano, inglés, francés, alemán, español, portugués, italiano, húngaro (botones RO / EN / FR / DE / ES / PT / IT / HU).
 - Ajustes preestablecidos de búsqueda: «Todas las fuentes», «Estudiante / Doctorando», «Investigador / Personal docente», «Libros y manuales», «Fuentes rumanas», «Lenguas románicas».
 - Un panel «Fuentes activadas» con marcado individual de las fuentes.
 - Filtros por categoría (Artículos, Preprint, Libros, Tesis, Datos) y por idioma (EN, RO, FR, DE, ES, PT, IT).
@@ -28,14 +28,15 @@ AcademiSearch es una aplicación contenida en un único archivo `index.html` que
 - Exportación de los resultados filtrados a BibTeX, RIS o CSV (archivo generado localmente en el navegador, sin solicitudes de red). La lista de autores se exporta tal como la devuelve la fuente (algunas fuentes truncan la lista), y los campos CSV que empiezan por `=`, `+`, `-` o `@` se neutralizan.
 - El campo «DOI / URL» limpia los prefijos (`doi:`, `https://doi.org/`) y muestra un mensaje claro cuando el formato del DOI no es válido.
 - La tecla `/` lleva el foco al campo de búsqueda; se sugieren las búsquedas de la sesión actual (no se guarda nada).
-- Una ventana «Términos legales y RGPD».
+- Una ventana «Términos legales y RGPD», mostrada en el idioma de la interfaz: el texto en rumano es el original; las traducciones a los otros 7 idiomas (11 secciones) son automáticas, no añaden cláusulas y **requieren la revisión de un especialista jurídico**.
+- Las descripciones de las 42 fuentes (chips, sugerencias, títulos de sección y fichas de portal) están disponibles en los 8 idiomas; las traducciones distintas de RO y EN son automáticas y no han sido verificadas por hablantes nativos.
 
 ## Funciones nuevas (4.1.0)
 
 - **Ordenación por relevancia** de los resultados filtrados en la ventana de resultados: búsqueda local (BM25, tolerancia a errores de escritura, signos diacríticos ignorados) sobre los títulos y resúmenes ya obtenidos; la antigua coincidencia literal se mantiene. No hace ninguna solicitud de red.
 - **«Mi biblioteca»**: botones de guardar/quitar en cada tarjeta; una ventana con búsqueda en la biblioteca, exportación BibTeX / RIS / CSV y borrado en dos pasos. Un máximo de 500 registros, guardados solo en este navegador.
 - Copia de seguridad `.fff.json` (módulo común «fff-kit», local, sin red): se abre desde el cuadro de diálogo que aparece al hacer clic en la versión del pie de página (exportación, exportación cifrada con contraseña, importación con confirmación, borrado de los datos de la aplicación). La copia incluye la biblioteca y el idioma de la interfaz.
-- Los nuevos textos de la biblioteca están en rumano, inglés, francés, alemán, español, portugués e italiano; **las traducciones no han sido verificadas por hablantes nativos.**
+- Los nuevos textos de la biblioteca están en rumano, inglés, francés, alemán, español, portugués, italiano y húngaro; **las traducciones no han sido verificadas por hablantes nativos.**
 
 ## Manual de uso
 
@@ -61,6 +62,10 @@ AcademiSearch es una aplicación contenida en un único archivo `index.html` que
 Descarga `index.html` y ábrelo en un navegador. La interfaz arranca en local, pero la búsqueda requiere conexión a internet.
 
 ## Historial / Registro de cambios
+
+### 19 de octubre de 2026 (v4.3.1–4.3.3)
+- Las descripciones de las 42 fuentes y la ventana «Términos legales y RGPD» se traducen a los 8 idiomas (el texto jurídico en rumano sigue siendo el original; las traducciones requieren revisión jurídica).
+- Corregido: el cuadro de diálogo «Mi biblioteca» no tenía los colores del tema (texto ilegible en el tema oscuro); ahora usa las variables del tema.
 
 ### 18 de octubre de 2026 (v4.2.0)
 - Novedad: enlace de entrada `#q=<término>` (p. ej. desde Nota Zero) que solo rellena previamente el campo de búsqueda; la búsqueda no se inicia sola, y el fragmento se borra de la dirección tras leerlo.

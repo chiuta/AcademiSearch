@@ -18,7 +18,7 @@ AcademiSearch is an application in a single `index.html` file that queries sever
 
 ## Features
 
-- Interface in 8 languages: Romanian, English, French, German, Spanish, Portuguese, Italian (RO / EN / FR / DE / ES / PT / IT / HU buttons).
+- Interface in 8 languages: Romanian, English, French, German, Spanish, Portuguese, Italian, Hungarian (RO / EN / FR / DE / ES / PT / IT / HU buttons).
 - Search presets: "All sources", "Student / Doctoral candidate", "Researcher / Teaching staff", "Books & Textbooks", "Romanian Sources", "Romance Languages".
 - An "Enabled sources" panel with individual ticking of the sources.
 - Filters by category (Articles, Preprint, Books, Theses, Data) and by language (EN, RO, FR, DE, ES, PT, IT).
@@ -28,14 +28,15 @@ AcademiSearch is an application in a single `index.html` file that queries sever
 - Export of the filtered results to BibTeX, RIS or CSV (a file generated locally in the browser, with no network requests). The author list is exported as the source returns it (some sources truncate the list), and CSV fields that begin with `=`, `+`, `-` or `@` are neutralised.
 - The "DOI / URL" field cleans the prefixes (`doi:`, `https://doi.org/`) and displays a clear message when the DOI format is invalid.
 - The `/` key moves focus to the search field; the searches of the current session are suggested (nothing is saved).
-- A "Legal terms & GDPR" window.
+- A "Legal terms & GDPR" window, shown in the interface language: the Romanian text is the original; the translations into the other 7 languages (11 sections) are automatic, add no clauses and **need review by a legal specialist**.
+- The descriptions of the 42 sources (chips, tooltips, section headings and portal cards) are available in all 8 languages; the translations other than RO and EN are automatic and have not been verified by native speakers.
 
 ## New features (4.1.0)
 
 - **Sorting by relevance** of the filtered results in the results window: local search (BM25, tolerance for typos, diacritics ignored) over the titles and abstracts already fetched; the old literal matching remains. It makes no network requests.
 - **"My library"**: save/remove buttons on each card; a window with search in the library, BibTeX / RIS / CSV export and two-step deletion. At most 500 records, kept only in this browser.
 - `.fff.json` backup copy (the common "fff-kit" module, local, no network): it opens from the dialog that appears when you click the version in the footer (export, password-encrypted export, import with confirmation, deletion of the app's data). The copy includes the library and the interface language.
-- The new library texts are in Romanian, English, French, German, Spanish, Portuguese and Italian; **the translations have not been verified by native speakers.**
+- The new library texts are in Romanian, English, French, German, Spanish, Portuguese, Italian and Hungarian; **the translations have not been verified by native speakers.**
 
 ## User guide
 
@@ -61,6 +62,10 @@ AcademiSearch is an application in a single `index.html` file that queries sever
 Download `index.html` and open it in a browser. The interface starts locally, but searching requires an internet connection.
 
 ## History / Changelog
+
+### 19 October 2026 (v4.3.1–4.3.3)
+- The descriptions of the 42 sources and the "Legal terms & GDPR" window are translated into all 8 languages (the Romanian legal text remains the original; the translations need legal review).
+- Fixed: the "My library" dialog had no theme colours (text unreadable on the dark theme); it now uses the theme variables.
 
 ### 18 October 2026 (v4.2.0)
 - New: an entry link `#q=<term>` (e.g. from Nota Zero) that only pre-fills the search field; the search does not start by itself, and the fragment is removed from the address after reading.

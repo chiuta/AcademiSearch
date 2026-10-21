@@ -18,7 +18,7 @@ AcademiSearch ist eine Anwendung in einer einzigen Datei `index.html`, die mehre
 
 ## Funktionen
 
-- Oberfläche in 8 Sprachen: Rumänisch, Englisch, Französisch, Deutsch, Spanisch, Portugiesisch, Italienisch (Schaltflächen RO / EN / FR / DE / ES / PT / IT / HU).
+- Oberfläche in 8 Sprachen: Rumänisch, Englisch, Französisch, Deutsch, Spanisch, Portugiesisch, Italienisch, Ungarisch (Schaltflächen RO / EN / FR / DE / ES / PT / IT / HU).
 - Suchvoreinstellungen: „Alle Quellen“, „Student / Doktorand“, „Forscher / Lehrkraft“, „Bücher & Lehrbücher“, „Rumänische Quellen“, „Romanische Sprachen“.
 - Ein Bereich „Aktivierte Quellen“ mit einzelnem Anhaken der Quellen.
 - Filter nach Kategorie (Artikel, Preprint, Bücher, Abschlussarbeiten, Daten) und nach Sprache (EN, RO, FR, DE, ES, PT, IT).
@@ -28,14 +28,15 @@ AcademiSearch ist eine Anwendung in einer einzigen Datei `index.html`, die mehre
 - Export der gefilterten Ergebnisse als BibTeX, RIS oder CSV (lokal im Browser erzeugte Datei, ohne Netzwerkanfragen). Die Autorenliste wird so exportiert, wie die Quelle sie liefert (manche Quellen kürzen die Liste), und CSV-Felder, die mit `=`, `+`, `-` oder `@` beginnen, werden neutralisiert.
 - Das Feld „DOI / URL“ bereinigt die Präfixe (`doi:`, `https://doi.org/`) und zeigt eine klare Meldung an, wenn das DOI-Format ungültig ist.
 - Die Taste `/` setzt den Fokus auf das Suchfeld; die Suchen der aktuellen Sitzung werden vorgeschlagen (es wird nichts gespeichert).
-- Ein Fenster „Rechtliche Hinweise & DSGVO“.
+- Ein Fenster „Rechtliche Hinweise & DSGVO“, angezeigt in der Oberflächensprache: Der rumänische Text ist das Original; die Übersetzungen in die übrigen 7 Sprachen (11 Abschnitte) sind automatisch, fügen keine Klauseln hinzu und **müssen von einer juristischen Fachperson geprüft werden**.
+- Die Beschreibungen der 42 Quellen (Chips, Tooltips, Abschnittsüberschriften und Portalkarten) sind in allen 8 Sprachen verfügbar; die Übersetzungen außer RO und EN sind automatisch und nicht von Muttersprachlern geprüft.
 
 ## Neue Funktionen (4.1.0)
 
 - **Sortierung nach Relevanz** der gefilterten Ergebnisse im Ergebnisfenster: lokale Suche (BM25, Toleranz gegenüber Tippfehlern, diakritische Zeichen ignoriert) über die bereits abgerufenen Titel und Zusammenfassungen; der alte wörtliche Abgleich bleibt erhalten. Sie stellt keine Netzwerkanfragen.
 - **„Meine Bibliothek“**: Schaltflächen zum Speichern/Entfernen auf jeder Karte; ein Fenster mit Suche in der Bibliothek, BibTeX- / RIS- / CSV-Export und zweistufigem Löschen. Höchstens 500 Einträge, nur in diesem Browser gespeichert.
 - Sicherungskopie `.fff.json` (gemeinsames Modul „fff-kit“, lokal, ohne Netzwerk): Sie öffnet sich über den Dialog, der beim Klick auf die Version in der Fußzeile erscheint (Export, passwortverschlüsselter Export, Import mit Bestätigung, Löschen der Anwendungsdaten). Die Kopie enthält die Bibliothek und die Oberflächensprache.
-- Die neuen Texte der Bibliothek liegen auf Rumänisch, Englisch, Französisch, Deutsch, Spanisch, Portugiesisch und Italienisch vor; **die Übersetzungen wurden nicht von Muttersprachlern geprüft.**
+- Die neuen Texte der Bibliothek liegen auf Rumänisch, Englisch, Französisch, Deutsch, Spanisch, Portugiesisch, Italienisch und Ungarisch vor; **die Übersetzungen wurden nicht von Muttersprachlern geprüft.**
 
 ## Anleitung
 
@@ -61,6 +62,10 @@ AcademiSearch ist eine Anwendung in einer einzigen Datei `index.html`, die mehre
 Laden Sie `index.html` herunter und öffnen Sie sie in einem Browser. Die Oberfläche startet lokal, aber die Suche erfordert eine Internetverbindung.
 
 ## Verlauf / Changelog
+
+### 19. Oktober 2026 (v4.3.1–4.3.3)
+- Die Beschreibungen der 42 Quellen und das Fenster „Rechtliche Hinweise & DSGVO“ sind in alle 8 Sprachen übersetzt (der rumänische Rechtstext bleibt das Original; die Übersetzungen müssen juristisch geprüft werden).
+- Behoben: Dem Dialog „Meine Bibliothek“ fehlten die Themenfarben (Text auf dem dunklen Thema unlesbar); er verwendet jetzt die Themenvariablen.
 
 ### 18. Oktober 2026 (v4.2.0)
 - Neu: Einstiegslink `#q=<Begriff>` (z. B. aus Nota Zero), der nur das Suchfeld vorausfüllt; die Suche startet nicht von selbst, und das Fragment wird nach dem Lesen aus der Adresse entfernt.

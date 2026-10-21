@@ -18,7 +18,7 @@ AcademiSearch este o aplicație dintr-un singur fișier `index.html` care intero
 
 ## Funcții
 
-- Interfață în 8 limbi: română, engleză, franceză, germană, spaniolă, portugheză, italiană (butoane RO / EN / FR / DE / ES / PT / IT / HU).
+- Interfață în 8 limbi: română, engleză, franceză, germană, spaniolă, portugheză, italiană, maghiară (butoane RO / EN / FR / DE / ES / PT / IT / HU).
 - Presetări de căutare: „Toate sursele", „Student / Doctorand", „Cercetător / Cadru didactic", „Cărți & Manuale", „Surse Românești", „Limbi Romanice".
 - Panou „Surse activate" cu bifarea individuală a surselor.
 - Filtre după categorie (Articole, Preprint, Cărți, Teze, Date) și după limbă (EN, RO, FR, DE, ES, PT, IT).
@@ -28,14 +28,15 @@ AcademiSearch este o aplicație dintr-un singur fișier `index.html` care intero
 - Export al rezultatelor filtrate în BibTeX, RIS sau CSV (fișier generat local în browser, fără cereri de rețea). Lista de autori se exportă așa cum o returnează sursa (unele surse trunchiază lista), iar câmpurile CSV care încep cu `=`, `+`, `-` sau `@` sunt neutralizate.
 - Câmpul „DOI / URL" curăță prefixele (`doi:`, `https://doi.org/`) și afișează un mesaj clar când formatul DOI este nevalid.
 - Tasta `/` mută focusul în câmpul de căutare; căutările din sesiunea curentă sunt sugerate (nu se salvează nimic).
-- Fereastră „Termeni legali & GDPR".
+- Fereastră „Termeni legali & GDPR", afișată în limba interfeței: textul în română este cel original; traducerile în celelalte 7 limbi (11 secțiuni) sunt automate, nu adaugă clauze și **necesită revizuire de către un specialist juridic**.
+- Descrierile celor 42 de surse (chip-uri, indicii, titluri de secțiune și carduri de portal) sunt disponibile în toate cele 8 limbi; traducerile în afară de RO și EN sunt automate și neverificate de vorbitori nativi.
 
 ## Funcții noi (4.1.0)
 
 - **Ordonare după relevanță** a rezultatelor filtrate din fereastra de rezultate: căutare locală (BM25, toleranță la greșeli de scriere, diacritice ignorate) peste titlurile și rezumatele deja aduse; potrivirea literală veche rămâne. Nu face nicio cerere de rețea.
 - **„Biblioteca mea”**: butoane de salvare/eliminare pe fiecare card; fereastră cu căutare în bibliotecă, export BibTeX / RIS / CSV și ștergere în doi pași. Maximum 500 de înregistrări, păstrate numai în acest browser.
 - Copie de siguranță `.fff.json` (modul comun „fff-kit”, local, fără rețea): se deschide din dialogul care apare la clic pe versiunea din subsol (export, export criptat cu parolă, import cu confirmare, ștergerea datelor aplicației). Copia include biblioteca și limba interfeței.
-- Textele noi ale bibliotecii sunt în română, engleză, franceză, germană, spaniolă, portugheză și italiană; **traducerile nu au fost verificate de vorbitori nativi.**
+- Textele noi ale bibliotecii sunt în română, engleză, franceză, germană, spaniolă, portugheză, italiană și maghiară; **traducerile nu au fost verificate de vorbitori nativi.**
 
 ## Manual de utilizare
 
@@ -61,6 +62,10 @@ AcademiSearch este o aplicație dintr-un singur fișier `index.html` care intero
 Descărcați `index.html` și deschideți-l în browser. Interfața pornește local, dar căutarea necesită conexiune la internet.
 
 ## Istoric / Changelog
+
+### 19 octombrie 2026 (v4.3.1–4.3.3)
+- Descrierile celor 42 de surse și fereastra „Termeni legali & GDPR" sunt traduse în toate cele 8 limbi (textul juridic în română rămâne cel original; traducerile necesită revizuire juridică).
+- Corectat: dialogul „Biblioteca mea” nu avea culorile temei (text ilizibil pe tema întunecată); folosește acum variabilele temei.
 
 ### 18 octombrie 2026 (v4.2.0)
 - Nou: legătură de intrare `#q=<termen>` (ex. din Nota Zero) care doar precompletează câmpul de căutare; căutarea nu pornește singură, iar fragmentul se șterge din adresă după citire.

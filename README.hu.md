@@ -18,7 +18,7 @@ Az AcademiSearch egyetlen `index.html` fájlban lévő alkalmazás, amely egysze
 
 ## Funkciók
 
-- Felület 8 nyelven: román, angol, francia, német, spanyol, portugál, olasz (RO / EN / FR / DE / ES / PT / IT / HU gombok).
+- Felület 8 nyelven: román, angol, francia, német, spanyol, portugál, olasz, magyar (RO / EN / FR / DE / ES / PT / IT / HU gombok).
 - Keresési előbeállítások: „Minden forrás”, „Egyetemi hallgató / Doktorandusz”, „Kutató / Oktató”, „Könyvek és tankönyvek”, „Román források”, „Újlatin nyelvek”.
 - Egy „Bekapcsolt források” panel a források egyenkénti bejelölésével.
 - Szűrők kategória (Cikkek, Preprint, Könyvek, Értekezések, Adatok) és nyelv (EN, RO, FR, DE, ES, PT, IT) szerint.
@@ -28,14 +28,15 @@ Az AcademiSearch egyetlen `index.html` fájlban lévő alkalmazás, amely egysze
 - A szűrt eredmények exportálása BibTeX, RIS vagy CSV formátumban (helyben, a böngészőben generált fájl, hálózati kérések nélkül). A szerzők listáját úgy exportálja, ahogy a forrás visszaadja (egyes források csonkolják a listát), a `=`, `+`, `-` vagy `@` karakterrel kezdődő CSV-mezők pedig semlegesítve vannak.
 - A „DOI / URL” mező megtisztítja az előtagokat (`doi:`, `https://doi.org/`), és világos üzenetet jelenít meg, ha a DOI formátuma érvénytelen.
 - A `/` billentyű a keresőmezőre viszi a fókuszt; az aktuális munkamenet keresései javaslatként jelennek meg (semmi nem kerül mentésre).
-- Egy „Jogi feltételek és GDPR” ablak.
+- Egy „Jogi feltételek és GDPR” ablak, a felület nyelvén megjelenítve: a román szöveg az eredeti; a többi 7 nyelvre készült fordítások (11 szakasz) gépiek, nem adnak hozzá záradékokat, és **jogi szakértői felülvizsgálatot igényelnek**.
+- A 42 forrás leírásai (chipek, súgószövegek, szakaszcímek és portálkártyák) mind a 8 nyelven elérhetők; az RO-tól és EN-től eltérő fordítások gépiek, és anyanyelvi beszélők nem ellenőrizték őket.
 
 ## Új funkciók (4.1.0)
 
 - **Relevancia szerinti rendezés** az eredményablakban a szűrt eredményekre: helyi keresés (BM25, elírástűrés, a diakritikus jelek figyelmen kívül hagyása) a már lehozott címek és kivonatok felett; a régi szó szerinti illesztés megmarad. Nem küld hálózati kérést.
 - **„Könyvtáram”**: mentés/eltávolítás gombok minden kártyán; egy ablak a könyvtárban való kereséssel, BibTeX / RIS / CSV exporttal és kétlépéses törléssel. Legfeljebb 500 rekord, kizárólag ebben a böngészőben tárolva.
 - `.fff.json` biztonsági másolat (a közös „fff-kit” modul, helyi, hálózat nélkül): a láblécben a verzióra kattintva megjelenő párbeszédablakból nyílik meg (export, jelszóval titkosított export, importálás megerősítéssel, az alkalmazás adatainak törlése). A másolat tartalmazza a könyvtárat és a felület nyelvét.
-- A könyvtár új szövegei románul, angolul, franciául, németül, spanyolul, portugálul és olaszul vannak; **a fordításokat anyanyelvi beszélők nem ellenőrizték.**
+- A könyvtár új szövegei románul, angolul, franciául, németül, spanyolul, portugálul, olaszul és magyarul vannak; **a fordításokat anyanyelvi beszélők nem ellenőrizték.**
 
 ## Használati útmutató
 
@@ -61,6 +62,10 @@ Az AcademiSearch egyetlen `index.html` fájlban lévő alkalmazás, amely egysze
 Töltsd le az `index.html` fájlt, és nyisd meg böngészőben. A felület helyben elindul, de a kereséshez internetkapcsolat szükséges.
 
 ## Előzmények / Változásnapló
+
+### 2026. október 19. (v4.3.1–4.3.3)
+- A 42 forrás leírásai és a „Jogi feltételek és GDPR” ablak mind a 8 nyelvre le van fordítva (a román jogi szöveg marad az eredeti; a fordítások jogi felülvizsgálatot igényelnek).
+- Javítva: a „Könyvtáram” párbeszédablaknak nem voltak témaszínei (a szöveg olvashatatlan volt a sötét témán); most a téma változóit használja.
 
 ### 2026. október 18. (v4.2.0)
 - Új: `#q=<kifejezés>` belépő hivatkozás (pl. a Nota Zero-ból), amely csak előre kitölti a keresőmezőt; a keresés nem indul el magától, és a töredék olvasás után törlődik a címből.

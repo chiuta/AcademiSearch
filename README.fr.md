@@ -18,7 +18,7 @@ AcademiSearch est une application contenue dans un seul fichier `index.html` qui
 
 ## Fonctions
 
-- Interface en 8 langues : roumain, anglais, français, allemand, espagnol, portugais, italien (boutons RO / EN / FR / DE / ES / PT / IT / HU).
+- Interface en 8 langues : roumain, anglais, français, allemand, espagnol, portugais, italien, hongrois (boutons RO / EN / FR / DE / ES / PT / IT / HU).
 - Préréglages de recherche : « Toutes les sources », « Étudiant / Doctorant », « Chercheur / Enseignant », « Livres & Manuels », « Sources roumaines », « Langues romanes ».
 - Un panneau « Sources activées » avec cochage individuel des sources.
 - Filtres par catégorie (Articles, Prépublication, Livres, Thèses, Données) et par langue (EN, RO, FR, DE, ES, PT, IT).
@@ -28,14 +28,15 @@ AcademiSearch est une application contenue dans un seul fichier `index.html` qui
 - Export des résultats filtrés en BibTeX, RIS ou CSV (fichier généré localement dans le navigateur, sans requête réseau). La liste des auteurs est exportée telle que la source la renvoie (certaines sources tronquent la liste), et les champs CSV commençant par `=`, `+`, `-` ou `@` sont neutralisés.
 - Le champ « DOI / URL » nettoie les préfixes (`doi:`, `https://doi.org/`) et affiche un message clair lorsque le format du DOI est invalide.
 - La touche `/` place le focus dans le champ de recherche ; les recherches de la session en cours sont suggérées (rien n'est enregistré).
-- Une fenêtre « Conditions légales & RGPD ».
+- Une fenêtre « Conditions légales & RGPD », affichée dans la langue de l'interface : le texte roumain est l'original ; les traductions dans les 7 autres langues (11 sections) sont automatiques, n'ajoutent aucune clause et **doivent être relues par un spécialiste juridique**.
+- Les descriptions des 42 sources (puces, infobulles, titres de section et cartes de portail) sont disponibles dans les 8 langues ; les traductions autres que RO et EN sont automatiques et n'ont pas été vérifiées par des locuteurs natifs.
 
 ## Nouvelles fonctions (4.1.0)
 
 - **Tri par pertinence** des résultats filtrés dans la fenêtre des résultats : recherche locale (BM25, tolérance aux fautes de frappe, signes diacritiques ignorés) sur les titres et résumés déjà récupérés ; l'ancienne correspondance littérale demeure. Elle ne fait aucune requête réseau.
 - **« Ma bibliothèque »** : boutons d'enregistrement/retrait sur chaque carte ; une fenêtre avec recherche dans la bibliothèque, export BibTeX / RIS / CSV et suppression en deux étapes. Au maximum 500 enregistrements, conservés uniquement dans ce navigateur.
 - Copie de sauvegarde `.fff.json` (module commun « fff-kit », local, sans réseau) : elle s'ouvre depuis la boîte de dialogue qui apparaît en cliquant sur la version dans le pied de page (export, export chiffré par mot de passe, import avec confirmation, suppression des données de l'application). La copie comprend la bibliothèque et la langue de l'interface.
-- Les nouveaux textes de la bibliothèque sont en roumain, anglais, français, allemand, espagnol, portugais et italien ; **les traductions n'ont pas été vérifiées par des locuteurs natifs.**
+- Les nouveaux textes de la bibliothèque sont en roumain, anglais, français, allemand, espagnol, portugais, italien et hongrois ; **les traductions n'ont pas été vérifiées par des locuteurs natifs.**
 
 ## Mode d'emploi
 
@@ -61,6 +62,10 @@ AcademiSearch est une application contenue dans un seul fichier `index.html` qui
 Téléchargez `index.html` et ouvrez-le dans un navigateur. L'interface démarre localement, mais la recherche nécessite une connexion à internet.
 
 ## Historique / Journal des modifications
+
+### 19 octobre 2026 (v4.3.1–4.3.3)
+- Les descriptions des 42 sources et la fenêtre « Conditions légales & RGPD » sont traduites dans les 8 langues (le texte juridique roumain reste l'original ; les traductions doivent être relues sur le plan juridique).
+- Corrigé : la boîte de dialogue « Ma bibliothèque » n'avait pas les couleurs du thème (texte illisible sur le thème sombre) ; elle utilise maintenant les variables du thème.
 
 ### 18 octobre 2026 (v4.2.0)
 - Nouveau : lien d'entrée `#q=<terme>` (p. ex. depuis Nota Zero) qui se contente de préremplir le champ de recherche ; la recherche ne démarre pas toute seule, et le fragment est effacé de l'adresse après lecture.
