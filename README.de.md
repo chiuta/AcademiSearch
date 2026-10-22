@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · **Deutsch** · [Magyar](README.hu.md)
 
-**Version:** 4.3.3 · **Zuletzt aktualisiert:** 2026-10-19
+**Version:** 4.3.4 · **Zuletzt aktualisiert:** 2026-10-22
 
 Oberflächensprachen: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -62,6 +62,9 @@ AcademiSearch ist eine Anwendung in einer einzigen Datei `index.html`, die mehre
 Laden Sie `index.html` herunter und öffnen Sie sie in einem Browser. Die Oberfläche startet lokal, aber die Suche erfordert eine Internetverbindung.
 
 ## Verlauf / Changelog
+
+### 4.3.4 — 2026-10-22
+- Der Seitentitel, der Zähler „Suche läuft…“ und das aria-label der Bibliothekssuche folgen jetzt der Oberflächensprache.
 
 ### 19. Oktober 2026 (v4.3.1–4.3.3)
 - Die Beschreibungen der 42 Quellen und das Fenster „Rechtliche Hinweise & DSGVO“ sind in alle 8 Sprachen übersetzt (der rumänische Rechtstext bleibt das Original; die Übersetzungen müssen juristisch geprüft werden).

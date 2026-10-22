@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · **Español** · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versión:** 4.3.3 · **Última actualización:** 2026-10-19
+**Versión:** 4.3.4 · **Última actualización:** 2026-10-22
 
 Idiomas de la interfaz: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -62,6 +62,9 @@ AcademiSearch es una aplicación contenida en un único archivo `index.html` que
 Descarga `index.html` y ábrelo en un navegador. La interfaz arranca en local, pero la búsqueda requiere conexión a internet.
 
 ## Historial / Registro de cambios
+
+### 4.3.4 — 2026-10-22
+- El título de la página, el contador «Buscando…» y el aria-label de la búsqueda en la biblioteca ahora siguen el idioma de la interfaz.
 
 ### 19 de octubre de 2026 (v4.3.1–4.3.3)
 - Las descripciones de las 42 fuentes y la ventana «Términos legales y RGPD» se traducen a los 8 idiomas (el texto jurídico en rumano sigue siendo el original; las traducciones requieren revisión jurídica).

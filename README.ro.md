@@ -2,7 +2,7 @@
 
 [English](README.md) · **Română** · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versiune:** 4.3.3 · **Ultima actualizare:** 2026-10-19
+**Versiune:** 4.3.4 · **Ultima actualizare:** 2026-10-22
 
 Limbile interfeței: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -62,6 +62,9 @@ AcademiSearch este o aplicație dintr-un singur fișier `index.html` care intero
 Descărcați `index.html` și deschideți-l în browser. Interfața pornește local, dar căutarea necesită conexiune la internet.
 
 ## Istoric / Changelog
+
+### 4.3.4 — 2026-10-22
+- Titlul paginii, contorul „Se caută…” și aria-label-ul căutării în bibliotecă urmează acum limba interfeței.
 
 ### 19 octombrie 2026 (v4.3.1–4.3.3)
 - Descrierile celor 42 de surse și fereastra „Termeni legali & GDPR" sunt traduse în toate cele 8 limbi (textul juridic în română rămâne cel original; traducerile necesită revizuire juridică).
