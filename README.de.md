@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · **Deutsch** · [Magyar](README.hu.md)
 
-**Version:** 4.3.6 · **Zuletzt aktualisiert:** 2026-10-22
+**Version:** 4.3.7 · **Zuletzt aktualisiert:** 2026-10-22
 
 Oberflächensprachen: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -62,6 +62,9 @@ AcademiSearch ist eine Anwendung in einer einzigen Datei `index.html`, die mehre
 Laden Sie `index.html` herunter und öffnen Sie sie in einem Browser. Die Oberfläche startet lokal, aber die Suche erfordert eine Internetverbindung.
 
 ## Verlauf / Changelog
+
+### 4.3.7 — 2026-10-22
+- fff-kit 1.1.2: PBKDF2 mit 600.000 Iterationen, Schutz vor Clickjacking
 
 ### 4.3.6 — 2026-10-22
 - Status pro Quelle im Ergebnisfenster: Jede API-Quelle zeigt OK, Ratenlimit, Zeitüberschreitung oder blockiert/CORS, dazu eine sichtbare Schaltfläche „Fehlgeschlagene Quellen erneut versuchen“ mit Backoff (2 s, 4 s …).

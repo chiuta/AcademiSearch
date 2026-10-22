@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · **Magyar**
 
-**Verzió:** 4.3.6 · **Utolsó frissítés:** 2026-10-22
+**Verzió:** 4.3.7 · **Utolsó frissítés:** 2026-10-22
 
 A felület nyelvei: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -62,6 +62,9 @@ Az AcademiSearch egyetlen `index.html` fájlban lévő alkalmazás, amely egysze
 Töltsd le az `index.html` fájlt, és nyisd meg böngészőben. A felület helyben elindul, de a kereséshez internetkapcsolat szükséges.
 
 ## Előzmények / Változásnapló
+
+### 4.3.7 — 2026-10-22
+- fff-kit 1.1.2: PBKDF2 600 000 iteráció, clickjacking elleni védelem
 
 ### 4.3.6 — 2026-10-22
 - Forrásonkénti állapot az eredményablakban: minden API-forrás OK / kérési korlát / időtúllépés / blokkolva-CORS állapotot mutat, látható „A sikertelen források újrapróbálása” gombbal és visszalépéssel (2 mp, 4 mp…).
