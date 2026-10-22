@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · **Magyar**
 
-**Verzió:** 4.3.8 · **Utolsó frissítés:** 2026-10-22
+**Verzió:** 4.3.9 · **Utolsó frissítés:** 2026-10-22
 
 A felület nyelvei: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -62,6 +62,9 @@ Az AcademiSearch egyetlen `index.html` fájlban lévő alkalmazás, amely egysze
 Töltsd le az `index.html` fájlt, és nyisd meg böngészőben. A felület helyben elindul, de a kereséshez internetkapcsolat szükséges.
 
 ## Előzmények / Változásnapló
+
+### 4.3.9 — 2026-10-22
+- Akadálymentesség: jól látható fókuszkeret a fő keresőmezőn, valamint a DOI-, API-kulcs-, könyvtár- és belső keresőmezőkön (legalább 3:1 kontraszt).
 
 ### 4.3.8 — 2026-10-22
 - Érintési célpontok: a lábléc „Könyvtáram” gombja mostantól legalább 28 px magas (CSS-specificitás javítva).

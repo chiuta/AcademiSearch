@@ -2,7 +2,7 @@
 
 **English** · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Version:** 4.3.8 · **Last updated:** 2026-10-22
+**Version:** 4.3.9 · **Last updated:** 2026-10-22
 
 Interface languages: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -62,6 +62,9 @@ AcademiSearch is an application in a single `index.html` file that queries sever
 Download `index.html` and open it in a browser. The interface starts locally, but searching requires an internet connection.
 
 ## History / Changelog
+
+### 4.3.9 — 2026-10-22
+- Accessibility: clear focus ring on the main search field and on the DOI, API-key, library and internal-search fields (contrast of at least 3:1).
 
 ### 4.3.8 — 2026-10-22
 - Touch targets: the footer “My library” button is now at least 28 px tall (CSS specificity fix).
