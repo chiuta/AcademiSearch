@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · **Español** · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versión:** 4.3.11 · **Última actualización:** 2026-10-23
+**Versión:** 4.3.12 · **Última actualización:** 2026-10-23
 
 Idiomas de la interfaz: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -50,7 +50,7 @@ AcademiSearch es una aplicación contenida en un único archivo `index.html` que
 
 ## Privacidad y red
 
-- Local: el idioma de la interfaz se guarda en `localStorage` (`ui_lang`); la biblioteca personal, en `localStorage` (`as_library`, un máximo de 500 registros, no sale del navegador); las claves API introducidas se guardan en `sessionStorage` y desaparecen al cerrar la pestaña. La aplicación no usa cookies.
+- Local: el idioma de la interfaz se guarda en `localStorage` (`academisearch.lang`); la biblioteca personal, en `localStorage` (`academisearch.library`, un máximo de 500 registros, no sale del navegador); las claves API introducidas se guardan en `sessionStorage` y desaparecen al cerrar la pestaña. La aplicación no usa cookies.
 - Red: la aplicación NO funciona sin conexión. En cada búsqueda, el término buscado se envía a los servicios externos activos, directamente desde el navegador: OpenAlex, CrossRef, CORE, Semantic Scholar, arXiv, Europe PMC (ebi.ac.uk), DOAJ, Zenodo, Open Library, Internet Archive, Project Gutenberg (gutendex.com). Con «Acceso libre» / «Unpaywall» se contacta con CrossRef, Unpaywall y OpenAIRE.
 - Proxy CORS (opt-in, desactivado por defecto): arXiv y Semantic Scholar se consultan directamente. Solo si marcas explícitamente «Permitir el proxy público allorigins.win» (junto a los campos de claves API; válido durante la pestaña) y el navegador bloquea la solicitud directa (CORS), esa solicitud se reenvía a través de `api.allorigins.win`, que puede ver la URL de la consulta (el término buscado). Las claves API nunca pasan por el proxy.
 - Las solicitudes a OpenAlex y Unpaywall incluyen la dirección de contacto del operador (`academisearch@alexio.tf`), conforme a la convención del «polite pool».
@@ -62,6 +62,10 @@ AcademiSearch es una aplicación contenida en un único archivo `index.html` que
 Descarga `index.html` y ábrelo en un navegador. La interfaz arranca en local, pero la búsqueda requiere conexión a internet.
 
 ## Historial / Registro de cambios
+
+### 4.3.12 — 2026-10-23
+- Las claves de almacenamiento llevan ahora el prefijo de la aplicación (`academisearch.lang`, `academisearch.library`); los datos existentes (idioma, biblioteca guardada) se migran automáticamente al iniciar y las copias antiguas `.fff.json` siguen pudiendo importarse.
+- fff-kit 1.2.0: almacenamiento sin prefijo corregido
 
 ### 4.3.10 — 2026-10-22
 - fff-kit 1.1.4: objetivos táctiles y tamaño mínimo de texto
@@ -99,7 +103,7 @@ Descarga `index.html` y ábrelo en un navegador. La interfaz arranca en local, p
 
 ### 14 de octubre de 2026 (v4.1.0)
 - Ordenación local por relevancia en la ventana de resultados (FFF.search).
-- «Mi biblioteca» (clave de `localStorage` `as_library`) con búsqueda y exportación BibTeX/RIS/CSV.
+- «Mi biblioteca» (clave de `localStorage` `academisearch.library`) con búsqueda y exportación BibTeX/RIS/CSV.
 - Copia de seguridad `.fff.json` mediante los módulos comunes (core, label, bundle, search); versión mostrada en el pie de página.
 - Pruebas nuevas: `tests/fff-r8.test.mjs`.
 

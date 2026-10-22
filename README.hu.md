@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · **Magyar**
 
-**Verzió:** 4.3.11 · **Utolsó frissítés:** 2026-10-23
+**Verzió:** 4.3.12 · **Utolsó frissítés:** 2026-10-23
 
 A felület nyelvei: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -50,7 +50,7 @@ Az AcademiSearch egyetlen `index.html` fájlban lévő alkalmazás, amely egysze
 
 ## Adatvédelem és hálózat
 
-- Helyi: a felület nyelve a `localStorage`-ban marad (`ui_lang`); a személyes könyvtár a `localStorage`-ban (`as_library`, legfeljebb 500 rekord, nem hagyja el a böngészőt); a megadott API-kulcsok a `sessionStorage`-ban maradnak, és a lap bezárásakor eltűnnek. Az alkalmazás nem használ sütiket.
+- Helyi: a felület nyelve a `localStorage`-ban marad (`academisearch.lang`); a személyes könyvtár a `localStorage`-ban (`academisearch.library`, legfeljebb 500 rekord, nem hagyja el a böngészőt); a megadott API-kulcsok a `sessionStorage`-ban maradnak, és a lap bezárásakor eltűnnek. Az alkalmazás nem használ sütiket.
 - Hálózat: az alkalmazás NEM offline. Minden keresésnél a keresett kifejezés közvetlenül a böngészőből kerül elküldésre az aktív külső szolgáltatásoknak: OpenAlex, CrossRef, CORE, Semantic Scholar, arXiv, Europe PMC (ebi.ac.uk), DOAJ, Zenodo, Open Library, Internet Archive, Project Gutenberg (gutendex.com). A „Szabad hozzáférés” / „Unpaywall” használatakor a CrossRef, az Unpaywall és az OpenAIRE kerül megkeresésre.
 - CORS-proxy (opt-in, alapértelmezés szerint kikapcsolva): az arXiv és a Semantic Scholar lekérdezése közvetlenül történik. Csak ha kifejezetten bejelölöd az „Az allorigins.win nyilvános proxy engedélyezése” opciót (az API-kulcsmezők mellett; a lap időtartamára érvényes), és a böngésző blokkolja a közvetlen kérést (CORS), az adott kérés az `api.allorigins.win` címen keresztül kerül újraküldésre, amely láthatja a lekérdezés URL-jét (a keresett kifejezést). Az API-kulcsok soha nem haladnak át a proxyn.
 - Az OpenAlex és az Unpaywall felé küldött kérések tartalmazzák az üzemeltető kapcsolati címét (`academisearch@alexio.tf`), a „polite pool” konvenciónak megfelelően.
@@ -62,6 +62,10 @@ Az AcademiSearch egyetlen `index.html` fájlban lévő alkalmazás, amely egysze
 Töltsd le az `index.html` fájlt, és nyisd meg böngészőben. A felület helyben elindul, de a kereséshez internetkapcsolat szükséges.
 
 ## Előzmények / Változásnapló
+
+### 4.3.12 — 2026-10-23
+- A tárolókulcsok mostantól az alkalmazás előtagját viselik (`academisearch.lang`, `academisearch.library`); a meglévő adatok (nyelv, mentett könyvtár) indításkor automatikusan átkerülnek, a régi `.fff.json` másolatok továbbra is importálhatók.
+- fff-kit 1.2.0: előtag nélküli tárolás javítva
 
 ### 4.3.10 — 2026-10-22
 - fff-kit 1.1.4: érintési célpontok és minimális szövegméret
@@ -99,7 +103,7 @@ Töltsd le az `index.html` fájlt, és nyisd meg böngészőben. A felület hely
 
 ### 2026. október 14. (v4.1.0)
 - Helyi relevancia szerinti rendezés az eredményablakban (FFF.search).
-- „Könyvtáram” (a `localStorage` `as_library` kulcsa) kereséssel és BibTeX/RIS/CSV exporttal.
+- „Könyvtáram” (a `localStorage` `academisearch.library` kulcsa) kereséssel és BibTeX/RIS/CSV exporttal.
 - `.fff.json` biztonsági másolat a közös modulokon keresztül (core, label, bundle, search); a verzió a láblécben jelenik meg.
 - Új tesztek: `tests/fff-r8.test.mjs`.
 

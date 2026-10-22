@@ -2,7 +2,7 @@
   "schema": 1,
   "slug": "academisearch",
   "name": "AcademiSearch — 42 Surse Academice Multilingve",
-  "version": "4.3.11",
+  "version": "4.3.12",
   "updated": "2026-10-23",
   "description": "Motor de căutare academic unificat gratuit — 42 surse open-access în 7 limbi + surse multilingve: arXiv, PubMed, CORE, Zenodo, CEEOL, Gallica, Dialnet și altele. Ideal pentru studenți, doctoranzi și cercetători.",
   "egress": [
@@ -103,11 +103,11 @@
     "localStorage"
   ],
   "storageKeys": [
-    "as_library",
-    "ui_lang"
+    "academisearch.lang",
+    "academisearch.library"
   ],
-  "sizeBytes": 958163,
-  "sha256": "f63bbd2dd029a9816460621f478d31d39ae58f3e3b263739501f531f72b3eb42",
+  "sizeBytes": 958743,
+  "sha256": "cbf3a82cdaf9cfae56557681505c6443b84f5d6a690f6ab2100bec849e5ce12b",
   "csp": {
     "present": true,
     "directives": {

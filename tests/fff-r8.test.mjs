@@ -39,7 +39,7 @@ const seed = (page) => page.evaluate((items) => { openResultsModal('test'); addR
 {
   const {ctx, page, errs, net} = await open();
   check('kitul e prezent (FFF.search, bundle, label)', await page.evaluate(() => !!(window.FFF && FFF.search && FFF.bundle && FFF.label)));
-  check('versiune 4.3.11 în meta și în #app-version', await page.evaluate(() => document.querySelector('meta[name=application-version]').content === '4.3.11' && /^v 4\.3\.11 · 2026-10-23$/.test(document.getElementById('app-version').textContent.trim())));
+  check('versiune 4.3.12 în meta și în #app-version', await page.evaluate(() => document.querySelector('meta[name=application-version]').content === '4.3.12' && /^v 4\.3\.12 · 2026-10-23$/.test(document.getElementById('app-version').textContent.trim())));
 
   // --- relevanță locală în filtrul intern ---
   await seed(page);
@@ -74,11 +74,11 @@ const seed = (page) => page.evaluate((items) => { openResultsModal('test'); addR
   await btns[3].click();
   check('buton trece pe „Salvat” (aria-pressed=true)', (await btns[3].getAttribute('aria-pressed')) === 'true' && /★/.test(await btns[3].textContent()));
   await btns[0].click();
-  let lib = await page.evaluate(() => JSON.parse(localStorage.getItem('as_library') || '[]'));
-  check('2 referințe în localStorage (as_library)', lib.length === 2 && lib[0].title.startsWith('Machine') && lib[1].title.startsWith('Photosynthesis'), lib.map((x) => x.title));
+  let lib = await page.evaluate(() => JSON.parse(localStorage.getItem('academisearch.library') || '[]'));
+  check('2 referințe în localStorage (academisearch.library)', lib.length === 2 && lib[0].title.startsWith('Machine') && lib[1].title.startsWith('Photosynthesis'), lib.map((x) => x.title));
   check('contor în subsol = 2', (await page.textContent('#libCount')) === '2');
   await btns[0].click();
-  lib = await page.evaluate(() => JSON.parse(localStorage.getItem('as_library') || '[]'));
+  lib = await page.evaluate(() => JSON.parse(localStorage.getItem('academisearch.library') || '[]'));
   check('al doilea clic scoate din bibliotecă', lib.length === 1);
   await btns[0].click();   // re-salvează
 
@@ -121,7 +121,7 @@ const seed = (page) => page.evaluate((items) => { openResultsModal('test'); addR
   check('export CSV (antet + 3 rânduri)', csv.replace(/^﻿/, '').trim().split(/\r?\n/).length === 4);
   // copie de siguranță prin kit
   const bundle = await p2.evaluate(() => { const o = FFF.bundle.build(); return o; });
-  check('copia .fff.json (kit) include as_library', bundle && bundle.data && typeof bundle.data.as_library === 'string' && JSON.parse(bundle.data.as_library).length === 3);
+  check('copia .fff.json (kit) include academisearch.library', bundle && bundle.data && typeof bundle.data['academisearch.library'] === 'string' && JSON.parse(bundle.data['academisearch.library']).length === 3);
   // accesibilitate: axe în dialog
   await p2.evaluate(fs.readFileSync(AXE, 'utf8') + '\n;0');
   const ax = await p2.evaluate(async () => (await window.axe.run(document.getElementById('libDlg'), {resultTypes: ['violations']})).violations.map((v) => v.id + ':' + v.nodes.length));
@@ -133,7 +133,7 @@ const seed = (page) => page.evaluate((items) => { openResultsModal('test'); addR
   await p2.click('#libClearBtn');
   check('golirea cere confirmare (încă 2 elemente)', (await p2.$$('#libList .lib-item')).length === 2 && /din nou/.test(await p2.textContent('#libClearBtn')));
   await p2.click('#libClearBtn');
-  check('a doua apăsare golește', (await p2.$$('#libList .lib-item')).length === 0 && (await p2.evaluate(() => JSON.parse(localStorage.getItem('as_library')).length)) === 0);
+  check('a doua apăsare golește', (await p2.$$('#libList .lib-item')).length === 0 && (await p2.evaluate(() => JSON.parse(localStorage.getItem('academisearch.library')).length)) === 0);
   check('0 erori de pagină', e2.length === 0, e2);
   await c2.close();
 }
