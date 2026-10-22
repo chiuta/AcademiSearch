@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · **Magyar**
 
-**Verzió:** 4.3.4 · **Utolsó frissítés:** 2026-10-22
+**Verzió:** 4.3.5 · **Utolsó frissítés:** 2026-10-22
 
 A felület nyelvei: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -62,6 +62,9 @@ Az AcademiSearch egyetlen `index.html` fájlban lévő alkalmazás, amely egysze
 Töltsd le az `index.html` fájlt, és nyisd meg böngészőben. A felület helyben elindul, de a kereséshez internetkapcsolat szükséges.
 
 ## Előzmények / Változásnapló
+
+### 4.3.5 — 2026-10-22
+- Fordítási javítás: az átláthatósági panel leírása (és neve) mostantól a felület nyelvét követi.
 
 ### 4.3.4 — 2026-10-22
 - Az oldal címe, a „Keresés…” számláló és a könyvtári keresés aria-label értéke mostantól a felület nyelvét követi.

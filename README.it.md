@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · **Italiano** · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versione:** 4.3.4 · **Ultimo aggiornamento:** 2026-10-22
+**Versione:** 4.3.5 · **Ultimo aggiornamento:** 2026-10-22
 
 Lingue dell'interfaccia: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -62,6 +62,9 @@ AcademiSearch è un'applicazione contenuta in un unico file `index.html` che int
 Scarica `index.html` e aprilo in un browser. L'interfaccia si avvia in locale, ma la ricerca richiede una connessione a internet.
 
 ## Cronologia / Changelog
+
+### 4.3.5 — 2026-10-22
+- Correzione di traduzione: la descrizione (e il nome) nel pannello di trasparenza seguono ora la lingua dell'interfaccia.
 
 ### 4.3.4 — 2026-10-22
 - Il titolo della pagina, il contatore «Ricerca in corso…» e l'aria-label della ricerca nella biblioteca seguono ora la lingua dell'interfaccia.

@@ -2,7 +2,7 @@
   "schema": 1,
   "slug": "academisearch",
   "name": "AcademiSearch — 42 Surse Academice Multilingve",
-  "version": "4.3.4",
+  "version": "4.3.5",
   "updated": "2026-10-22",
   "description": "Motor de căutare academic unificat gratuit — 42 surse open-access în 7 limbi + surse multilingve: arXiv, PubMed, CORE, Zenodo, CEEOL, Gallica, Dialnet și altele. Ideal pentru studenți, doctoranzi și cercetători.",
   "egress": [
@@ -106,8 +106,8 @@
     "as_library",
     "ui_lang"
   ],
-  "sizeBytes": 897788,
-  "sha256": "bc9f2c6c9783ad405beea5edec297c68c6043de9622e536649a086b059e97cdf",
+  "sizeBytes": 901105,
+  "sha256": "241bc99e58c5d1aa62afdd1fcd3ab08c69295d5c3599315f9fca7a0d924d8965",
   "csp": {
     "present": true,
     "directives": {
@@ -120,7 +120,7 @@
       "base-uri": "'self'",
       "form-action": "'self'",
       "worker-src": "'self' blob:",
-      "script-src": "'self' blob: sha256×3",
+      "script-src": "'self' blob: sha256×4",
       "connect-src": "'self' https://api.crossref.org https://api.openaire.eu https://api.unpaywall.org https://api.allorigins.win https://archive.org https://openlibrary.org https://gutendex.com https://api.semanticscholar.org https://api.core.ac.uk https://api.openalex.org https://export.arxiv.org https://zenodo.org https://doaj.org https://www.ebi.ac.uk",
       "manifest-src": "'self'"
     },
