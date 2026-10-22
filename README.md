@@ -2,7 +2,7 @@
 
 **English** · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Version:** 4.3.5 · **Last updated:** 2026-10-22
+**Version:** 4.3.6 · **Last updated:** 2026-10-22
 
 Interface languages: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -62,6 +62,11 @@ AcademiSearch is an application in a single `index.html` file that queries sever
 Download `index.html` and open it in a browser. The interface starts locally, but searching requires an internet connection.
 
 ## History / Changelog
+
+### 4.3.6 — 2026-10-22
+- Per-source status in the results window: each API source shows OK, rate limit, timeout or blocked/CORS, plus a visible "Retry failed sources" button with backoff (2 s, 4 s…).
+- In-memory session cache of results per source and query (fewer 429 errors on repeated searches).
+- Mobile: no text below 12 px and touch targets of at least 24 px (WCAG 2.5.8).
 
 ### 4.3.5 — 2026-10-22
 - Translation fix: the description (and name) in the transparency panel now follow the interface language.

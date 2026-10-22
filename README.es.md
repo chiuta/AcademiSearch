@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · **Español** · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versión:** 4.3.5 · **Última actualización:** 2026-10-22
+**Versión:** 4.3.6 · **Última actualización:** 2026-10-22
 
 Idiomas de la interfaz: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -62,6 +62,11 @@ AcademiSearch es una aplicación contenida en un único archivo `index.html` que
 Descarga `index.html` y ábrelo en un navegador. La interfaz arranca en local, pero la búsqueda requiere conexión a internet.
 
 ## Historial / Registro de cambios
+
+### 4.3.6 — 2026-10-22
+- Estado por fuente en la ventana de resultados: cada fuente API muestra OK, límite de peticiones, tiempo agotado o bloqueado/CORS, y un botón visible «Reintentar las fuentes fallidas» con backoff (2 s, 4 s…).
+- Caché de sesión en memoria de los resultados por fuente y consulta (menos errores 429 en búsquedas repetidas).
+- Móvil: ningún texto por debajo de 12 px y áreas táctiles de al menos 24 px (WCAG 2.5.8).
 
 ### 4.3.5 — 2026-10-22
 - Corrección de traducción: la descripción (y el nombre) del panel de transparencia siguen ahora el idioma de la interfaz.
