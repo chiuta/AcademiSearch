@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · **Português** · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versão:** 4.3.12 · **Última atualização:** 2026-10-23
+**Versão:** 4.3.13 · **Última atualização:** 2026-10-23
 
 Idiomas da interface: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -62,6 +62,10 @@ O AcademiSearch é uma aplicação contida num único ficheiro `index.html` que 
 Descarregue `index.html` e abra-o num navegador. A interface arranca localmente, mas a pesquisa requer ligação à internet.
 
 ## Histórico / Registo de alterações
+
+### 4.3.13 — 2026-10-23
+
+- **Fix**: search-term highlighting no longer corrupts HTML entities (searching “amp”, “lt” or “39” used to insert `<mark>` inside `&amp;`, `&lt;`, `&#39;` and show them literally).
 
 ### 4.3.12 — 2026-10-23
 - As chaves de armazenamento têm agora o prefixo da aplicação (`academisearch.lang`, `academisearch.library`); os dados existentes (idioma, biblioteca guardada) são migrados automaticamente no arranque e as cópias antigas `.fff.json` continuam a poder ser importadas.

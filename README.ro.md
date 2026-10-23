@@ -2,7 +2,7 @@
 
 [English](README.md) · **Română** · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versiune:** 4.3.12 · **Ultima actualizare:** 2026-10-23
+**Versiune:** 4.3.13 · **Ultima actualizare:** 2026-10-23
 
 Limbile interfeței: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -62,6 +62,10 @@ AcademiSearch este o aplicație dintr-un singur fișier `index.html` care intero
 Descărcați `index.html` și deschideți-l în browser. Interfața pornește local, dar căutarea necesită conexiune la internet.
 
 ## Istoric / Changelog
+
+### 4.3.13 — 2026-10-23
+
+- **Corecție**: evidențierea termenului căutat nu mai corupe entitățile HTML (căutarea „amp”, „lt” sau „39” insera `<mark>` în `&amp;`, `&lt;`, `&#39;` și le afișa literal).
 
 ### 4.3.12 — 2026-10-23
 - Cheile de stocare au acum prefixul aplicației (`academisearch.lang`, `academisearch.library`); datele existente (limba, biblioteca salvată) se migrează automat la pornire, iar copiile vechi `.fff.json` se pot importa în continuare.
