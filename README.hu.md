@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · **Magyar**
 
-**Verzió:** 4.3.12 · **Utolsó frissítés:** 2026-10-23
+**Verzió:** 4.3.13 · **Utolsó frissítés:** 2026-10-23
 
 A felület nyelvei: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -62,6 +62,10 @@ Az AcademiSearch egyetlen `index.html` fájlban lévő alkalmazás, amely egysze
 Töltsd le az `index.html` fájlt, és nyisd meg böngészőben. A felület helyben elindul, de a kereséshez internetkapcsolat szükséges.
 
 ## Előzmények / Változásnapló
+
+### 4.3.13 — 2026-10-23
+
+- **Fix**: search-term highlighting no longer corrupts HTML entities (searching “amp”, “lt” or “39” used to insert `<mark>` inside `&amp;`, `&lt;`, `&#39;` and show them literally).
 
 ### 4.3.12 — 2026-10-23
 - A tárolókulcsok mostantól az alkalmazás előtagját viselik (`academisearch.lang`, `academisearch.library`); a meglévő adatok (nyelv, mentett könyvtár) indításkor automatikusan átkerülnek, a régi `.fff.json` másolatok továbbra is importálhatók.
