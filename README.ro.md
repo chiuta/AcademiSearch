@@ -2,7 +2,7 @@
 
 [English](README.md) · **Română** · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versiune:** 4.3.13 · **Ultima actualizare:** 2026-10-26
+**Versiune:** 5.0.0 · **Ultima actualizare:** 2026-10-26
 
 Limbile interfeței: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -62,6 +62,12 @@ AcademiSearch este o aplicație dintr-un singur fișier `index.html` care intero
 Descărcați `index.html` și deschideți-l în browser. Interfața pornește local, dar căutarea necesită conexiune la internet.
 
 ## Istoric / Changelog
+
+### 5.0.0 — 2026-10-26
+
+- **Dosare de cercetare** în Biblioteca mea: creezi dosare (max. 30), muți referințele între ele, adaugi o notă personală pe fiecare, iar salvările noi merg în dosarul ales. Exporți un dosar ca BibTeX/RIS/CSV sau ca **Markdown** (`.md`, cu notele). Totul rămâne local (`academisearch.folders`).
+- **Deduplicare între surse**: aceeași lucrare găsită de mai multe API-uri apare o singură dată (după DOI sau, fără DOI, după titlu + an + primul autor); PDF-ul, rezumatul și DOI-ul lipsă se completează din celelalte surse, iar cardul arată „Găsit și în: …”.
+- **Rețea de citări** (OpenAlex, doar la cerere, cu butonul de pe card sau din bibliotecă): graf cu referințele și lucrările care citează, cu liste, totaluri și „Salvează” direct în bibliotecă. Acoperirea OpenAlex e incompletă; interfața o spune.
 
 ### 4.3.12 — 2026-10-23
 - Cheile de stocare au acum prefixul aplicației (`academisearch.lang`, `academisearch.library`); datele existente (limba, biblioteca salvată) se migrează automat la pornire, iar copiile vechi `.fff.json` se pot importa în continuare.

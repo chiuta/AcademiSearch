@@ -2,7 +2,7 @@
 
 **English** · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Version:** 4.3.13 · **Last updated:** 2026-10-26
+**Version:** 5.0.0 · **Last updated:** 2026-10-26
 
 Interface languages: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -62,6 +62,12 @@ AcademiSearch is an application in a single `index.html` file that queries sever
 Download `index.html` and open it in a browser. The interface starts locally, but searching requires an internet connection.
 
 ## History / Changelog
+
+### 5.0.0 — 2026-10-26
+
+- **Research folders** in My library: create folders (max 30), move references between them, add a personal note to each; new saves go into the active folder. Export a folder as BibTeX/RIS/CSV or **Markdown** (with notes). Stored locally.
+- **Cross-source deduplication**: the same work returned by several APIs is shown once (by DOI or, without DOI, title + year + first author); missing PDF/abstract/DOI are filled in from the other sources and the card shows where else it was found.
+- **Citation network** (OpenAlex, on request): graph of references and citing works with lists, totals and one-click save to the library. OpenAlex coverage is incomplete, and the UI says so.
 
 ### 4.3.12 — 2026-10-23
 - Storage keys now carry the app prefix (`academisearch.lang`, `academisearch.library`); existing data (language, saved library) is migrated automatically at startup, and old `.fff.json` copies can still be imported.
