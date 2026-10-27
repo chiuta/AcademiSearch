@@ -2,7 +2,9 @@
 
 [English](README.md) · **Română** · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versiune:** 5.0.0 · **Ultima actualizare:** 2026-10-26
+**Versiune:** 5.1.0 · **Ultima actualizare:** 2026-10-27
+
+**Stare:** stabil · **Offline:** cere internet pentru căutare (API-urile surselor)
 
 Limbile interfeței: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -30,6 +32,8 @@ AcademiSearch este o aplicație dintr-un singur fișier `index.html` care intero
 - Tasta `/` mută focusul în câmpul de căutare; căutările din sesiunea curentă sunt sugerate (nu se salvează nimic).
 - Fereastră „Termeni legali & GDPR", afișată în limba interfeței: textul în română este cel original; traducerile în celelalte 7 limbi (11 secțiuni) sunt automate, nu adaugă clauze și **necesită revizuire de către un specialist juridic**.
 - Descrierile celor 42 de surse (chip-uri, indicii, titluri de secțiune și carduri de portal) sunt disponibile în toate cele 8 limbi; traducerile în afară de RO și EN sunt automate și neverificate de vorbitori nativi.
+- **Zotero (5.1.0):** butonul „Zotero” (rezultate și bibliotecă) descarcă lista în format RIS, pe care Zotero îl importă (Fișier → Import…). Fiecare card de rezultat poartă și metadate COinS invizibile (`Z3988`), astfel încât Zotero Connector poate recunoaște elementele din pagină. Local, fără rețea. Trimiterea directă către un Zotero pornit este *planificată* (necesită test cu un Zotero real și nu este inclusă).
+- **PDF-uri libere în bloc (5.1.0):** butonul „PDF-uri libere (Unpaywall)” caută, la cerere, până la 25 de rezultate filtrate care au DOI dar nu au PDF (3 cereri simultan) și atașează doar un `url_for_pdf` real din Unpaywall. Se trimit acele DOI-uri către `api.unpaywall.org` (deja în lista de gazde de mai sus); nu se trimite nimic dacă nu apeși butonul.
 
 ## Funcții noi (4.1.0)
 
@@ -62,6 +66,13 @@ AcademiSearch este o aplicație dintr-un singur fișier `index.html` care intero
 Descărcați `index.html` și deschideți-l în browser. Interfața pornește local, dar căutarea necesită conexiune la internet.
 
 ## Istoric / Changelog
+
+### 5.1.0 — 2026-10-27
+- Export Zotero (RIS) și metadate COinS invizibile pe carduri, pentru Zotero Connector.
+- Buton „PDF-uri libere (Unpaywall)”: căutare în bloc (max. 25, la cerere) pentru rezultatele cu DOI și fără PDF.
+- Existente deja din 5.0.0 (cerute în recenzie): deduplicare între surse după DOI, buton Unpaywall pe fiecare card.
+- Nefăcut: trimitere directă către un Zotero pornit (necesită test cu un Zotero real).
+- Test nou: `tests/zotero-oa.test.mjs`.
 
 ### 5.0.0 — 2026-10-26
 

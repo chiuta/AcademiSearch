@@ -2,7 +2,9 @@
 
 **English** · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Version:** 5.0.0 · **Last updated:** 2026-10-26
+**Version:** 5.1.0 · **Last updated:** 2026-10-27
+
+**Status:** stable · **Offline:** needs internet for search (source APIs)
 
 Interface languages: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -30,6 +32,8 @@ AcademiSearch is an application in a single `index.html` file that queries sever
 - The `/` key moves focus to the search field; the searches of the current session are suggested (nothing is saved).
 - A "Legal terms & GDPR" window, shown in the interface language: the Romanian text is the original; the translations into the other 7 languages (11 sections) are automatic, add no clauses and **need review by a legal specialist**.
 - The descriptions of the 42 sources (chips, tooltips, section headings and portal cards) are available in all 8 languages; the translations other than RO and EN are automatic and have not been verified by native speakers.
+- **Zotero (5.1.0):** a "Zotero" button (results and library) downloads the list as RIS, which Zotero imports (File → Import…). Each result card also carries invisible COinS metadata (`Z3988`), so the Zotero Connector can recognise the items on the page. Local, no network. A direct push to a running Zotero is *planned* (it needs a test against a real Zotero and is not included).
+- **Free PDFs in bulk (5.1.0):** the "Free PDFs (Unpaywall)" button looks up, on request, up to 25 filtered results that have a DOI but no PDF (3 requests at a time) and attaches only a real `url_for_pdf` from Unpaywall. This sends those DOIs to `api.unpaywall.org` (already in the list of hosts above); nothing is sent unless you press the button.
 
 ## New features (4.1.0)
 
@@ -62,6 +66,13 @@ AcademiSearch is an application in a single `index.html` file that queries sever
 Download `index.html` and open it in a browser. The interface starts locally, but searching requires an internet connection.
 
 ## History / Changelog
+
+### 5.1.0 — 2026-10-27
+- Zotero export (RIS) and invisible COinS metadata on the cards for the Zotero Connector.
+- "Free PDFs (Unpaywall)" button: bulk lookup (max. 25, on request) for results with a DOI and no PDF.
+- Already present since 5.0.0 (the review asked for them): cross-source deduplication by DOI, Unpaywall button per card.
+- Not done: direct push to a running Zotero (needs testing against a real Zotero).
+- New test: `tests/zotero-oa.test.mjs`.
 
 ### 5.0.0 — 2026-10-26
 
