@@ -2,6 +2,13 @@
 
 Format: [SemVer](https://semver.org/lang/ro/) (MAJOR.MINOR.PATCH). Istoricul complet al versiunilor anterioare este în secțiunea „Istoric / Changelog” din [README.ro.md](README.ro.md).
 
+## 5.1.1 — 2026-10-27
+
+Anterior: v5.1.0. Doar documentație; logica aplicației nu s-a schimbat.
+
+- „Trimiterea directă către Zotero” era marcată „planificat”. Se documentează acum ca **neimplementată și neplanificată**: conectorul local Zotero (`127.0.0.1:23119`) este interzis de CSP (`connect-src` limitat la gazdele API); CSP nu a fost relaxat. Alternativele existente: descărcarea RIS și metadatele COinS pentru Zotero Connector.
+- Nu mai rămâne nimic „planificat” care să se poată implementa onest în această aplicație (BibTeX există deja în biblioteca locală; deduplicarea după DOI și Unpaywall pe card, din 5.0.0).
+
 ## 5.1.0 — 2026-10-27
 
 ### Adăugat
