@@ -2,7 +2,7 @@
 
 **English** · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Version:** 5.1.0 · **Last updated:** 2026-10-27
+**Version:** 5.1.1 · **Last updated:** 2026-10-27
 
 **Status:** stable · **Offline:** needs internet for search (source APIs)
 
@@ -32,7 +32,7 @@ AcademiSearch is an application in a single `index.html` file that queries sever
 - The `/` key moves focus to the search field; the searches of the current session are suggested (nothing is saved).
 - A "Legal terms & GDPR" window, shown in the interface language: the Romanian text is the original; the translations into the other 7 languages (11 sections) are automatic, add no clauses and **need review by a legal specialist**.
 - The descriptions of the 42 sources (chips, tooltips, section headings and portal cards) are available in all 8 languages; the translations other than RO and EN are automatic and have not been verified by native speakers.
-- **Zotero (5.1.0):** a "Zotero" button (results and library) downloads the list as RIS, which Zotero imports (File → Import…). Each result card also carries invisible COinS metadata (`Z3988`), so the Zotero Connector can recognise the items on the page. Local, no network. A direct push to a running Zotero is *planned* (it needs a test against a real Zotero and is not included).
+- **Zotero (5.1.0):** a "Zotero" button (results and library) downloads the list as RIS, which Zotero imports (File → Import…). Each result card also carries invisible COinS metadata (`Z3988`), so the Zotero Connector can recognise the items on the page. Local, no network. **A direct push to a running Zotero is not implemented and will not be**: Zotero's local connector listens on `127.0.0.1:23119`, and the page's CSP (`connect-src` limited to the listed API hosts) forbids connecting to it; relaxing the CSP to allow localhost was deliberately not done (it would weaken the policy for every visitor, and it could not be tested without a real Zotero). Use the RIS download or the Zotero Connector on the COinS-marked page instead.
 - **Free PDFs in bulk (5.1.0):** the "Free PDFs (Unpaywall)" button looks up, on request, up to 25 filtered results that have a DOI but no PDF (3 requests at a time) and attaches only a real `url_for_pdf` from Unpaywall. This sends those DOIs to `api.unpaywall.org` (already in the list of hosts above); nothing is sent unless you press the button.
 
 ## New features (4.1.0)
@@ -66,6 +66,9 @@ AcademiSearch is an application in a single `index.html` file that queries sever
 Download `index.html` and open it in a browser. The interface starts locally, but searching requires an internet connection.
 
 ## History / Changelog
+
+### 5.1.1 — 2026-10-27
+- Documentation only: the direct push to a running Zotero is documented as not implemented (the CSP forbids connecting to `127.0.0.1:23119` and it was not relaxed). No code change.
 
 ### 5.1.0 — 2026-10-27
 - Zotero export (RIS) and invisible COinS metadata on the cards for the Zotero Connector.
