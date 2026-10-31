@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · **Italiano** · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versione:** 5.1.1 · **Ultimo aggiornamento:** 2026-10-27
+**Versione:** 5.1.2 · **Ultimo aggiornamento:** 2026-10-31
 
 **Stato:** stabile · **Offline:** richiede Internet per la ricerca (API delle fonti)
 

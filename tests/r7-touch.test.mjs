@@ -24,7 +24,7 @@ for (const L of ['en', 'ro', 'fr', 'it', 'es', 'pt', 'de', 'hu']) {
   console.log('— ' + L);
   check(L + ': .fpill min-height 26', r.pill === 26, r);
   check(L + ': .toggle-arrow min-width 28 (r7)', r.arrow === 28, r);
-  check(L + ': #proxyOpt 20px', r.proxy === 20, r);
+  check(L + ': #proxyOpt 24px (WCAG 2.5.8)', r.proxy === 24, r);
   check(L + ': .search-input min-width 0 și font 16 px la 360', r.siMin === '0px' && r.siFs === 16, r);
   check(L + ': .lib-btn-foot min-height 28', r.foot === 28, r);
   check(L + ': fără depășire orizontală la 360 px', r.overflow <= 0, r.overflow);
