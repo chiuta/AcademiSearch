@@ -107,8 +107,8 @@
     "academisearch.lang",
     "academisearch.library"
   ],
-  "sizeBytes": 1016680,
-  "sha256": "6b160f86cf8cff6cede9a9c0dfe33538e1b4fff751b06d6c6caa91091e363815",
+  "sizeBytes": 1016766,
+  "sha256": "3c5ae01aeda1236b18c28450dedfde6437a66206371d70b4db3842d169a95ff0",
   "csp": {
     "present": true,
     "directives": {
