@@ -46,7 +46,11 @@ const seed = (page) => page.evaluate((items) => { openResultsModal('test'); addR
 {
   const {ctx, page, errs, net} = await open();
   check('kitul e prezent (FFF.search, bundle, label)', await page.evaluate(() => !!(window.FFF && FFF.search && FFF.bundle && FFF.label)));
+<<<<<<< ours
   check(`versiune ${__FFF_APP.version} în meta și în #app-version`, await page.evaluate((__FFF_APP)=> document.querySelector('meta[name=application-version]').content === __FFF_APP.version && new RegExp(String.raw`^v ${__FFF_APP.versionRe} · ${__FFF_APP.updatedRe}$`).test(document.getElementById('app-version').textContent.trim()), {...__FFF_APP, versionRe: __fffRe(__FFF_APP.version), updatedRe: __fffRe(__FFF_APP.updated)}));
+=======
+  check('versiune 4.3.13 în meta și în #app-version', await page.evaluate(() => document.querySelector('meta[name=application-version]').content === '4.3.13' && /^v 4\.3\.13 · 2026-10-23$/.test(document.getElementById('app-version').textContent.trim())));
+>>>>>>> theirs
 
   // --- relevanță locală în filtrul intern ---
   await seed(page);
@@ -167,6 +171,22 @@ const seed = (page) => page.evaluate((items) => { openResultsModal('test'); addR
   const t = await titles(page);
   check('fără FFF.search filtrul literal merge ca înainte', t.length === 1 && /Quantum/.test(t[0]), {t, errs});
   check('fără kit: 0 pageerror', errs.length === 0, errs);
+  await ctx.close();
+}
+// 4.3.13: evidențierea nu mai corupe entitățile HTML
+{
+  const {ctx, page, errs} = await open();
+  const r = await page.evaluate(() => ({
+    amp: hlText('A & B <x> "q"', 'amp'), lt: hlText('1 < 2', 'lt'), n39: hlText("it's", '39'),
+    raw: hlText('Tom & Jerry', '&'), ci: hlText('Quantum <b>', 'QUANT'), rx: hlText('a.b (c)', '.b (')
+  }));
+  check('hl: „amp” nu potrivește în &amp;', r.amp === 'A &amp; B &lt;x&gt; &quot;q&quot;', r.amp);
+  check('hl: „lt” nu potrivește în &lt;', r.lt === '1 &lt; 2', r.lt);
+  check('hl: „39” nu potrivește în &#39;', r.n39 === 'it&#39;s', r.n39);
+  check('hl: „&” evidențiat și evadat', r.raw === 'Tom <mark>&amp;</mark> Jerry', r.raw);
+  check('hl: insensibil la majuscule, restul evadat', r.ci === '<mark>Quant</mark>um &lt;b&gt;', r.ci);
+  check('hl: caractere speciale de regex tratate literal', r.rx === 'a<mark>.b (</mark>c)', r.rx);
+  check('hl: 0 erori', errs.length === 0, errs);
   await ctx.close();
 }
 await b.close();
