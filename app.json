@@ -107,8 +107,8 @@
     "academisearch.lang",
     "academisearch.library"
   ],
-  "sizeBytes": 1024183,
-  "sha256": "7088d8298465fa20854c076f8299e6f782e4de25dc7a5dcce6cb7c3ce4ce59a2",
+  "sizeBytes": 1164617,
+  "sha256": "2cf2eecd53e1b6d43d3b8dacdfa0125a13c13242edd9b7f6672a7abc1d68c0e6",
   "csp": {
     "present": true,
     "directives": {
@@ -151,6 +151,10 @@
       "dialog",
       "label",
       "bundle",
+      "qr",
+      "p2p",
+      "sync",
+      "history",
       "bridge",
       "search"
     ]
@@ -163,6 +167,10 @@
       "dialog",
       "label",
       "bundle",
+      "qr",
+      "p2p",
+      "sync",
+      "history",
       "bridge",
       "search"
     ]
