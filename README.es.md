@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · **Español** · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versión:** 5.2.0 · **Última actualización:** 2026-11-02
+**Versión:** 5.2.2 · **Última actualización:** 2026-11-02
 
 **Estado:** estable · **Offline:** requiere Internet para la búsqueda (API de las fuentes)
 
@@ -55,7 +55,7 @@ AcademiSearch es una aplicación contenida en un único archivo `index.html` que
 - Local: el idioma de la interfaz se guarda en `localStorage` (`academisearch.lang`); la biblioteca personal, en `localStorage` (`academisearch.library`, un máximo de 500 registros, no sale del navegador); las claves API introducidas se guardan en `sessionStorage` y desaparecen al cerrar la pestaña. La aplicación no usa cookies.
 - Red: la aplicación NO funciona sin conexión. En cada búsqueda, el término buscado se envía a los servicios externos activos, directamente desde el navegador: OpenAlex, CrossRef, CORE, Semantic Scholar, arXiv, Europe PMC (ebi.ac.uk), DOAJ, Zenodo, Open Library, Internet Archive, Project Gutenberg (gutendex.com). Con «Acceso libre» / «Unpaywall» se contacta con CrossRef, Unpaywall y OpenAIRE.
 - Proxy CORS (opt-in, desactivado por defecto): arXiv y Semantic Scholar se consultan directamente. Solo si marcas explícitamente «Permitir el proxy público allorigins.win» (junto a los campos de claves API; válido durante la pestaña) y el navegador bloquea la solicitud directa (CORS), esa solicitud se reenvía a través de `api.allorigins.win`, que puede ver la URL de la consulta (el término buscado). Las claves API nunca pasan por el proxy.
-- Las solicitudes a OpenAlex y Unpaywall incluyen la dirección de contacto del operador (`academisearch@alexio.tf`), conforme a la convención del «polite pool».
+- Las solicitudes a Unpaywall incluyen la dirección de contacto del operador (`academisearch@alexio.tf`). OpenAlex sustituyó en febrero de 2026 el «polite pool» por claves de API gratuitas e ignora `mailto`: las consultas básicas funcionan sin clave y puedes añadir tu propia clave opcional desde el pie de página (se guarda solo en este navegador).
 - Los portales con enlace directo solo se contactan si abres el enlace.
 - Fuentes tipográficas/CDN: verificado en la auditoría (2026-10-10): no hay scripts, fuentes ni estilos cargados desde un CDN; las fuentes están integradas, y la política CSP de la página (`connect-src`; `script-src` con hash, sin `unsafe-inline`) limita las solicitudes a los hosts indicados arriba.
 

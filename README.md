@@ -2,7 +2,7 @@
 
 **English** · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Version:** 5.2.0 · **Last updated:** 2026-11-02
+**Version:** 5.2.2 · **Last updated:** 2026-11-02
 
 **Status:** stable · **Offline:** needs internet for search (source APIs)
 
@@ -57,7 +57,7 @@ AcademiSearch is an application in a single `index.html` file that queries sever
 - Local: the interface language is kept in `localStorage` (`academisearch.lang`); the personal library in `localStorage` (`academisearch.library`, at most 500 records, it does not leave the browser); the API keys entered are kept in `sessionStorage` and disappear when the tab is closed. The app does not use cookies.
 - Network: the app is NOT offline. With every search, the searched term is sent to the active external services, directly from the browser: OpenAlex, CrossRef, CORE, Semantic Scholar, arXiv, Europe PMC (ebi.ac.uk), DOAJ, Zenodo, Open Library, Internet Archive, Project Gutenberg (gutendex.com). With "Open Access" / "Unpaywall", CrossRef, Unpaywall and OpenAIRE are contacted.
 - CORS proxy (opt-in, off by default): arXiv and Semantic Scholar are queried directly. Only if you explicitly tick "Allow the public proxy allorigins.win" (next to the API key fields; valid for the duration of the tab) and the browser blocks the direct request (CORS), that request is resent through `api.allorigins.win`, which can see the query URL (the searched term). The API keys never pass through the proxy.
-- Requests to OpenAlex and Unpaywall include the operator's contact address (`academisearch@alexio.tf`), following the "polite pool" convention.
+- Requests to Unpaywall include the operator's contact address (`academisearch@alexio.tf`). OpenAlex replaced its "polite pool" with free API keys in February 2026 and ignores `mailto`: basic queries work without a key, and you can add your own optional key from the footer (kept only in this browser).
 - The portals with a direct link are contacted only if you open the link.
 - Fonts/CDN: verified at the audit (2026-10-10): there are no scripts, fonts or styles loaded from a CDN; the fonts are built in, and the page's CSP policy (`connect-src`; `script-src` with a hash, no `unsafe-inline`) limits requests to the hosts above.
 

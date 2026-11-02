@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · **Português** · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versão:** 5.2.0 · **Última atualização:** 2026-11-02
+**Versão:** 5.2.2 · **Última atualização:** 2026-11-02
 
 **Estado:** estável · **Offline:** requer Internet para a pesquisa (APIs das fontes)
 
@@ -55,7 +55,7 @@ O AcademiSearch é uma aplicação contida num único ficheiro `index.html` que 
 - Local: o idioma da interface é guardado no `localStorage` (`academisearch.lang`); a biblioteca pessoal, no `localStorage` (`academisearch.library`, no máximo 500 registos, não sai do navegador); as chaves API introduzidas são guardadas no `sessionStorage` e desaparecem ao fechar o separador. A aplicação não utiliza cookies.
 - Rede: a aplicação NÃO funciona offline. Em cada pesquisa, o termo pesquisado é enviado para os serviços externos ativos, diretamente a partir do navegador: OpenAlex, CrossRef, CORE, Semantic Scholar, arXiv, Europe PMC (ebi.ac.uk), DOAJ, Zenodo, Open Library, Internet Archive, Project Gutenberg (gutendex.com). Com «Acesso livre» / «Unpaywall» são contactados o CrossRef, o Unpaywall e o OpenAIRE.
 - Proxy CORS (opt-in, desativado por predefinição): o arXiv e o Semantic Scholar são consultados diretamente. Apenas se assinalar explicitamente «Permitir o proxy público allorigins.win» (junto dos campos das chaves API; válido durante o separador) e o navegador bloquear o pedido direto (CORS), esse pedido é reenviado através de `api.allorigins.win`, que pode ver o URL da consulta (o termo pesquisado). As chaves API nunca passam pelo proxy.
-- Os pedidos ao OpenAlex e ao Unpaywall incluem o endereço de contacto do operador (`academisearch@alexio.tf`), conforme a convenção do «polite pool».
+- Os pedidos ao Unpaywall incluem o endereço de contacto do operador (`academisearch@alexio.tf`). O OpenAlex substituiu em fevereiro de 2026 o «polite pool» por chaves de API gratuitas e ignora `mailto`: as consultas básicas funcionam sem chave e pode adicionar a sua própria chave opcional no rodapé (fica apenas neste navegador).
 - Os portais com ligação direta só são contactados se abrir a ligação.
 - Tipos de letra/CDN: verificado na auditoria (2026-10-10): não existem scripts, tipos de letra ou estilos carregados de uma CDN; os tipos de letra estão integrados, e a política CSP da página (`connect-src`; `script-src` com hash, sem `unsafe-inline`) limita os pedidos aos anfitriões acima indicados.
 

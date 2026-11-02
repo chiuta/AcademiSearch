@@ -2,6 +2,21 @@
 
 Format: [SemVer](https://semver.org/lang/ro/) (MAJOR.MINOR.PATCH). Istoricul complet al versiunilor anterioare este în secțiunea „Istoric / Changelog” din [README.ro.md](README.ro.md).
 
+## 5.2.2 — 2026-11-02
+
+### Surse actualizate (runda 2, verificat la 2026-11-02)
+- Cheie OpenAlex opțională (buton în subsol, 8 limbi): `api_key` se adaugă interogărilor OpenAlex; fără cheie, interogările de bază merg ca înainte. README-urile nu mai prezintă `mailto` ca „polite pool”.
+- Textul juridic (8 limbi): OpenAlex a înlocuit în februarie 2026 „polite pool” cu chei API gratuite și ignoră parametrul `mailto` (help.openalex.org/api/deprecations); API-ul vechi de căutare OpenAIRE era programat spre retragere la 31 mai 2026 (graph.openaire.eu). Logica de căutare nu s-a modificat.
+
+## 5.2.1 — 2026-11-02
+
+Actualizare surse (verificate pe web la 2026-11-02):
+
+- EThOS (British Library): nu mai este marcat „indisponibil”; serviciul a fost repus în funcțiune pe o platformă nouă (8 iulie 2026) — metadate pentru 650.000+ teze britanice, text integral prin depozitele universităților. Linkul trimite acum la ethos.bl.uk (în loc de Discovery Edinburgh); descrierea e actualizată în toate cele 8 limbi (sursă: bl.uk/collection/ethos).
+- CORE: „200M+” → „450M+” lucrări (CORE declară peste 452 M; sursă: core.ac.uk/services/api).
+- Project Gutenberg: „70.000+” → „79.000+” cărți (gutenberg.org indică 79.692).
+- Neschimbat, dar de reținut: OpenAlex cere acum cheie API (parametrul mailto e ignorat), iar API-ul vechi de căutare OpenAIRE a fost programat să fie retras la 31 mai 2026; logica aplicației nu a fost modificată.
+
 ## 5.2.0 — 2026-11-01
 
 - Corectat: adaptorul «Trimite la…» nu mai aruncă eroare când kitul FFF lipsește (gardian pe fiecare bloc; găsit de testul «fără kit» din CI).
