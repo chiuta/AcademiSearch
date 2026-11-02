@@ -5,6 +5,7 @@ Format: [SemVer](https://semver.org/lang/ro/) (MAJOR.MINOR.PATCH). Istoricul com
 ## 5.2.2 — 2026-11-02
 
 ### Surse actualizate (runda 2, verificat la 2026-11-02)
+- Cheie OpenAlex opțională (buton în subsol, 8 limbi): `api_key` se adaugă interogărilor OpenAlex; fără cheie, interogările de bază merg ca înainte. README-urile nu mai prezintă `mailto` ca „polite pool”.
 - Textul juridic (8 limbi): OpenAlex a înlocuit în februarie 2026 „polite pool” cu chei API gratuite și ignoră parametrul `mailto` (help.openalex.org/api/deprecations); API-ul vechi de căutare OpenAIRE era programat spre retragere la 31 mai 2026 (graph.openaire.eu). Logica de căutare nu s-a modificat.
 
 ## 5.2.1 — 2026-11-02
