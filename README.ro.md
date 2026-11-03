@@ -2,7 +2,7 @@
 
 [English](README.md) · **Română** · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versiune:** 5.2.3 · **Ultima actualizare:** 2026-11-02
+**Versiune:** 5.2.4 · **Ultima actualizare:** 2026-11-03
 
 **Stare:** stabil · **Offline:** cere internet pentru căutare (API-urile surselor)
 

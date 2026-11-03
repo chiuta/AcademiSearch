@@ -2,8 +2,8 @@
   "schema": 1,
   "slug": "academisearch",
   "name": "AcademiSearch — 42 Surse Academice Multilingve",
-  "version": "5.2.3",
-  "updated": "2026-11-02",
+  "version": "5.2.4",
+  "updated": "2026-11-03",
   "description": "Motor de căutare academic unificat gratuit — 42 surse open-access în 7 limbi + surse multilingve: arXiv, PubMed, CORE, Zenodo, CEEOL, Gallica, Dialnet și altele. Ideal pentru studenți, doctoranzi și cercetători.",
   "egress": [
     {
@@ -99,16 +99,19 @@
     }
   ],
   "permissions": [
+    "clipboard",
     "serviceWorker",
-    "localStorage"
+    "localStorage",
+    "Web Crypto",
+    "BroadcastChannel"
   ],
   "storageKeys": [
     "academisearch.folders",
     "academisearch.lang",
     "academisearch.library"
   ],
-  "sizeBytes": 1164827,
-  "sha256": "0651a15af9876d8fae1fde864b6f08b26d8edf03f62a5e5cd0717eb098233f4f",
+  "sizeBytes": 1206114,
+  "sha256": "898ab7f068dd78863ddc38f322791b1b9599a2fc56e942f572909bac7ab080dc",
   "csp": {
     "present": true,
     "directives": {
@@ -121,7 +124,7 @@
       "base-uri": "'self'",
       "form-action": "'self'",
       "worker-src": "'self' blob:",
-      "script-src": "'self' blob: sha256×5",
+      "script-src": "'self' blob: sha256×7",
       "connect-src": "'self' https://api.crossref.org https://api.openaire.eu https://api.unpaywall.org https://api.allorigins.win https://archive.org https://openlibrary.org https://gutendex.com https://api.semanticscholar.org https://api.core.ac.uk https://api.openalex.org https://export.arxiv.org https://zenodo.org https://doaj.org https://www.ebi.ac.uk",
       "manifest-src": "'self'"
     },
