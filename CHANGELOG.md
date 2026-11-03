@@ -2,6 +2,10 @@
 
 Format: [SemVer](https://semver.org/lang/ro/) (MAJOR.MINOR.PATCH). Istoricul complet al versiunilor anterioare este în secțiunea „Istoric / Changelog” din [README.ro.md](README.ro.md).
 
+## 5.2.6 — 2026-11-03
+
+Etapa 4: lanțul de surse (nota CSL și adnotarea VERIGA se păstrează în referință) și Laboratorul de reproducere (afirmație + CSV atașat, plic claim/repro)
+
 ## 5.2.5 — 2026-11-03
 
 Accesibilitate: meniul „Trimite către…” / „Primește…” stă într-un reper ARIA (regula axe «region»); secțiunea seifului folosește h2. Cod comun din hub.

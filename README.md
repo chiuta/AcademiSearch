@@ -2,7 +2,7 @@
 
 **English** · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Version:** 5.2.5 · **Last updated:** 2026-11-03
+**Version:** 5.2.6 · **Last updated:** 2026-11-03
 
 **Status:** stable · **Offline:** needs internet for search (source APIs)
 
