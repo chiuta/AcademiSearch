@@ -2,6 +2,10 @@
 
 Format: [SemVer](https://semver.org/lang/ro/) (MAJOR.MINOR.PATCH). Istoricul complet al versiunilor anterioare este în secțiunea „Istoric / Changelog” din [README.ro.md](README.ro.md).
 
+## 5.2.9 — 2026-11-08
+
+- Filtrul «Cu PDF» devine «Cu PDF (link direct)» în toate cele 8 limbi, ca să nu sugereze că PDF înseamnă acces deschis.
+
 ## 5.2.6 — 2026-11-03
 
 Etapa 4: lanțul de surse (nota CSL și adnotarea VERIGA se păstrează în referință) și Laboratorul de reproducere (afirmație + CSV atașat, plic claim/repro)

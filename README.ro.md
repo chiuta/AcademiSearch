@@ -2,7 +2,7 @@
 
 [English](README.md) · **Română** · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versiune:** 5.2.8 · **Ultima actualizare:** 2026-11-08
+**Versiune:** 5.2.9 · **Ultima actualizare:** 2026-11-08
 
 **Stare:** stabil · **Offline:** cere internet pentru căutare (API-urile surselor)
 
@@ -24,7 +24,7 @@ AcademiSearch este o aplicație dintr-un singur fișier `index.html` care intero
 - Presetări de căutare: „Toate sursele", „Student / Doctorand", „Cercetător / Cadru didactic", „Cărți & Manuale", „Surse Românești", „Limbi Romanice".
 - Panou „Surse activate" cu bifarea individuală a surselor.
 - Filtre după categorie (Articole, Preprint, Cărți, Teze, Date) și după limbă (EN, RO, FR, DE, ES, PT, IT).
-- Rezultate cu filtre „Cu PDF" și „Cu DOI" și încărcare progresivă a rezultatelor.
+- Rezultate cu filtre „Cu PDF (link direct)" și „Cu DOI" și încărcare progresivă a rezultatelor.
 - Câmp „DOI / URL" cu butoanele „Acces Liber" și „Unpaywall": aplicația caută o versiune open-access prin CrossRef (dacă lipsește DOI-ul), Unpaywall, OpenAIRE și căutare după titlu în Unpaywall.
 - Câmpuri opționale pentru cheie API CORE și cheie API Semantic Scholar.
 - Export al rezultatelor filtrate în BibTeX, RIS sau CSV (fișier generat local în browser, fără cereri de rețea). Lista de autori se exportă așa cum o returnează sursa (unele surse trunchiază lista), iar câmpurile CSV care încep cu `=`, `+`, `-` sau `@` sunt neutralizate.
@@ -48,7 +48,7 @@ AcademiSearch este o aplicație dintr-un singur fișier `index.html` care intero
 2. Alegeți o presetare (de exemplu „Student / Doctorand") sau deschideți „Surse activate" și bifați manual sursele dorite.
 3. Opțional, restrângeți după CATEGORIE și LIMBĂ.
 4. Scrieți termenul în câmpul de căutare și apăsați Enter sau butonul „CAUTĂ".
-5. În fereastra de rezultate folosiți filtrele „Cu PDF" / „Cu DOI"; închideți cu „Închide" sau tasta Escape.
+5. În fereastra de rezultate folosiți filtrele „Cu PDF (link direct)" / „Cu DOI"; închideți cu „Închide" sau tasta Escape.
 6. Pentru un articol cunoscut, lipiți DOI-ul sau URL-ul în câmpul „DOI / URL" și apăsați „Acces Liber" (sau „Unpaywall").
 7. Pentru CORE și Semantic Scholar puteți introduce cheia API și apăsați „Salvează" (cheile sunt opționale).
 
