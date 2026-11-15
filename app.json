@@ -103,6 +103,7 @@
     "serviceWorker",
     "localStorage",
     "Web Crypto",
+    "WebGL",
     "BroadcastChannel"
   ],
   "storageKeys": [
@@ -110,8 +111,8 @@
     "academisearch.lang",
     "academisearch.library"
   ],
-  "sizeBytes": 1296446,
-  "sha256": "4e1f4c9bf155120107e1a8cb34c4c8b91c99751860308a1d8936ec13db83f508",
+  "sizeBytes": 1348458,
+  "sha256": "18110eba67b78f809cdea3c21dbd38d822d59bcbed59e09b23895aa77759fb91",
   "csp": {
     "present": true,
     "directives": {
@@ -124,7 +125,7 @@
       "base-uri": "'self'",
       "form-action": "'self'",
       "worker-src": "'self' blob:",
-      "script-src": "'self' blob: sha256×8",
+      "script-src": "'self' blob: sha256×9",
       "connect-src": "'self' https://api.crossref.org https://api.openaire.eu https://api.unpaywall.org https://api.allorigins.win https://archive.org https://openlibrary.org https://gutendex.com https://api.semanticscholar.org https://api.core.ac.uk https://api.openalex.org https://export.arxiv.org https://zenodo.org https://doaj.org https://www.ebi.ac.uk",
       "manifest-src": "'self'"
     },
