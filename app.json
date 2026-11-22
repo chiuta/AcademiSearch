@@ -3,7 +3,7 @@
   "slug": "academisearch",
   "name": "AcademiSearch — 42 Surse Academice Multilingve",
   "version": "5.3.3",
-  "updated": "2026-11-19",
+  "updated": "2026-11-22",
   "description": "Motor de căutare academic unificat gratuit — 42 surse open-access în 7 limbi + surse multilingve: arXiv, PubMed, CORE, Zenodo, CEEOL, Gallica, Dialnet și altele. Ideal pentru studenți, doctoranzi și cercetători.",
   "egress": [
     {
@@ -111,8 +111,8 @@
     "academisearch.lang",
     "academisearch.library"
   ],
-  "sizeBytes": 1485344,
-  "sha256": "38ec51a203881cefaa128e102d29a9a594d5ee8bf262fc8140d69566fdc11360",
+  "sizeBytes": 1485404,
+  "sha256": "5a9289b2dd5dd97126325b170d8b66eeea8c2fb6966514f92f375c7dbac4d58d",
   "csp": {
     "present": true,
     "directives": {
@@ -127,7 +127,8 @@
       "worker-src": "'self' blob:",
       "script-src": "'self' blob: sha256×11",
       "connect-src": "'self' https://api.crossref.org https://api.openaire.eu https://api.unpaywall.org https://api.allorigins.win https://archive.org https://openlibrary.org https://gutendex.com https://api.semanticscholar.org https://api.core.ac.uk https://api.openalex.org https://export.arxiv.org https://zenodo.org https://doaj.org https://www.ebi.ac.uk",
-      "manifest-src": "'self'"
+      "manifest-src": "'self'",
+      "upgrade-insecure-requests": "''"
     },
     "scriptInline": "hash",
     "connect": "'self' https://api.crossref.org https://api.openaire.eu https://api.unpaywall.org https://api.allorigins.win https://archive.org https://openlibrary.org https://gutendex.com https://api.semanticscholar.org https://api.core.ac.uk https://api.openalex.org https://export.arxiv.org https://zenodo.org https://doaj.org https://www.ebi.ac.uk"
